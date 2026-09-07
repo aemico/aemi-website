@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AEMI Chili Garlic Oil — a little heat, a lot of flavor.">
+  <title>AEMI | Chili Garlic Oil</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="AEMI home">AEMI</a>
+    <button class="menu-toggle" aria-label="Open menu">☰</button>
+    <nav id="nav">
+      <a href="#home">Home</a>
+      <a href="#product">Product</a>
+      <a href="#about">About</a>
+      <a href="#order">Order</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="hero">
+      <div class="hero-logo">
+        <img id="logoImage" src="aemi-logo.jpg" alt="AEMI Chili Garlic Oil logo">
+      </div>
+      <p class="eyebrow" id="heroProduct">CHILI GARLIC OIL</p>
+      <h1 id="tagline">A Little Heat.<br>A Lot of Flavor.</h1>
+      <p id="heroDescription">Bold, savory flavor made to elevate everyday meals.</p>
+      <a class="button" href="#order">ORDER NOW</a>
+    </section>
+
+    <section id="product" class="section">
+      <div class="section-heading">
+        <p class="eyebrow">THE SIGNATURE</p>
+        <h2 id="productName">AEMI Chili Garlic Oil</h2>
+      </div>
+      <div class="product-card">
+        <div class="product-art" aria-label="Product image placeholder">
+          <span>PRODUCT<br>PHOTO<br>COMING SOON</span>
+        </div>
+        <div class="product-info">
+          <p id="productDescription">
+            A savory, aromatic blend of garlic, chili, and balanced seasonings,
+            made for rice, noodles, meats, snacks, and everyday meals.
+          </p>
+          <div class="details">
+            <div><span>SIZE</span><strong id="sizes">60 mL · 120 mL</strong></div>
+            <div><span>STATUS</span><strong id="availability">COMING SOON</strong></div>
+          </div>
+          <p class="ingredients"><strong>Ingredients:</strong> <span id="ingredients">Garlic · Chili · Oyster Sauce · Black Pepper · Salt · Brown Sugar</span></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section feature-section">
+      <p class="eyebrow">WHY AEMI</p>
+      <div class="features">
+        <article><span>01</span><h3>Bold Flavor</h3><p>Made to add character to simple everyday meals.</p></article>
+        <article><span>02</span><h3>Made With Care</h3><p>Prepared with attention to flavor and consistency.</p></article>
+        <article><span>03</span><h3>Everyday Favorite</h3><p>A versatile chili-garlic companion for whatever you're eating.</p></article>
+      </div>
+    </section>
+
+    <section id="about" class="section about">
+      <p class="eyebrow">OUR STORY</p>
+      <h2>Made for the meals<br>you already love.</h2>
+      <p id="aboutText">
+        AEMI is a small food brand built around one simple idea: everyday food
+        can become something special with the right flavor. More about AEMI's
+        story will be added here as the brand grows.
+      </p>
+    </section>
+
+    <section id="order" class="section order-section">
+      <p class="eyebrow">ORDER AEMI</p>
+      <h2>Ready when you are.</h2>
+      <p>Delivery and pickup are available. Delivery normally takes 2–3 days depending on location.</p>
+
+      <form id="orderForm">
+        <label>Full name<input name="name" required></label>
+        <label>Contact number<input name="contact" type="tel" required></label>
+        <label>Order
+          <select name="product" id="productSelect" required></select>
+        </label>
+        <label>Quantity<input name="quantity" id="quantity" type="number" min="1" value="1" required></label>
+        <label>Delivery or pickup
+          <select name="fulfillment" required>
+            <option value="">Select one</option>
+            <option>Delivery</option>
+            <option>Pickup</option>
+          </select>
+        </label>
+        <label>Address / pickup details<textarea name="address" rows="3" required></textarea></label>
+        <label>Payment method
+          <select name="payment" required>
+            <option value="">Select one</option>
+            <option>GCash</option>
+            <option>Cash</option>
+            <option>COD</option>
+          </select>
+        </label>
+        <label>Order notes<textarea name="notes" rows="3" placeholder="Optional"></textarea></label>
+        <button class="button full" type="submit">SUBMIT ORDER</button>
+        <p class="form-note">Order submission will be connected to AEMI's order sheet/form before launch.</p>
+      </form>
+    </section>
+
+    <section id="contact" class="section contact">
+      <p class="eyebrow">STAY CONNECTED</p>
+      <h2>Find AEMI online.</h2>
+      <div class="socials">
+        <a id="facebook" href="#" target="_blank">Facebook</a>
+        <a id="instagram" href="#" target="_blank">Instagram</a>
+        <a id="tiktok" href="#" target="_blank">TikTok</a>
+        <a id="messenger" href="#" target="_blank">Messenger</a>
+      </div>
+      <div class="pickup">
+        <strong>Pickup Location</strong>
+        <p id="pickupLocation">Tartaria, Silang, Cavite · De Leon Compound · Sta. Rosa–Tagaytay Road</p>
+        <p id="emailLine">Email: Coming soon</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <strong>AEMI</strong>
+    <span>CHILI GARLIC OIL</span>
+    <small>© <span id="year"></span> AEMI. All rights reserved.</small>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
