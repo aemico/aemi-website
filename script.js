@@ -19,8 +19,17 @@ const AEMI = {
     ]
   },
 
-  aboutText: "AEMI is a small food brand built around one simple idea: everyday food can become something special with the right flavor. More about AEMI's story will be added here as the brand grows.",
+  aboutText: `AEMI started with two people, one recipe, and the idea of creating something of our own.
 
+Our first batch was small, but it gave us a glimpse of what AEMI could become. People tried it, enjoyed it, and supported our little start.
+
+But we also learned that making something good was only the beginning. We needed to do more than just make the product—we needed to build the brand behind it.
+
+So, we started again.
+
+AEMI Round 2 is our second try, this time with more planning, better systems, and a clearer vision of where we want to take it.
+
+Still small. Still ours. But this time, we're building it with intention.`,
   delivery: {
     available: true,
     usualTime: "2–3 days depending on location",
