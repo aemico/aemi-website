@@ -85,18 +85,18 @@ h2 { font-size: clamp(36px, 6vw, 58px); margin: 0 0 20px; font-weight: 500; }
 }
 .product-art {
   min-height: 360px;
-  display: grid;
-  place-items: center;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
   border: 1px dashed #bcaea5;
   background: var(--cream);
-  color: #9b8d85;
-  letter-spacing: .16em;
-  font-size: 12px;
 }
+
 .product-art img {
-  width: 90%;
-  height: 320px;
+  width: 100%;
+  height: 100%;
+  max-width: none;
   object-fit: contain;
   display: block;
 }
