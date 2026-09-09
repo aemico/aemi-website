@@ -157,7 +157,7 @@ footer small { opacity: .7; margin-top: 8px; }
   justify-content: center;
   border: 1px dashed #bcaea5;
   background: var(--cream);
-  overflow: hidden;
+  overflow: visible;
 }
 
 .about-image img {
