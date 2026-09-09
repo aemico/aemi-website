@@ -94,6 +94,12 @@ h2 { font-size: clamp(36px, 6vw, 58px); margin: 0 0 20px; font-weight: 500; }
   letter-spacing: .16em;
   font-size: 12px;
 }
+.product-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
 .product-info { color: var(--muted); }
 .product-info p { max-width: 520px; }
 .details { display: flex; gap: 35px; margin: 28px 0; }
