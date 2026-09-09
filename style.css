@@ -155,11 +155,15 @@ footer small { opacity: .7; margin-top: 8px; }
   margin-top: 2rem;
   display: flex;
   justify-content: center;
+  min-height: 360px;
+  border: 1px dashed #bcaea5;
+  background: var(--cream);
+  overflow: hidden;
 }
 
 .about-image img {
-  width: 70%;
-  max-width: 240px;
-  height: auto;
+  width: 100%;
+  height: 360px;
+  object-fit: contain;
   display: block;
-  }
+}
