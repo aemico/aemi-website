@@ -95,9 +95,8 @@ h2 { font-size: clamp(36px, 6vw, 58px); margin: 0 0 20px; font-weight: 500; }
   font-size: 12px;
 }
 .product-art img {
-  width: 80%;
-  max-width: 280px;
-  height: auto;
+  width: 90%;
+  height: 320px;
   object-fit: contain;
   display: block;
 }
@@ -159,9 +158,9 @@ footer small { opacity: .7; margin-top: 8px; }
 }
 
 .about-image img {
-  width: 100%;
-  max-width: 420px;
+  width: 85%;
+  max-width: 300px;
   height: auto;
   display: block;
   object-fit: contain;
-  }
+}
