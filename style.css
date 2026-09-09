@@ -158,9 +158,8 @@ footer small { opacity: .7; margin-top: 8px; }
 }
 
 .about-image img {
-  width: 85%;
-  max-width: 300px;
+  width: 70%;
+  max-width: 240px;
   height: auto;
   display: block;
-  object-fit: contain;
-}
+  }
