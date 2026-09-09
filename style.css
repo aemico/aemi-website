@@ -152,3 +152,16 @@ footer small { opacity: .7; margin-top: 8px; }
   .product-art { min-height: 280px; }
   .section { padding-top: 70px; padding-bottom: 70px; }
 }
+.about-image {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.about-image img {
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  }
