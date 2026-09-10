@@ -83,12 +83,14 @@ const quantityInput = document.getElementById("quantity");
 const orderSummary = document.getElementById("orderSummary");
 
 function updateOrderSummary() {
-  const selectedSize = AEMI.product.sizes[productSelect.value];
+  const selectedIndex = Number(productSelect.value);
+  const selectedSize = AEMI.product.sizes[selectedIndex];
   const quantity = quantityInput.value || 1;
 
-  orderSummary.textContent = `${selectedSize.label} × ${quantity}`;
+  if (selectedSize) {
+    orderSummary.textContent = `${selectedSize.label} × ${quantity}`;
+  }
 }
-
 productSelect.addEventListener("change", updateOrderSummary);
 quantityInput.addEventListener("input", updateOrderSummary);
 
