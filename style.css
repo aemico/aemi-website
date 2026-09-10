@@ -166,12 +166,13 @@ footer small { opacity: .7; margin-top: 8px; }
   display: block;
 }
 .order-summary {
-  margin: -5px 0 5px;
-  padding: 12px 14px;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
+  margin: 8px 0 18px;
+  padding: 14px 16px;
+  background: var(--ivory);
+  border: 1px solid var(--line);
   color: var(--red);
   font-size: 13px;
   font-weight: 600;
   letter-spacing: .04em;
-  }
+  text-align: left;
+             }
