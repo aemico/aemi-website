@@ -73,33 +73,42 @@ const sizeText = AEMI.product.sizes.map(item => item.label).join(" · ");
 document.getElementById("sizes").textContent = sizeText;
 
 const productSelect = document.getElementById("productSelect");
-AEMI.product.sizes.forEach((item, index) => {
+
+AEMI.product.sizes.forEach((item) => {
   const option = document.createElement("option");
   option.value = item.label;
-  option.textContent = item.price == null ? `${item.label} — Price TBD` : `${item.label} — ₱${item.price}`;
+  option.textContent = item.price == null
+    ? `${item.label} — Price TBD`
+    : `${item.label} — ₱${item.price}`;
   productSelect.appendChild(option);
 });
+
 const quantityInput = document.getElementById("quantity");
 const orderSummary = document.getElementById("orderSummary");
 
 function updateOrderSummary() {
-  const selectedIndex = Number(productSelect.value);
-  const selectedSize = AEMI.product.sizes[selectedIndex];
+  const selectedSize = productSelect.value;
   const quantity = quantityInput.value || 1;
 
   if (selectedSize) {
-    orderSummary.textContent = `${selectedSize.label} × ${quantity}`;
+    orderSummary.textContent = `${selectedSize} × ${quantity}`;
   }
 }
+
 productSelect.addEventListener("change", updateOrderSummary);
 quantityInput.addEventListener("input", updateOrderSummary);
 
 updateOrderSummary();
+
 const emailLine = document.getElementById("emailLine");
-if (AEMI.contact.email) emailLine.textContent = `Email: ${AEMI.contact.email}`;
+
+if (AEMI.contact.email) {
+  emailLine.textContent = `Email: ${AEMI.contact.email}`;
+}
 
 ["facebook", "instagram", "tiktok", "messenger"].forEach(id => {
   const link = document.getElementById(id);
+
   if (AEMI.socials[id]) {
     link.href = AEMI.socials[id];
   } else {
@@ -116,6 +125,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
 document.querySelector(".menu-toggle").addEventListener("click", () => {
   document.getElementById("nav").classList.toggle("open");
 });
+
 const fulfillmentSelect = document.querySelector('select[name="fulfillment"]');
 const addressLabel = document.getElementById("addressLabel");
 const addressField = document.getElementById("addressField");
@@ -129,12 +139,6 @@ fulfillmentSelect.addEventListener("change", () => {
     addressLabel.firstChild.textContent = "Pickup details";
     addressField.placeholder = "Preferred pickup time or other pickup details";
     addressField.required = false;
-  } else {
-    addressLabel.firstChild.textContent = "Address / pickup details";
-    addressField.placeholder = "";
-    addressField.required = true;
-  }
-});
   } else {
     addressLabel.firstChild.textContent = "Address / pickup details";
     addressField.placeholder = "";
