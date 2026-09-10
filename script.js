@@ -138,8 +138,15 @@ fulfillmentSelect.addEventListener("change", () => {
 document.getElementById("orderForm").addEventListener("submit", (event) => {
   event.preventDefault();
 
-  window.open(
-    "https://forms.gle/C38eM6wzDbEwNwnR9",
-    "_blank"
-  );
+  const form = event.target;
+  const formData = new FormData(form);
+
+  fetch("https://script.google.com/macros/s/AKfycbwhHzTwb4z3WvoyCjZdavc7BYaTFssgQpLrVnBLU_PZjz-fWSTZwF3qUQMxRlAW9TGb/exec", {
+    method: "POST",
+    body: new URLSearchParams(formData)
+  });
+
+  alert("Thank you! Your AEMI order has been submitted.");
+  form.reset();
+  updateOrderSummary();
 });
