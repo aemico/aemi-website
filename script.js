@@ -30,11 +30,191 @@ So, we started again.
 AEMI Round 2 is our second try, this time with more planning, better systems, and a clearer vision of where we want to take it.
 
 Still small. Still ours. But this time, we're building it with intention.`,
+
   delivery: {
     available: true,
     usualTime: "2–3 days depending on location",
     feeNote: "Delivery fee depends on location."
   },
+
+  pickup: {
+    available: true,
+    location: "Tartaria, Silang, Cavite · De Leon Compound · Sta. Rosa–Tagaytay Road",
+    schedule: "By arrangement / prior negotiation"
+  },
+
+  contact: {
+    email: "",
+    phone: ""
+  },
+
+  socials: {
+    facebook: "",
+    instagram: "",
+    tiktok: "",
+    messenger: ""
+  }
+};
+
+
+/* ============================================================
+   WEBSITE LOGIC
+   ============================================================ */
+
+document.title = `${AEMI.businessName} | Chili Garlic Oil`;
+
+document.getElementById("tagline").innerHTML =
+  AEMI.tagline.replace(". ", ".<br>");
+
+document.getElementById("heroDescription").textContent =
+  AEMI.heroDescription;
+
+document.getElementById("productName").textContent =
+  AEMI.product.name;
+
+document.getElementById("productDescription").textContent =
+  AEMI.product.description;
+
+document.getElementById("ingredients").textContent =
+  AEMI.product.ingredients;
+
+document.getElementById("availability").textContent =
+  AEMI.product.availability;
+
+document.getElementById("aboutText").textContent =
+  AEMI.aboutText;
+
+document.getElementById("pickupLocation").textContent =
+  AEMI.pickup.location;
+
+
+/* PRODUCT SIZES */
+
+const sizeText = AEMI.product.sizes
+  .map(item => item.label)
+  .join(" · ");
+
+document.getElementById("sizes").textContent = sizeText;
+
+const productSelect = document.getElementById("productSelect");
+
+AEMI.product.sizes.forEach(item => {
+  const option = document.createElement("option");
+
+  option.value = item.label;
+
+  option.textContent = item.price == null
+    ? `${item.label} — Price TBD`
+    : `${item.label} — ₱${item.price}`;
+
+  productSelect.appendChild(option);
+});
+
+
+/* ORDER SUMMARY */
+
+const quantityInput = document.getElementById("quantity");
+const orderSummary = document.getElementById("orderSummary");
+
+function updateOrderSummary() {
+  const selectedSize = productSelect.value;
+  const quantity = quantityInput.value || 1;
+
+  if (selectedSize) {
+    orderSummary.textContent =
+      `${selectedSize} × ${quantity}`;
+  }
+}
+
+productSelect.addEventListener("change", updateOrderSummary);
+quantityInput.addEventListener("input", updateOrderSummary);
+
+updateOrderSummary();
+
+
+/* CONTACT */
+
+const emailLine = document.getElementById("emailLine");
+
+if (AEMI.contact.email) {
+  emailLine.textContent = `Email: ${AEMI.contact.email}`;
+}
+
+
+/* SOCIAL LINKS */
+
+["facebook", "instagram", "tiktok", "messenger"].forEach(id => {
+  const link = document.getElementById(id);
+
+  if (AEMI.socials[id]) {
+    link.href = AEMI.socials[id];
+  } else {
+    link.href = "#";
+
+    link.addEventListener("click", e => {
+      e.preventDefault();
+      alert("AEMI's social account is coming soon.");
+    });
+  }
+});
+
+
+/* YEAR */
+
+document.getElementById("year").textContent =
+  new Date().getFullYear();
+
+
+/* MOBILE MENU */
+
+document.querySelector(".menu-toggle").addEventListener("click", () => {
+  document.getElementById("nav").classList.toggle("open");
+});
+
+
+/* DELIVERY / PICKUP */
+
+const fulfillmentSelect =
+  document.querySelector('select[name="fulfillment"]');
+
+const addressLabel =
+  document.getElementById("addressLabel");
+
+const addressField =
+  document.getElementById("addressField");
+
+fulfillmentSelect.addEventListener("change", () => {
+
+  if (fulfillmentSelect.value === "Delivery") {
+
+    addressLabel.firstChild.textContent =
+      "Delivery address";
+
+    addressField.placeholder =
+      "Enter your complete delivery address";
+
+    addressField.required = true;
+
+  } else if (fulfillmentSelect.value === "Pickup") {
+
+    addressLabel.firstChild.textContent =
+      "Pickup details";
+
+    addressField.placeholder =
+      "Preferred pickup time or other pickup details";
+
+    addressField.required = false;
+
+  } else {
+
+    addressLabel.firstChild.textContent =
+      "Address / pickup details";
+
+    addressField.placeholder = "";
+
+    addressField.required = true;
+  }
+});  },
 
   pickup: {
     available: true,
