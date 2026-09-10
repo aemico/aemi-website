@@ -109,12 +109,15 @@ fulfillmentSelect.addEventListener("change", () => {
   if (fulfillmentSelect.value === "Delivery") {
     addressLabel.firstChild.textContent = "Delivery address";
     addressField.placeholder = "Enter your complete delivery address";
+    addressField.required = true;
   } else if (fulfillmentSelect.value === "Pickup") {
     addressLabel.firstChild.textContent = "Pickup details";
     addressField.placeholder = "Preferred pickup time or other pickup details";
+    addressField.required = false;
   } else {
     addressLabel.firstChild.textContent = "Address / pickup details";
     addressField.placeholder = "";
+    addressField.required = true;
   }
 });
 document.getElementById("orderForm").addEventListener("submit", (event) => {
