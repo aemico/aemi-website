@@ -135,18 +135,34 @@ fulfillmentSelect.addEventListener("change", () => {
     addressField.required = true;
   }
 });
-document.getElementById("orderForm").addEventListener("submit", (event) => {
+document.getElementById("orderForm").addEventListener("submit", async (event) => {
   event.preventDefault();
 
   const form = event.target;
   const formData = new FormData(form);
 
-  fetch("https://script.google.com/macros/s/AKfycbwhHzTwb4z3WvoyCjZdavc7BYaTFssgQpLrVnBLU_PZjz-fWSTZwF3qUQMxRlAW9TGb/exec", {
-    method: "POST",
-    body: new URLSearchParams(formData)
-  });
+  try {
+    const response = await fetch(
+      "https://script.google.com/macros/s/AKfycbwhHzTwb4z3WvoyCjZdavc7BYaTFssgQpLrVnBLU_PZjz-fWSTZwF3qUQMxRlAW9TGb/exec",
+      {
+        method: "POST",
+        body: new URLSearchParams(formData)
+      }
+    );
 
-  alert("Thank you! Your AEMI order has been submitted.");
-  form.reset();
-  updateOrderSummary();
+    const result = await response.text();
+
+    if (response.ok && result.trim() === "success") {
+      alert("Thank you! Your AEMI order has been submitted.");
+      form.reset();
+      updateOrderSummary();
+    } else {
+      alert("AEMI order submission failed. Please try again.");
+      console.log("Apps Script response:", result);
+    }
+
+  } catch (error) {
+    alert("AEMI order submission failed. Please check your connection and try again.");
+    console.error("Order submission error:", error);
+  }
 });
