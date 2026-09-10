@@ -75,7 +75,7 @@ document.getElementById("sizes").textContent = sizeText;
 const productSelect = document.getElementById("productSelect");
 AEMI.product.sizes.forEach((item, index) => {
   const option = document.createElement("option");
-  option.value = index;
+  option.value = item.label;
   option.textContent = item.price == null ? `${item.label} — Price TBD` : `${item.label} — ₱${item.price}`;
   productSelect.appendChild(option);
 });
