@@ -79,7 +79,20 @@ AEMI.product.sizes.forEach((item, index) => {
   option.textContent = item.price == null ? `${item.label} — Price TBD` : `${item.label} — ₱${item.price}`;
   productSelect.appendChild(option);
 });
+const quantityInput = document.getElementById("quantity");
+const orderSummary = document.getElementById("orderSummary");
 
+function updateOrderSummary() {
+  const selectedSize = AEMI.product.sizes[productSelect.value];
+  const quantity = quantityInput.value || 1;
+
+  orderSummary.textContent = `${selectedSize.label} × ${quantity}`;
+}
+
+productSelect.addEventListener("change", updateOrderSummary);
+quantityInput.addEventListener("input", updateOrderSummary);
+
+updateOrderSummary();
 const emailLine = document.getElementById("emailLine");
 if (AEMI.contact.email) emailLine.textContent = `Email: ${AEMI.contact.email}`;
 
