@@ -137,5 +137,9 @@ fulfillmentSelect.addEventListener("change", () => {
 });
 document.getElementById("orderForm").addEventListener("submit", (event) => {
   event.preventDefault();
-  alert("AEMI order form is ready! The next setup step is connecting this form to your free order sheet.");
+
+  window.open(
+    "https://forms.gle/C38eM6wzDbEwNwnR9",
+    "_blank"
+  );
 });
