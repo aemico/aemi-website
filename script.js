@@ -101,7 +101,22 @@ document.getElementById("year").textContent = new Date().getFullYear();
 document.querySelector(".menu-toggle").addEventListener("click", () => {
   document.getElementById("nav").classList.toggle("open");
 });
+const fulfillmentSelect = document.querySelector('select[name="fulfillment"]');
+const addressLabel = document.getElementById("addressLabel");
+const addressField = document.getElementById("addressField");
 
+fulfillmentSelect.addEventListener("change", () => {
+  if (fulfillmentSelect.value === "Delivery") {
+    addressLabel.firstChild.textContent = "Delivery address";
+    addressField.placeholder = "Enter your complete delivery address";
+  } else if (fulfillmentSelect.value === "Pickup") {
+    addressLabel.firstChild.textContent = "Pickup details";
+    addressField.placeholder = "Preferred pickup time or other pickup details";
+  } else {
+    addressLabel.firstChild.textContent = "Address / pickup details";
+    addressField.placeholder = "";
+  }
+});
 document.getElementById("orderForm").addEventListener("submit", (event) => {
   event.preventDefault();
   alert("AEMI order form is ready! The next setup step is connecting this form to your free order sheet.");
