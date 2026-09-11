@@ -474,22 +474,49 @@
   }
 
 
-  /*
-   * Submit order.
-   */
-  if (aemiOrderForm) {
+ /*
+ * Submit order.
+ */
+if (aemiOrderForm) {
+  aemiOrderForm.addEventListener("submit", function (event) {
+    event.preventDefault();
 
-    aemiOrderForm.addEventListener(
-      "submit",
-      function (event) {
+    if (aemiOrderSubmitting) {
+      return;
+    }
 
-        if (aemiOrderSubmitting) {
+    const orderNumber = generateAemiOrderNumber();
 
-          event.preventDefault();
-          return;
+    aemiHiddenOrderNumber.value = orderNumber;
+    aemiReceiptOrderNumber.textContent = orderNumber;
 
-        }
+    aemiOrderSubmitting = true;
+    aemiSubmitButton.disabled = true;
+    aemiSubmitButton.textContent = "SUBMITTING...";
 
+    const formData = new FormData(aemiOrderForm);
+
+    fetch(
+      "https://script.google.com/macros/s/AKfycbzhsOBppntZzePi8u4C3nJDzq9RooyrxqPODy8CqEq9VCVGFp5U7Q7VuL-HO1LwWAFn/exec",
+      {
+        method: "POST",
+        body: formData,
+        mode: "no-cors"
+      }
+    );
+
+    setTimeout(function () {
+      aemiOrderForm.hidden = true;
+      aemiOrderReceipt.hidden = false;
+      aemiReceiptStatus.textContent = "Pending";
+
+      aemiOrderReceipt.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }, 800);
+  });
+}
 
         /*
          * Generate the order number.
