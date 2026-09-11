@@ -435,159 +435,202 @@
 
 
   <!-- AEMI ORDER RECEIPT LOGIC -->
-  <script>
+<script>
 
-    const aemiOrderForm = document.getElementById("orderForm");
-    const aemiOrderReceipt = document.getElementById("orderReceipt");
-    const aemiSubmitButton = document.getElementById("submitOrderButton");
+  const aemiOrderForm =
+    document.getElementById("orderForm");
 
-    const aemiReceiptOrderNumber =
-      document.getElementById("receiptOrderNumber");
+  const aemiOrderReceipt =
+    document.getElementById("orderReceipt");
 
-    const aemiReceiptStatus =
-      document.getElementById("receiptStatus");
+  const aemiSubmitButton =
+    document.getElementById("submitOrderButton");
 
-    const aemiTrackReceiptButton =
-      document.getElementById("trackReceiptButton");
+  const aemiReceiptOrderNumber =
+    document.getElementById("receiptOrderNumber");
 
-    const aemiBackToOrderButton =
-      document.getElementById("backToOrderButton");
+  const aemiReceiptStatus =
+    document.getElementById("receiptStatus");
 
-    const aemiTrackingInput =
-      document.getElementById("orderNumber");
+  const aemiTrackReceiptButton =
+    document.getElementById("trackReceiptButton");
 
-    let aemiOrderSubmitting = false;
+  const aemiBackToOrderButton =
+    document.getElementById("backToOrderButton");
+
+  const aemiTrackingInput =
+    document.getElementById("orderNumber");
+
+  const aemiHiddenOrderNumber =
+    document.getElementById("orderNumberHidden");
 
 
-    /*
-     * Prevent duplicate submissions.
-     * The actual form submission happens inside the hidden iframe.
-     */
-    if (aemiOrderForm) {
+  let aemiOrderSubmitting = false;
 
-    aemiOrderForm.addEventListener("submit", function (event) {
 
-  if (aemiOrderSubmitting) {
-    event.preventDefault();
-    return;
+  /*
+   * Generate an AEMI order number before submission.
+   */
+  function generateAemiOrderNumber() {
+
+    const timestamp =
+      Date.now().toString().slice(-6);
+
+    const random =
+      Math.floor(100 + Math.random() * 900);
+
+    return "AEMI-" + timestamp + random;
+
   }
+
+
+  /*
+   * Submit order.
+   */
+  if (aemiOrderForm) {
+
+    aemiOrderForm.addEventListener(
+      "submit",
+      function (event) {
+
+        if (aemiOrderSubmitting) {
+
+          event.preventDefault();
+          return;
+
+        }
+
+
+        /*
+         * Generate the order number.
+         */
+        const orderNumber =
+          generateAemiOrderNumber();
+
+
+        /*
+         * Put the number into the hidden
+         * form field so Google Sheets receives it.
+         */
+        aemiHiddenOrderNumber.value =
+          orderNumber;
+
+
+        /*
+         * Show the order number immediately
+         * in the receipt.
+         */
+        aemiReceiptOrderNumber.textContent =
+          orderNumber;
+
+
+        /*
+         * Prevent duplicate submissions.
+         */
         aemiOrderSubmitting = true;
 
         aemiSubmitButton.disabled = true;
-        aemiSubmitButton.textContent = "SUBMITTING...";
+
+        aemiSubmitButton.textContent =
+          "SUBMITTING...";
+
+
+        /*
+         * Let the normal form submission
+         * continue into the hidden iframe.
+         */
+        setTimeout(function () {
+
+          /*
+           * The form has been submitted to
+           * Google Apps Script.
+           *
+           * Show the receipt after submission.
+           */
+          aemiOrderForm.hidden = true;
+
+          aemiOrderReceipt.hidden = false;
+
+          aemiReceiptStatus.textContent =
+            "Pending";
+
+          aemiOrderReceipt.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+          });
+
+        }, 800);
 
       });
 
-    }
-
-
-    /*
-     * Listen for the confirmation sent by Google Apps Script.
-     */
-    window.addEventListener("message", function (event) {
-
-  const submitFrame =
-    document.getElementById("orderSubmitFrame");
-
-  if (
-    !event.data ||
-    event.data.type !== "AEMI_ORDER_RECEIVED" ||
-    !submitFrame ||
-    event.source !== submitFrame.contentWindow
-  ) {
-    return;
   }
 
 
-      const orderNumber = event.data.orderNumber;
+  /*
+   * TRACK MY ORDER
+   */
+  if (aemiTrackReceiptButton) {
 
-      if (!orderNumber) {
-        return;
-      }
+    aemiTrackReceiptButton.addEventListener(
+      "click",
+      function () {
 
-
-      aemiReceiptOrderNumber.textContent = orderNumber;
-
-      aemiReceiptStatus.textContent =
-        event.data.status || "Pending";
-
-
-      /*
-       * Hide the form and show the receipt.
-       */
-      aemiOrderForm.hidden = true;
-
-      aemiOrderReceipt.hidden = false;
+        const orderNumber =
+          aemiReceiptOrderNumber.textContent.trim();
 
 
-      /*
-       * Move the visitor to the receipt.
-       */
-      aemiOrderReceipt.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
+        if (aemiTrackingInput && orderNumber) {
+
+          aemiTrackingInput.value =
+            orderNumber;
+
+        }
 
 
-    });
+        const trackSection =
+          document.getElementById("track");
 
 
-    /*
-     * TRACK MY ORDER
-     */
-    if (aemiTrackReceiptButton) {
+        if (trackSection) {
 
-  aemiTrackReceiptButton.addEventListener("click", function () {
+          trackSection.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+          });
 
-    const orderNumber =
-      aemiReceiptOrderNumber.textContent.trim();
+        }
 
-    if (aemiTrackingInput && orderNumber) {
 
-      aemiTrackingInput.value = orderNumber;
+        /*
+         * Automatically check the order.
+         */
+        setTimeout(function () {
 
-    }
+          const trackingForm =
+            document.getElementById("trackingForm");
 
-    const trackSection =
-      document.getElementById("track");
+          if (trackingForm) {
 
-    if (trackSection) {
+            trackingForm.requestSubmit();
 
-      trackSection.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
+          }
 
-    }
-
-    /*
-     * Automatically check the order
-     * after moving to the tracker.
-     */
-    setTimeout(() => {
-
-      if (trackingForm) {
-
-        trackingForm.requestSubmit();
+        }, 700);
 
       }
+    );
 
-    }, 500);
-
-  });
-
-}
+  }
 
 
-    /*
-     * BACK TO ORDER
-     *
-     * This does NOT use browser history.
-     * Therefore it cannot trigger form resubmission.
-     */
-    if (aemiBackToOrderButton) {
+  /*
+   * BACK TO ORDER
+   */
+  if (aemiBackToOrderButton) {
 
-      aemiBackToOrderButton.addEventListener("click", function () {
+    aemiBackToOrderButton.addEventListener(
+      "click",
+      function () {
 
         aemiOrderReceipt.hidden = true;
 
@@ -595,10 +638,23 @@
 
         aemiOrderForm.reset();
 
+
+        /*
+         * Clear generated order number.
+         */
+        if (aemiHiddenOrderNumber) {
+
+          aemiHiddenOrderNumber.value = "";
+
+        }
+
+
         aemiOrderSubmitting = false;
 
         aemiSubmitButton.disabled = false;
-        aemiSubmitButton.textContent = "SUBMIT ORDER";
+
+        aemiSubmitButton.textContent =
+          "SUBMIT ORDER";
 
 
         aemiOrderForm.scrollIntoView({
@@ -606,11 +662,12 @@
           block: "start"
         });
 
-      });
+      }
+    );
 
-    }
+  }
 
-  </script>
+</script>
 
 </body>
 </html>
