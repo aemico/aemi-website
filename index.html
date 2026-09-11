@@ -130,7 +130,36 @@
      <p class="form-note">Your order will be reviewed and confirmed by AEMI before processing.</p>
       </form>
     </section>
+    <section id="track" class="section order-section">
+      <p class="eyebrow">ORDER TRACKING</p>
 
+      <h2>Where's your AEMI?</h2>
+
+      <p>
+        Enter your order number below to check your latest order status.
+      </p>
+
+      <form id="trackingForm">
+
+        <label>
+          Order number
+          <input
+            id="orderNumber"
+            type="text"
+            placeholder="AEMI-0002"
+            autocomplete="off"
+            required
+          >
+        </label>
+
+        <button class="button full" type="submit">
+          TRACK ORDER
+        </button>
+
+      </form>
+
+      <div id="trackingResult" class="tracking-result"></div>
+    </section>
     <section id="contact" class="section contact">
       <p class="eyebrow">STAY CONNECTED</p>
       <h2>Find AEMI online.</h2>
