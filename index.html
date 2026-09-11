@@ -482,12 +482,17 @@
      */
     window.addEventListener("message", function (event) {
 
-      if (
-        !event.data ||
-        event.data.type !== "AEMI_ORDER_RECEIVED"
-      ) {
-        return;
-      }
+  const submitFrame =
+    document.getElementById("orderSubmitFrame");
+
+  if (
+    !event.data ||
+    event.data.type !== "AEMI_ORDER_RECEIVED" ||
+    !submitFrame ||
+    event.source !== submitFrame.contentWindow
+  ) {
+    return;
+  }
 
 
       const orderNumber = event.data.orderNumber;
