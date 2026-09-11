@@ -508,12 +508,20 @@
           generateAemiOrderNumber();
 
 
-        /*
-         * Put the number into the hidden
-         * form field so Google Sheets receives it.
-         */
-        aemiHiddenOrderNumber.value =
-          orderNumber;
+       /*
+ * Put the number into the hidden form field.
+ */
+aemiHiddenOrderNumber.value =
+  orderNumber;
+
+/*
+ * Also send the order number directly
+ * through the Apps Script URL.
+ */
+aemiOrderForm.action =
+  "https://script.google.com/macros/s/AKfycbzhsOBppntZzePi8u4C3nJDzq9RooyrxqPODy8CqEq9VCVGFp5U7Q7VuL-HO1LwWAFn/exec"
+  + "?orderNumber="
+  + encodeURIComponent(orderNumber);
 
 
         /*
