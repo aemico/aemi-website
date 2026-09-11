@@ -176,3 +176,107 @@ footer small { opacity: .7; margin-top: 8px; }
   letter-spacing: .04em;
   text-align: left;
              }
+/* ============================================================
+   ORDER TRACKING
+   ============================================================ */
+
+.tracking-result {
+  margin-top: 35px;
+}
+
+.tracking-card {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 35px 25px;
+  border: 1px solid var(--line);
+  background: var(--ivory);
+  text-align: center;
+}
+
+.tracking-card h2 {
+  margin: 8px 0 10px;
+  color: var(--red);
+  letter-spacing: 0.08em;
+}
+
+.tracking-card p {
+  line-height: 1.7;
+}
+
+.tracking-timeline {
+  margin: 35px 0;
+  text-align: left;
+}
+
+.tracking-step {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  min-height: 55px;
+  padding-left: 5px;
+  color: #9a8c80;
+}
+
+.tracking-step:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 15px;
+  top: 35px;
+  width: 1px;
+  height: 30px;
+  background: var(--line);
+}
+
+.tracking-dot {
+  position: relative;
+  z-index: 1;
+  width: 30px;
+  height: 30px;
+  flex: 0 0 30px;
+  box-sizing: border-box;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--ivory);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}
+
+.tracking-step.completed {
+  color: var(--red);
+}
+
+.tracking-step.completed .tracking-dot {
+  border-color: var(--red);
+  background: var(--red);
+  color: #fffaf2;
+}
+
+.tracking-step.current {
+  color: var(--red);
+  font-weight: bold;
+}
+
+.tracking-step.current .tracking-dot {
+  border-color: var(--red);
+  box-shadow: 0 0 0 4px rgba(125, 32, 32, 0.08);
+}
+
+.tracking-label {
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+}
+
+.tracking-current {
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+}
+
+.tracking-current strong {
+  color: var(--red);
+}
