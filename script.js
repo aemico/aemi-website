@@ -212,3 +212,205 @@ fulfillmentSelect.addEventListener("change", () => {
     addressField.required = true;
   }
 });
+/* ============================================================
+   ORDER TRACKING
+   ============================================================ */
+
+const trackingForm = document.getElementById("trackingForm");
+const orderNumberInput = document.getElementById("orderNumber");
+const trackingResult = document.getElementById("trackingResult");
+
+const WEB_APP_URL =
+  "https://script.google.com/macros/s/AKfycbwb91_sh-CmcorUVENEHKlyK16umG9mmKztmmy2IZyA2qMxLdLaZyahQBNgfc1LoGAg/exec";
+
+
+if (trackingForm) {
+
+  trackingForm.addEventListener("submit", (event) => {
+
+    event.preventDefault();
+
+    const orderNumber =
+      orderNumberInput.value.trim().toUpperCase();
+
+    if (!orderNumber) return;
+
+
+    trackingResult.innerHTML = `
+      <p>Checking your order...</p>
+    `;
+
+
+    const callbackName =
+      "aemiTracking_" + Date.now();
+
+
+    window[callbackName] = function(data) {
+
+      if (!data.success) {
+
+        trackingResult.innerHTML = `
+          <div class="tracking-card">
+
+            <h2>Order Not Found</h2>
+
+            <p>
+              We couldn't find that order number.
+              Please check it and try again.
+            </p>
+
+          </div>
+        `;
+
+        delete window[callbackName];
+
+        return;
+      }
+
+
+      const fulfillment =
+        data.fulfillment.toLowerCase();
+
+      const status =
+        data.status;
+
+
+      let steps;
+
+
+      if (fulfillment === "delivery") {
+
+        steps = [
+          "Pending",
+          "Confirmed",
+          "Processing",
+          "Out for Delivery",
+          "Delivered"
+        ];
+
+      } else {
+
+        steps = [
+          "Pending",
+          "Confirmed",
+          "Ready for Pickup",
+          "Picked Up"
+        ];
+
+      }
+
+
+      const currentIndex =
+        steps.indexOf(status);
+
+
+      const timeline =
+        steps.map((step, index) => {
+
+          let className = "";
+
+          if (index < currentIndex) {
+            className = "completed";
+          }
+
+          if (index === currentIndex) {
+            className = "current";
+          }
+
+
+          return `
+            <div class="tracking-step ${className}">
+
+              <div class="tracking-dot">
+                ${index < currentIndex ? "✓" : ""}
+              </div>
+
+              <div class="tracking-label">
+                ${step}
+              </div>
+
+            </div>
+          `;
+
+        }).join("");
+
+
+      trackingResult.innerHTML = `
+
+        <div class="tracking-card">
+
+          <p class="eyebrow">
+            ORDER NUMBER
+          </p>
+
+          <h2>
+            ${data.orderNumber}
+          </h2>
+
+          <p>
+            ${fulfillment === "delivery"
+              ? "Delivery"
+              : "Pickup"}
+          </p>
+
+
+          <div class="tracking-timeline">
+
+            ${timeline}
+
+          </div>
+
+
+          <p class="tracking-current">
+
+            Current status:
+            <strong>${status}</strong>
+
+          </p>
+
+        </div>
+
+      `;
+
+
+      delete window[callbackName];
+
+    };
+
+
+    const script =
+      document.createElement("script");
+
+
+    script.src =
+      WEB_APP_URL +
+      "?order=" +
+      encodeURIComponent(orderNumber) +
+      "&callback=" +
+      callbackName;
+
+
+    script.onerror = function() {
+
+      trackingResult.innerHTML = `
+        <div class="tracking-card">
+
+          <h2>Something went wrong</h2>
+
+          <p>
+            Please try again in a moment.
+          </p>
+
+        </div>
+      `;
+
+      delete window[callbackName];
+
+    };
+
+
+    document.body.appendChild(script);
+
+  });
+
+}
