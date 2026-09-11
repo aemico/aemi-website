@@ -528,33 +528,46 @@
      */
     if (aemiTrackReceiptButton) {
 
-      aemiTrackReceiptButton.addEventListener("click", function () {
+  aemiTrackReceiptButton.addEventListener("click", function () {
 
-        const orderNumber =
-          aemiReceiptOrderNumber.textContent.trim();
+    const orderNumber =
+      aemiReceiptOrderNumber.textContent.trim();
 
-        if (aemiTrackingInput && orderNumber) {
+    if (aemiTrackingInput && orderNumber) {
 
-          aemiTrackingInput.value = orderNumber;
+      aemiTrackingInput.value = orderNumber;
 
-        }
+    }
 
+    const trackSection =
+      document.getElementById("track");
 
-        const trackSection =
-          document.getElementById("track");
+    if (trackSection) {
 
-        if (trackSection) {
-
-          trackSection.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-          });
-
-        }
-
+      trackSection.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
       });
 
     }
+
+    /*
+     * Automatically check the order
+     * after moving to the tracker.
+     */
+    setTimeout(() => {
+
+      if (trackingForm) {
+
+        trackingForm.requestSubmit();
+
+      }
+
+    }, 500);
+
+  });
+
+}
 
 
     /*
