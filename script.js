@@ -221,7 +221,7 @@ const orderNumberInput = document.getElementById("orderNumber");
 const trackingResult = document.getElementById("trackingResult");
 
 const WEB_APP_URL =
-  "https://script.google.com/macros/s/AKfycbwb91_sh-CmcorUVENEHKlyK16umG9mmKztmmy2IZyA2qMxLdLaZyahQBNgfc1LoGAg/exec";
+  "https://script.google.com/macros/s/AKfycbzhsOBppntZzePi8u4C3nJDzq9RooyrxqPODy8CqEq9VCVGFp5U7Q7VuL-HO1LwWAFn/exec";
 
 
 if (trackingForm) {
