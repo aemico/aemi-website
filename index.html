@@ -461,12 +461,12 @@
      */
     if (aemiOrderForm) {
 
-      aemiOrderForm.addEventListener("submit", function () {
+    aemiOrderForm.addEventListener("submit", function (event) {
 
-        if (aemiOrderSubmitting) {
-          return;
-        }
-
+  if (aemiOrderSubmitting) {
+    event.preventDefault();
+    return;
+  }
         aemiOrderSubmitting = true;
 
         aemiSubmitButton.disabled = true;
