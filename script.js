@@ -1,23 +1,43 @@
-     /* ============================================================
+/* ============================================================
    AEMI EDITABLE SETTINGS
-   Change the values below when AEMI's information changes.
    ============================================================ */
 
 const AEMI = {
+
   businessName: "AEMI",
+
   tagline: "A Little Heat. A Lot of Flavor.",
-  heroDescription: "Bold, savory flavor made to elevate everyday meals.",
+
+  heroDescription:
+    "Bold, savory flavor made to elevate everyday meals.",
+
 
   product: {
+
     name: "AEMI Chili Garlic Oil",
-    description: "A savory, aromatic blend of garlic, chili, and balanced seasonings, made for rice, noodles, meats, snacks, and everyday meals.",
-    ingredients: "Garlic · Chili · Oyster Sauce · Black Pepper · Salt · Brown Sugar",
-    availability: "COMING SOON",
+
+    description:
+      "A savory, aromatic blend of garlic, chili, and balanced seasonings, made for rice, noodles, meats, snacks, and everyday meals.",
+
+    ingredients:
+      "Garlic · Chili · Oyster Sauce · Black Pepper · Salt · Brown Sugar",
+
+    availability:
+      "COMING SOON",
+
     sizes: [
-      { label: "60 mL", price: null },
-      { label: "120 mL", price: null }
+      {
+        label: "60 mL",
+        price: null
+      },
+      {
+        label: "120 mL",
+        price: null
+      }
     ]
+
   },
+
 
   aboutText: `AEMI started with two people, one recipe, and the idea of creating something of our own.
 
@@ -31,148 +51,391 @@ AEMI Round 2 is our second try, this time with more planning, better systems, an
 
 Still small. Still ours. But this time, we're building it with intention.`,
 
+
   delivery: {
+
     available: true,
-    usualTime: "2–3 days depending on location",
-    feeNote: "Delivery fee depends on location."
+
+    usualTime:
+      "2–3 days depending on location",
+
+    feeNote:
+      "Delivery fee depends on location."
+
   },
+
 
   pickup: {
+
     available: true,
-    location: "Tartaria, Silang, Cavite · De Leon Compound · Sta. Rosa–Tagaytay Road",
-    schedule: "By arrangement / prior negotiation"
+
+    location:
+      "Tartaria, Silang, Cavite · De Leon Compound · Sta. Rosa–Tagaytay Road",
+
+    schedule:
+      "By arrangement / prior negotiation"
+
   },
+
 
   contact: {
+
     email: "",
+
     phone: ""
+
   },
 
+
   socials: {
+
     facebook: "",
+
     instagram: "",
+
     tiktok: "",
+
     messenger: ""
+
   }
+
 };
+
+
 /* ============================================================
-   WEBSITE LOGIC
+   BASIC WEBSITE CONTENT
    ============================================================ */
 
-document.title = `${AEMI.businessName} | Chili Garlic Oil`;
-
-document.getElementById("tagline").innerHTML =
-  AEMI.tagline.replace(". ", ".<br>");
-
-document.getElementById("heroDescription").textContent =
-  AEMI.heroDescription;
-
-document.getElementById("productName").textContent =
-  AEMI.product.name;
-
-document.getElementById("productDescription").textContent =
-  AEMI.product.description;
-
-document.getElementById("ingredients").textContent =
-  AEMI.product.ingredients;
-
-document.getElementById("availability").textContent =
-  AEMI.product.availability;
-
-document.getElementById("aboutText").textContent =
-  AEMI.aboutText;
-
-document.getElementById("pickupLocation").textContent =
-  AEMI.pickup.location;
+document.title =
+  `${AEMI.businessName} | Chili Garlic Oil`;
 
 
-/* PRODUCT SIZES */
+const taglineElement =
+  document.getElementById("tagline");
 
-const sizeText = AEMI.product.sizes
-  .map(item => item.label)
-  .join(" · ");
+if (taglineElement) {
 
-document.getElementById("sizes").textContent = sizeText;
+  taglineElement.innerHTML =
+    AEMI.tagline.replace(
+      ". ",
+      ".<br>"
+    );
 
-const productSelect = document.getElementById("productSelect");
-
-AEMI.product.sizes.forEach(item => {
-  const option = document.createElement("option");
-
-  option.value = item.label;
-
-  option.textContent = item.price == null
-    ? `${item.label} — Price TBD`
-    : `${item.label} — ₱${item.price}`;
-
-  productSelect.appendChild(option);
-});
-
-
-/* ORDER SUMMARY */
-
-const quantityInput = document.getElementById("quantity");
-const orderSummary = document.getElementById("orderSummary");
-
-function updateOrderSummary() {
-  const selectedSize = productSelect.value;
-  const quantity = quantityInput.value || 1;
-
-  if (selectedSize) {
-    orderSummary.textContent =
-      `${selectedSize} × ${quantity}`;
-  }
 }
 
-productSelect.addEventListener("change", updateOrderSummary);
-quantityInput.addEventListener("input", updateOrderSummary);
+
+const heroDescription =
+  document.getElementById("heroDescription");
+
+if (heroDescription) {
+
+  heroDescription.textContent =
+    AEMI.heroDescription;
+
+}
+
+
+const productName =
+  document.getElementById("productName");
+
+if (productName) {
+
+  productName.textContent =
+    AEMI.product.name;
+
+}
+
+
+const productDescription =
+  document.getElementById("productDescription");
+
+if (productDescription) {
+
+  productDescription.textContent =
+    AEMI.product.description;
+
+}
+
+
+const ingredients =
+  document.getElementById("ingredients");
+
+if (ingredients) {
+
+  ingredients.textContent =
+    AEMI.product.ingredients;
+
+}
+
+
+const availability =
+  document.getElementById("availability");
+
+if (availability) {
+
+  availability.textContent =
+    AEMI.product.availability;
+
+}
+
+
+const aboutText =
+  document.getElementById("aboutText");
+
+if (aboutText) {
+
+  aboutText.textContent =
+    AEMI.aboutText;
+
+}
+
+
+const pickupLocation =
+  document.getElementById("pickupLocation");
+
+if (pickupLocation) {
+
+  pickupLocation.textContent =
+    AEMI.pickup.location;
+
+}
+
+
+/* ============================================================
+   PRODUCT SIZES
+   ============================================================ */
+
+const sizes =
+  document.getElementById("sizes");
+
+const productSelect =
+  document.getElementById("productSelect");
+
+
+if (sizes) {
+
+  sizes.textContent =
+    AEMI.product.sizes
+      .map(item => item.label)
+      .join(" · ");
+
+}
+
+
+if (productSelect) {
+
+  AEMI.product.sizes.forEach(
+    item => {
+
+      const option =
+        document.createElement("option");
+
+
+      option.value =
+        item.label;
+
+
+      option.textContent =
+        item.price == null
+          ? `${item.label} — Price TBD`
+          : `${item.label} — ₱${item.price}`;
+
+
+      productSelect.appendChild(option);
+
+    }
+  );
+
+}
+
+
+/* ============================================================
+   ORDER SUMMARY
+   ============================================================ */
+
+const quantityInput =
+  document.getElementById("quantity");
+
+const orderSummary =
+  document.getElementById("orderSummary");
+
+
+function updateOrderSummary() {
+
+  if (
+    !productSelect ||
+    !quantityInput ||
+    !orderSummary
+  ) {
+
+    return;
+
+  }
+
+
+  const selectedSize =
+    productSelect.value;
+
+
+  const quantity =
+    quantityInput.value || 1;
+
+
+  if (selectedSize) {
+
+    orderSummary.textContent =
+      `${selectedSize} × ${quantity}`;
+
+  }
+
+}
+
+
+if (productSelect) {
+
+  productSelect.addEventListener(
+    "change",
+    updateOrderSummary
+  );
+
+}
+
+
+if (quantityInput) {
+
+  quantityInput.addEventListener(
+    "input",
+    updateOrderSummary
+  );
+
+}
+
 
 updateOrderSummary();
 
-/* CONTACT */
 
-const emailLine = document.getElementById("emailLine");
+/* ============================================================
+   CONTACT
+   ============================================================ */
 
-if (AEMI.contact.email) {
-  emailLine.textContent = `Email: ${AEMI.contact.email}`;
+const emailLine =
+  document.getElementById("emailLine");
+
+
+if (
+  emailLine &&
+  AEMI.contact.email
+) {
+
+  emailLine.textContent =
+    `Email: ${AEMI.contact.email}`;
+
 }
 
 
-/* SOCIAL LINKS */
+/* ============================================================
+   SOCIAL LINKS
+   ============================================================ */
 
-["facebook", "instagram", "tiktok", "messenger"].forEach(id => {
-  const link = document.getElementById(id);
+[
+  "facebook",
+  "instagram",
+  "tiktok",
+  "messenger"
+].forEach(
+  id => {
 
-  if (AEMI.socials[id]) {
-    link.href = AEMI.socials[id];
-  } else {
-    link.href = "#";
+    const link =
+      document.getElementById(id);
 
-    link.addEventListener("click", e => {
-      e.preventDefault();
-      alert("AEMI's social account is coming soon.");
-    });
+
+    if (!link) {
+      return;
+    }
+
+
+    if (AEMI.socials[id]) {
+
+      link.href =
+        AEMI.socials[id];
+
+    }
+
+    else {
+
+      link.href =
+        "#";
+
+
+      link.addEventListener(
+        "click",
+        event => {
+
+          event.preventDefault();
+
+          alert(
+            "AEMI's social account is coming soon."
+          );
+
+        }
+      );
+
+    }
+
   }
-});
+);
 
 
-/* YEAR */
+/* ============================================================
+   YEAR
+   ============================================================ */
 
-document.getElementById("year").textContent =
-  new Date().getFullYear();
-
-
-/* MOBILE MENU */
-
-document.querySelector(".menu-toggle").addEventListener("click", () => {
-  document.getElementById("nav").classList.toggle("open");
-});
+const year =
+  document.getElementById("year");
 
 
-/* DELIVERY / PICKUP */
+if (year) {
+
+  year.textContent =
+    new Date().getFullYear();
+
+}
+
+
+/* ============================================================
+   MOBILE MENU
+   ============================================================ */
+
+const menuToggle =
+  document.querySelector(".menu-toggle");
+
+const nav =
+  document.getElementById("nav");
+
+
+if (
+  menuToggle &&
+  nav
+) {
+
+  menuToggle.addEventListener(
+    "click",
+    () => {
+
+      nav.classList.toggle("open");
+
+    }
+  );
+
+}
+
+
+/* ============================================================
+   DELIVERY / PICKUP
+   ============================================================ */
 
 const fulfillmentSelect =
-  document.querySelector('select[name="fulfillment"]');
+  document.getElementById("fulfillmentSelect");
 
 const addressLabel =
   document.getElementById("addressLabel");
@@ -180,237 +443,371 @@ const addressLabel =
 const addressField =
   document.getElementById("addressField");
 
-fulfillmentSelect.addEventListener("change", () => {
 
-  if (fulfillmentSelect.value === "Delivery") {
+if (
+  fulfillmentSelect &&
+  addressLabel &&
+  addressField
+) {
 
-    addressLabel.firstChild.textContent =
-      "Delivery address";
+  fulfillmentSelect.addEventListener(
+    "change",
+    () => {
 
-    addressField.placeholder =
-      "Enter your complete delivery address";
+      if (
+        fulfillmentSelect.value ===
+        "Delivery"
+      ) {
 
-    addressField.required = true;
+        addressLabel.childNodes[0].textContent =
+          "Delivery address";
 
-  } else if (fulfillmentSelect.value === "Pickup") {
+        addressField.placeholder =
+          "Enter your complete delivery address";
 
-    addressLabel.firstChild.textContent =
-      "Pickup details";
+        addressField.required =
+          true;
 
-    addressField.placeholder =
-      "Preferred pickup time or other pickup details";
+      }
 
-    addressField.required = false;
 
-  } else {
+      else if (
+        fulfillmentSelect.value ===
+        "Pickup"
+      ) {
 
-    addressLabel.firstChild.textContent =
-      "Address / pickup details";
+        addressLabel.childNodes[0].textContent =
+          "Pickup details";
 
-    addressField.placeholder = "";
+        addressField.placeholder =
+          "Preferred pickup time or other pickup details";
 
-    addressField.required = true;
-  }
-});
+        addressField.required =
+          false;
+
+      }
+
+
+      else {
+
+        addressLabel.childNodes[0].textContent =
+          "Address / pickup details";
+
+        addressField.placeholder =
+          "";
+
+        addressField.required =
+          true;
+
+      }
+
+    }
+  );
+
+}
+
+
 /* ============================================================
    ORDER TRACKING
    ============================================================ */
 
-const trackingForm = document.getElementById("trackingForm");
-const orderNumberInput = document.getElementById("orderNumber");
-const trackingResult = document.getElementById("trackingResult");
+const trackingForm =
+  document.getElementById("trackingForm");
+
+const orderNumberInput =
+  document.getElementById("orderNumber");
+
+const trackingResult =
+  document.getElementById("trackingResult");
+
+
+/*
+ * CURRENT AEMI GOOGLE APPS SCRIPT WEB APP
+ */
 
 const WEB_APP_URL =
-  "https://script.google.com/macros/s/AKfycbzhsOBppntZzePi8u4C3nJDzq9RooyrxqPODy8CqEq9VCVGFp5U7Q7VuL-HO1LwWAFn/exec";
+  "https://script.google.com/macros/s/AKfycbxAOTJu0QdMdIOetE_glCt3FjF5CvddYWXlafC2g_t9mrLBwRh0ZlKQTOvQj3MUy9KH/exec";
 
 
 if (trackingForm) {
 
-  trackingForm.addEventListener("submit", (event) => {
+  trackingForm.addEventListener(
+    "submit",
+    event => {
 
-    event.preventDefault();
-
-    const orderNumber =
-      orderNumberInput.value.trim().toUpperCase();
-
-    if (!orderNumber) return;
+      event.preventDefault();
 
 
-    trackingResult.innerHTML = `
-      <p>Checking your order...</p>
-    `;
+      const orderNumber =
+        orderNumberInput.value
+          .trim()
+          .toUpperCase();
 
 
-    const callbackName =
-      "aemiTracking_" + Date.now();
-
-
-    window[callbackName] = function(data) {
-
-      if (!data.success) {
-
-        trackingResult.innerHTML = `
-          <div class="tracking-card">
-
-            <h2>Order Not Found</h2>
-
-            <p>
-              We couldn't find that order number.
-              Please check it and try again.
-            </p>
-
-          </div>
-        `;
-
-        delete window[callbackName];
+      if (!orderNumber) {
 
         return;
-      }
-
-
-      const fulfillment =
-        data.fulfillment.toLowerCase();
-
-      const status =
-        data.status;
-
-
-      let steps;
-
-
-      if (fulfillment === "delivery") {
-
-        steps = [
-          "Pending",
-          "Confirmed",
-          "Processing",
-          "Out for Delivery",
-          "Delivered"
-        ];
-
-      } else {
-
-        steps = [
-          "Pending",
-          "Confirmed",
-          "Ready for Pickup",
-          "Picked Up"
-        ];
 
       }
 
 
-      const currentIndex =
-        steps.indexOf(status);
+      trackingResult.innerHTML = `
+        <p>Checking your order...</p>
+      `;
 
 
-      const timeline =
-        steps.map((step, index) => {
-
-          let className = "";
-
-          if (index < currentIndex) {
-            className = "completed";
-          }
-
-          if (index === currentIndex) {
-            className = "current";
-          }
+      const callbackName =
+        "aemiTracking_" +
+        Date.now();
 
 
-          return `
-            <div class="tracking-step ${className}">
+      window[callbackName] =
+        function (data) {
 
-              <div class="tracking-dot">
-                ${index < currentIndex ? "✓" : ""}
+
+          if (!data.success) {
+
+            trackingResult.innerHTML = `
+
+              <div class="tracking-card">
+
+                <h2>
+                  Order Not Found
+                </h2>
+
+                <p>
+                  We couldn't find that order number.
+                  Please check it and try again.
+                </p>
+
               </div>
 
-              <div class="tracking-label">
-                ${step}
+            `;
+
+
+            delete window[callbackName];
+
+            return;
+
+          }
+
+
+          const fulfillment =
+            String(
+              data.fulfillment || ""
+            ).toLowerCase();
+
+
+          const status =
+            String(
+              data.status || "Pending"
+            );
+
+
+          let steps;
+
+
+          if (
+            fulfillment ===
+            "delivery"
+          ) {
+
+            steps = [
+
+              "Pending",
+
+              "Confirmed",
+
+              "Processing",
+
+              "Out for Delivery",
+
+              "Delivered"
+
+            ];
+
+          }
+
+          else {
+
+            steps = [
+
+              "Pending",
+
+              "Confirmed",
+
+              "Ready for Pickup",
+
+              "Picked Up"
+
+            ];
+
+          }
+
+
+          const currentIndex =
+            steps.indexOf(status);
+
+
+          const timeline =
+            steps
+              .map(
+                (step, index) => {
+
+                  let className =
+                    "";
+
+
+                  if (
+                    currentIndex >= 0 &&
+                    index < currentIndex
+                  ) {
+
+                    className =
+                      "completed";
+
+                  }
+
+
+                  if (
+                    index ===
+                    currentIndex
+                  ) {
+
+                    className =
+                      "current";
+
+                  }
+
+
+                  return `
+
+                    <div
+                      class="tracking-step ${className}"
+                    >
+
+                      <div class="tracking-dot">
+
+                        ${
+                          currentIndex >= 0 &&
+                          index < currentIndex
+                            ? "✓"
+                            : ""
+                        }
+
+                      </div>
+
+                      <div class="tracking-label">
+
+                        ${step}
+
+                      </div>
+
+                    </div>
+
+                  `;
+
+                }
+              )
+              .join("");
+
+
+          trackingResult.innerHTML = `
+
+            <div class="tracking-card">
+
+              <p class="eyebrow">
+                ORDER NUMBER
+              </p>
+
+
+              <h2>
+                ${data.orderNumber}
+              </h2>
+
+
+              <p>
+                ${
+                  fulfillment === "delivery"
+                    ? "Delivery"
+                    : "Pickup"
+                }
+              </p>
+
+
+              <div class="tracking-timeline">
+
+                ${timeline}
+
               </div>
+
+
+              <p class="tracking-current">
+
+                Current status:
+
+                <strong>
+                  ${status}
+                </strong>
+
+              </p>
 
             </div>
+
           `;
 
-        }).join("");
+
+          delete window[callbackName];
+
+        };
 
 
-      trackingResult.innerHTML = `
-
-        <div class="tracking-card">
-
-          <p class="eyebrow">
-            ORDER NUMBER
-          </p>
-
-          <h2>
-            ${data.orderNumber}
-          </h2>
-
-          <p>
-            ${fulfillment === "delivery"
-              ? "Delivery"
-              : "Pickup"}
-          </p>
+      const script =
+        document.createElement(
+          "script"
+        );
 
 
-          <div class="tracking-timeline">
-
-            ${timeline}
-
-          </div>
-
-
-          <p class="tracking-current">
-
-            Current status:
-            <strong>${status}</strong>
-
-          </p>
-
-        </div>
-
-      `;
+      script.src =
+        WEB_APP_URL +
+        "?order=" +
+        encodeURIComponent(
+          orderNumber
+        ) +
+        "&callback=" +
+        callbackName;
 
 
-      delete window[callbackName];
+      script.onerror =
+        function () {
 
-    };
+          trackingResult.innerHTML = `
 
+            <div class="tracking-card">
 
-    const script =
-      document.createElement("script");
+              <h2>
+                Something went wrong
+              </h2>
 
+              <p>
+                Please try again in a moment.
+              </p>
 
-    script.src =
-      WEB_APP_URL +
-      "?order=" +
-      encodeURIComponent(orderNumber) +
-      "&callback=" +
-      callbackName;
+            </div>
 
-
-    script.onerror = function() {
-
-      trackingResult.innerHTML = `
-        <div class="tracking-card">
-
-          <h2>Something went wrong</h2>
-
-          <p>
-            Please try again in a moment.
-          </p>
-
-        </div>
-      `;
-
-      delete window[callbackName];
-
-    };
+          `;
 
 
-    document.body.appendChild(script);
+          delete window[callbackName];
 
-  });
+        };
+
+
+      document.body.appendChild(
+        script
+      );
+
+    }
+  );
 
 }
