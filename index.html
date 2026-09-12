@@ -424,7 +424,7 @@
   <script src="script.js"></script>
 
 
-  <!-- AEMI ORDER RECEIPT LOGIC -->
+ <!-- AEMI ORDER RECEIPT LOGIC -->
 <script>
 
   const aemiOrderForm =
@@ -454,12 +454,11 @@
   const aemiHiddenOrderNumber =
     document.getElementById("orderNumberHidden");
 
-
   let aemiOrderSubmitting = false;
 
 
   /*
-   * Generate an AEMI order number before submission.
+   * Generate order number
    */
   function generateAemiOrderNumber() {
 
@@ -470,88 +469,33 @@
       Math.floor(100 + Math.random() * 900);
 
     return "AEMI-" + timestamp + random;
-
   }
 
 
- /*
- * Submit order.
- */
-if (aemiOrderForm) {
-  aemiOrderForm.addEventListener("submit", function (event) {
-    event.preventDefault();
+  /*
+   * Submit order
+   */
+  if (aemiOrderForm) {
 
-    if (aemiOrderSubmitting) {
-      return;
-    }
+    aemiOrderForm.addEventListener(
+      "submit",
+      function (event) {
 
-    const orderNumber = generateAemiOrderNumber();
+        event.preventDefault();
 
-    aemiHiddenOrderNumber.value = orderNumber;
-    aemiReceiptOrderNumber.textContent = orderNumber;
+        if (aemiOrderSubmitting) {
+          return;
+        }
 
-    aemiOrderSubmitting = true;
-    aemiSubmitButton.disabled = true;
-    aemiSubmitButton.textContent = "SUBMITTING...";
-
-    const formData = new FormData(aemiOrderForm);
-
-    fetch(
-      "https://script.google.com/macros/s/AKfycbzhsOBppntZzePi8u4C3nJDzq9RooyrxqPODy8CqEq9VCVGFp5U7Q7VuL-HO1LwWAFn/exec",
-      {
-        method: "POST",
-        body: formData,
-        mode: "no-cors"
-      }
-    );
-
-    setTimeout(function () {
-      aemiOrderForm.hidden = true;
-      aemiOrderReceipt.hidden = false;
-      aemiReceiptStatus.textContent = "Pending";
-
-      aemiOrderReceipt.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
-    }, 800);
-  });
-}
-
-        /*
-         * Generate the order number.
-         */
         const orderNumber =
           generateAemiOrderNumber();
 
+        aemiHiddenOrderNumber.value =
+          orderNumber;
 
-       /*
- * Put the number into the hidden form field.
- */
-aemiHiddenOrderNumber.value =
-  orderNumber;
-
-/*
- * Also send the order number directly
- * through the Apps Script URL.
- */
-aemiOrderForm.action =
-  "https://script.google.com/macros/s/AKfycbzhsOBppntZzePi8u4C3nJDzq9RooyrxqPODy8CqEq9VCVGFp5U7Q7VuL-HO1LwWAFn/exec"
-  + "?orderNumber="
-  + encodeURIComponent(orderNumber);
-
-
-        /*
-         * Show the order number immediately
-         * in the receipt.
-         */
         aemiReceiptOrderNumber.textContent =
           orderNumber;
 
-
-        /*
-         * Prevent duplicate submissions.
-         */
         aemiOrderSubmitting = true;
 
         aemiSubmitButton.disabled = true;
@@ -560,33 +504,41 @@ aemiOrderForm.action =
           "SUBMITTING...";
 
 
-        /*
-         * Let the normal form submission
-         * continue into the hidden iframe.
-         */
-        setTimeout(function () {
+        const formData =
+          new FormData(aemiOrderForm);
 
-          /*
-           * The form has been submitted to
-           * Google Apps Script.
-           *
-           * Show the receipt after submission.
-           */
-          aemiOrderForm.hidden = true;
 
-          aemiOrderReceipt.hidden = false;
+        fetch(
+          "https://script.google.com/macros/s/AKfycbzhsOBppntZzePi8u4C3nJDzq9RooyrxqPODy8CqEq9VCVGFp5U7Q7VuL-HO1LwWAFn/exec",
+          {
+            method: "POST",
+            body: formData,
+            mode: "no-cors"
+          }
+        );
 
-          aemiReceiptStatus.textContent =
-            "Pending";
 
-          aemiOrderReceipt.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-          });
+        setTimeout(
+          function () {
 
-        }, 800);
+            aemiOrderForm.hidden = true;
 
-      });
+            aemiOrderReceipt.hidden = false;
+
+            aemiReceiptStatus.textContent =
+              "Pending";
+
+            aemiOrderReceipt.scrollIntoView({
+              behavior: "smooth",
+              block: "start"
+            });
+
+          },
+          800
+        );
+
+      }
+    );
 
   }
 
@@ -604,7 +556,10 @@ aemiOrderForm.action =
           aemiReceiptOrderNumber.textContent.trim();
 
 
-        if (aemiTrackingInput && orderNumber) {
+        if (
+          aemiTrackingInput &&
+          orderNumber
+        ) {
 
           aemiTrackingInput.value =
             orderNumber;
@@ -626,21 +581,21 @@ aemiOrderForm.action =
         }
 
 
-        /*
-         * Automatically check the order.
-         */
-        setTimeout(function () {
+        setTimeout(
+          function () {
 
-          const trackingForm =
-            document.getElementById("trackingForm");
+            const trackingForm =
+              document.getElementById("trackingForm");
 
-          if (trackingForm) {
+            if (trackingForm) {
 
-            trackingForm.requestSubmit();
+              trackingForm.requestSubmit();
 
-          }
+            }
 
-        }, 700);
+          },
+          700
+        );
 
       }
     );
@@ -664,9 +619,6 @@ aemiOrderForm.action =
         aemiOrderForm.reset();
 
 
-        /*
-         * Clear generated order number.
-         */
         if (aemiHiddenOrderNumber) {
 
           aemiHiddenOrderNumber.value = "";
