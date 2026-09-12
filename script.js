@@ -88,16 +88,11 @@ Still small. Still ours. But this time, we're building it with intention.`,
 
 
  socials: {
-
   facebook: "https://www.facebook.com/share/1BaAQRDfad",
-
   instagram: "https://www.instagram.com/aemii_co",
-
   tiktok: "https://www.tiktok.com/@aemii.co",
-
   messenger: "https://m.me/aemii.co"
-
-}
+ }
 
 };
 
