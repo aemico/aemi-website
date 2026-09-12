@@ -184,7 +184,7 @@
 
         <input
           type="hidden"
-        name="aemiOrderNumber"
+          name="orderNumber"
           id="orderNumberHidden"
         >
 
@@ -277,7 +277,7 @@
       </form>
 
 
-      <!-- HIDDEN SUBMISSION FRAME -->
+      <!-- HIDDEN FORM SUBMISSION FRAME -->
       <iframe
         name="aemiSubmitFrame"
         id="aemiSubmitFrame"
@@ -517,8 +517,7 @@
 
 
           /*
-           * Your current Google Apps Script
-           * deployment URL.
+           * Google Apps Script Web App
            */
           const webAppUrl =
             "https://script.google.com/macros/s/AKfycbzhsOBppntZzePi8u4C3nJDzq9RooyrxqPODy8CqEq9VCVGFp5U7Q7VuL-HO1LwWAFn/exec";
@@ -526,7 +525,7 @@
 
           /*
            * Send the order number directly
-           * through the URL.
+           * in the Apps Script URL.
            */
           aemiOrderForm.action =
             webAppUrl +
@@ -535,10 +534,9 @@
 
 
           /*
-           * Submit normally.
-           *
-           * Because the form targets the hidden
-           * iframe, the AEMI page itself stays open.
+           * Submit the form normally.
+           * The hidden iframe prevents
+           * the page from navigating away.
            */
           aemiOrderForm.submit();
 
