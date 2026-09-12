@@ -87,17 +87,17 @@ Still small. Still ours. But this time, we're building it with intention.`,
   },
 
 
-  socials: {
+ socials: {
 
-    facebook: "",
+  facebook: "https://www.facebook.com/share/1BaAQRDfad",
 
-    instagram: "",
+  instagram: "https://www.instagram.com/aemii_co",
 
-    tiktok: "",
+  tiktok: "https://www.tiktok.com/@aemii.co",
 
-    messenger: ""
+  messenger: "https://m.me/aemii.co"
 
-  }
+}
 
 };
 
