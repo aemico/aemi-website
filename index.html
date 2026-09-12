@@ -492,7 +492,11 @@
         title="AEMI order submission"
         style="display:none;"
       ></iframe>
-
+<script>
+  document.getElementById("aemiSubmitFrame").onload = function () {
+    console.log("AEMI submission response loaded.");
+  };
+</script>
 
       <!-- =======================================================
            RECEIPT
