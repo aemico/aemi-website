@@ -526,8 +526,7 @@ const trackingResult =
  */
 
 const WEB_APP_URL =
-  "https://script.google.com/macros/s/AKfycbxAOTJu0QdMdIOetE_glCt3FjF5CvddYWXlafC2g_t9mrLBwRh0ZlKQTOvQj3MUy9KH/exec";
-
+  "https://script.google.com/macros/s/AKfycbw_557rqSYN1cMQ_srMHtutr4TvYW6bkvbc8oJU6wNXxPgRjGFhGmadY7l0fZ66o7vo/exec";
 
 if (trackingForm) {
 
