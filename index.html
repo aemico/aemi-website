@@ -859,14 +859,7 @@ if (aemiOrderForm) {
       aemiOrderForm.action =
         AEMI_WEB_APP_URL;
 
-     fetch(AEMI_WEB_APP_URL, {
-  method: "POST",
-  body: new FormData(aemiOrderForm)
-})
-.then(response => response.text())
-.then(result => {
-  console.log("AEMI response:", result);
-});
+    
 
 
       /*
