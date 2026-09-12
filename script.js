@@ -650,66 +650,72 @@ if (trackingForm) {
 
 
           const timeline =
-            steps
-              .map(
-                (step, index) => {
+  steps
+    .map(
+      (step, index) => {
 
-                  let className =
-                    "";
+        let className = "";
 
+        if (
+          currentIndex >= 0 &&
+          index < currentIndex
+        ) {
 
-                  if (
-                    currentIndex >= 0 &&
-                    index < currentIndex
-                  ) {
+          className = "completed";
 
-                    className =
-                      "completed";
+        }
 
-                  }
+        else if (
+          index === currentIndex
+        ) {
 
+          className = "current";
 
-                  if (
-                    index ===
-                    currentIndex
-                  ) {
+        }
 
-                    className =
-                      "current";
+        return `
 
-                  }
+          <div
+            class="tracking-step ${className}"
+          >
 
+            <div class="tracking-dot">
 
-                  return `
+              ${
+                index < currentIndex
+                  ? "✓"
+                  : index === currentIndex
+                    ? "●"
+                    : ""
+              }
 
-                    <div
-                      class="tracking-step ${className}"
-                    >
+            </div>
 
-                      <div class="tracking-dot">
+            <div class="tracking-label">
 
-                        ${
-                          currentIndex >= 0 &&
-                          index < currentIndex
-                            ? "✓"
-                            : ""
-                        }
+              <span>
+                ${step}
+              </span>
 
-                      </div>
+              ${
+                index === currentIndex
+                  ? `
+                    <small class="tracking-active">
+                      CURRENT STATUS
+                    </small>
+                  `
+                  : ""
+              }
 
-                      <div class="tracking-label">
+            </div>
 
-                        ${step}
+          </div>
 
-                      </div>
+        `;
 
-                    </div>
-
-                  `;
-
-                }
-              )
-              .join("");
+      }
+    )
+    .join("");
 
 
           trackingResult.innerHTML = `
