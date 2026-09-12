@@ -871,40 +871,47 @@ if (aemiOrderForm) {
        * has had time to reach Apps Script.
        */
 
-      setTimeout(
-        function () {
-
-          aemiOrderForm.hidden = true;
-
-          aemiOrderReceipt.hidden = false;
-
-          aemiReceiptStatus.textContent =
-            "Pending";
-
-
-          aemiOrderReceipt.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-          });
-
-
-          aemiOrderSubmitting = false;
-
-          aemiSubmitButton.disabled = false;
-
-          aemiSubmitButton.textContent =
-            "SUBMIT ORDER";
-
-        },
-        1200
-      );
+     
 
     }
   );
 
 }
 
+window.addEventListener("message", function (event) {
 
+  if (!event.data) return;
+
+  if (event.data.type !== "aemiOrderSubmitted") return;
+
+  const orderNumber =
+    String(event.data.orderNumber || "").trim();
+
+  if (!orderNumber) return;
+
+  aemiReceiptOrderNumber.textContent =
+    orderNumber;
+
+  aemiReceiptStatus.textContent =
+    "Pending";
+
+  aemiOrderForm.hidden = true;
+
+  aemiOrderReceipt.hidden = false;
+
+  aemiOrderReceipt.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+
+  aemiOrderSubmitting = false;
+
+  aemiSubmitButton.disabled = false;
+
+  aemiSubmitButton.textContent =
+    "SUBMIT ORDER";
+
+});
     /*
      * TRACK MY ORDER
      */
