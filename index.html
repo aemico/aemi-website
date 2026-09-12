@@ -832,50 +832,80 @@
     );
 
 
-    /*
-     * Submit order
-     */
+   /*
+ * Submit order
+ */
 
-    if (aemiOrderForm) {
+if (aemiOrderForm) {
 
-      aemiOrderForm.addEventListener(
-        "submit",
-        function (event) {
+  aemiOrderForm.addEventListener(
+    "submit",
+    function (event) {
 
-          event.preventDefault();
+      event.preventDefault();
+
+      if (aemiOrderSubmitting) {
+        return;
+      }
+
+      aemiOrderSubmitting = true;
+
+      aemiSubmitButton.disabled = true;
+
+      aemiSubmitButton.textContent =
+        "SUBMITTING...";
 
 
-          if (aemiOrderSubmitting) {
-            return;
-          }
+      /*
+       * Send the order to Google Apps Script.
+       */
+
+      aemiOrderForm.action =
+        AEMI_WEB_APP_URL;
+
+      aemiOrderForm.submit();
 
 
-          aemiOrderSubmitting = true;
+      /*
+       * The order is already being written
+       * to Google Sheets.
+       *
+       * Show the receipt after the submission
+       * has had time to reach Apps Script.
+       */
+
+      setTimeout(
+        function () {
+
+          aemiOrderForm.hidden = true;
+
+          aemiOrderReceipt.hidden = false;
+
+          aemiReceiptStatus.textContent =
+            "Pending";
 
 
-          aemiSubmitButton.disabled = true;
+          aemiOrderReceipt.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+          });
+
+
+          aemiOrderSubmitting = false;
+
+          aemiSubmitButton.disabled = false;
 
           aemiSubmitButton.textContent =
-            "SUBMITTING...";
+            "SUBMIT ORDER";
 
-
-          /*
-           * Send form to Google Apps Script.
-           *
-           * The Apps Script itself creates
-           * the official sequential order number.
-           */
-
-          aemiOrderForm.action =
-            AEMI_WEB_APP_URL;
-
-
-          aemiOrderForm.submit();
-
-        }
+        },
+        1200
       );
 
     }
+  );
+
+}
 
 
     /*
