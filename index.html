@@ -492,11 +492,6 @@
         title="AEMI order submission"
         style="display:none;"
       ></iframe>
-<script>
-  document.getElementById("aemiSubmitFrame").onload = function () {
-    console.log("AEMI submission response loaded.");
-  };
-</script>
 
       <!-- =======================================================
            RECEIPT
@@ -864,7 +859,14 @@ if (aemiOrderForm) {
       aemiOrderForm.action =
         AEMI_WEB_APP_URL;
 
-      aemiOrderForm.submit();
+     fetch(AEMI_WEB_APP_URL, {
+  method: "POST",
+  body: new FormData(aemiOrderForm)
+})
+.then(response => response.text())
+.then(result => {
+  console.log("AEMI response:", result);
+});
 
 
       /*
