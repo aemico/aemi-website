@@ -324,15 +324,6 @@
         target="aemiSubmitFrame"
       >
 
-        <!-- NEW: hidden submission token -->
-
-        <input
-          type="hidden"
-          name="clientToken"
-          id="clientToken"
-        >
-
-
         <label>
 
           Full name
@@ -535,7 +526,7 @@
             </span>
 
             <strong id="receiptOrderNumber">
-              Checking...
+              —
             </strong>
 
           </div>
@@ -557,7 +548,7 @@
 
 
         <p class="form-note">
-          Your official order number will be provided once your order is confirmed.
+          Keep your order number for tracking and future reference.
         </p>
 
 
@@ -745,7 +736,7 @@
 
 
   <!-- =========================================================
-       ORDER SUBMISSION + RECEIPT LOGIC
+       ORDER SUBMISSION + RECEIPT
        ========================================================= -->
 
   <script>
@@ -774,264 +765,86 @@
     const aemiTrackingInput =
       document.getElementById("orderNumber");
 
-    const aemiClientTokenInput =
-      document.getElementById("clientToken");
-
 
     const AEMI_WEB_APP_URL =
       "https://script.google.com/macros/s/AKfycbxAOTJu0QdMdIOetE_glCt3FjF5CvddYWXlafC2g_t9mrLBwRh0ZlKQTOvQj3MUy9KH/exec";
 
 
-    let aemiOrderSubmitting =
-      false;
-
-    let aemiPollingTimer =
-      null;
-
-    let aemiPollingAttempts =
-      0;
+    let aemiSubmitting = false;
 
 
     /* =========================================================
-       CREATE UNIQUE CLIENT TOKEN
+       GET OFFICIAL NEXT ORDER NUMBER
        ========================================================= */
 
-    function createAemiClientToken() {
+    function getAemiOrderNumber() {
 
-      return (
-        "AEMI-" +
-        Date.now() +
-        "-" +
-        Math.random()
-          .toString(36)
-          .slice(2, 10)
-      );
+      return new Promise(function(resolve, reject) {
 
-    }
+        const callbackName =
+          "aemiOrderNumber_" + Date.now();
 
 
-    /* =========================================================
-       CHECK FOR NEW ORDER
-       ========================================================= */
+        window[callbackName] =
+          function(data) {
 
-    function checkAemiOrder(clientToken) {
+            const script =
+              document.getElementById(callbackName);
 
-      if (!clientToken) {
-        return;
-      }
+            if (script) {
+              script.remove();
+            }
 
-
-      const callbackName =
-        "aemiOrderCheck_" +
-        Date.now() +
-        "_" +
-        Math.random()
-          .toString(36)
-          .slice(2, 7);
-
-
-      window[callbackName] =
-        function (data) {
-
-          try {
             delete window[callbackName];
-          } catch (error) {
-            window[callbackName] = undefined;
-          }
 
 
-          const script =
-            document.getElementById(
-              callbackName
-            );
+            if (
+              data &&
+              data.success &&
+              data.orderNumber
+            ) {
 
-          if (script) {
+              resolve(data.orderNumber);
+
+            } else {
+
+              reject(
+                new Error("Order number unavailable.")
+              );
+
+            }
+
+          };
+
+
+        const script =
+          document.createElement("script");
+
+        script.id =
+          callbackName;
+
+        script.src =
+          AEMI_WEB_APP_URL +
+          "?next=1&callback=" +
+          encodeURIComponent(callbackName);
+
+
+        script.onerror =
+          function() {
+
             script.remove();
-          }
 
-
-          /*
-           * Order found.
-           */
-
-          if (
-            data &&
-            data.success &&
-            data.orderNumber
-          ) {
-
-            finishAemiOrder(
-              data.orderNumber,
-              data.status || "Pending"
-            );
-
-            return;
-
-          }
-
-
-          /*
-           * Not found yet.
-           */
-
-          aemiPollingAttempts++;
-
-
-          if (
-            aemiPollingAttempts < 30
-          ) {
-
-            aemiPollingTimer =
-              setTimeout(
-                function () {
-
-                  checkAemiOrder(
-                    clientToken
-                  );
-
-                },
-                1000
-              );
-
-          } else {
-
-            /*
-             * Do not submit the order again.
-             */
-
-            aemiOrderSubmitting =
-              false;
-
-            aemiSubmitButton.disabled =
-              false;
-
-            aemiSubmitButton.textContent =
-              "SUBMIT ORDER";
-
-
-            alert(
-              "Your order was submitted, but the receipt is taking a little longer to appear. Please try again in a moment."
-            );
-
-          }
-
-        };
-
-
-      const script =
-        document.createElement("script");
-
-
-      script.id =
-        callbackName;
-
-
-      script.src =
-        AEMI_WEB_APP_URL +
-        "?token=" +
-        encodeURIComponent(
-          clientToken
-        ) +
-        "&callback=" +
-        callbackName;
-
-
-      script.onerror =
-        function () {
-
-          try {
             delete window[callbackName];
-          } catch (error) {
-            window[callbackName] = undefined;
-          }
+
+            reject(
+              new Error("Connection failed.")
+            );
+
+          };
 
 
-          script.remove();
+        document.body.appendChild(script);
 
-
-          aemiPollingAttempts++;
-
-
-          if (
-            aemiPollingAttempts < 30
-          ) {
-
-            aemiPollingTimer =
-              setTimeout(
-                function () {
-
-                  checkAemiOrder(
-                    clientToken
-                  );
-
-                },
-                1000
-              );
-
-          }
-
-        };
-
-
-      document.body.appendChild(
-        script
-      );
-
-    }
-
-
-    /* =========================================================
-       SHOW RECEIPT
-       ========================================================= */
-
-    function finishAemiOrder(
-      orderNumber,
-      status
-    ) {
-
-      if (aemiPollingTimer) {
-
-        clearTimeout(
-          aemiPollingTimer
-        );
-
-        aemiPollingTimer =
-          null;
-
-      }
-
-
-      aemiReceiptOrderNumber.textContent =
-        orderNumber;
-
-
-      aemiReceiptStatus.textContent =
-        status;
-
-
-      aemiOrderForm.hidden =
-        true;
-
-
-      aemiOrderReceipt.hidden =
-        false;
-
-
-      aemiOrderSubmitting =
-        false;
-
-
-      aemiSubmitButton.disabled =
-        false;
-
-
-      aemiSubmitButton.textContent =
-        "SUBMIT ORDER";
-
-
-      aemiOrderReceipt.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
       });
 
     }
@@ -1045,79 +858,135 @@
 
       aemiOrderForm.addEventListener(
         "submit",
-        function (event) {
+        async function(event) {
 
           event.preventDefault();
 
 
-          if (
-            aemiOrderSubmitting
-          ) {
-
+          if (aemiSubmitting) {
             return;
-
           }
 
 
-          aemiOrderSubmitting =
-            true;
+          aemiSubmitting = true;
 
-
-          aemiSubmitButton.disabled =
-            true;
-
+          aemiSubmitButton.disabled = true;
 
           aemiSubmitButton.textContent =
             "SUBMITTING...";
 
 
-          /*
-           * Create a unique token for
-           * this exact order.
-           */
+          try {
 
-          const clientToken =
-            createAemiClientToken();
+            /*
+             * Get the official AEMI
+             * order number.
+             */
 
-
-          aemiClientTokenInput.value =
-            clientToken;
+            const orderNumber =
+              await getAemiOrderNumber();
 
 
-          /*
-           * Send the normal POST.
-           */
+            /*
+             * Put that number inside
+             * the order being submitted.
+             */
 
-          aemiOrderForm.action =
-            AEMI_WEB_APP_URL;
-
-
-          aemiOrderForm.target =
-            "aemiSubmitFrame";
-
-
-          aemiOrderForm.submit();
-
-
-          /*
-           * Wait briefly, then ask Apps Script
-           * for the order belonging to this token.
-           */
-
-          aemiPollingAttempts =
-            0;
-
-
-          setTimeout(
-            function () {
-
-              checkAemiOrder(
-                clientToken
+            let hiddenOrderNumber =
+              document.getElementById(
+                "hiddenOrderNumber"
               );
 
-            },
-            700
-          );
+
+            if (!hiddenOrderNumber) {
+
+              hiddenOrderNumber =
+                document.createElement("input");
+
+              hiddenOrderNumber.type =
+                "hidden";
+
+              hiddenOrderNumber.name =
+                "orderNumber";
+
+              hiddenOrderNumber.id =
+                "hiddenOrderNumber";
+
+              aemiOrderForm.appendChild(
+                hiddenOrderNumber
+              );
+
+            }
+
+
+            hiddenOrderNumber.value =
+              orderNumber;
+
+
+            /*
+             * Send order to Apps Script.
+             */
+
+            aemiOrderForm.action =
+              AEMI_WEB_APP_URL;
+
+            aemiOrderForm.target =
+              "aemiSubmitFrame";
+
+            aemiOrderForm.submit();
+
+
+            /*
+             * Show receipt immediately.
+             */
+
+            aemiReceiptOrderNumber.textContent =
+              orderNumber;
+
+            aemiReceiptStatus.textContent =
+              "Pending";
+
+            aemiOrderForm.hidden =
+              true;
+
+            aemiOrderReceipt.hidden =
+              false;
+
+            aemiSubmitting =
+              false;
+
+            aemiSubmitButton.disabled =
+              false;
+
+            aemiSubmitButton.textContent =
+              "SUBMIT ORDER";
+
+
+            aemiOrderReceipt.scrollIntoView({
+              behavior: "smooth",
+              block: "start"
+            });
+
+
+          } catch (error) {
+
+            console.error(error);
+
+            aemiSubmitting =
+              false;
+
+            aemiSubmitButton.disabled =
+              false;
+
+            aemiSubmitButton.textContent =
+              "SUBMIT ORDER";
+
+
+            alert(
+              "We couldn't submit your order right now. Please try again."
+            );
+
+          }
 
         }
       );
@@ -1129,13 +998,11 @@
        TRACK MY ORDER
        ========================================================= */
 
-    if (
-      aemiTrackReceiptButton
-    ) {
+    if (aemiTrackReceiptButton) {
 
       aemiTrackReceiptButton.addEventListener(
         "click",
-        function () {
+        function() {
 
           const orderNumber =
             aemiReceiptOrderNumber
@@ -1146,8 +1013,7 @@
           if (
             aemiTrackingInput &&
             orderNumber &&
-            orderNumber !==
-              "Checking..."
+            orderNumber !== "—"
           ) {
 
             aemiTrackingInput.value =
@@ -1157,9 +1023,7 @@
 
 
           const trackSection =
-            document.getElementById(
-              "track"
-            );
+            document.getElementById("track");
 
 
           if (trackSection) {
@@ -1172,26 +1036,20 @@
           }
 
 
-          setTimeout(
-            function () {
+          setTimeout(function() {
 
-              const trackingForm =
-                document.getElementById(
-                  "trackingForm"
-                );
+            const trackingForm =
+              document.getElementById(
+                "trackingForm"
+              );
 
+            if (trackingForm) {
 
-              if (
-                trackingForm
-              ) {
+              trackingForm.requestSubmit();
 
-                trackingForm.requestSubmit();
+            }
 
-              }
-
-            },
-            700
-          );
+          }, 700);
 
         }
       );
@@ -1203,56 +1061,43 @@
        BACK TO ORDER
        ========================================================= */
 
-    if (
-      aemiBackToOrderButton
-    ) {
+    if (aemiBackToOrderButton) {
 
       aemiBackToOrderButton.addEventListener(
         "click",
-        function () {
-
-          if (aemiPollingTimer) {
-
-            clearTimeout(
-              aemiPollingTimer
-            );
-
-            aemiPollingTimer =
-              null;
-
-          }
-
+        function() {
 
           aemiOrderReceipt.hidden =
             true;
 
-
           aemiOrderForm.hidden =
             false;
-
 
           aemiOrderForm.reset();
 
 
-          aemiClientTokenInput.value =
-            "";
+          const hiddenOrderNumber =
+            document.getElementById(
+              "hiddenOrderNumber"
+            );
+
+          if (hiddenOrderNumber) {
+            hiddenOrderNumber.remove();
+          }
 
 
           aemiReceiptOrderNumber.textContent =
-            "Checking...";
-
+            "—";
 
           aemiReceiptStatus.textContent =
             "Pending";
 
 
-          aemiOrderSubmitting =
+          aemiSubmitting =
             false;
-
 
           aemiSubmitButton.disabled =
             false;
-
 
           aemiSubmitButton.textContent =
             "SUBMIT ORDER";
