@@ -523,6 +523,8 @@ const trackingResult =
 const WEB_APP_URL =
   "https://script.google.com/macros/s/AKfycbw_557rqSYN1cMQ_srMHtutr4TvYW6bkvbc8oJU6wNXxPgRjGFhGmadY7l0fZ66o7vo/exec";
 
+let aemiTrackingInterval = null;
+
 if (trackingForm) {
 
   trackingForm.addEventListener(
@@ -755,6 +757,25 @@ if (trackingForm) {
             </div>
 
           `;
+
+
+                    if (aemiTrackingInterval) {
+            clearInterval(aemiTrackingInterval);
+          }
+
+          aemiTrackingInterval = setInterval(
+            function () {
+
+              if (
+                orderNumberInput &&
+                orderNumberInput.value.trim()
+              ) {
+                trackingForm.requestSubmit();
+              }
+
+            },
+            300000
+          );
 
 
           delete window[callbackName];
