@@ -534,10 +534,16 @@ if (trackingForm) {
       event.preventDefault();
 
 
-      const orderNumber =
-        orderNumberInput.value
-          .trim()
-          .toUpperCase();
+      let orderNumber =
+  orderNumberInput.value
+    .trim()
+    .toUpperCase();
+
+if (/^\d+$/.test(orderNumber)) {
+  orderNumber =
+    "AEMI-" +
+    orderNumber.padStart(4, "0");
+}
 
 
       if (!orderNumber) {
