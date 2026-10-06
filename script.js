@@ -25,16 +25,16 @@ const AEMI = {
     availability:
       "COMING SOON",
 
-    sizes: [
-      {
-        label: "60 mL",
-        price: null
-      },
-      {
-        label: "120 mL",
-        price: null
-      }
-    ]
+   sizes: [
+  {
+    label: "120 mL",
+    price: null
+  },
+  {
+    label: "220 mL",
+    price: null
+  }
+]
 
   },
 
