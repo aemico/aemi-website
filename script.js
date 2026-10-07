@@ -649,7 +649,34 @@ if (/^\d+$/.test(orderNumber)) {
 
           const currentIndex =
             steps.indexOf(status);
+           
+           if (status === "Cancelled") {
 
+  trackingResult.innerHTML = `
+
+    <div class="tracking-card">
+
+      <p class="eyebrow">
+        ORDER STATUS
+      </p>
+
+      <h2>
+        Order Cancelled
+      </h2>
+
+      <p>
+        Order ${data.orderNumber} has been cancelled.
+      </p>
+
+    </div>
+
+  `;
+
+  delete window[callbackName];
+
+  return;
+
+}
 
           const timeline =
   steps
