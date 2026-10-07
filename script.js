@@ -832,14 +832,14 @@ if (/^\d+$/.test(orderNumber)) {
         );
 
 
-      script.src =
-        WEB_APP_URL +
-        "?order=" +
-        encodeURIComponent(
-          orderNumber
-        ) +
-        "&callback=" +
-        callbackName;
+  script.src =
+  WEB_APP_URL +
+  "?order=" +
+  encodeURIComponent(orderNumber) +
+  "&contact=" +
+  encodeURIComponent(trackingContact) +
+  "&callback=" +
+  encodeURIComponent(callbackName);
 
 
       script.onerror =
