@@ -652,6 +652,11 @@ if (/^\d+$/.test(orderNumber)) {
            
            if (status === "Cancelled") {
 
+              if (aemiTrackingInterval) {
+  clearInterval(aemiTrackingInterval);
+  aemiTrackingInterval = null;
+}
+
   trackingResult.innerHTML = `
 
     <div class="tracking-card">
