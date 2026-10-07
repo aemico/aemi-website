@@ -515,6 +515,8 @@ const orderNumberInput =
 const trackingResult =
   document.getElementById("trackingResult");
 
+const trackingContactInput =
+  document.getElementById("trackingContact");
 
 /*
  * CURRENT AEMI GOOGLE APPS SCRIPT WEB APP
