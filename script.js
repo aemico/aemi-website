@@ -540,7 +540,10 @@ if (trackingForm) {
   orderNumberInput.value
     .trim()
     .toUpperCase();
-
+       
+const trackingContact =
+  trackingContactInput.value.trim();
+       
 if (/^\d+$/.test(orderNumber)) {
   orderNumber =
     "AEMI-" +
