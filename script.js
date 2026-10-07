@@ -787,17 +787,31 @@ if (/^\d+$/.test(orderNumber)) {
               </div>
 
 
-              <p class="tracking-current">
+             <p class="tracking-current">
 
-                Current status:
+  Current status:
 
-                <strong>
-                  ${status}
-                </strong>
+  <strong>
+    ${status}
+  </strong>
 
-              </p>
+</p>
 
-            </div>
+${
+  data.canCancel
+    ? `
+      <button
+        type="button"
+        class="button full"
+        id="cancelOrderButton"
+      >
+        CANCEL ORDER
+      </button>
+    `
+    : ""
+}
+
+</div>
 
           `;
 
