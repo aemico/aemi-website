@@ -815,6 +815,121 @@ ${
 
           `;
 
+           const cancelOrderButton =
+  document.getElementById("cancelOrderButton");
+
+if (cancelOrderButton) {
+
+  cancelOrderButton.addEventListener(
+    "click",
+    () => {
+
+      const confirmed =
+        confirm(
+          "Are you sure you want to cancel this order?"
+        );
+
+      if (!confirmed) {
+        return;
+      }
+
+      const cancelFrame =
+        document.createElement("iframe");
+
+      cancelFrame.style.display =
+        "none";
+
+      cancelFrame.name =
+        "aemiCancelFrame_" +
+        Date.now();
+
+      document.body.appendChild(
+        cancelFrame
+      );
+
+      const cancelForm =
+        document.createElement("form");
+
+      cancelForm.method =
+        "POST";
+
+      cancelForm.action =
+        WEB_APP_URL;
+
+      cancelForm.target =
+        cancelFrame.name;
+
+      const actionInput =
+        document.createElement("input");
+
+      actionInput.type =
+        "hidden";
+
+      actionInput.name =
+        "action";
+
+      actionInput.value =
+        "cancel";
+
+      cancelForm.appendChild(
+        actionInput
+      );
+
+      const orderInput =
+        document.createElement("input");
+
+      orderInput.type =
+        "hidden";
+
+      orderInput.name =
+        "orderNumber";
+
+      orderInput.value =
+        data.orderNumber;
+
+      cancelForm.appendChild(
+        orderInput
+      );
+
+      const contactInput =
+        document.createElement("input");
+
+      contactInput.type =
+        "hidden";
+
+      contactInput.name =
+        "contact";
+
+      contactInput.value =
+        trackingContact;
+
+      cancelForm.appendChild(
+        contactInput
+      );
+
+      document.body.appendChild(
+        cancelForm
+      );
+
+      cancelForm.submit();
+
+      cancelOrderButton.disabled =
+        true;
+
+      cancelOrderButton.textContent =
+        "CANCELLING...";
+
+      setTimeout(
+        () => {
+          trackingForm.requestSubmit();
+        },
+        1500
+      );
+
+    }
+  );
+
+}
 
                     if (aemiTrackingInterval) {
             clearInterval(aemiTrackingInterval);
