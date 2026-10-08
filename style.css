@@ -324,8 +324,8 @@ grid-template-columns:
 
   overflow: hidden;
 
-  border:
-    1px dashed #bcaea5;
+ border:
+  1px solid var(--line);
 
   background:
     var(--cream);
