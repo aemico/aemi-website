@@ -302,8 +302,8 @@ h2 {
 
   display: grid;
 
-  grid-template-columns:
-    1fr 1fr;
+grid-template-columns:
+  1.1fr 0.9fr;
 
   gap: 45px;
 
@@ -396,6 +396,10 @@ h2 {
 .details strong {
 
   color: var(--ink);
+
+  font-size: 14px;
+
+  font-weight: 600;
 
 }
 
