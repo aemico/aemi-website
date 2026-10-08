@@ -465,43 +465,6 @@ grid-template-columns:
 }
 
 
-.features article {
-
-  padding-top: 10px;
-
-}
-
-
-.features span {
-
-  color: var(--red);
-
-  font-size: 12px;
-
-  letter-spacing: .1em;
-
-}
-
-
-.features h3 {
-
-  font-size: 26px;
-
-  margin:
-    14px 0 8px;
-
-}
-
-
-.features p {
-
-  color: var(--muted);
-
-  font-size: 14px;
-
-}
-
-
 .about {
 
   text-align: center;
