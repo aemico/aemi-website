@@ -437,6 +437,32 @@ grid-template-columns:
   gap: 30px;
 
 }
+.feature {
+  padding: 28px;
+  border: 1px solid var(--line);
+  background: var(--cream);
+}
+
+.feature span {
+  display: block;
+  margin-bottom: 18px;
+  color: var(--red);
+  font-size: 11px;
+  letter-spacing: .15em;
+}
+
+.feature h3 {
+  margin-bottom: 12px;
+  color: var(--ink);
+  font-size: 18px;
+}
+
+.feature p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
 
 
 .features article {
