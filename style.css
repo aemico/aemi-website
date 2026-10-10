@@ -1269,38 +1269,110 @@ footer small {
 }
 
 
+
 /* WHOLESALE & RESELLER */
 
 .wholesale-card {
+  position: relative;
+  isolation: isolate;
   max-width: 650px;
-  margin: 35px auto 0;
+  margin: 35px auto 55px;
   padding: 40px;
   text-align: center;
-  border: 1px solid var(--line);
-  background: var(--cream);
+  border: none;
+  border-radius: 2px;
+  background: #8f1826;
+  color: #f8f0df;
+}
+
+/* Keep the content above the dripping decoration */
+.wholesale-card > * {
+  position: relative;
+  z-index: 2;
 }
 
 .wholesale-card h3 {
   margin-bottom: 15px;
-  color: var(--ink);
+  color: #f8f0df;
   font-size: 24px;
 }
 
 .wholesale-card p {
   margin-bottom: 24px;
-  color: var(--muted);
+  color: #f8f0df;
   font-size: 14px;
   line-height: 1.8;
 }
 
 .wholesale-card .form-note {
   margin: 22px 0 0;
+  color: #f8f0df;
   font-size: 12px;
+}
+
+/* Ivory email button */
+.wholesale-card .button {
+  display: inline-block;
+  background: #f8f0df;
+  color: #8f1826;
+  border: 1px solid #f8f0df;
+  text-decoration: none;
+  transition: background 0.25s ease,
+              color 0.25s ease,
+              transform 0.25s ease;
+}
+
+.wholesale-card .button:hover {
+  background: #fffaf0;
+  color: #68101b;
+  transform: translateY(-2px);
+}
+
+/* Dripping red bottom edge */
+.wholesale-card::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 38px;
+  background:
+    radial-gradient(
+      ellipse 22px 27px at 12% 0%,
+      #8f1826 98%,
+      transparent 100%
+    ),
+    radial-gradient(
+      ellipse 17px 20px at 32% 0%,
+      #8f1826 98%,
+      transparent 100%
+    ),
+    radial-gradient(
+      ellipse 25px 36px at 57% 0%,
+      #8f1826 98%,
+      transparent 100%
+    ),
+    radial-gradient(
+      ellipse 16px 23px at 78% 0%,
+      #8f1826 98%,
+      transparent 100%
+    ),
+    radial-gradient(
+      ellipse 22px 29px at 94% 0%,
+      #8f1826 98%,
+      transparent 100%
+    );
+  pointer-events: none;
 }
 
 @media (max-width: 600px) {
   .wholesale-card {
     padding: 25px 20px;
+    margin-bottom: 50px;
+  }
+
+  .wholesale-card h3 {
+    font-size: 22px;
   }
 }
-
