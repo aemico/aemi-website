@@ -1270,22 +1270,63 @@ footer small {
 
 
 
-/* WHOLESALE & RESELLER */
+
+/* WHOLESALE & RESELLER — GLOSSY CHILI OIL */
 
 .wholesale-card {
   position: relative;
   isolation: isolate;
   max-width: 650px;
-  margin: 35px auto 55px;
+  margin: 35px auto 75px;
   padding: 40px;
   text-align: center;
-  border: none;
-  border-radius: 2px;
-  background: #8f1826;
+  border: 1px solid #65101a;
+
+  /* Deep, glossy chili red */
+  background:
+    linear-gradient(
+      155deg,
+      rgba(255, 160, 145, 0.10) 0%,
+      transparent 24%,
+      rgba(35, 0, 5, 0.20) 75%,
+      rgba(15, 0, 2, 0.25) 100%
+    ),
+    linear-gradient(
+      120deg,
+      #68101b 0%,
+      #8b1022 35%,
+      #720b1a 68%,
+      #490812 100%
+    );
+
   color: #f8f0df;
+
+  box-shadow:
+    inset 0 2px 2px rgba(255, 210, 190, 0.16),
+    inset 0 -8px 18px rgba(25, 0, 0, 0.20),
+    0 8px 22px rgba(65, 5, 15, 0.12);
 }
 
-/* Keep the content above the dripping decoration */
+/* Soft reflected light on the glossy surface */
+.wholesale-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      110deg,
+      transparent 12%,
+      rgba(255, 225, 205, 0.07) 27%,
+      transparent 43%
+    );
+
+  opacity: 0.9;
+}
+
+/* Keep all card content above the shine */
 .wholesale-card > * {
   position: relative;
   z-index: 2;
@@ -1293,7 +1334,7 @@ footer small {
 
 .wholesale-card h3 {
   margin-bottom: 15px;
-  color: #f8f0df;
+  color: #fff5e5;
   font-size: 24px;
 }
 
@@ -1313,63 +1354,81 @@ footer small {
 /* Ivory email button */
 .wholesale-card .button {
   display: inline-block;
+  position: relative;
+  z-index: 3;
   background: #f8f0df;
-  color: #8f1826;
+  color: #68101b;
   border: 1px solid #f8f0df;
   text-decoration: none;
-  transition: background 0.25s ease,
-              color 0.25s ease,
-              transform 0.25s ease;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    0 3px 8px rgba(25, 0, 0, 0.16);
 }
 
 .wholesale-card .button:hover {
   background: #fffaf0;
-  color: #68101b;
+  color: #490812;
   transform: translateY(-2px);
+  box-shadow: 0 5px 12px rgba(25, 0, 0, 0.22);
 }
 
-/* Dripping red bottom edge */
+/* Organic, rounded liquid drips */
 .wholesale-card::after {
   content: "";
   position: absolute;
   z-index: 1;
-  top: 100%;
-  left: 0;
-  width: 100%;
-  height: 38px;
+  top: calc(100% - 1px);
+  left: -1px;
+  width: calc(100% + 2px);
+  height: 48px;
+  pointer-events: none;
+
   background:
     radial-gradient(
-      ellipse 22px 27px at 12% 0%,
-      #8f1826 98%,
+      ellipse 20px 15px at 7% 0%,
+      #7e1020 96%,
       transparent 100%
     ),
     radial-gradient(
-      ellipse 17px 20px at 32% 0%,
-      #8f1826 98%,
+      ellipse 30px 24px at 23% 0%,
+      #850f20 96%,
       transparent 100%
     ),
     radial-gradient(
-      ellipse 25px 36px at 57% 0%,
-      #8f1826 98%,
+      ellipse 18px 17px at 41% 0%,
+      #640b18 96%,
       transparent 100%
     ),
     radial-gradient(
-      ellipse 16px 23px at 78% 0%,
-      #8f1826 98%,
+      ellipse 31px 38px at 61% 0%,
+      #790d1c 96%,
       transparent 100%
     ),
     radial-gradient(
-      ellipse 22px 29px at 94% 0%,
-      #8f1826 98%,
+      ellipse 20px 25px at 82% 0%,
+      #850f20 96%,
+      transparent 100%
+    ),
+    radial-gradient(
+      ellipse 26px 19px at 96% 0%,
+      #5e0a16 96%,
       transparent 100%
     );
-  pointer-events: none;
+
+  filter: drop-shadow(0 4px 3px rgba(60, 0, 8, 0.14));
 }
 
 @media (max-width: 600px) {
   .wholesale-card {
     padding: 25px 20px;
-    margin-bottom: 50px;
+    margin-bottom: 65px;
   }
 
   .wholesale-card h3 {
