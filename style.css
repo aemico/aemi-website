@@ -1303,3 +1303,277 @@ footer small {
     padding: 25px 20px;
   }
 }
+
+
+/* =================================
+   AEMI WHOLESALE — RED TILE DESIGN
+================================= */
+
+.wholesale-section {
+  padding-top: 100px;
+  padding-bottom: 110px;
+}
+
+.wholesale-heading {
+  max-width: 850px;
+  margin: 0 auto 45px;
+  text-align: center;
+}
+
+.wholesale-heading .eyebrow {
+  color: var(--red);
+  letter-spacing: 0.25em;
+}
+
+.wholesale-heading h2 {
+  margin: 22px 0;
+  color: #6f171d;
+  font-size: clamp(36px, 5vw, 68px);
+  line-height: 1.08;
+  font-weight: 400;
+}
+
+.wholesale-intro {
+  margin: 28px 0 0;
+  color: #6f171d;
+  font-size: clamp(20px, 2.5vw, 30px);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.wholesale-tiles {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.1fr;
+  gap: 10px;
+  align-items: stretch;
+}
+
+.wholesale-tile {
+  min-width: 0;
+  overflow: hidden;
+  background: #741b21;
+  color: #fff4e8;
+  border: 1px solid rgba(255, 244, 232, 0.12);
+  border-radius: 4px;
+}
+
+.wholesale-benefits {
+  padding: 30px;
+}
+
+.tile-eyebrow {
+  margin: 0 0 18px;
+  color: #f1d8c3;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  line-height: 1.6;
+}
+
+.benefit-item {
+  display: grid;
+  grid-template-columns: 35px 1fr;
+  gap: 14px;
+  padding: 24px 0;
+  border-bottom: 1px solid rgba(255, 244, 232, 0.35);
+}
+
+.benefit-item:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.benefit-number {
+  color: #e9bda4;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+}
+
+.benefit-item h3,
+.inquiry-tile h3 {
+  margin: 0 0 9px;
+  color: #fff4e8;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.benefit-item p,
+.inquiry-tile p:not(.tile-eyebrow) {
+  margin: 0;
+  color: #f1dcd0;
+  font-size: 13px;
+  line-height: 1.75;
+}
+
+.wholesale-product {
+  position: relative;
+  min-height: 500px;
+  background: #4b1015;
+}
+
+.wholesale-product img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 500px;
+  object-fit: cover;
+}
+
+.product-overlay {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 65px 24px 25px;
+  background: linear-gradient(
+    transparent,
+    rgba(45, 5, 8, 0.92)
+  );
+}
+
+.product-overlay p {
+  margin: 0 0 12px;
+  color: #f1d8c3;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+}
+
+.product-overlay h3 {
+  margin: 0;
+  color: #fff4e8;
+  font-size: 28px;
+  line-height: 1.2;
+  font-weight: 400;
+}
+
+.wholesale-right {
+  display: grid;
+  grid-template-rows: 1fr 1fr auto;
+  gap: 10px;
+}
+
+.inquiry-tile {
+  display: grid;
+  grid-template-columns: 38px 1fr;
+  gap: 16px;
+  align-content: center;
+  padding: 25px;
+}
+
+.inquiry-mark {
+  color: #e9bda4;
+  font-size: 26px;
+}
+
+.inquiry-tile .tile-eyebrow {
+  margin-bottom: 10px;
+}
+
+.wholesale-email {
+  display: grid;
+  grid-template-columns: 35px 1fr 20px;
+  align-items: center;
+  gap: 14px;
+  padding: 23px;
+  background: #f7eee5;
+  color: #741b21;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.wholesale-email:hover {
+  background: #ead7c8;
+}
+
+.email-symbol {
+  font-size: 27px;
+}
+
+.email-copy {
+  display: grid;
+  gap: 8px;
+}
+
+.wholesale-email .tile-eyebrow {
+  margin: 0;
+  color: #741b21;
+}
+
+.email-copy strong {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+}
+
+.email-copy small {
+  color: #795a54;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.email-arrow {
+  font-size: 22px;
+}
+
+/* RESPONSIVE LAYOUT */
+
+@media (max-width: 900px) {
+  .wholesale-tiles {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .wholesale-right {
+    grid-column: 1 / -1;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+  }
+
+  .wholesale-email {
+    grid-column: 1 / -1;
+  }
+
+  .wholesale-product,
+  .wholesale-product img {
+    min-height: 450px;
+  }
+}
+
+@media (max-width: 600px) {
+  .wholesale-section {
+    padding-top: 65px;
+    padding-bottom: 70px;
+  }
+
+  .wholesale-heading {
+    margin-bottom: 30px;
+  }
+
+  .wholesale-heading h2 {
+    font-size: 38px;
+  }
+
+  .wholesale-intro {
+    font-size: 19px;
+  }
+
+  .wholesale-tiles {
+    grid-template-columns: 1fr;
+  }
+
+  .wholesale-benefits {
+    padding: 25px;
+  }
+
+  .wholesale-product,
+  .wholesale-product img {
+    min-height: 420px;
+  }
+
+  .wholesale-right {
+    grid-column: auto;
+    grid-template-columns: 1fr;
+  }
+
+  .wholesale-email {
+    grid-column: auto;
+  }
+}
+
