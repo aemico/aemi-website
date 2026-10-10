@@ -1303,3 +1303,40 @@ footer small {
   border: 1px solid rgba(255, 235, 218, 0.2);
   overflow: hidden;
 }
+
+
+/* AEMI — Wholesale Card Content Alignment */
+.wholesale-card {
+  padding: 55px 35px;
+  text-align: center;
+}
+
+.wholesale-card h3 {
+  margin: 0 0 18px;
+  color: #fff4e7;
+  font-size: 30px;
+}
+
+.wholesale-card p {
+  max-width: 520px;
+  margin: 0 auto 25px;
+  color: #fff4e7;
+}
+
+.wholesale-card .button {
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.wholesale-card .form-note {
+  margin: 20px auto 0;
+  font-size: 11px;
+  opacity: 0.85;
+}
+
+@media (max-width: 700px) {
+  .wholesale-card {
+    padding: 40px 22px;
+  }
+}
+
