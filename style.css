@@ -1269,74 +1269,37 @@ footer small {
 }
 
 
+/* WHOLESALE & RESELLER */
 
-
-/* AEMI — Dark Cherry Glass Mosaic */
 .wholesale-card {
-  background-color: #480810;
-
-  background-image:
-    /* Soft glass reflections */
-    linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.13),
-      transparent 35%,
-      rgba(0, 0, 0, 0.12) 75%
-    ),
-
-    /* Individual tile colors */
-    conic-gradient(
-      from 90deg at 50% 50%,
-      #681020 0% 25%,
-      #941f32 0% 50%,
-      #4b101a 0% 75%,
-      #791426 0% 100%
-    );
-
-  background-size:
-    100% 100%,
-    100px 100px;
-
-  background-repeat: repeat;
-
-  color: #fff4e7;
-  border: 1px solid rgba(255, 235, 218, 0.2);
-  overflow: hidden;
-}
-
-
-/* AEMI — Wholesale Card Content Alignment */
-.wholesale-card {
-  padding: 55px 35px;
+  max-width: 650px;
+  margin: 35px auto 0;
+  padding: 40px;
   text-align: center;
+  border: 1px solid var(--line);
+  background: var(--cream);
 }
 
 .wholesale-card h3 {
-  margin: 0 0 18px;
-  color: #fff4e7;
-  font-size: 30px;
+  margin-bottom: 15px;
+  color: var(--ink);
+  font-size: 24px;
 }
 
 .wholesale-card p {
-  max-width: 520px;
-  margin: 0 auto 25px;
-  color: #fff4e7;
-}
-
-.wholesale-card .button {
-  display: inline-block;
-  margin-bottom: 10px;
+  margin-bottom: 24px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.8;
 }
 
 .wholesale-card .form-note {
-  margin: 20px auto 0;
-  font-size: 11px;
-  opacity: 0.85;
+  margin: 22px 0 0;
+  font-size: 12px;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 600px) {
   .wholesale-card {
-    padding: 40px 22px;
+    padding: 25px 20px;
   }
 }
-
