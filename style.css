@@ -1267,3 +1267,40 @@ footer small {
     uppercase;
 
 }
+
+
+/* WHOLESALE & RESELLER */
+
+.wholesale-card {
+  max-width: 650px;
+  margin: 35px auto 0;
+  padding: 40px;
+  text-align: center;
+  border: 1px solid var(--line);
+  background: var(--cream);
+}
+
+.wholesale-card h3 {
+  margin-bottom: 15px;
+  color: var(--ink);
+  font-size: 24px;
+}
+
+.wholesale-card p {
+  margin-bottom: 24px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.wholesale-card .form-note {
+  margin: 22px 0 0;
+  font-size: 12px;
+}
+
+@media (max-width: 600px) {
+  .wholesale-card {
+    padding: 25px 20px;
+  }
+}
+
