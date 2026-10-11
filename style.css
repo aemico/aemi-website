@@ -1826,3 +1826,535 @@ footer small {
     font-size: 9px;
   }
 }
+
+/* ==========================================
+   AEMI — HOMEPAGE POLISH
+   Add this at the VERY BOTTOM of style.css
+========================================== */
+
+/* Smooth navigation to sections below the sticky header */
+section[id] {
+  scroll-margin-top: 90px;
+}
+
+/* Give the page a more deliberate editorial feel */
+.section {
+  padding-top: clamp(72px, 9vw, 112px);
+  padding-bottom: clamp(72px, 9vw, 112px);
+}
+
+.section-heading {
+  margin-bottom: 38px;
+}
+
+.eyebrow {
+  line-height: 1.8;
+}
+
+/* HERO — more breathing room */
+.hero {
+  min-height: min(790px, 82vh);
+  padding: clamp(45px, 7vw, 90px) 7%;
+  gap: 0;
+}
+
+.hero-logo {
+  margin-bottom: 12px;
+}
+
+.hero-logo img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.hero .eyebrow {
+  margin-top: 12px;
+  margin-bottom: 18px;
+}
+
+.hero h1 {
+  max-width: 900px;
+  margin-inline: auto;
+  letter-spacing: -0.035em;
+}
+
+.hero p:not(.eyebrow) {
+  max-width: 490px;
+  font-size: 15px;
+  line-height: 1.9;
+}
+
+/* BUTTONS — cleaner and easier to use */
+.button {
+  min-height: 48px;
+  padding: 15px 28px;
+  border-radius: 2px;
+  text-align: center;
+  line-height: 1.4;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.button:focus-visible,
+a:focus-visible,
+.menu-toggle:focus-visible {
+  outline: 2px solid #b98187;
+  outline-offset: 4px;
+}
+
+.button:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+/* PRODUCT — refined image panel */
+.product-card {
+  gap: clamp(28px, 5vw, 58px);
+}
+
+.product-art {
+  min-width: 0;
+  min-height: 0;
+  aspect-ratio: 4 / 5;
+  padding: 18px;
+  border-radius: 3px;
+}
+
+.product-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.product-info {
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+.product-info > p:first-child {
+  margin-top: 0;
+}
+
+.details {
+  flex-wrap: wrap;
+  gap: 22px 38px;
+}
+
+.details div {
+  gap: 6px;
+}
+
+.details span {
+  font-weight: 600;
+}
+
+.details strong {
+  line-height: 1.6;
+}
+
+.ingredients {
+  line-height: 1.9;
+}
+
+/* FEATURE CARDS — understated, not overly decorative */
+.features {
+  gap: 18px;
+}
+
+.feature,
+.enjoy-card {
+  min-width: 0;
+  border-radius: 3px;
+  transition:
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.feature,
+.enjoy-card {
+  padding: clamp(23px, 3vw, 32px);
+}
+
+.feature span,
+.enjoy-card span {
+  letter-spacing: 0.18em;
+}
+
+.feature h3,
+.enjoy-card h3 {
+  line-height: 1.4;
+}
+
+.feature p,
+.enjoy-card p {
+  line-height: 1.85;
+}
+
+@media (hover: hover) {
+  .feature:hover,
+  .enjoy-card:hover {
+    border-color: #c5aaa0;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(75, 16, 22, 0.05);
+  }
+}
+
+/* WHOLESALE — cohesive edges and spacing */
+.wholesale-tiles {
+  gap: 12px;
+}
+
+.wholesale-tile {
+  border-radius: 3px;
+}
+
+.wholesale-benefits {
+  padding: clamp(23px, 3vw, 34px);
+}
+
+.wholesale-email {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.email-copy {
+  min-width: 0;
+}
+
+/* OUR STORY — cleaner image presentation */
+.about {
+  max-width: 900px;
+}
+
+.about > p:last-of-type {
+  font-size: 14px;
+  line-height: 2;
+}
+
+.about-image {
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  margin-top: clamp(32px, 5vw, 55px);
+  overflow: hidden;
+}
+
+.about-image img {
+  width: 100%;
+  height: auto;
+}
+
+/* ORDER AND TRACKING — tidy form surfaces */
+.order-section {
+  padding-top: clamp(65px, 8vw, 95px);
+  padding-bottom: clamp(65px, 8vw, 95px);
+}
+
+.order-section > h2 {
+  max-width: 720px;
+}
+
+.order-section > p:not(.eyebrow) {
+  line-height: 1.9;
+}
+
+form {
+  gap: 20px;
+}
+
+label {
+  line-height: 1.6;
+}
+
+input,
+select,
+textarea {
+  min-height: 48px;
+  border-radius: 2px;
+  transition: border-color 0.2s ease;
+}
+
+textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.order-summary,
+.receipt-card,
+.tracking-card {
+  border-radius: 3px;
+}
+
+.tracking-card {
+  overflow-wrap: anywhere;
+}
+
+/* CONTACT — balanced buttons and readable details */
+.socials {
+  gap: 10px;
+}
+
+.socials a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 20px;
+  border-radius: 2px;
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.pickup p {
+  line-height: 1.9;
+  overflow-wrap: anywhere;
+}
+
+/* MOBILE — prioritize comfortable reading */
+@media (max-width: 700px) {
+  .site-header {
+    padding: 12px 5%;
+    min-height: 62px;
+  }
+
+  .brand {
+    font-size: 26px;
+  }
+
+  .menu-toggle {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 8px;
+    cursor: pointer;
+  }
+
+  nav {
+    top: 100%;
+    padding: 18px 5% 22px;
+    gap: 0;
+    box-shadow: 0 12px 18px rgba(75, 16, 22, 0.04);
+  }
+
+  nav a {
+    display: flex;
+    align-items: center;
+    min-height: 46px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 12px;
+  }
+
+  nav a:last-child {
+    border-bottom: 0;
+  }
+
+  .hero {
+    min-height: auto;
+    padding: 62px 6% 76px;
+  }
+
+  .hero-logo img {
+    width: min(280px, 78vw);
+  }
+
+  .hero h1 {
+    font-size: clamp(43px, 11vw, 62px);
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+  }
+
+  .hero p:not(.eyebrow) {
+    max-width: 340px;
+    font-size: 14px;
+    line-height: 1.85;
+    margin-bottom: 25px;
+  }
+
+  .section {
+    padding: 66px 6%;
+  }
+
+  .section-heading {
+    margin-bottom: 28px;
+  }
+
+  .section-heading h2,
+  .order-section h2,
+  .about h2 {
+    font-size: clamp(34px, 8.5vw, 46px);
+    line-height: 1.12;
+  }
+
+  .product-card,
+  .features,
+  .enjoy-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .product-card {
+    gap: 27px;
+  }
+
+  .product-art {
+    aspect-ratio: 1 / 1;
+    padding: 12px;
+  }
+
+  .product-info {
+    font-size: 14px;
+  }
+
+  .details {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px 12px;
+    margin: 24px 0;
+  }
+
+  .details strong {
+    font-size: 13px;
+    overflow-wrap: anywhere;
+  }
+
+  .features,
+  .enjoy-grid {
+    gap: 13px;
+  }
+
+  .feature,
+  .enjoy-card {
+    padding: 24px;
+  }
+
+  .wholesale-section {
+    padding: 66px 6%;
+  }
+
+  .wholesale-heading h2 {
+    font-size: clamp(32px, 8vw, 42px);
+  }
+
+  .wholesale-product,
+  .wholesale-product img {
+    min-height: 0;
+    aspect-ratio: 4 / 5;
+  }
+
+  .wholesale-right {
+    gap: 10px;
+  }
+
+  .wholesale-email {
+    padding: 20px 16px;
+    grid-template-columns: 28px minmax(0, 1fr) 18px;
+    gap: 10px;
+  }
+
+  .about > p:last-of-type {
+    font-size: 14px;
+    line-height: 1.9;
+    text-align: left;
+  }
+
+  .delivery-policy {
+    padding: 23px 19px;
+  }
+
+  .delivery-policy-label {
+    gap: 9px;
+    letter-spacing: 0.15em;
+  }
+
+  .delivery-policy-item h3 {
+    align-items: flex-start;
+    font-size: 18px;
+  }
+
+  .order-section {
+    padding-left: 6%;
+    padding-right: 6%;
+  }
+
+  form {
+    gap: 18px;
+  }
+
+  .receipt-card {
+    padding: 25px 20px;
+  }
+
+  .receipt-row {
+    padding: 17px 0;
+  }
+
+  .tracking-card {
+    padding: 28px 18px;
+  }
+
+  .socials {
+    gap: 9px;
+    margin-bottom: 38px;
+  }
+
+  .socials a {
+    flex: 1 1 40%;
+    padding: 12px;
+    font-size: 12px;
+  }
+
+  footer {
+    padding: 35px 6%;
+  }
+}
+
+/* EXTRA-SMALL PHONES */
+@media (max-width: 360px) {
+  .hero {
+    padding-right: 5%;
+    padding-left: 5%;
+  }
+
+  .hero h1 {
+    font-size: 39px;
+  }
+
+  .section,
+  .wholesale-section {
+    padding-right: 5%;
+    padding-left: 5%;
+  }
+
+  .details {
+    grid-template-columns: 1fr;
+  }
+
+  .wholesale-email {
+    grid-template-columns: 24px minmax(0, 1fr);
+  }
+
+  .email-arrow {
+    display: none;
+  }
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
