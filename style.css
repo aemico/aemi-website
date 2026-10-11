@@ -1468,24 +1468,27 @@ footer small {
   margin-bottom: 10px;
 }
 
+
 .wholesale-email {
   display: grid;
   grid-template-columns: 35px 1fr 20px;
   align-items: center;
   gap: 14px;
-  padding: 23px;
+  padding: 25px 23px;
   background: #f7eee5;
   color: #741b21;
   text-decoration: none;
-  transition: background 0.2s ease;
+  border: 1px solid #741b21;
+  transition: background 0.2s ease, transform 0.2s ease;
 }
 
 .wholesale-email:hover {
   background: #ead7c8;
+  transform: translateY(-2px);
 }
 
 .email-symbol {
-  font-size: 27px;
+  font-size: 28px;
 }
 
 .email-copy {
@@ -1511,7 +1514,13 @@ footer small {
 
 .email-arrow {
   font-size: 22px;
+  transition: transform 0.2s ease;
 }
+
+.wholesale-email:hover .email-arrow {
+  transform: translateX(4px);
+}
+
 
 /* RESPONSIVE LAYOUT */
 
