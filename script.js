@@ -1033,3 +1033,42 @@ if (cancelOrderButton) {
   );
 
 }
+
+
+/* AEMI ORDER TYPE & DELIVERY NOTE */
+
+const orderTypeSelect = document.getElementById("orderTypeSelect");
+const fulfillmentSelect = document.getElementById("fulfillmentSelect");
+const deliveryTypeNote = document.getElementById("deliveryTypeNote");
+
+function updateDeliveryTypeNote() {
+  if (!orderTypeSelect || !fulfillmentSelect || !deliveryTypeNote) {
+    return;
+  }
+
+  const orderType = orderTypeSelect.value;
+  const fulfillment = fulfillmentSelect.value;
+
+  let message = "";
+
+  if (orderType === "Retail" && fulfillment === "Delivery") {
+    message =
+      "Local retail orders within Tartaria, Silang, Cavite qualify for FREE delivery. Please provide your complete address. Orders outside the local area require delivery confirmation from AEMI.";
+  } else if (orderType === "Wholesale" && fulfillment === "Delivery") {
+    message =
+      "Retailer and wholesale delivery charges will be confirmed by AEMI before your order is finalized.";
+  } else if (fulfillment === "Pickup") {
+    message =
+      "Pickup arrangements will be confirmed by AEMI after you submit your order.";
+  }
+
+  deliveryTypeNote.textContent = message;
+  deliveryTypeNote.hidden = !message;
+}
+
+if (orderTypeSelect && fulfillmentSelect && deliveryTypeNote) {
+  orderTypeSelect.addEventListener("change", updateDeliveryTypeNote);
+  fulfillmentSelect.addEventListener("change", updateDeliveryTypeNote);
+
+  updateDeliveryTypeNote();
+}
