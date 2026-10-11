@@ -1666,3 +1666,34 @@ footer small {
     font-size: 23px;
   }
 }
+
+
+/* AEMI ORDER TYPE & DELIVERY NOTE */
+
+#deliveryTypeNote {
+  margin: 0;
+  padding: 14px 16px;
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--red);
+  border-radius: 8px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+#deliveryTypeNote[hidden] {
+  display: none;
+}
+
+#orderTypeSelect {
+  width: 100%;
+}
+
+/* Keep the order form fields visually consistent */
+#orderForm select,
+#orderForm input,
+#orderForm textarea {
+  box-sizing: border-box;
+  max-width: 100%;
+}
