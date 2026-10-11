@@ -678,7 +678,7 @@ textarea:focus {
   letter-spacing: .04em;
 
   text-align: left;
-
+  white-space: pre-line;
 }
 
 
