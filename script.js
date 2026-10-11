@@ -256,10 +256,12 @@ const orderSummary =
 
 
 
+
 function updateOrderSummary() {
   if (!productSelect || !quantityInput || !orderSummary) return;
 
   const selectedSize = productSelect.value;
+
   const selectedProduct = AEMI.product.sizes.find(
     item => item.label === selectedSize
   );
@@ -282,39 +284,59 @@ function updateOrderSummary() {
   const total = subtotal;
 
   const formatPeso = amount =>
-    "₱" + amount.toLocaleString("en-PH");
+    "₱" + amount.toLocaleString("en-PH", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
 
-  orderSummary.textContent = [
-    `Unit price: ${formatPeso(unitPrice)}`,
-    `Quantity: ${quantity}`,
-    `Subtotal: ${formatPeso(subtotal)}`,
-    `Total: ${formatPeso(total)} (delivery fee not included)`
-  ].join("\n");
+  orderSummary.innerHTML = `
+    <span class="summary-heading">YOUR ORDER SUMMARY</span>
+
+    <span class="summary-divider"></span>
+
+    <span class="summary-row">
+      <span>Unit price</span>
+      <span>${formatPeso(unitPrice)}</span>
+    </span>
+
+    <span class="summary-row">
+      <span>Quantity</span>
+      <span>${quantity} ${quantity === 1 ? "jar" : "jars"}</span>
+    </span>
+
+    <span class="summary-row">
+      <span>Subtotal</span>
+      <span>${formatPeso(subtotal)}</span>
+    </span>
+
+    <span class="summary-divider"></span>
+
+    <span class="summary-row summary-total">
+      <span>TOTAL</span>
+      <span>${formatPeso(total)}</span>
+    </span>
+
+    <span class="summary-note">
+      Delivery fee not included.
+    </span>
+  `;
 }
 
-
 if (productSelect) {
-
   productSelect.addEventListener(
     "change",
     updateOrderSummary
   );
-
 }
 
-
 if (quantityInput) {
-
   quantityInput.addEventListener(
     "input",
     updateOrderSummary
   );
-
 }
 
-
 updateOrderSummary();
-
 
 /* ============================================================
    CONTACT
