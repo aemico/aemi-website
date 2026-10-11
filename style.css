@@ -2358,3 +2358,7 @@ textarea {
     scroll-behavior: auto !important;
   }
 }
+
+body {
+  outline: 6px solid hotpink !important;
+}
