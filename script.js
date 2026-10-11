@@ -28,11 +28,11 @@ const AEMI = {
    sizes: [
   {
     label: "120 mL",
-    price: null
+    price: 99
   },
   {
     label: "220 mL",
-    price: null
+    price: 175
   }
 ]
 
@@ -255,34 +255,41 @@ const orderSummary =
   document.getElementById("orderSummary");
 
 
+
 function updateOrderSummary() {
+  if (!productSelect || !quantityInput || !orderSummary) return;
 
-  if (
-    !productSelect ||
-    !quantityInput ||
-    !orderSummary
-  ) {
+  const selectedSize = productSelect.value;
+  const selectedProduct = AEMI.product.sizes.find(
+    item => item.label === selectedSize
+  );
 
+  const quantity = Number(quantityInput.value);
+
+  if (!selectedSize || !selectedProduct) {
+    orderSummary.textContent = "";
     return;
-
   }
 
-
-  const selectedSize =
-    productSelect.value;
-
-
-  const quantity =
-    quantityInput.value || 1;
-
-
-  if (selectedSize) {
-
+  if (!Number.isInteger(quantity) || quantity < 1) {
     orderSummary.textContent =
-      `${selectedSize} × ${quantity}`;
-
+      "Please enter a quantity of at least 1.";
+    return;
   }
 
+  const unitPrice = selectedProduct.price;
+  const subtotal = unitPrice * quantity;
+  const total = subtotal;
+
+  const formatPeso = amount =>
+    "₱" + amount.toLocaleString("en-PH");
+
+  orderSummary.textContent = [
+    `Unit price: ${formatPeso(unitPrice)}`,
+    `Quantity: ${quantity}`,
+    `Subtotal: ${formatPeso(subtotal)}`,
+    `Total: ${formatPeso(total)} (delivery fee not included)`
+  ].join("\n");
 }
 
 
