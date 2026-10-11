@@ -654,33 +654,93 @@ textarea:focus {
 }
 
 
+
 .order-summary {
+  display: grid;
+  gap: 0;
 
-  margin:
-    8px 0 18px;
+  margin: 8px 0 18px;
+  padding: 22px 20px;
 
-  padding:
-    14px 16px;
+  background: var(--ivory);
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--red);
 
-  background:
-    var(--ivory);
-
-  border:
-    1px solid var(--line);
-
-  color:
-    var(--red);
-
+  color: var(--ink);
+  font-family: "DM Sans", Arial, sans-serif;
   font-size: 13px;
-
-  font-weight: 600;
-
-  letter-spacing: .04em;
-
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 1.6;
   text-align: left;
-  white-space: pre-line;
+  white-space: normal;
 }
 
+.summary-heading {
+  display: block;
+  margin-bottom: 16px;
+
+  color: var(--red);
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+.summary-divider {
+  display: block;
+  height: 1px;
+  margin: 4px 0 12px;
+
+  background: var(--line);
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+
+  padding: 8px 0;
+}
+
+.summary-row > span:first-child {
+  color: var(--muted);
+}
+
+.summary-row > span:last-child {
+  color: var(--ink);
+  font-weight: 600;
+  text-align: right;
+}
+
+.summary-total {
+  padding: 12px 0 4px;
+}
+
+.summary-total > span:first-child {
+  color: var(--red);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+
+.summary-total > span:last-child {
+  color: var(--red);
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.summary-note {
+  display: block;
+  margin-top: 10px;
+
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
 
 /* ============================================================
    RECEIPT
@@ -1586,3 +1646,23 @@ footer small {
   }
 }
 
+/* ORDER SUMMARY — MOBILE */
+
+@media (max-width: 600px) {
+  .order-summary {
+    padding: 18px 15px;
+    font-size: 12px;
+  }
+
+  .summary-heading {
+    font-size: 16px;
+  }
+
+  .summary-row {
+    gap: 10px;
+  }
+
+  .summary-total > span:last-child {
+    font-size: 23px;
+  }
+}
