@@ -1697,3 +1697,28 @@ footer small {
   box-sizing: border-box;
   max-width: 100%;
 }
+
+
+/* DELIVERY POLICY ICON DETAILS */
+
+.delivery-policy-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.delivery-main-icon {
+  flex-shrink: 0;
+  color: #f1d8c3;
+}
+
+.delivery-policy-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.delivery-item-icon {
+  flex-shrink: 0;
+  color: #e9bda4;
+}
