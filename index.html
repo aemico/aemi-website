@@ -455,6 +455,40 @@ crafted to bring bold flavor to everyday meals.
       </p>
 
 
+<!-- AEMI DELIVERY POLICY -->
+
+<div class="delivery-policy">
+
+  <p class="delivery-policy-label">
+    AEMI DELIVERY POLICY
+  </p>
+
+  <div class="delivery-policy-item">
+    <h3>Local Retail Orders</h3>
+    <p>
+      Enjoy FREE delivery within Tartaria,
+      Silang, Cavite.
+    </p>
+  </div>
+
+  <div class="delivery-policy-item">
+    <h3>Retailers & Wholesale Partners</h3>
+    <p>
+      Delivery outside our local retail area
+      can be arranged for a fee. The delivery
+      charge will be confirmed by AEMI before
+      your order is finalized.
+    </p>
+  </div>
+
+  <p class="delivery-policy-note">
+    All deliveries are subject to address
+    confirmation and availability.
+  </p>
+
+</div>
+
+      
       <!-- ORDER FORM -->
 
       <form
@@ -487,6 +521,34 @@ crafted to bring bold flavor to everyday meals.
 
         </label>
 
+        
+<label>
+  Order type
+
+  <select
+    name="orderType"
+    id="orderTypeSelect"
+    required
+  >
+    <option value="">
+      Select order type
+    </option>
+
+    <option value="Retail">
+      Retail — Personal Order
+    </option>
+
+    <option value="Wholesale">
+      Retailer / Wholesale — 12 Jars or More
+    </option>
+  </select>
+</label>
+
+<p
+  id="deliveryTypeNote"
+  class="form-note"
+  hidden
+></p>
 
         <label>
 
