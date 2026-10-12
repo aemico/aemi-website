@@ -1826,3 +1826,23 @@ footer small {
     font-size: 9px;
   }
 }
+
+/* AEMI navigation spacing fix */
+.site-header {
+  gap: 24px;
+}
+
+.site-header nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 18px 25px;
+}
+
+.site-header nav a {
+  display: inline-block;
+  white-space: nowrap;
+  text-decoration: none;
+  line-height: 1.8;
+}
