@@ -12,6 +12,12 @@
   <title>AEMI | Chili Garlic Oil</title>
 
   <link rel="stylesheet" href="style.css">
+  
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
+
 </head>
 
 <body>
@@ -524,6 +530,26 @@ crafted to bring bold flavor to everyday meals.
   <p class="delivery-policy-note">
     All deliveries are subject to address
     confirmation and availability.
+  </p>
+
+</div>
+
+<!-- AEMI DELIVERY LOCATION MAP -->
+
+<div class="delivery-map-section" id="deliveryMapSection">
+
+  <h3>Choose Your Delivery Location</h3>
+
+  <p class="form-note">
+    If you selected delivery, choose your location on the map.
+    AEMI will confirm your address and delivery fee before
+    finalizing your order.
+  </p>
+
+  <div id="aemiMap" style="height: 320px; width: 100%;"></div>
+
+  <p id="mapLocationStatus" class="form-note">
+    Select a location on the map to place your pin.
   </p>
 
 </div>
@@ -1372,6 +1398,14 @@ crafted to bring bold flavor to everyday meals.
     }
 
   </script>
+
+<!-- Free interactive map library -->
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
+  
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 </body>
 </html>
