@@ -214,31 +214,29 @@ if (sizes) {
 
 
 if (productSelect) {
+  const placeholderOption = document.createElement("option");
 
-  AEMI.product.sizes.forEach(
-    item => {
+  placeholderOption.value = "";
+  placeholderOption.textContent = "Choose a size";
+  placeholderOption.disabled = true;
+  placeholderOption.selected = true;
+  placeholderOption.defaultSelected = true;
 
-      const option =
-        document.createElement("option");
+  productSelect.appendChild(placeholderOption);
 
+  AEMI.product.sizes.forEach(item => {
+    const option = document.createElement("option");
 
-      option.value =
-        item.label;
+    option.value = item.label;
 
+    option.textContent =
+      item.price == null
+        ? `${item.label} — Price TBD`
+        : `${item.label} — ₱${item.price}`;
 
-      option.textContent =
-        item.price == null
-          ? `${item.label} — Price TBD`
-          : `${item.label} — ₱${item.price}`;
-
-
-      productSelect.appendChild(option);
-
-    }
-  );
-
+    productSelect.appendChild(option);
+  });
 }
-
 
 /* ============================================================
    ORDER SUMMARY
@@ -338,20 +336,16 @@ updateOrderSummary();
    CONTACT
    ============================================================ */
 
-const emailLine =
-  document.getElementById("emailLine");
+const emailLine = document.getElementById("emailLine");
 
+if (emailLine && AEMI.contact.email) {
+  const emailLink = emailLine.querySelector("a");
 
-if (
-  emailLine &&
-  AEMI.contact.email
-) {
-
-  emailLine.textContent =
-    `Email: ${AEMI.contact.email}`;
-
+  if (emailLink) {
+    emailLink.href = `mailto:${AEMI.contact.email}`;
+    emailLink.textContent = AEMI.contact.email;
+  }
 }
-
 
 /* ============================================================
    SOCIAL LINKS
@@ -1031,122 +1025,60 @@ if (cancelOrderButton) {
 
 
 
-/* AEMI ORDER TYPE & DELIVERY NOTE */
+/* ============================================================
+   AEMI ORDER TYPE & WHOLESALE INQUIRY
+   ============================================================ */
 
 const orderTypeSelect =
   document.getElementById("orderTypeSelect");
 
-const deliveryTypeNote =
-  document.getElementById("deliveryTypeNote");
+const wholesaleInquiryNotice =
+  document.getElementById("wholesaleInquiryNotice");
 
-function updateDeliveryTypeNote() {
-  if (
-    !orderTypeSelect ||
-    !fulfillmentSelect ||
-    !deliveryTypeNote
-  ) {
-    return;
-  }
+const orderForm =
+  document.getElementById("orderForm");
 
-  const orderType = orderTypeSelect.value;
-  const fulfillment = fulfillmentSelect.value;
+if (orderTypeSelect && wholesaleInquiryNotice && orderForm) {
+  const orderTypeLabel = orderTypeSelect.closest("label");
 
-  let message = "";
-
-  if (orderType === "Retail" && fulfillment === "Delivery") {
-    message =
-      "Local retail orders within Tartaria, Silang, Cavite qualify for FREE delivery. Please provide your complete address. Orders outside the local area require delivery confirmation from AEMI.";
-  } else if (
-    orderType === "Wholesale" &&
-    fulfillment === "Delivery"
-  ) {
-    message =
-      "Retailer and wholesale delivery charges will be confirmed by AEMI before your order is finalized.";
-  } else if (fulfillment === "Pickup") {
-    message =
-      "Pickup arrangements will be confirmed by AEMI after you submit your order.";
-  }
-
-  deliveryTypeNote.textContent = message;
-  deliveryTypeNote.hidden = !message;
-}
-
-if (
-  orderTypeSelect &&
-  fulfillmentSelect &&
-  deliveryTypeNote
-) {
-  orderTypeSelect.addEventListener(
-    "change",
-    updateDeliveryTypeNote
+  const retailElements = Array.from(orderForm.children).filter(
+    element =>
+      element !== orderTypeLabel &&
+      element !== wholesaleInquiryNotice &&
+      !element.matches('input[type="hidden"]')
   );
-
-  fulfillmentSelect.addEventListener(
-    "change",
-    updateDeliveryTypeNote
-  );
-
-  updateDeliveryTypeNote();
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-  const orderTypeSelect = document.getElementById("orderTypeSelect");
-  const orderForm = document.getElementById("orderForm");
-  const deliveryTypeNote = document.getElementById("deliveryTypeNote");
-
-  if (!orderTypeSelect || !orderForm) return;
-
-  orderTypeSelect.addEventListener("change", function () {
-    if (orderTypeSelect.value === "Wholesale") {
-      if (deliveryTypeNote) {
-        deliveryTypeNote.textContent =
-          "Wholesale and reseller orders are handled through email. Please contact AEMI for bundle pricing and ordering details.";
-        deliveryTypeNote.hidden = false;
-      }
-
-      orderForm.hidden = true;
-
-      document.getElementById("wholesale")?.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
-    } else {
-      if (deliveryTypeNote) {
-        deliveryTypeNote.hidden = true;
-        deliveryTypeNote.textContent = "";
-      }
-
-      orderForm.hidden = false;
-    }
-  });
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-  const orderTypeSelect = document.getElementById("orderTypeSelect");
-  const orderForm = document.getElementById("orderForm");
-  const wholesaleInquiryNotice = document.getElementById("wholesaleInquiryNotice");
-
-  if (!orderTypeSelect || !orderForm || !wholesaleInquiryNotice) return;
 
   function updateOrderTypeView() {
+    const isRetail = orderTypeSelect.value === "Retail";
     const isWholesale = orderTypeSelect.value === "Wholesale";
 
     wholesaleInquiryNotice.hidden = !isWholesale;
 
-    // Hide the retail ordering fields when wholesale is selected.
-    Array.from(orderForm.children).forEach(function (element) {
-      if (element.id !== "wholesaleInquiryNotice") {
-        element.hidden = isWholesale;
-      }
+    retailElements.forEach(element => {
+      element.hidden = !isRetail;
+
+      element
+        .querySelectorAll("input, select, textarea, button")
+        .forEach(control => {
+          control.disabled = !isRetail;
+        });
     });
 
-    // Keep the order-type selector visible.
-    const orderTypeLabel = orderTypeSelect.closest("label");
     if (orderTypeLabel) {
       orderTypeLabel.hidden = false;
     }
+
+    orderTypeSelect.disabled = false;
   }
 
-  orderTypeSelect.addEventListener("change", updateOrderTypeView);
+  orderTypeSelect.addEventListener(
+    "change",
+    updateOrderTypeView
+  );
+
+  orderForm.addEventListener("reset", () => {
+    setTimeout(updateOrderTypeView, 0);
+  });
+
   updateOrderTypeView();
-});
+}
