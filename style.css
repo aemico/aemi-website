@@ -1933,3 +1933,15 @@ footer small {
     z-index: 101;
   }
 }
+
+/* FIX: MAP MUST STAY BEHIND THE AEMI HEADER */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.leaflet-container {
+  position: relative;
+  z-index: 1;
+}
