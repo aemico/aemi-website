@@ -1289,54 +1289,30 @@ if (!aemiSubmitting) {
             aemiOrderForm.submit();
 
 
-    /*
- * Wait for confirmation from Apps Script.
+/*
+ * Show the receipt after submitting the order.
+ * Google Sheets receives the order through the existing form.
  */
 
-aemiSubmitButton.textContent = "WAITING FOR CONFIRMATION...";
-
-aemiSubmissionTimeout = setTimeout(function() {
-  if (!aemiSubmitting) {
-    return;
-  }
-
-  aemiSubmitting = false;
-  aemiSubmitButton.disabled = false;
-  aemiSubmitButton.textContent = "SUBMIT ORDER";
-
-  alert(
-    "AEMI could not confirm whether your order was saved. " +
-    "Please check your order tracking or contact AEMI " +
-    "before submitting again to avoid a duplicate order."
-  );
-
+if (aemiSubmissionTimeout) {
+  clearTimeout(aemiSubmissionTimeout);
   aemiSubmissionTimeout = null;
-}, 20000);
+}
 
-          } catch (error) {
+aemiReceiptOrderNumber.textContent = orderNumber;
+aemiReceiptStatus.textContent = "Pending";
 
-            console.error(error);
+aemiOrderForm.hidden = true;
+aemiOrderReceipt.hidden = false;
 
-            aemiSubmitting =
-              false;
+aemiSubmitting = false;
+aemiSubmitButton.disabled = false;
+aemiSubmitButton.textContent = "SUBMIT ORDER";
 
-            aemiSubmitButton.disabled =
-              false;
-
-            aemiSubmitButton.textContent =
-              "SUBMIT ORDER";
-
-
-            alert(
-              "We couldn't submit your order right now. Please try again."
-            );
-
-          }
-
-        }
-      );
-
-    }
+aemiOrderReceipt.scrollIntoView({
+  behavior: "smooth",
+  block: "start"
+});
 
 
     /* =========================================================
