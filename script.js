@@ -1120,3 +1120,33 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  const orderTypeSelect = document.getElementById("orderTypeSelect");
+  const orderForm = document.getElementById("orderForm");
+  const wholesaleInquiryNotice = document.getElementById("wholesaleInquiryNotice");
+
+  if (!orderTypeSelect || !orderForm || !wholesaleInquiryNotice) return;
+
+  function updateOrderTypeView() {
+    const isWholesale = orderTypeSelect.value === "Wholesale";
+
+    wholesaleInquiryNotice.hidden = !isWholesale;
+
+    // Hide the retail ordering fields when wholesale is selected.
+    Array.from(orderForm.children).forEach(function (element) {
+      if (element.id !== "wholesaleInquiryNotice") {
+        element.hidden = isWholesale;
+      }
+    });
+
+    // Keep the order-type selector visible.
+    const orderTypeLabel = orderTypeSelect.closest("label");
+    if (orderTypeLabel) {
+      orderTypeLabel.hidden = false;
+    }
+  }
+
+  orderTypeSelect.addEventListener("change", updateOrderTypeView);
+  updateOrderTypeView();
+});
