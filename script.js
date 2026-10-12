@@ -1025,8 +1025,10 @@ if (cancelOrderButton) {
 
 
 
+
 /* ============================================================
    AEMI ORDER TYPE & WHOLESALE INQUIRY
+   Safe version: do not hide or disable retail form fields
    ============================================================ */
 
 const orderTypeSelect =
@@ -1035,58 +1037,20 @@ const orderTypeSelect =
 const wholesaleInquiryNotice =
   document.getElementById("wholesaleInquiryNotice");
 
-const orderForm =
-  document.getElementById("orderForm");
-
-if (orderTypeSelect && wholesaleInquiryNotice && orderForm) {
-  const orderTypeLabel =
-    orderTypeSelect.closest("label") ||
-    orderForm.querySelector('label[for="orderTypeSelect"]');
-
-  const retailElements = Array.from(orderForm.children).filter(
-    element =>
-      element !== orderTypeSelect &&
-      !element.contains(orderTypeSelect) &&
-      element !== orderTypeLabel &&
-      element !== wholesaleInquiryNotice &&
-      !element.matches('input[type="hidden"]')
-  );
-
+if (orderTypeSelect && wholesaleInquiryNotice) {
   function updateOrderTypeView() {
     const selectedType =
       String(orderTypeSelect.value || "").trim().toLowerCase();
 
     const isWholesale = selectedType.includes("wholesale");
-    const isRetail = !isWholesale;
 
     wholesaleInquiryNotice.hidden = !isWholesale;
-
-    retailElements.forEach(element => {
-      element.hidden = !isRetail;
-
-      element
-        .querySelectorAll("input, select, textarea, button")
-        .forEach(control => {
-          control.disabled = !isRetail;
-        });
-    });
-
-    if (orderTypeLabel) {
-      orderTypeLabel.hidden = false;
-    }
-
-    orderTypeSelect.hidden = false;
-    orderTypeSelect.disabled = false;
   }
 
   orderTypeSelect.addEventListener(
     "change",
     updateOrderTypeView
   );
-
-  orderForm.addEventListener("reset", () => {
-    setTimeout(updateOrderTypeView, 0);
-  });
 
   updateOrderTypeView();
 }
