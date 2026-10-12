@@ -914,14 +914,19 @@ crafted to bring bold flavor to everyday meals.
 
         <label>
   Contact number
+
 <input
   id="trackingContact"
   type="tel"
   placeholder="09XXXXXXXXX"
-  inputmode="tel"
+  inputmode="numeric"
   autocomplete="tel"
+  maxlength="11"
+  pattern="09[0-9]{9}"
+  title="Enter an 11-digit Philippine mobile number starting with 09."
   required
 >
+
 </label>
 
 <p class="form-note">
