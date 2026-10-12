@@ -1870,3 +1870,66 @@ footer small {
     color: var(--red);
   }
 }
+
+/* AEMI FINAL HEADER OVERRIDE */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  isolation: isolate;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.site-header .brand {
+  flex-shrink: 0;
+}
+
+.site-header .menu-toggle {
+  display: none;
+  flex-shrink: 0;
+}
+
+.site-header nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+  gap: clamp(8px, 1.2vw, 18px);
+  min-width: 0;
+  font-size: clamp(10px, 0.8vw, 12px);
+  letter-spacing: 0.04em;
+}
+
+.site-header nav a {
+  display: block;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+@media (max-width: 1000px) {
+  .site-header .menu-toggle {
+    display: block;
+  }
+
+  .site-header nav:not(.open) {
+    display: none !important;
+  }
+
+  .site-header nav.open {
+    display: flex !important;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 18px 6%;
+    background: var(--ivory);
+    border-bottom: 1px solid var(--line);
+    z-index: 101;
+  }
+}
