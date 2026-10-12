@@ -1314,6 +1314,22 @@ aemiOrderReceipt.scrollIntoView({
   block: "start"
 });
 
+          } catch (error) {
+            console.error("AEMI order submission error:", error);
+
+            aemiSubmitting = false;
+            aemiSubmitButton.disabled = false;
+            aemiSubmitButton.textContent = "SUBMIT ORDER";
+
+            alert(
+              "AEMI couldn't get an order number. " +
+              "Please check your connection and try again."
+            );
+          }
+        }
+      );
+    }
+
 
     /* =========================================================
        TRACK MY ORDER
