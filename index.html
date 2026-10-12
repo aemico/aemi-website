@@ -1088,7 +1088,46 @@ crafted to bring bold flavor to everyday meals.
   "https://script.google.com/macros/s/AKfycbw_557rqSYN1cMQ_srMHtutr4TvYW6bkvbc8oJU6wNXxPgRjGFhGmadY7l0fZ66o7vo/exec";
 
     let aemiSubmitting = false;
+let aemiSubmissionTimeout = null;
 
+window.addEventListener("message", function(event) {
+  const submitFrame =
+    document.getElementById("aemiSubmitFrame");
+
+  if (!submitFrame || event.source !== submitFrame.contentWindow) {
+    return;
+  }
+
+  const message = event.data;
+
+  if (
+    !message ||
+    message.type !== "AEMI_ORDER_SUBMITTED" ||
+    !message.orderNumber
+  ) {
+    return;
+  }
+
+  if (aemiSubmissionTimeout) {
+    clearTimeout(aemiSubmissionTimeout);
+    aemiSubmissionTimeout = null;
+  }
+
+  aemiReceiptOrderNumber.textContent = message.orderNumber;
+  aemiReceiptStatus.textContent = "Pending";
+
+  aemiOrderForm.hidden = true;
+  aemiOrderReceipt.hidden = false;
+
+  aemiSubmitting = false;
+  aemiSubmitButton.disabled = false;
+  aemiSubmitButton.textContent = "SUBMIT ORDER";
+
+  aemiOrderReceipt.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+});
 
     /* =========================================================
        GET OFFICIAL NEXT ORDER NUMBER
@@ -1253,37 +1292,29 @@ crafted to bring bold flavor to everyday meals.
             aemiOrderForm.submit();
 
 
-            /*
-             * Show receipt immediately.
-             */
+    /*
+ * Wait for confirmation from Apps Script.
+ */
 
-            aemiReceiptOrderNumber.textContent =
-              orderNumber;
+aemiSubmitButton.textContent = "WAITING FOR CONFIRMATION...";
 
-            aemiReceiptStatus.textContent =
-              "Pending";
+aemiSubmissionTimeout = setTimeout(function() {
+  if (!aemiSubmitting) {
+    return;
+  }
 
-            aemiOrderForm.hidden =
-              true;
+  aemiSubmitting = false;
+  aemiSubmitButton.disabled = false;
+  aemiSubmitButton.textContent = "SUBMIT ORDER";
 
-            aemiOrderReceipt.hidden =
-              false;
+  alert(
+    "AEMI could not confirm whether your order was saved. " +
+    "Please check your order tracking or contact AEMI " +
+    "before submitting again to avoid a duplicate order."
+  );
 
-            aemiSubmitting =
-              false;
-
-            aemiSubmitButton.disabled =
-              false;
-
-            aemiSubmitButton.textContent =
-              "SUBMIT ORDER";
-
-
-            aemiOrderReceipt.scrollIntoView({
-              behavior: "smooth",
-              block: "start"
-            });
-
+  aemiSubmissionTimeout = null;
+}, 20000);
 
           } catch (error) {
 
