@@ -422,31 +422,30 @@ if (year) {
 }
 
 
-/* ============================================================
-   MOBILE MENU
-   ============================================================ */
+/* MOBILE MENU */
+const menuToggle = document.querySelector(".menu-toggle");
+const nav = document.getElementById("nav");
 
-const menuToggle =
-  document.querySelector(".menu-toggle");
+if (menuToggle && nav) {
+  menuToggle.addEventListener("click", () => {
+    const isOpen = nav.classList.toggle("open");
 
-const nav =
-  document.getElementById("nav");
+    menuToggle.setAttribute("aria-expanded", String(isOpen));
+    menuToggle.setAttribute(
+      "aria-label",
+      isOpen ? "Close menu" : "Open menu"
+    );
+    menuToggle.textContent = isOpen ? "✕" : "☰";
+  });
 
-
-if (
-  menuToggle &&
-  nav
-) {
-
-  menuToggle.addEventListener(
-    "click",
-    () => {
-
-      nav.classList.toggle("open");
-
-    }
-  );
-
+  nav.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      nav.classList.remove("open");
+      menuToggle.setAttribute("aria-expanded", "false");
+      menuToggle.setAttribute("aria-label", "Open menu");
+      menuToggle.textContent = "☰";
+    });
+  });
 }
 
 
