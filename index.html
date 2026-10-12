@@ -1337,7 +1337,15 @@ crafted to bring bold flavor to everyday meals.
               orderNumber;
 
           }
+const checkoutContact =
+  document.querySelector('#orderForm [name="contact"]');
 
+const trackingContactField =
+  document.getElementById("trackingContact");
+
+if (checkoutContact && trackingContactField) {
+  trackingContactField.value = checkoutContact.value;
+}
 
           const trackSection =
             document.getElementById("track");
