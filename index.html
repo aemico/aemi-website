@@ -1091,12 +1091,9 @@ crafted to bring bold flavor to everyday meals.
 let aemiSubmissionTimeout = null;
 
 window.addEventListener("message", function(event) {
-  const submitFrame =
-    document.getElementById("aemiSubmitFrame");
-
-  if (!submitFrame || event.source !== submitFrame.contentWindow) {
-    return;
-  }
+if (!aemiSubmitting) {
+  return;
+}
 
   const message = event.data;
 
