@@ -590,7 +590,7 @@ crafted to bring bold flavor to everyday meals.
         </label>
 
         
-<label>
+ <label>
   Order type
 
   <select
@@ -607,11 +607,16 @@ crafted to bring bold flavor to everyday meals.
     </option>
 
     <option value="Wholesale">
-      Retailer / Wholesale — 12 Jars or More
+      Wholesale / Reseller Inquiry
     </option>
   </select>
 </label>
 
+<p
+  id="deliveryTypeNote"
+  class="form-note"
+  hidden
+></p>
 <p
   id="deliveryTypeNote"
   class="form-note"
@@ -1482,11 +1487,21 @@ if (lookupId !== addressLookupId) return;
 
     const addressField = document.getElementById("addressField");
 
-    if (data.display_name && addressField) {
-      addressField.value = data.display_name;
-      status.textContent =
-        "Address filled in below. You can edit it if needed.";
-    } else {
+
+if (data.display_name && addressField) {
+  const currentAddress = addressField.value.trim();
+
+  if (currentAddress) {
+    status.textContent =
+      "Map address found. Please check your address below and add your house/building number if needed.";
+  } else {
+    addressField.value = data.display_name;
+
+    status.textContent =
+      "Map address filled in below. Please add your house/building number and check the details.";
+  }
+  
+} else {
       status.textContent =
         "Location pinned! Please enter your full address below.";
     }
