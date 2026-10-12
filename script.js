@@ -78,14 +78,10 @@ Still small. Still ours. But this time, we're building it with intention.`,
   },
 
 
-  contact: {
-
-    email: "",
-
-    phone: ""
-
-  },
-
+ contact: {
+  email: "chiligarlicoil26@gmail.com",
+  phone: ""
+},
 
  socials: {
   facebook: "https://www.facebook.com/share/1BaAQRDfad",
