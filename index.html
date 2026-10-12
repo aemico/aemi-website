@@ -1400,12 +1400,80 @@ crafted to bring bold flavor to everyday meals.
   </script>
 
 <!-- Free interactive map library -->
-<link
-  rel="stylesheet"
-  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-/>
-  
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const mapElement = document.getElementById("aemiMap");
+  const status = document.getElementById("mapLocationStatus");
+
+  if (!mapElement || !status || typeof L === "undefined") {
+    return;
+  }
+
+  // Start the map around Silang, Cavite.
+  const map = L.map("aemiMap").setView([14.2300, 120.9750], 12);
+
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    maxZoom: 19
+  }).addTo(map);
+
+  let marker = null;
+
+  function updatePin(latlng) {
+    status.textContent =
+      "Pinned location: " +
+      latlng.lat.toFixed(6) + ", " +
+      latlng.lng.toFixed(6) +
+      ". Please also enter your full address below.";
+
+    let latitude = document.getElementById("mapLatitude");
+    let longitude = document.getElementById("mapLongitude");
+
+    if (!latitude) {
+      latitude = document.createElement("input");
+      latitude.type = "hidden";
+      latitude.name = "mapLatitude";
+      latitude.id = "mapLatitude";
+      document.getElementById("orderForm").appendChild(latitude);
+    }
+
+    if (!longitude) {
+      longitude = document.createElement("input");
+      longitude.type = "hidden";
+      longitude.name = "mapLongitude";
+      longitude.id = "mapLongitude";
+      document.getElementById("orderForm").appendChild(longitude);
+    }
+
+    latitude.value = latlng.lat.toFixed(6);
+    longitude.value = latlng.lng.toFixed(6);
+  }
+
+  function placeMarker(latlng) {
+    if (marker) {
+      marker.setLatLng(latlng);
+    } else {
+      marker = L.marker(latlng, { draggable: true }).addTo(map);
+
+      marker.on("dragend", function () {
+        updatePin(marker.getLatLng());
+      });
+    }
+
+    updatePin(latlng);
+  }
+
+  map.on("click", function (event) {
+    placeMarker(event.latlng);
+  });
+
+  setTimeout(function () {
+    map.invalidateSize();
+  }, 200);
+});
+</script>
 
 </body>
 </html>
