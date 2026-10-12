@@ -1039,18 +1039,25 @@ const orderForm =
   document.getElementById("orderForm");
 
 if (orderTypeSelect && wholesaleInquiryNotice && orderForm) {
-  const orderTypeLabel = orderTypeSelect.closest("label");
+  const orderTypeLabel =
+    orderTypeSelect.closest("label") ||
+    orderForm.querySelector('label[for="orderTypeSelect"]');
 
   const retailElements = Array.from(orderForm.children).filter(
     element =>
+      element !== orderTypeSelect &&
+      !element.contains(orderTypeSelect) &&
       element !== orderTypeLabel &&
       element !== wholesaleInquiryNotice &&
       !element.matches('input[type="hidden"]')
   );
 
   function updateOrderTypeView() {
-    const isRetail = orderTypeSelect.value === "Retail";
-    const isWholesale = orderTypeSelect.value === "Wholesale";
+    const selectedType =
+      String(orderTypeSelect.value || "").trim().toLowerCase();
+
+    const isWholesale = selectedType.includes("wholesale");
+    const isRetail = !isWholesale;
 
     wholesaleInquiryNotice.hidden = !isWholesale;
 
@@ -1068,6 +1075,7 @@ if (orderTypeSelect && wholesaleInquiryNotice && orderForm) {
       orderTypeLabel.hidden = false;
     }
 
+    orderTypeSelect.hidden = false;
     orderTypeSelect.disabled = false;
   }
 
