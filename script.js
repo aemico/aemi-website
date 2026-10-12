@@ -1088,3 +1088,35 @@ if (
 
   updateDeliveryTypeNote();
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  const orderTypeSelect = document.getElementById("orderTypeSelect");
+  const orderForm = document.getElementById("orderForm");
+  const deliveryTypeNote = document.getElementById("deliveryTypeNote");
+
+  if (!orderTypeSelect || !orderForm) return;
+
+  orderTypeSelect.addEventListener("change", function () {
+    if (orderTypeSelect.value === "Wholesale") {
+      if (deliveryTypeNote) {
+        deliveryTypeNote.textContent =
+          "Wholesale and reseller orders are handled through email. Please contact AEMI for bundle pricing and ordering details.";
+        deliveryTypeNote.hidden = false;
+      }
+
+      orderForm.hidden = true;
+
+      document.getElementById("wholesale")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    } else {
+      if (deliveryTypeNote) {
+        deliveryTypeNote.hidden = true;
+        deliveryTypeNote.textContent = "";
+      }
+
+      orderForm.hidden = false;
+    }
+  });
+});
