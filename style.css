@@ -1945,3 +1945,33 @@ footer small {
   position: relative;
   z-index: 1;
 }
+/* AEMI WHOLESALE INQUIRY NOTICE */
+
+.wholesale-inquiry-notice {
+  padding: 26px;
+  background: var(--ivory);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--red);
+  color: var(--ink);
+}
+
+.wholesale-inquiry-notice h3 {
+  margin: 8px 0 14px;
+  color: var(--red);
+  font-size: 28px;
+  font-weight: 500;
+}
+
+.wholesale-inquiry-notice > p:not(.eyebrow) {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.wholesale-inquiry-notice .button {
+  margin: 8px 0;
+}
+
+.wholesale-inquiry-notice[hidden] {
+  display: none !important;
+}
