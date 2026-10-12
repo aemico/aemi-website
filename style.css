@@ -97,19 +97,22 @@ a {
 }
 
 
-nav {
-
+.site-header nav {
   display: flex;
-
-  gap: 25px;
-
-  font-size: 13px;
-
+  align-items: center;
+  justify-content: flex-end;
+  gap: 18px;
+  font-size: 12px;
   text-transform: uppercase;
-
-  letter-spacing: .12em;
-
+  letter-spacing: 0.06em;
 }
+
+.site-header nav a {
+  display: block;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
 
 
 nav a:hover {
