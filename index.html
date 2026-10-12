@@ -680,18 +680,25 @@ crafted to bring bold flavor to everyday meals.
         </label>
 
 
-        <label id="addressLabel">
+      
+<label id="addressLabel">
+  Complete delivery address
 
-          Address / pickup details
+  <textarea
+    name="address"
+    id="addressField"
+    rows="4"
+    placeholder="House/Building No., Street, Barangay, City/Municipality, Province, ZIP Code"
+    required
+  ></textarea>
 
-          <textarea
-            name="address"
-            id="addressField"
-            rows="3"
-            required
-          ></textarea>
+  <small class="form-note">
+    Include your house or building number, street, barangay,
+    city or municipality, and province. Please check that
+    your map pin matches your delivery address.
+  </small>
+</label>
 
-        </label>
 
 
         <label>
