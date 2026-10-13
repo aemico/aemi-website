@@ -1975,3 +1975,29 @@ footer small {
 .wholesale-inquiry-notice[hidden] {
   display: none !important;
 }
+
+/* AEMI manual GCash payment instructions */
+#gcashPaymentInstructions {
+  margin-top: 1rem;
+}
+
+.gcash-qr {
+  margin-top: 1.25rem;
+  text-align: center;
+}
+
+.gcash-qr-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: min(100%, 260px);
+  aspect-ratio: 1;
+  margin: 0.75rem auto;
+  padding: 1.25rem;
+  border: 1px dashed var(--red);
+  border-radius: 12px;
+  background: var(--cream);
+  color: var(--muted);
+  text-align: center;
+  font-size: 0.9rem;
+}
