@@ -2002,3 +2002,12 @@ footer small {
   text-align: center;
   font-size: 0.9rem;
 }
+
+.gcash-qr-image {
+  display: block;
+  width: min(100%, 260px);
+  height: auto;
+  margin: 0.75rem auto;
+  border-radius: 12px;
+  background: #ffffff;
+}
