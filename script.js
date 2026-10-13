@@ -1024,11 +1024,9 @@ if (cancelOrderButton) {
 }
 
 
-
-
 /* ============================================================
    AEMI ORDER TYPE & WHOLESALE INQUIRY
-   Safe version: do not hide or disable retail form fields
+   Email-only wholesale inquiries; protect retail checkout.
    ============================================================ */
 
 const orderTypeSelect =
@@ -1037,16 +1035,66 @@ const orderTypeSelect =
 const wholesaleInquiryNotice =
   document.getElementById("wholesaleInquiryNotice");
 
-if (orderTypeSelect && wholesaleInquiryNotice) {
-  function updateOrderTypeView() {
-    const selectedType =
-      String(orderTypeSelect.value || "").trim().toLowerCase();
+const aemiRetailForm =
+  document.getElementById("orderForm");
 
-    const isWholesale = selectedType.includes("wholesale");
+const aemiRetailSubmitButton =
+  document.getElementById("submitOrderButton");
 
-    wholesaleInquiryNotice.hidden = !isWholesale;
+const aemiRetailFieldNames = [
+  "name",
+  "contact",
+  "product",
+  "quantity",
+  "fulfillment",
+  "address",
+  "payment",
+  "notes"
+];
+
+function updateOrderTypeView() {
+  if (!orderTypeSelect || !wholesaleInquiryNotice) {
+    return;
   }
 
+  const isWholesale =
+    orderTypeSelect.value === "Wholesale";
+
+  // Show the email inquiry notice only for wholesale.
+  wholesaleInquiryNotice.hidden = !isWholesale;
+
+  // Hide and disable retail-only fields for wholesale.
+  if (aemiRetailForm) {
+    aemiRetailFieldNames.forEach(function (fieldName) {
+      const field = aemiRetailForm.elements.namedItem(fieldName);
+
+      if (!field) return;
+
+      const label = field.closest("label");
+
+      if (label) {
+        label.hidden = isWholesale;
+      }
+
+      field.disabled = isWholesale;
+    });
+  }
+
+  // Hide the retail order summary for wholesale.
+  const summary = document.getElementById("orderSummary");
+
+  if (summary) {
+    summary.hidden = isWholesale;
+  }
+
+  // Prevent wholesale inquiries from using the retail button.
+  if (aemiRetailSubmitButton) {
+    aemiRetailSubmitButton.hidden = isWholesale;
+    aemiRetailSubmitButton.disabled = isWholesale;
+  }
+}
+
+if (orderTypeSelect) {
   orderTypeSelect.addEventListener(
     "change",
     updateOrderTypeView
