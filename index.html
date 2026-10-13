@@ -1214,17 +1214,37 @@ if (!aemiSubmitting) {
 
     if (aemiOrderForm) {
 
-      aemiOrderForm.addEventListener(
-        "submit",
-        async function(event) {
+   
+aemiOrderForm.addEventListener(
+  "submit",
+  async function(event) {
 
-          event.preventDefault();
+    event.preventDefault();
 
+    // Wholesale inquiries must never become retail orders.
+    const selectedOrderType =
+      document.getElementById("orderTypeSelect");
 
-          if (aemiSubmitting) {
-            return;
-          }
+    if (
+      selectedOrderType &&
+      selectedOrderType.value === "Wholesale"
+    ) {
+      const inquiryNotice =
+        document.getElementById("wholesaleInquiryNotice");
 
+      if (inquiryNotice) {
+        inquiryNotice.scrollIntoView({
+          behavior: "smooth",
+          block: "center"
+        });
+      }
+
+      return;
+    }
+
+    if (aemiSubmitting) {
+      return;
+    }
 
           aemiSubmitting = true;
 
