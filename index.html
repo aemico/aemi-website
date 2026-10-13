@@ -1285,50 +1285,46 @@ if (!aemiSubmitting) {
              * Send order to Apps Script.
              */
 
+          
             aemiOrderForm.action =
               AEMI_WEB_APP_URL;
 
             aemiOrderForm.target =
               "aemiSubmitFrame";
 
+            // Actually send the order to Google Apps Script.
             aemiOrderForm.submit();
 
+            // Wait for confirmation from the server.
+            aemiSubmissionTimeout = setTimeout(function () {
+              if (!aemiSubmitting) {
+                return;
+              }
 
-/*
- * Show the receipt after submitting the order.
- * Google Sheets receives the order through the existing form.
- */
+              alert(
+                "AEMI hasn't confirmed your order yet. " +
+                "To avoid duplicate orders, please don't submit again. " +
+                "Contact AEMI so we can check whether your order was received."
+              );
+            }, 20000);
 
-if (aemiSubmissionTimeout) {
-  clearTimeout(aemiSubmissionTimeout);
-  aemiSubmissionTimeout = null;
-}
 
-aemiReceiptOrderNumber.textContent = orderNumber;
-aemiReceiptStatus.textContent = "Pending";
-
-aemiOrderForm.hidden = true;
-aemiOrderReceipt.hidden = false;
-
-aemiSubmitting = false;
-aemiSubmitButton.disabled = false;
-aemiSubmitButton.textContent = "SUBMIT ORDER";
-
-aemiOrderReceipt.scrollIntoView({
-  behavior: "smooth",
-  block: "start"
-});
 
           } catch (error) {
             console.error("AEMI order submission error:", error);
+
+            if (aemiSubmissionTimeout) {
+              clearTimeout(aemiSubmissionTimeout);
+              aemiSubmissionTimeout = null;
+            }
 
             aemiSubmitting = false;
             aemiSubmitButton.disabled = false;
             aemiSubmitButton.textContent = "SUBMIT ORDER";
 
             alert(
-              "AEMI couldn't get an order number. " +
-              "Please check your connection and try again."
+              "AEMI couldn't prepare your order number. " +
+              "Your order was not submitted. Please check your connection and try again."
             );
           }
         }
