@@ -829,6 +829,7 @@ crafted to bring bold flavor to everyday meals.
           </div>
 
 
+
           <div class="receipt-row">
 
   <span>
@@ -868,10 +869,47 @@ crafted to bring bold flavor to everyday meals.
 
 </div>
 
+<!-- AEMI MANUAL GCASH PAYMENT -->
+<div id="gcashPaymentInstructions" class="receipt-card" hidden>
+
+  <p class="eyebrow">GCASH PAYMENT</p>
+
+  <h3>Complete Your Payment</h3>
+
+  <p>
+    Send your exact order total to the GCash account below.
+    Your order will remain pending until AEMI verifies your payment.
+  </p>
+
+  <div class="receipt-row">
+    <span>ACCOUNT NAME</span>
+    <strong>AEZER EUNICE DE LEON</strong>
+  </div>
+
+  <div class="receipt-row">
+    <span>GCASH NUMBER</span>
+    <strong>09913536919</strong>
+  </div>
+
+  <div class="gcash-qr">
+    <p><strong>Scan to Pay</strong></p>
+
+    <div class="gcash-qr-placeholder">
+      Your GCash QR code will appear here.
+    </div>
+  </div>
+
+  <p class="form-note">
+    Double-check the recipient name and amount before sending.
+    Keep your transaction confirmation for your records.
+  </p>
+
+</div>
+<!-- END AEMI MANUAL GCASH PAYMENT -->
+
 </section>
 
 </section> <!-- End of the outer Order section -->
-
 
 <!-- =========================================================
      TRACK ORDER
@@ -1079,6 +1117,9 @@ crafted to bring bold flavor to everyday meals.
     const aemiReceiptStatus =
       document.getElementById("receiptStatus");
 
+    const aemiGcashInstructions =
+  document.getElementById("gcashPaymentInstructions");
+
     const aemiTrackReceiptButton =
       document.getElementById("trackReceiptButton");
 
@@ -1197,7 +1238,11 @@ function checkAemiOrder(orderNumber, contact) {
 function showAemiReceipt(orderNumber, status) {
   aemiReceiptOrderNumber.textContent = orderNumber;
   aemiReceiptStatus.textContent = status || "Pending";
-
+  
+if (aemiGcashInstructions) {
+  aemiGcashInstructions.hidden =
+    aemiOrderForm.elements.namedItem("payment").value !== "GCash";
+}
   aemiOrderForm.hidden = true;
   aemiOrderReceipt.hidden = false;
 
