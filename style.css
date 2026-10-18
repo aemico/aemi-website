@@ -2011,3 +2011,84 @@ footer small {
   border-radius: 12px;
   background: #ffffff;
 }
+
+/* =========================================================
+   AEMI CUSTOMER REVIEWS
+   ========================================================= */
+
+.reviews-section {
+  background: var(--cream);
+}
+
+.reviews-intro {
+  max-width: 540px;
+  margin: 1rem auto 0;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin-top: 2.5rem;
+}
+
+.review-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--ivory);
+}
+
+.review-mark {
+  color: var(--red);
+  font-family: Georgia, serif;
+  font-size: 3.5rem;
+  line-height: 0.9;
+}
+
+.review-text {
+  margin: 1rem 0 2rem;
+  color: var(--ink);
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+
+.review-author {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+  width: 100%;
+}
+
+.review-author-name {
+  color: var(--red);
+  font-weight: 600;
+}
+
+.review-author-label {
+  color: var(--muted);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 640px) {
+  .reviews-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-top: 1.75rem;
+  }
+
+  .review-text {
+    font-size: 1.05rem;
+  }
+}
