@@ -3312,3 +3312,10 @@ body.lightbox-open {
     font-size: 16px;
   }
 }
+/* Art Bids heading — yellow text */
+#bids .bids-heading .eyebrow,
+#bids .bids-heading h2,
+#bids .bids-heading h2 em,
+#bids .bids-heading > p:not(.eyebrow) {
+  color: #f5d76e;
+}
