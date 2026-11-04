@@ -2257,8 +2257,8 @@ button:focus-visible {
 #bids,
 .bids-section {
   background-image: url("bidding-background.jpg");
-  background-size: cover;
-  background-position: center;
+  background-size: 100% auto;
+  background-position: center top;
   background-repeat: no-repeat;
 }
 
