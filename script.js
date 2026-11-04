@@ -1,1104 +1,167 @@
-/* ============================================================
-   AEMI EDITABLE SETTINGS
-   ============================================================ */
 
-const AEMI = {
-
-  businessName: "AEMI",
-
-  tagline: "A Little Heat. A Lot of Flavor.",
-
-  heroDescription:
-    "Bold, savory flavor made to elevate everyday meals.",
-
-
-  product: {
-
-    name: "AEMI Chili Garlic Oil",
-
-    description:
-      "A savory, aromatic blend of garlic, chili, and balanced seasonings, made for rice, noodles, meats, snacks, and everyday meals.",
-
-    ingredients:
-      "Garlic · Chili · Oyster Sauce · Black Pepper · Salt · Brown Sugar",
-
-    availability:
-      "COMING SOON",
-
-   sizes: [
-  {
-    label: "120 mL",
-    price: 99
-  },
-  {
-    label: "220 mL",
-    price: 175
-  }
-]
-
-  },
-
-
-  aboutText: `AEMI started with two people, one recipe, and the idea of creating something of our own.
-
-Our first batch was small, but it gave us a glimpse of what AEMI could become. People tried it, enjoyed it, and supported our little start.
-
-But we also learned that making something good was only the beginning. We needed to do more than just make the product—we needed to build the brand behind it.
-
-So, we started again.
-
-AEMI Round 2 is our second try, this time with more planning, better systems, and a clearer vision of where we want to take it.
-
-Still small. Still ours. But this time, we're building it with intention.`,
-
-
-  delivery: {
-
-    available: true,
-
-    usualTime:
-      "2–3 days depending on location",
-
-    feeNote:
-      "Delivery fee depends on location."
-
-  },
-
-
-  pickup: {
-
-    available: true,
-
-    location:
-      "Tartaria, Silang, Cavite · De Leon Compound · Sta. Rosa–Tagaytay Road",
-
-    schedule:
-      "By arrangement / prior negotiation"
-
-  },
-
-
- contact: {
-  email: "chiligarlicoil26@gmail.com",
-  phone: ""
-},
-
- socials: {
-  facebook: "https://www.facebook.com/share/1BaAQRDfad",
-  instagram: "https://www.instagram.com/aemii_co",
-  tiktok: "https://www.tiktok.com/@aemii.co",
-  messenger: "https://m.me/aemii.co"
- }
-
-};
-
-
-/* ============================================================
-   BASIC WEBSITE CONTENT
-   ============================================================ */
-
-document.title =
-  `${AEMI.businessName} | Chili Garlic Oil`;
-
-
-const taglineElement =
-  document.getElementById("tagline");
-
-if (taglineElement) {
-
-  taglineElement.innerHTML =
-    AEMI.tagline.replace(
-      ". ",
-      ".<br>"
-    );
-
-}
-
-
-const heroDescription =
-  document.getElementById("heroDescription");
-
-if (heroDescription) {
-
-  heroDescription.textContent =
-    AEMI.heroDescription;
-
-}
-
-
-const productName =
-  document.getElementById("productName");
-
-if (productName) {
-
-  productName.textContent =
-    AEMI.product.name;
-
-}
-
-
-const productDescription =
-  document.getElementById("productDescription");
-
-if (productDescription) {
-
-  productDescription.textContent =
-    AEMI.product.description;
-
-}
-
-
-const ingredients =
-  document.getElementById("ingredients");
-
-if (ingredients) {
-
-  ingredients.textContent =
-    AEMI.product.ingredients;
-
-}
-
-
-const availability =
-  document.getElementById("availability");
-
-if (availability) {
-
-  availability.textContent =
-    AEMI.product.availability;
-
-}
-
-
-const aboutText =
-  document.getElementById("aboutText");
-
-if (aboutText) {
-
-  aboutText.textContent =
-    AEMI.aboutText;
-
-}
-
-
-const pickupLocation =
-  document.getElementById("pickupLocation");
-
-if (pickupLocation) {
-
-  pickupLocation.textContent =
-    AEMI.pickup.location;
-
-}
-
-
-/* ============================================================
-   PRODUCT SIZES
-   ============================================================ */
-
-const sizes =
-  document.getElementById("sizes");
-
-const productSelect =
-  document.getElementById("productSelect");
-
-
-if (sizes) {
-
-  sizes.textContent =
-    AEMI.product.sizes
-      .map(item => item.label)
-      .join(" · ");
-
-}
-
-
-if (productSelect) {
-  const placeholderOption = document.createElement("option");
-
-  placeholderOption.value = "";
-  placeholderOption.textContent = "Choose a size";
-  placeholderOption.disabled = true;
-  placeholderOption.selected = true;
-  placeholderOption.defaultSelected = true;
-
-  productSelect.appendChild(placeholderOption);
-
-  AEMI.product.sizes.forEach(item => {
-    const option = document.createElement("option");
-
-    option.value = item.label;
-
-    option.textContent =
-      item.price == null
-        ? `${item.label} — Price TBD`
-        : `${item.label} — ₱${item.price}`;
-
-    productSelect.appendChild(option);
-  });
-}
-
-/* ============================================================
-   ORDER SUMMARY
-   ============================================================ */
-
-const quantityInput =
-  document.getElementById("quantity");
-
-const orderSummary =
-  document.getElementById("orderSummary");
-
-
-
-
-function updateOrderSummary() {
-  if (!productSelect || !quantityInput || !orderSummary) return;
-
-  const selectedSize = productSelect.value;
-
-  const selectedProduct = AEMI.product.sizes.find(
-    item => item.label === selectedSize
-  );
-
-  const quantity = Number(quantityInput.value);
-
-  if (!selectedSize || !selectedProduct) {
-    orderSummary.textContent = "";
-    return;
-  }
-
-  if (!Number.isInteger(quantity) || quantity < 1) {
-    orderSummary.textContent =
-      "Please enter a quantity of at least 1.";
-    return;
-  }
-
-  const unitPrice = selectedProduct.price;
-  const subtotal = unitPrice * quantity;
-  const total = subtotal;
-
-  const formatPeso = amount =>
-    "₱" + amount.toLocaleString("en-PH", {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    });
-
-  orderSummary.innerHTML = `
-    <span class="summary-heading">YOUR ORDER SUMMARY</span>
-
-    <span class="summary-divider"></span>
-
-    <span class="summary-row">
-      <span>Unit price</span>
-      <span>${formatPeso(unitPrice)}</span>
-    </span>
-
-    <span class="summary-row">
-      <span>Quantity</span>
-      <span>${quantity} ${quantity === 1 ? "jar" : "jars"}</span>
-    </span>
-
-    <span class="summary-row">
-      <span>Subtotal</span>
-      <span>${formatPeso(subtotal)}</span>
-    </span>
-
-    <span class="summary-divider"></span>
-
-    <span class="summary-row summary-total">
-      <span>TOTAL</span>
-      <span>${formatPeso(total)}</span>
-    </span>
-
-    <span class="summary-note">
-      Delivery fee not included.
-    </span>
-  `;
-}
-
-if (productSelect) {
-  productSelect.addEventListener(
-    "change",
-    updateOrderSummary
-  );
-}
-
-if (quantityInput) {
-  quantityInput.addEventListener(
-    "input",
-    updateOrderSummary
-  );
-}
-
-updateOrderSummary();
-
-/* ============================================================
-   CONTACT
-   ============================================================ */
-
-const emailLine = document.getElementById("emailLine");
-
-if (emailLine && AEMI.contact.email) {
-  const emailLink = emailLine.querySelector("a");
-
-  if (emailLink) {
-    emailLink.href = `mailto:${AEMI.contact.email}`;
-    emailLink.textContent = AEMI.contact.email;
-  }
-}
-
-/* ============================================================
-   SOCIAL LINKS
-   ============================================================ */
-
-[
-  "facebook",
-  "instagram",
-  "tiktok",
-  "messenger"
-].forEach(
-  id => {
-
-    const link =
-      document.getElementById(id);
-
-
-    if (!link) {
-      return;
-    }
-
-
-    if (AEMI.socials[id]) {
-
-      link.href =
-        AEMI.socials[id];
-
-    }
-
-    else {
-
-      link.href =
-        "#";
-
-
-      link.addEventListener(
-        "click",
-        event => {
-
-          event.preventDefault();
-
-          alert(
-            "AEMI's social account is coming soon."
-          );
-
-        }
+/* =========================================
+   AEMI ART SPACE
+   Gallery, navigation and commission inquiry
+   ========================================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+  const menuToggle = document.querySelector(".menu-toggle");
+  const siteNav = document.querySelector(".site-nav");
+
+  // Mobile navigation
+  if (menuToggle && siteNav) {
+    const closeMenu = () => {
+      menuToggle.setAttribute("aria-expanded", "false");
+      menuToggle.setAttribute("aria-label", "Open navigation");
+      siteNav.classList.remove("is-open");
+    };
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen =
+        menuToggle.getAttribute("aria-expanded") === "true";
+
+      menuToggle.setAttribute("aria-expanded", String(!isOpen));
+      menuToggle.setAttribute(
+        "aria-label",
+        isOpen ? "Open navigation" : "Close navigation"
       );
 
-    }
+      siteNav.classList.toggle("is-open", !isOpen);
+    });
 
+    siteNav.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", closeMenu);
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        closeMenu();
+        menuToggle.focus();
+      }
+    });
+
+    document.addEventListener("click", (event) => {
+      if (
+        siteNav.classList.contains("is-open") &&
+        !siteNav.contains(event.target) &&
+        !menuToggle.contains(event.target)
+      ) {
+        closeMenu();
+      }
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 680) {
+        closeMenu();
+      }
+    });
   }
-);
 
+  // Gallery artist filters
+  const filterButtons = document.querySelectorAll(".filter-button");
+  const artCards = document.querySelectorAll(".art-card");
 
-/* ============================================================
-   YEAR
-   ============================================================ */
+  filterButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const filter = button.dataset.filter;
 
-const year =
-  document.getElementById("year");
+      filterButtons.forEach((item) => {
+        const selected = item === button;
 
+        item.classList.toggle("is-active", selected);
+        item.setAttribute("aria-pressed", String(selected));
+      });
 
-if (year) {
+      artCards.forEach((card) => {
+        const matches =
+          filter === "all" || card.dataset.artist === filter;
 
-  year.textContent =
-    new Date().getFullYear();
-
-}
-
-
-/* MOBILE MENU */
-const menuToggle = document.querySelector(".menu-toggle");
-const nav = document.getElementById("nav");
-
-if (menuToggle && nav) {
-  menuToggle.addEventListener("click", () => {
-    const isOpen = nav.classList.toggle("open");
-
-    menuToggle.setAttribute("aria-expanded", String(isOpen));
-    menuToggle.setAttribute(
-      "aria-label",
-      isOpen ? "Close menu" : "Open menu"
-    );
-    menuToggle.textContent = isOpen ? "✕" : "☰";
-  });
-
-  nav.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => {
-      nav.classList.remove("open");
-      menuToggle.setAttribute("aria-expanded", "false");
-      menuToggle.setAttribute("aria-label", "Open menu");
-      menuToggle.textContent = "☰";
+        card.hidden = !matches;
+      });
     });
   });
-}
 
+  // Current year in footer
+  const yearElement = document.getElementById("current-year");
 
-/* ============================================================
-   DELIVERY / PICKUP
-   ============================================================ */
+  if (yearElement) {
+    yearElement.textContent = new Date().getFullYear();
+  }
 
-const fulfillmentSelect =
-  document.getElementById("fulfillmentSelect");
+  // Commission inquiry
+  const commissionForm = document.getElementById("commission-form");
+  const formHint = document.getElementById("form-hint");
 
-const addressLabel =
-  document.getElementById("addressLabel");
-
-const addressField =
-  document.getElementById("addressField");
-
-
-if (
-  fulfillmentSelect &&
-  addressLabel &&
-  addressField
-) {
-
-  fulfillmentSelect.addEventListener(
-    "change",
-    () => {
-
-      if (
-        fulfillmentSelect.value ===
-        "Delivery"
-      ) {
-
-        addressLabel.childNodes[0].textContent =
-          "Delivery address";
-
-        addressField.placeholder =
-          "Enter your complete delivery address";
-
-        addressField.required =
-          true;
-
-      }
-
-
-      else if (
-        fulfillmentSelect.value ===
-        "Pickup"
-      ) {
-
-        addressLabel.childNodes[0].textContent =
-          "Pickup details";
-
-        addressField.placeholder =
-          "Preferred pickup time or other pickup details";
-
-        addressField.required =
-          false;
-
-      }
-
-
-      else {
-
-        addressLabel.childNodes[0].textContent =
-          "Address / pickup details";
-
-        addressField.placeholder =
-          "";
-
-        addressField.required =
-          true;
-
-      }
-
-    }
-  );
-
-}
-
-
-/* ============================================================
-   ORDER TRACKING
-   ============================================================ */
-
-const trackingForm =
-  document.getElementById("trackingForm");
-
-const orderNumberInput =
-  document.getElementById("orderNumber");
-
-const trackingResult =
-  document.getElementById("trackingResult");
-
-const trackingContactInput =
-  document.getElementById("trackingContact");
-
-/*
- * CURRENT AEMI GOOGLE APPS SCRIPT WEB APP
- */
-
-const WEB_APP_URL =
-  "https://script.google.com/macros/s/AKfycbw_557rqSYN1cMQ_srMHtutr4TvYW6bkvbc8oJU6wNXxPgRjGFhGmadY7l0fZ66o7vo/exec";
-
-let aemiTrackingInterval = null;
-
-if (trackingForm) {
-
-  trackingForm.addEventListener(
-    "submit",
-    event => {
-
+  if (commissionForm) {
+    commissionForm.addEventListener("submit", (event) => {
       event.preventDefault();
 
-
-      let orderNumber =
-  orderNumberInput.value
-    .trim()
-    .toUpperCase();
-       
-const trackingContact =
-  trackingContactInput.value.trim();
-       
-if (/^\d+$/.test(orderNumber)) {
-  orderNumber =
-    "AEMI-" +
-    orderNumber.padStart(4, "0");
-}
-
-
-      if (!orderNumber) {
-
-        return;
-
-      }
-
-
-      trackingResult.innerHTML = `
-        <p>Checking your order...</p>
-      `;
-
-
-      const callbackName =
-        "aemiTracking_" +
-        Date.now();
-
-
-      window[callbackName] =
-        function (data) {
-
-
-          if (!data.success) {
-
-            trackingResult.innerHTML = `
-
-              <div class="tracking-card">
-
-                <h2>
-                  Order Not Found
-                </h2>
-
-                <p>
-                  We couldn't find that order number.
-                  Please check it and try again.
-                </p>
-
-              </div>
-
-            `;
-
-
-            delete window[callbackName];
-
-            return;
-
-          }
-
-
-          const fulfillment =
-            String(
-              data.fulfillment || ""
-            ).toLowerCase();
-
-
-          const status =
-            String(
-              data.status || "Pending"
-            );
-
-
-          let steps;
-
-
-          if (
-            fulfillment ===
-            "delivery"
-          ) {
-
-            steps = [
-
-              "Pending",
-
-              "Confirmed",
-
-              "Processing",
-
-              "Out for Delivery",
-
-              "Delivered"
-
-            ];
-
-          }
-
-          else {
-
-            steps = [
-
-              "Pending",
-
-              "Confirmed",
-
-              "Ready for Pickup",
-
-              "Picked Up"
-
-            ];
-
-          }
-
-
-          const currentIndex =
-            steps.indexOf(status);
-           
-           if (status === "Cancelled") {
-
-              if (aemiTrackingInterval) {
-  clearInterval(aemiTrackingInterval);
-  aemiTrackingInterval = null;
-}
-
-  trackingResult.innerHTML = `
-
-    <div class="tracking-card">
-
-      <p class="eyebrow">
-        ORDER STATUS
-      </p>
-
-      <h2>
-        Order Cancelled
-      </h2>
-
-      <p>
-        Order ${data.orderNumber} has been cancelled.
-      </p>
-
-    </div>
-
-  `;
-
-  delete window[callbackName];
-
-  return;
-
-}
-
-          const timeline =
-  steps
-    .map(
-      (step, index) => {
-
-        let className = "";
-
-        if (
-          currentIndex >= 0 &&
-          index < currentIndex
-        ) {
-
-          className = "completed";
-
-        }
-
-        else if (
-          index === currentIndex
-        ) {
-
-          className = "current";
-
-        }
-
-        return `
-
-          <div
-            class="tracking-step ${className}"
-          >
-
-            <div class="tracking-dot">
-
-              ${
-                index < currentIndex
-                  ? "✓"
-                  : index === currentIndex
-                    ? "●"
-                    : ""
-              }
-
-            </div>
-
-            <div class="tracking-label">
-
-              <span>
-                ${step}
-              </span>
-
-              ${
-                index === currentIndex
-                  ? `
-                    <small class="tracking-active">
-                      CURRENT STATUS
-                    </small>
-                  `
-                  : ""
-              }
-
-            </div>
-
-          </div>
-
-        `;
-
-      }
-    )
-    .join("");
-
-
-          trackingResult.innerHTML = `
-
-            <div class="tracking-card">
-
-              <p class="eyebrow">
-                ORDER NUMBER
-              </p>
-
-
-              <h2>
-                ${data.orderNumber}
-              </h2>
-
-
-              <p>
-                ${
-                  fulfillment === "delivery"
-                    ? "Delivery"
-                    : "Pickup"
-                }
-              </p>
-
-
-              <div class="tracking-timeline">
-
-                ${timeline}
-
-              </div>
-
-
-             <p class="tracking-current">
-
-  Current status:
-
-  <strong>
-    ${status}
-  </strong>
-
-</p>
-
-${
-  data.canCancel
-    ? `
-      <button
-        type="button"
-        class="button full"
-        id="cancelOrderButton"
-      >
-        CANCEL ORDER
-      </button>
-    `
-    : ""
-}
-
-</div>
-
-          `;
-
-           const cancelOrderButton =
-  document.getElementById("cancelOrderButton");
-
-if (cancelOrderButton) {
-
-  cancelOrderButton.addEventListener(
-    "click",
-    () => {
-
-      const confirmed =
-        confirm(
-          "Are you sure you want to cancel this order?"
-        );
-
-      if (!confirmed) {
+      if (!commissionForm.reportValidity()) {
         return;
       }
 
-      const cancelFrame =
-        document.createElement("iframe");
-
-      cancelFrame.style.display =
-        "none";
-
-      cancelFrame.name =
-        "aemiCancelFrame_" +
-        Date.now();
-
-      document.body.appendChild(
-        cancelFrame
-      );
-
-      const cancelForm =
-        document.createElement("form");
-
-      cancelForm.method =
-        "POST";
-
-      cancelForm.action =
-        WEB_APP_URL;
-
-      cancelForm.target =
-        cancelFrame.name;
-
-      const actionInput =
-        document.createElement("input");
-
-      actionInput.type =
-        "hidden";
-
-      actionInput.name =
-        "action";
-
-      actionInput.value =
-        "cancel";
-
-      cancelForm.appendChild(
-        actionInput
-      );
-
-      const orderInput =
-        document.createElement("input");
-
-      orderInput.type =
-        "hidden";
-
-      orderInput.name =
-        "orderNumber";
-
-      orderInput.value =
-        data.orderNumber;
-
-      cancelForm.appendChild(
-        orderInput
-      );
-
-      const contactInput =
-        document.createElement("input");
-
-      contactInput.type =
-        "hidden";
-
-      contactInput.name =
-        "contact";
-
-      contactInput.value =
-        trackingContact;
-
-      cancelForm.appendChild(
-        contactInput
-      );
-
-      document.body.appendChild(
-        cancelForm
-      );
-
-      cancelForm.submit();
-
-      cancelOrderButton.disabled =
-        true;
-
-      cancelOrderButton.textContent =
-        "CANCELLING...";
-
-      setTimeout(
-        () => {
-          trackingForm.requestSubmit();
-        },
-        1500
-      );
-
-    }
-  );
-
-}
-
-                    if (aemiTrackingInterval) {
-            clearInterval(aemiTrackingInterval);
-          }
-
-          aemiTrackingInterval = setInterval(
-            function () {
-
-              if (
-                orderNumberInput &&
-                orderNumberInput.value.trim()
-              ) {
-                trackingForm.requestSubmit();
-              }
-
-            },
-            100000
-          );
-
-
-          delete window[callbackName];
-
-        };
-
-
-      const script =
-        document.createElement(
-          "script"
-        );
-
-
-  script.src =
-  WEB_APP_URL +
-  "?order=" +
-  encodeURIComponent(orderNumber) +
-  "&contact=" +
-  encodeURIComponent(trackingContact) +
-  "&callback=" +
-  encodeURIComponent(callbackName);
-
-
-      script.onerror =
-        function () {
-
-          trackingResult.innerHTML = `
-
-            <div class="tracking-card">
-
-              <h2>
-                Something went wrong
-              </h2>
-
-              <p>
-                Please try again in a moment.
-              </p>
-
-            </div>
-
-          `;
-
-
-          delete window[callbackName];
-
-        };
-
-
-      document.body.appendChild(
-        script
-      );
-
-    }
-  );
-
-}
-
-
-/* ============================================================
-   AEMI ORDER TYPE & WHOLESALE INQUIRY
-   Email-only wholesale inquiries; protect retail checkout.
-   ============================================================ */
-
-const orderTypeSelect =
-  document.getElementById("orderTypeSelect");
-
-const wholesaleInquiryNotice =
-  document.getElementById("wholesaleInquiryNotice");
-
-const aemiRetailForm =
-  document.getElementById("orderForm");
-
-const aemiRetailSubmitButton =
-  document.getElementById("submitOrderButton");
-
-const aemiRetailFieldNames = [
-  "name",
-  "contact",
-  "product",
-  "quantity",
-  "fulfillment",
-  "address",
-  "payment",
-  "notes"
-];
-
-function updateOrderTypeView() {
-  if (!orderTypeSelect || !wholesaleInquiryNotice) {
-    return;
-  }
-
-  const isWholesale =
-    orderTypeSelect.value === "Wholesale";
-
-  // Show the email inquiry notice only for wholesale.
-  wholesaleInquiryNotice.hidden = !isWholesale;
-
-  // Hide and disable retail-only fields for wholesale.
-  if (aemiRetailForm) {
-    aemiRetailFieldNames.forEach(function (fieldName) {
-      const field = aemiRetailForm.elements.namedItem(fieldName);
-
-      if (!field) return;
-
-      const label = field.closest("label");
-
-      if (label) {
-        label.hidden = isWholesale;
+      const formData = new FormData(commissionForm);
+
+      const name = String(formData.get("name") || "").trim();
+      const contact = String(formData.get("contact") || "").trim();
+      const artist = String(formData.get("artist") || "").trim();
+      const details = String(formData.get("details") || "").trim();
+
+      if (!name || !contact || !artist || !details) {
+        return;
       }
 
-      field.disabled = isWholesale;
+      const message = [
+        "Hello, AEMI! I'd like to inquire about an art commission.",
+        "",
+        `Name: ${name}`,
+        `Preferred artist: ${artist}`,
+        `My contact: ${contact}`,
+        "",
+        "About my idea:",
+        details,
+        "",
+        "Thank you!"
+      ].join("\n");
+
+      const messengerUrl =
+        "https://m.me/aemii.co?text=" + encodeURIComponent(message);
+
+      if (formHint) {
+        formHint.textContent =
+          "Your inquiry is prepared. Messenger will open in a new tab if supported. Please check the message before sending it.";
+      }
+
+      const messengerWindow = window.open(
+        messengerUrl,
+        "_blank",
+        "noopener,noreferrer"
+      );
+
+      if (!messengerWindow && formHint) {
+        formHint.textContent =
+          "Your inquiry is ready, but Messenger did not open. You can copy the details below and send them to m.me/aemii.co.";
+        
+        let messageBox = document.getElementById("commission-message-preview");
+
+        if (!messageBox) {
+          messageBox = document.createElement("textarea");
+          messageBox.id = "commission-message-preview";
+          messageBox.readOnly = true;
+          messageBox.rows = 8;
+          messageBox.setAttribute("aria-label", "Prepared commission message");
+          messageBox.style.width = "100%";
+          messageBox.style.marginTop = "12px";
+          messageBox.style.padding = "12px";
+          messageBox.style.border = "1px solid #d6e2e4";
+          messageBox.style.background = "#fbf8ef";
+          commissionForm.appendChild(messageBox);
+        }
+
+        messageBox.value = message;
+        messageBox.focus();
+        messageBox.select();
+      }
     });
   }
-
-  // Hide the retail order summary for wholesale.
-  const summary = document.getElementById("orderSummary");
-
-  if (summary) {
-    summary.hidden = isWholesale;
-  }
-
-  // Prevent wholesale inquiries from using the retail button.
-  if (aemiRetailSubmitButton) {
-    aemiRetailSubmitButton.hidden = isWholesale;
-    aemiRetailSubmitButton.disabled = isWholesale;
-  }
-}
-
-if (orderTypeSelect) {
-  orderTypeSelect.addEventListener(
-    "change",
-    updateOrderTypeView
-  );
-
-  updateOrderTypeView();
-}
+});
