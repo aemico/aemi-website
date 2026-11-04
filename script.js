@@ -165,3 +165,55 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+/* =========================================
+   AEMI GALLERY — SEE MORE ART
+   Shows artworks in batches of six
+   ========================================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+  const gallery = document.querySelector(".gallery-grid");
+  const moreSection = document.querySelector(".gallery-more");
+  const moreButton = document.getElementById("see-more-art");
+
+  if (!gallery || !moreSection || !moreButton) return;
+
+  const batchSize = 6;
+  let visibleCount = batchSize;
+
+  function updateGallery() {
+    const artworks = Array.from(
+      gallery.querySelectorAll(".art-card")
+    );
+
+    artworks.forEach((artwork, index) => {
+      artwork.hidden = index >= visibleCount;
+    });
+
+    const hasMore = artworks.length > visibleCount;
+
+    moreSection.hidden = !hasMore;
+    moreButton.hidden = !hasMore;
+  }
+
+  moreButton.addEventListener("click", () => {
+    const artworks = gallery.querySelectorAll(".art-card");
+
+    visibleCount = Math.min(
+      visibleCount + batchSize,
+      artworks.length
+    );
+
+    updateGallery();
+
+    const remaining = artworks.length - visibleCount;
+
+    if (remaining > 0) {
+      moreButton.innerHTML =
+        'See more art <span aria-hidden="true">↓</span>';
+    }
+  });
+
+  // Keep the gallery ready for future artwork additions.
+  updateGallery();
+});
