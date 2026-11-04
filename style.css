@@ -3100,11 +3100,11 @@ body.lightbox-open {
   padding-bottom: 110px;
 
   background-image: url("artists-background.jpg");
-  background-size: cover;
-  background-position: center;
+  background-size: 100% auto;
+  background-position: center top;
   background-repeat: no-repeat;
 
-  width: 100%;
+  background-color: var(--ivory);
 }
 .meet-artists-heading {
   text-align: center;
