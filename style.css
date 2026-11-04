@@ -3098,6 +3098,12 @@ body.lightbox-open {
 .meet-artists-section {
   padding-top: 110px;
   padding-bottom: 110px;
+
+  /* Background image */
+  background-image: url("artists-background.jpg");
+  background-size: 100% auto;
+  background-position: center top;
+  background-repeat: no-repeat;
 }
 
 .meet-artists-heading {
