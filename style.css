@@ -3099,13 +3099,11 @@ body.lightbox-open {
   padding-top: 110px;
   padding-bottom: 110px;
 
-  /* Background image */
   background-image: url("artists-background.jpg");
-  background-size: 100% auto;
-  background-position: center top;
+  background-size: 100% 100%;
+  background-position: center;
   background-repeat: no-repeat;
 }
-
 .meet-artists-heading {
   text-align: center;
   max-width: 570px;
