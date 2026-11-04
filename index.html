@@ -3,1671 +3,303 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <meta
-    name="description"
-    content="AEMI Chili Garlic Oil — a little heat, a lot of flavor."
-  >
-
-  <title>AEMI | Chili Garlic Oil</title>
-
-  
-<link rel="stylesheet" href="style.css?v=3">
-
-  
-<link
-  rel="stylesheet"
-  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-/>
-
+  <meta name="theme-color" content="#eaf4f7">
+  <meta name="description" content="AEMI is a small art space for paintings by Yua and drawings by CJ. Explore original pieces, social-media art bids, and commission inquiries.">
+  <title>AEMI — an art space by Yua & CJ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
-
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- =========================================================
-       HEADER
-       ========================================================= -->
-
-  <header class="site-header">
-
-    <a
-      class="brand"
-      href="#home"
-      aria-label="AEMI home"
-    >
-      AEMI
+  <header class="site-header" id="top">
+    <a class="wordmark" href="#home" aria-label="AEMI home">
+      <span class="wordmark-name">AEMI</span>
+      <span class="wordmark-note">an art space</span>
     </a>
 
-    <button
-      class="menu-toggle"
-      aria-label="Open menu"
-      type="button"
-    >
-      ☰
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation">
+      <span></span><span></span>
     </button>
 
-    <nav id="nav">
-
-      <a href="#home">Home</a>
-      <a href="#product">Product</a>
-      <a href="#about">About</a>
-      <a href="#order">Order</a>
-      <a href="#track">Track Order</a>
-      <a href="#contact">Contact</a>
-
+    <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+      <a href="#gallery">Gallery</a>
+      <a href="#bids">Art bids</a>
+      <a href="#commissions">Commissions</a>
+      <a href="#about">Our story</a>
+      <a class="nav-contact" href="#contact">Say hello <span aria-hidden="true">↗</span></a>
     </nav>
-
   </header>
 
+  <main id="main">
+    <section class="hero section-wrap" id="home">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="eyebrow-dot"></span> two artists, one little corner of the world</p>
+        <h1>Art made slowly.<br><em>Feelings, made visible.</em></h1>
+        <p class="hero-description">AEMI is a growing art space by Yua and CJ — one paints, one draws, and both make things from the heart.</p>
 
-  <main>
+        <div class="hero-actions">
+          <a class="button button-dark" href="#gallery">Explore the gallery <span aria-hidden="true">↘</span></a>
+          <a class="text-link" href="#about">Get to know us <span aria-hidden="true">↗</span></a>
+        </div>
 
-
-    <!-- =========================================================
-         HOME
-         ========================================================= -->
-
-    <section id="home" class="hero">
-
-      <div class="hero-logo">
-
-<img
-  id="logoImage"
-  src="AEMI-LOGO.png"
-  alt="AEMI Chili Garlic Oil logo"
->
-
+        <div class="hero-note">
+          <span class="note-star" aria-hidden="true">✳</span>
+          <span>original pieces, little experiments<br>and art with a story to tell</span>
+        </div>
       </div>
 
-      <p
-        class="eyebrow"
-        id="heroProduct"
-      >
-        CHILI GARLIC OIL
-      </p>
+      <div class="hero-art" aria-label="Decorative abstract blue and butter-yellow shapes">
+        <div class="hero-art-paper">
+          <span class="hero-sun"></span>
+          <span class="hero-arc hero-arc-one"></span>
+          <span class="hero-arc hero-arc-two"></span>
+          <span class="hero-stroke"></span>
+          <span class="hero-caption">a little color<br>for the everyday</span>
+          <span class="hero-stamp">A / 01</span>
+        </div>
+        <span class="floating-note floating-note-top">made by hand</span>
+        <span class="floating-note floating-note-bottom">always becoming ✳</span>
+      </div>
 
-      <h1 id="tagline">
-        A Little Heat.<br>
-        A Lot of Flavor.
-      </h1>
-
-      <p id="heroDescription">
-        Bold, savory flavor made to elevate everyday meals.
-      </p>
-
-      <a
-        class="button"
-        href="#order"
-      >
-        ORDER NOW
-      </a>
-
+      <a class="scroll-cue" href="#gallery"><span></span> SCROLL TO EXPLORE</a>
     </section>
 
+    <section class="intro-strip" aria-label="Gallery introduction">
+      <p>paintings · pencil drawings · original ideas · commissions</p>
+      <span aria-hidden="true">✳</span>
+      <p>made with care in the Philippines</p>
+    </section>
 
-    <!-- =========================================================
-         PRODUCT
-         ========================================================= -->
-
-    <section
-      id="product"
-      class="section"
-    >
-
+    <section class="section-wrap gallery-section" id="gallery">
       <div class="section-heading">
-
-       <p class="eyebrow">
-  THE AEMI SIGNATURE
-</p>
-
-        <h2 id="productName">
-          AEMI Chili Garlic Oil
-        </h2>
-
+        <div>
+          <p class="eyebrow">01 / the gallery</p>
+          <h2>Little worlds,<br><em>made by us.</em></h2>
+        </div>
+        <p class="section-intro">Meet our work in its own way: Yua’s paintings, CJ’s drawings, and the pieces that are still finding their shape.</p>
       </div>
 
+      <div class="gallery-tabs" role="group" aria-label="Filter gallery by artist">
+        <button class="filter-button is-active" type="button" data-filter="all" aria-pressed="true">All work <span>06</span></button>
+        <button class="filter-button" type="button" data-filter="yua" aria-pressed="false">Yua / paintings</button>
+        <button class="filter-button" type="button" data-filter="cj" aria-pressed="false">CJ / drawings</button>
+      </div>
 
-      <div class="product-card">
-
-        <div class="product-art">
-
-          <img
-            src="aemi-teaser-1.png"
-            alt="AEMI Chili Garlic Oil"
-          >
-
-        </div>
-
-
-         <div class="product-info">
-
-          <p id="productDescription">
-           A rich, savory blend of golden garlic, chili, and balanced seasonings,
-crafted to bring bold flavor to everyday meals.
-          </p>
-  
-
-          <div class="details">
-
-            <div>
-
-              <span>SIZE</span>
-
-            <strong id="sizes">
-  120 mL · 220 mL
-</strong>
-
-            </div>
-
-
-            <div>
-
-              <span>STATUS</span>
-
-              <strong id="availability">
-                COMING SOON
-              </strong>
-
-            </div>
-
+      <div class="art-grid" id="art-grid">
+        <article class="art-card" data-artist="yua">
+          <div class="art-preview art-preview-one">
+            <span class="preview-tag">PAINTING · YUA</span>
+            <span class="art-form form-one"></span>
+            <span class="art-form form-two"></span>
+            <span class="art-form form-three"></span>
+            <span class="preview-placeholder">artwork preview</span>
           </div>
-
-
-          <p class="ingredients">
-
-            <strong>Ingredients:</strong>
-
-            <span id="ingredients">
-              Garlic · Chili · Oyster Sauce · Black Pepper · Salt · Brown Sugar
-            </span>
-
-          </p>
-
-        </div>
-
-      </div>
-
-    </section>
-
-    <section class="section product-highlights">
-
-  <div class="section-heading">
-
-    <p class="eyebrow">
-      WHY AEMI
-    </p>
-
-    <h2>
-      Made for everyday cravings.
-    </h2>
-
-  </div>
-
-  <div class="features">
-
-    <div class="feature">
-      <span>01</span>
-      <h3>Bold Flavor</h3>
-      <p>
-        Rich garlic and chili bring depth, warmth, and savory flavor to every bite.
-      </p>
-    </div>
-
-    <div class="feature">
-      <span>02</span>
-      <h3>Made With Care</h3>
-      <p>
-        Thoughtfully prepared in small batches with attention to every detail.
-      </p>
-    </div>
-
-    <div class="feature">
-      <span>03</span>
-      <h3>Easy to Enjoy</h3>
-      <p>
-        Pair it with rice, noodles, eggs, meats, or your favorite everyday dishes.
-      </p>
-    </div>
-
-  </div>
-
-</section>
-
-    <section class="section how-to-enjoy">
-
-  <div class="section-heading">
-
-    <p class="eyebrow">
-      HOW TO ENJOY AEMI
-    </p>
-
-    <h2>
-      One jar. So many ways.
-    </h2>
-
-  </div>
-
-  <div class="enjoy-grid">
-
-    <div class="enjoy-card">
-      <span>01</span>
-      <h3>Over Rice</h3>
-      <p>
-        Spoon it over warm rice for an easy, savory kick.
-      </p>
-    </div>
-
-    <div class="enjoy-card">
-      <span>02</span>
-      <h3>With Eggs</h3>
-      <p>
-        Add a little chili garlic oil to eggs for extra flavor.
-      </p>
-    </div>
-
-    <div class="enjoy-card">
-      <span>03</span>
-      <h3>For Noodles</h3>
-      <p>
-        Mix it into noodles for a rich and flavorful finish.
-      </p>
-    </div>
-
-    <div class="enjoy-card">
-      <span>04</span>
-      <h3>With Your Favorites</h3>
-      <p>
-        Pair it with meats, snacks, vegetables, or everyday dishes.
-      </p>
-    </div>
-
-  </div>
-
-</section>
-
-<!-- =========================================================
-     CUSTOMER FEEDBACK
-     ========================================================= -->
-
-<section id="reviews" class="section reviews-section">
-
-  <div class="section-heading">
-    <p class="eyebrow">KIND WORDS</p>
-    <h2>What People Say About AEMI</h2>
-    <p class="reviews-intro">
-      Every batch means something to us. Here's a little feedback
-      from people who have tried our chili garlic oil.
-    </p>
-  </div>
-
-  <div class="reviews-grid">
-
-    <article class="review-card">
-      <span class="review-mark" aria-hidden="true">“</span>
-
-      <p class="review-text">
-        I like the savory flavor. It has a kick to it, and the
-        chili and garlic were chewy and cooked perfectly.
-      </p>
-
-      <div class="review-author">
-        <span class="review-author-name">Jezel</span>
-        <span class="review-author-label">Customer Feedback</span>
-      </div>
-    </article>
-
-    <article class="review-card">
-      <span class="review-mark" aria-hidden="true">“</span>
-
-      <p class="review-text">
-        I like the original flavor. I hope the next batch
-        will have more spice.
-      </p>
-
-      <div class="review-author">
-        <span class="review-author-name">Ghel</span>
-        <span class="review-author-label">Taste Tester</span>
-      </div>
-    </article>
-
-  </div>
-
-</section>
-
-    
-<!-- WHOLESALE & RESELLER INQUIRIES -->
-<section id="wholesale" class="section wholesale-section">
-
-  <div class="wholesale-heading">
-    <p class="eyebrow">GROW WITH AEMI</p>
-
-    <h2>
-      “I just need to<br>
-      restock my essentials”
-    </h2>
-
-    <p class="wholesale-intro">
-      THE AEMI ESSENTIALS
-    </p>
-  </div>
-
-  <div class="wholesale-tiles">
-
-    <!-- TILE 1: WHY AEMI -->
-    <div class="wholesale-tile wholesale-benefits">
-      <p class="tile-eyebrow">WHY PARTNER WITH AEMI</p>
-
-      <div class="benefit-item">
-        <span class="benefit-number">01</span>
-        <div>
-          <h3>A Flavorful Favorite</h3>
-          <p>A distinctive chili garlic oil for everyday meals.</p>
-        </div>
-      </div>
-
-      <div class="benefit-item">
-        <span class="benefit-number">02</span>
-        <div>
-          <h3>A Growing Community</h3>
-          <p>Grow alongside a brand built with care.</p>
-        </div>
-      </div>
-
-      <div class="benefit-item">
-        <span class="benefit-number">03</span>
-        <div>
-          <h3>Let's Work Together</h3>
-          <p>Whether you own a store or want to resell, let's connect.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- TILE 2: PRODUCT SHOWCASE -->
-    <div class="wholesale-tile wholesale-product">
-      <img
-        src="wholesale.png"
-        alt="AEMI chili garlic oil"
-      >
-
-      <div class="product-overlay">
-        <p>THE AEMI ESSENTIAL</p>
-        <h3>A little heat.<br>A lot of flavor.</h3>
-      </div>
-    </div>
-
-    <!-- TILE 3: INQUIRIES -->
-    <div class="wholesale-right">
-
-      <div class="wholesale-tile inquiry-tile">
-        <span class="inquiry-mark">✳</span>
-        <div>
-          <p class="tile-eyebrow">01 / WHOLESALE</p>
-          <h3>For Stores & Bulk Orders</h3>
-          <p>Interested in carrying AEMI? Let's talk.</p>
-        </div>
-      </div>
-
-      <div class="wholesale-tile inquiry-tile">
-        <span class="inquiry-mark">✳</span>
-        <div>
-          <p class="tile-eyebrow">02 / RESELLERS</p>
-          <h3>Grow With AEMI</h3>
-          <p>Explore becoming an AEMI reseller.</p>
-        </div>
-      </div>
-
-      <a
-        class="wholesale-tile wholesale-email"
-        href="mailto:chiligarlicoil26@gmail.com?subject=AEMI%20Wholesale%20and%20Reseller%20Inquiry"
-      >
-        <span class="email-symbol">✉</span>
-
-        <span class="email-copy">
-          <span class="tile-eyebrow">LET'S CONNECT</span>
-          <strong>INQUIRE VIA EMAIL</strong>
-          <small>Tell us about your plans.</small>
-        </span>
-
-        <span class="email-arrow">↗</span>
-      </a>
-
-    </div>
-  </div>
-
-</section>
-
-
-    <!-- =========================================================
-         ABOUT
-         ========================================================= -->
-
-    <section
-      id="about"
-      class="section about"
-    >
-
-      <p class="eyebrow">
-        OUR STORY
-      </p>
-
-      <h2>
-        Made for the meals<br>
-        you already love.
-      </h2>
-
-      <p id="aboutText">
-        AEMI started with two people, one recipe, and the idea of creating
-        something of our own.
-
-        Our first batch was small, but it gave us a glimpse of what AEMI
-        could become. People tried it, enjoyed it, and supported our little start.
-
-        But we also learned that making something good was only the beginning.
-        We needed to do more than just make the product—we needed to build
-        the brand behind it.
-
-        So, we started again.
-
-        AEMI Round 2 is our second try, this time with more planning, better
-        systems, and a clearer vision of where we want to take it.
-
-        Still small. Still ours. But this time, we're building it with intention.
-      </p>
-
-
-      <div class="about-image">
-
-        <img
-          src="aemi-teaser-2.png"
-          alt="AEMI Chili Garlic Oil"
-        >
-
-      </div>
-
-    </section>
-
-
-    <!-- =========================================================
-         ORDER
-         ========================================================= -->
-
-    <section
-      id="order"
-      class="section order-section"
-    >
-
-      <p class="eyebrow">
-        ORDER AEMI
-      </p>
-
-      <h2>
-        Ready when you are.
-      </h2>
-
-      <p>
-        Choose your order details below. We'll confirm your order before processing.
-      </p>
-
-
-<!-- AEMI DELIVERY POLICY -->
-
-<div class="delivery-policy">
-
- 
-<p class="delivery-policy-label">
-  <svg class="delivery-main-icon"
-       xmlns="http://www.w3.org/2000/svg"
-       width="22" height="22" viewBox="0 0 24 24"
-       fill="none" stroke="currentColor"
-       stroke-width="1.6" stroke-linecap="round"
-       stroke-linejoin="round" aria-hidden="true">
-    <path d="M10 17h4V5H2v12h3"/>
-    <path d="M14 9h4l4 4v4h-3"/>
-    <circle cx="7.5" cy="17.5" r="2.5"/>
-    <circle cx="16.5" cy="17.5" r="2.5"/>
-  </svg>
-  AEMI DELIVERY POLICY
-</p>
-
-
-  <div class="delivery-policy-item">
-  
-<h3 class="delivery-policy-heading">
-  <svg class="delivery-item-icon"
-       xmlns="http://www.w3.org/2000/svg"
-       width="19" height="19" viewBox="0 0 24 24"
-       fill="none" stroke="currentColor"
-       stroke-width="1.7" stroke-linecap="round"
-       stroke-linejoin="round" aria-hidden="true">
-    <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/>
-    <circle cx="12" cy="10" r="2.5"/>
-  </svg>
-  Local Retail Orders
-</h3>
-
-   <p>
-  Delivery within Silang, Cavite is ₱100.
-  Delivery within Laguna is ₱200.
-  Delivery within Dasmariñas is ₱250.
-  Delivery within Imus is ₱300.
-  Pickup is free. Other locations will be
-  confirmed by AEMI before the order is finalized.
-</p>
-  </div>
-
-  <div class="delivery-policy-item">
-   
-<h3 class="delivery-policy-heading">
-  <svg class="delivery-item-icon"
-       xmlns="http://www.w3.org/2000/svg"
-       width="19" height="19" viewBox="0 0 24 24"
-       fill="none" stroke="currentColor"
-       stroke-width="1.7" stroke-linecap="round"
-       stroke-linejoin="round" aria-hidden="true">
-    <path d="m21 8-9-5-9 5 9 5 9-5Z"/>
-    <path d="M3 8v8l9 5 9-5V8"/>
-    <path d="M12 13v8"/>
-  </svg>
-  Retailers &amp; Wholesale Partners
-</h3>
-
-    <p>
-      Delivery outside our local retail area
-      can be arranged for a fee. The delivery
-      charge will be confirmed by AEMI before
-      your order is finalized.
-    </p>
-  </div>
-
-  <p class="delivery-policy-note">
-    All deliveries are subject to address
-    confirmation and availability.
-  </p>
-
-</div>
-
-<!-- AEMI DELIVERY LOCATION MAP -->
-
-<div class="delivery-map-section" id="deliveryMapSection">
-
-  <h3>Choose Your Delivery Location</h3>
-
-  <p class="form-note">
-    If you selected delivery, choose your location on the map.
-    AEMI will confirm your address and delivery fee before
-    finalizing your order.
-  </p>
-
-  <div id="aemiMap" style="height: 320px; width: 100%;"></div>
-
-  <p id="mapLocationStatus" class="form-note">
-    Select a location on the map to place your pin.
-  </p>
-
-</div>
-
-      
-      <!-- ORDER FORM -->
-
-      <form
-        id="orderForm"
-        method="POST"
-        target="aemiSubmitFrame"
-      >
-
-        <label>
-
-          Full name
-
-          <input
-            name="name"
-            required
-          >
-
-        </label>
-
-
-        <label>
-
-          Contact number
-
-          <input
-            name="contact"
-            type="tel"
-            required
-          >
-
-        </label>
-
-        
- <label>
-  Order type
-
-  <select
-    name="orderType"
-    id="orderTypeSelect"
-    required
-  >
-    <option value="">
-      Select order type
-    </option>
-
-    <option value="Retail">
-      Retail — Personal Order
-    </option>
-
-    <option value="Wholesale">
-      Wholesale / Reseller Inquiry
-    </option>
-  </select>
-</label>
-
-<div id="wholesaleInquiryNotice" class="wholesale-inquiry-notice" hidden>
-  <p class="eyebrow">WHOLESALE & RESELLERS</p>
-
-  <h3>Let's grow with AEMI.</h3>
-
-  <p>
-    Interested in ordering 12 jars or more? Contact us for
-    wholesale pricing, reseller bundles, and ordering details.
-    We'll help you find the right option for your business.
-  </p>
-
-  <a
-    class="button"
-    href="mailto:chiligarlicoil26@gmail.com?subject=AEMI%20Wholesale%20and%20Reseller%20Inquiry"
-  >
-    INQUIRE VIA EMAIL
-  </a>
-
-  <p class="form-note">
-    Your wholesale inquiry will not be submitted as a retail order.
-  </p>
-</div>
-
-        <label>
-
-          Product size
-
-          <select
-            name="product"
-            id="productSelect"
-            required
-          ></select>
-
-        </label>
-
-
-        <label>
-
-          Quantity
-
-          <input
-            name="quantity"
-            id="quantity"
-            type="number"
-            min="1"
-            value="1"
-            required
-          >
-
-        </label>
-
-
-        <p
-          id="orderSummary"
-          class="order-summary"
-        ></p>
-
-
-        <label>
-
-          Fulfillment
-
-          <select
-            name="fulfillment"
-            id="fulfillmentSelect"
-            required
-          >
-
-            <option value="">
-              Select one
-            </option>
-
-            <option value="Delivery">
-              Delivery
-            </option>
-
-            <option value="Pickup">
-              Pickup
-            </option>
-
-          </select>
-
-        </label>
-
-
-      
-<label id="addressLabel">
-  Complete delivery address
-
-  <textarea
-    name="address"
-    id="addressField"
-    rows="4"
-    placeholder="House/Building No., Street, Barangay, City/Municipality, Province, ZIP Code"
-    required
-  ></textarea>
-
-  <small class="form-note">
-    Include your house or building number, street, barangay,
-    city or municipality, and province. Please check that
-    your map pin matches your delivery address.
-  </small>
-</label>
-
-
-
-        <label>
-
-          Payment method
-
-          <select
-            name="payment"
-            required
-          >
-
-            <option value="">
-              Select one
-            </option>
-
-            <option value="GCash">
-              GCash
-            </option>
-
-            <option value="Cash">
-              Cash
-            </option>
-
-            <option value="COD">
-              COD
-            </option>
-
-          </select>
-
-        </label>
-
-
-        <label>
-
-          Order notes
-
-          <textarea
-            name="notes"
-            rows="3"
-            placeholder="Optional"
-          ></textarea>
-
-        </label>
-
-
-        <button
-          id="submitOrderButton"
-          class="button full"
-          type="submit"
-        >
-          SUBMIT ORDER
-        </button>
-
-
-        <p class="form-note">
-          Your order will be reviewed and confirmed by AEMI before processing.
-        </p>
-
-      </form>
-
-
-      <!-- HIDDEN SUBMISSION FRAME -->
-
-      <iframe
-        name="aemiSubmitFrame"
-        id="aemiSubmitFrame"
-        title="AEMI order submission"
-        style="display:none;"
-      ></iframe>
-
-
-      <!-- =======================================================
-           RECEIPT
-           ======================================================= -->
-
-      <section
-        id="orderReceipt"
-        class="order-receipt"
-        hidden
-      >
-
-       <p class="eyebrow">
-  ORDER RECEIVED
-</p>
-
-<h2>
-  Your AEMI order is in.
-</h2>
-
-<p>
-  We've received your order and will review it before processing.
-</p>
-
-
-        <div class="receipt-card">
-
-          <div class="receipt-row">
-
-            <span>
-              ORDER NUMBER
-            </span>
-
-            <strong id="receiptOrderNumber">
-              —
-            </strong>
-
+          <div class="art-card-info">
+            <div><h3>Blue Hour Study</h3><p>Original painting · Yua</p></div>
+            <span class="art-status status-placeholder">Details soon</span>
           </div>
+        </article>
 
+        <article class="art-card" data-artist="cj">
+          <div class="art-preview art-preview-two">
+            <span class="preview-tag">PENCIL · CJ</span>
+            <span class="sketch-face"></span>
+            <span class="sketch-line sketch-line-one"></span>
+            <span class="sketch-line sketch-line-two"></span>
+            <span class="preview-placeholder">artwork preview</span>
+          </div>
+          <div class="art-card-info">
+            <div><h3>Soft Focus</h3><p>Pencil drawing · CJ</p></div>
+            <span class="art-status status-placeholder">Details soon</span>
+          </div>
+        </article>
 
+        <article class="art-card" data-artist="yua">
+          <div class="art-preview art-preview-three">
+            <span class="preview-tag">PAINTING · YUA</span>
+            <span class="art-form form-four"></span>
+            <span class="art-form form-five"></span>
+            <span class="art-form form-six"></span>
+            <span class="preview-placeholder">artwork preview</span>
+          </div>
+          <div class="art-card-info">
+            <div><h3>Sun on the Windowsill</h3><p>Original painting · Yua</p></div>
+            <span class="art-status status-placeholder">Details soon</span>
+          </div>
+        </article>
 
-          <div class="receipt-row">
+        <article class="art-card" data-artist="cj">
+          <div class="art-preview art-preview-four">
+            <span class="preview-tag">PENCIL · CJ</span>
+            <span class="sketch-flower"><i></i><i></i><i></i><i></i><i></i><b></b></span>
+            <span class="sketch-stem"></span>
+            <span class="preview-placeholder">artwork preview</span>
+          </div>
+          <div class="art-card-info">
+            <div><h3>Something in Bloom</h3><p>Pencil drawing · CJ</p></div>
+            <span class="art-status status-placeholder">Details soon</span>
+          </div>
+        </article>
 
-  <span>
-    STATUS
-  </span>
+        <article class="art-card" data-artist="yua">
+          <div class="art-preview art-preview-five">
+            <span class="preview-tag">PAINTING · YUA</span>
+            <span class="art-form form-seven"></span>
+            <span class="art-form form-eight"></span>
+            <span class="art-form form-nine"></span>
+            <span class="preview-placeholder">artwork preview</span>
+          </div>
+          <div class="art-card-info">
+            <div><h3>After the Rain</h3><p>Original painting · Yua</p></div>
+            <span class="art-status status-placeholder">Details soon</span>
+          </div>
+        </article>
 
-  <strong
-    id="receiptStatus"
-    class="receipt-status"
-  >
-    Pending
-  </strong>
-
-</div>
-
-        <p class="form-note">
-          Keep your order number for tracking and future reference.
-        </p>
-
-
-        <button
-          id="trackReceiptButton"
-          class="button full"
-          type="button"
-        >
-          TRACK MY ORDER
-        </button>
-
-
-       <button
-  id="backToOrderButton"
-  class="button secondary-button full"
-  type="button"
->
-  BACK TO ORDER
-</button>
-
-</div>
-
-<!-- AEMI MANUAL GCASH PAYMENT -->
-<div id="gcashPaymentInstructions" class="receipt-card" hidden>
-
-  <p class="eyebrow">GCASH PAYMENT</p>
-
-  <h3>Complete Your Payment</h3>
-
-  <p>
-    Send your exact order total to the GCash account below.
-    Your order will remain pending until AEMI verifies your payment.
-  </p>
-
-  <div class="receipt-row">
-    <span>ACCOUNT NAME</span>
-    <strong>AEZER EUNICE DE LEON</strong>
-  </div>
-
-  <div class="receipt-row">
-    <span>GCASH NUMBER</span>
-    <strong>09913536919</strong>
-  </div>
-
-
-<div class="gcash-qr">
-  <p><strong>Scan to Pay</strong></p>
-  <img
-    src="gcash-qr.png"
-    alt="AEMI GCash payment QR code"
-    class="gcash-qr-image"
-  />
-</div>
-
-
-  <p class="form-note">
-    Double-check the recipient name and amount before sending.
-    Keep your transaction confirmation for your records.
-  </p>
-
-</div>
-<!-- END AEMI MANUAL GCASH PAYMENT -->
-
-</section>
-
-</section> <!-- End of the outer Order section -->
-
-<!-- =========================================================
-     TRACK ORDER
-     ========================================================= -->
-
-<section
-  id="track"
-  class="section order-section"
->
-
-      <p class="eyebrow">
-        ORDER TRACKING
-      </p>
-
-      <h2>
-        Where's your AEMI?
-      </h2>
-
-      <p>
-        Enter your order number below to check your latest order status.
-      </p>
-
-
-      <form id="trackingForm">
-
-        <label>
-
-  Order number
-
-  <input
-    id="orderNumber"
-    type="text"
-    placeholder="0001"
-    inputmode="numeric"
-    autocomplete="off"
-    required
-  >
-
-</label>
-
-        <label>
-  Contact number
-
-<input
-  id="trackingContact"
-  type="tel"
-  placeholder="09XXXXXXXXX"
-  inputmode="numeric"
-  autocomplete="tel"
-  maxlength="11"
-  pattern="09[0-9]{9}"
-  title="Enter an 11-digit Philippine mobile number starting with 09."
-  required
->
-
-</label>
-
-<p class="form-note">
-  Enter the numbers only. Example: 0001
-</p>
-
-        <button
-          class="button full"
-          type="submit"
-        >
-          TRACK ORDER
-        </button>
-
-      </form>
-
-
-      <div
-        id="trackingResult"
-        class="tracking-result"
-      ></div>
-
-    </section>
-
-
-    <!-- =========================================================
-         CONTACT
-         ========================================================= -->
-
-    <section
-      id="contact"
-      class="section contact"
-    >
-
-      <p class="eyebrow">
-        STAY CONNECTED
-      </p>
-
-      <h2>
-        Find AEMI online.
-      </h2>
-
-
-    <div class="socials">
-
-  <a
-    id="facebook"
-    href="https://www.facebook.com/share/1BaAQRDfad"
-    target="_blank"
-    rel="noopener"
-  >
-    Facebook
-  </a>
-
-  <a
-    id="instagram"
-    href="https://www.instagram.com/aemii_co"
-    target="_blank"
-    rel="noopener"
-  >
-    Instagram
-  </a>
-
-  <a
-    id="tiktok"
-    href="https://www.tiktok.com/@aemii.co"
-    target="_blank"
-    rel="noopener"
-  >
-    TikTok
-  </a>
-
-  <a
-    id="messenger"
-    href="https://m.me/aemii.co"
-    target="_blank"
-    rel="noopener"
-  >
-    Messenger
-  </a>
-
-</div>
-
-
-      <div class="pickup">
-
-        <strong>
-          Pickup Location
-        </strong>
-
-        <p id="pickupLocation">
-          Tartaria, Silang, Cavite · De Leon Compound · Sta. Rosa–Tagaytay Road
-        </p>
-
-       <p id="emailLine">
-  Email:
-  <a href="mailto:chiligarlicoil26@gmail.com">
-    chiligarlicoil26@gmail.com
-  </a>
-       </p>
-
+        <article class="art-card" data-artist="cj">
+          <div class="art-preview art-preview-six">
+            <span class="preview-tag">PENCIL · CJ</span>
+            <span class="sketch-eye"></span>
+            <span class="sketch-line sketch-line-three"></span>
+            <span class="sketch-line sketch-line-four"></span>
+            <span class="preview-placeholder">artwork preview</span>
+          </div>
+          <div class="art-card-info">
+            <div><h3>In the Margins</h3><p>Pencil drawing · CJ</p></div>
+            <span class="art-status status-placeholder">Details soon</span>
+          </div>
+        </article>
       </div>
 
+      <p class="gallery-footnote"><span aria-hidden="true">✳</span> These are temporary visual placeholders. We’ll replace them with your actual artwork photos and add real prices / availability before publishing.</p>
     </section>
 
+    <section class="bids-section" id="bids">
+      <div class="section-wrap bids-inner">
+        <div class="bids-heading">
+          <p class="eyebrow">02 / community art bids</p>
+          <h2>A little art.<br><em>A little excitement.</em></h2>
+          <p>We’ll announce available pieces and bidding windows on our social pages. The bidding itself happens on the original social-media post, so everyone can follow along fairly.</p>
+          <a class="button button-light" href="#contact">Find our socials <span aria-hidden="true">↗</span></a>
+        </div>
+
+        <div class="bid-cards">
+          <article class="bid-card bid-card-yua">
+            <div class="bid-card-top"><span class="bid-avatar">Y</span><span class="bid-open-label"><i></i> bidding details</span></div>
+            <p class="eyebrow">YUA / PAINTINGS</p>
+            <h3>Starting at ₱1</h3>
+            <p>Minimum bid increase: <strong>₱50</strong></p>
+            <p class="bid-small">The post will include the artwork, closing time, and final bidding rules.</p>
+            <a class="text-link" href="https://www.instagram.com/aemii_co" target="_blank" rel="noopener noreferrer">Watch for announcements ↗</a>
+          </article>
+
+          <article class="bid-card bid-card-cj">
+            <div class="bid-card-top"><span class="bid-avatar">C</span><span class="bid-open-label"><i></i> details coming</span></div>
+            <p class="eyebrow">CJ / DRAWINGS</p>
+            <h3>Coming soon</h3>
+            <p>Starting bid and minimum increment will be announced with each post.</p>
+            <p class="bid-small">Every listing will clearly show its rules before bidding opens.</p>
+            <a class="text-link" href="https://www.tiktok.com/@aemii.co" target="_blank" rel="noopener noreferrer">Follow CJ’s updates ↗</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-wrap commission-section" id="commissions">
+      <div class="commission-copy">
+        <p class="eyebrow">03 / made for you</p>
+        <h2>Have a feeling<br>you want <em>drawn?</em></h2>
+        <p>Tell us a little about the piece you’re imagining. We’ll read your inquiry and get back to you through the contact method you choose.</p>
+        <div class="commission-points">
+          <span><b>01</b> Share your idea</span>
+          <span><b>02</b> We discuss details</span>
+          <span><b>03</b> Make something meaningful</span>
+        </div>
+      </div>
+
+      <form class="commission-form" id="commission-form">
+        <div class="form-heading">
+          <span class="form-spark" aria-hidden="true">✳</span>
+          <div><h3>Commission inquiry</h3><p>No pressure — just tell us what you have in mind.</p></div>
+        </div>
+
+        <div class="form-row">
+          <label for="client-name">Your name</label>
+          <input id="client-name" name="name" type="text" placeholder="What should we call you?" required>
+        </div>
+
+        <div class="form-row">
+          <label for="client-contact">How can we reach you?</label>
+          <input id="client-contact" name="contact" type="text" placeholder="Instagram, Facebook, or email" required>
+        </div>
+
+        <div class="form-row">
+          <label for="artist-choice">Who would you like to work with?</label>
+          <select id="artist-choice" name="artist" required>
+            <option value="" disabled selected>Choose an artist</option>
+            <option value="Yua — painting">Yua · painting</option>
+            <option value="CJ — pencil drawing">CJ · pencil drawing</option>
+            <option value="Either / not sure yet">Either / not sure yet</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label for="project-details">Tell us about your idea</label>
+          <textarea id="project-details" name="details" rows="4" placeholder="Subject, size, mood, deadline, budget — anything you know so far…" required></textarea>
+        </div>
+
+        <button class="button button-dark form-submit" type="submit">Prepare inquiry <span aria-hidden="true">↗</span></button>
+        <p class="form-hint" id="form-hint">This form prepares your message and opens Messenger; no details are sent automatically.</p>
+      </form>
+    </section>
+
+    <section class="about-section" id="about">
+      <div class="section-wrap about-inner">
+        <div class="about-art" aria-hidden="true">
+          <div class="about-circle"></div>
+          <div class="about-paper">
+            <span class="about-paper-line"></span>
+            <span class="about-paper-sun"></span>
+            <span class="about-paper-note">made of<br>many little things</span>
+          </div>
+          <span class="about-scribble">A + C</span>
+        </div>
+
+        <div class="about-copy">
+          <p class="eyebrow">04 / behind the work</p>
+          <h2>Two hands.<br><em>Two ways of seeing.</em></h2>
+          <p>AEMI began as a shared idea, and now it’s becoming a home for the art we love making. Yua paints; CJ draws. Our styles are different, but we both believe a piece of art can hold a moment, a memory, or a feeling that’s hard to explain.</p>
+          <p>This space will grow with us — one finished piece, one experiment, and one story at a time.</p>
+          <a class="text-link" href="#contact">Come say hello <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-section section-wrap" id="contact">
+      <div>
+        <p class="eyebrow">05 / keep in touch</p>
+        <h2>Let’s make room<br><em>for more art.</em></h2>
+      </div>
+
+      <div class="contact-content">
+        <p>Follow along for new pieces, work-in-progress moments, commission updates, and social-media bidding announcements.</p>
+        <div class="social-links">
+          <a href="https://www.instagram.com/aemii_co" target="_blank" rel="noopener noreferrer"><span>Instagram</span><span aria-hidden="true">↗</span></a>
+          <a href="https://www.tiktok.com/@aemii.co" target="_blank" rel="noopener noreferrer"><span>TikTok</span><span aria-hidden="true">↗</span></a>
+          <a href="https://www.facebook.com/share/1BaAQRDfad" target="_blank" rel="noopener noreferrer"><span>Facebook</span><span aria-hidden="true">↗</span></a>
+          <a href="https://m.me/aemii.co" target="_blank" rel="noopener noreferrer"><span>Messenger</span><span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
   </main>
 
-
-  <!-- =========================================================
-       FOOTER
-       ========================================================= -->
-
-  <footer>
-
-    <strong>
-      AEMI
-    </strong>
-
-    <span>
-      CHILI GARLIC OIL
-    </span>
-
-    <small>
-      © <span id="year"></span> AEMI. All rights reserved.
-    </small>
-
+  <footer class="site-footer">
+    <a class="footer-wordmark" href="#top">AEMI<span>✳</span></a>
+    <p>made with care by Yua & CJ</p>
+    <p>© <span id="current-year"></span> AEMI Art Space</p>
   </footer>
-
-
-  <script src="script.js?v=3"></script>
-
-
-  <!-- =========================================================
-       ORDER SUBMISSION + RECEIPT
-       ========================================================= -->
-
-  <script>
-
-    const aemiOrderForm =
-      document.getElementById("orderForm");
-
-    const aemiOrderReceipt =
-      document.getElementById("orderReceipt");
-
-    const aemiSubmitButton =
-      document.getElementById("submitOrderButton");
-
-    const aemiReceiptOrderNumber =
-      document.getElementById("receiptOrderNumber");
-
-    const aemiReceiptStatus =
-      document.getElementById("receiptStatus");
-
-    const aemiGcashInstructions =
-  document.getElementById("gcashPaymentInstructions");
-
-    const aemiTrackReceiptButton =
-      document.getElementById("trackReceiptButton");
-
-    const aemiBackToOrderButton =
-      document.getElementById("backToOrderButton");
-
-    const aemiTrackingInput =
-      document.getElementById("orderNumber");
-
-
-  const AEMI_WEB_APP_URL =
-  "https://script.google.com/macros/s/AKfycbw_557rqSYN1cMQ_srMHtutr4TvYW6bkvbc8oJU6wNXxPgRjGFhGmadY7l0fZ66o7vo/exec";
-
-  
-let aemiSubmitting = false;
-
-/* =========================================================
-   GET OFFICIAL NEXT ORDER NUMBER
-   ========================================================= */
-
-function getAemiOrderNumber() {
-  return new Promise(function(resolve, reject) {
-    const callbackName = "aemiOrderNumber_" + Date.now();
-    const script = document.createElement("script");
-    let finished = false;
-
-    function cleanup() {
-      if (finished) return;
-      finished = true;
-      clearTimeout(timeout);
-      script.remove();
-      delete window[callbackName];
-    }
-
-    const timeout = setTimeout(function() {
-      cleanup();
-      reject(new Error("Order number request timed out."));
-    }, 10000);
-
-    window[callbackName] = function(data) {
-      if (finished) return;
-      cleanup();
-
-      if (data && data.success && data.orderNumber) {
-        resolve(data.orderNumber);
-      } else {
-        reject(new Error("Order number unavailable."));
-      }
-    };
-
-    script.onerror = function() {
-      if (finished) return;
-      cleanup();
-      reject(new Error("Connection failed."));
-    };
-
-    script.src =
-      AEMI_WEB_APP_URL +
-      "?next=1&callback=" +
-      encodeURIComponent(callbackName);
-
-    document.body.appendChild(script);
-  });
-}
-
-/* =========================================================
-   CHECK WHETHER THE ORDER WAS SAVED
-   ========================================================= */
-
-function checkAemiOrder(orderNumber, contact) {
-  return new Promise(function(resolve, reject) {
-    const callbackName = "aemiCheckOrder_" + Date.now();
-    const script = document.createElement("script");
-    let finished = false;
-
-    function cleanup() {
-      if (finished) return;
-      finished = true;
-      clearTimeout(timeout);
-      script.remove();
-      delete window[callbackName];
-    }
-
-    const timeout = setTimeout(function() {
-      cleanup();
-      reject(new Error("Order check timed out."));
-    }, 4000);
-
-    window[callbackName] = function(data) {
-      if (finished) return;
-      cleanup();
-      resolve(data);
-    };
-
-    script.onerror = function() {
-      if (finished) return;
-      cleanup();
-      reject(new Error("Could not check the order."));
-    };
-
-    const params = new URLSearchParams({
-      order: orderNumber,
-      contact: contact,
-      callback: callbackName
-    });
-
-    script.src = AEMI_WEB_APP_URL + "?" + params.toString();
-    document.body.appendChild(script);
-  });
-}
-
-/* =========================================================
-   DISPLAY THE RECEIPT
-   ========================================================= */
-
-function showAemiReceipt(orderNumber, status) {
-  aemiReceiptOrderNumber.textContent = orderNumber;
-  aemiReceiptStatus.textContent = status || "Pending";
-  
-if (aemiGcashInstructions) {
-  aemiGcashInstructions.hidden =
-    aemiOrderForm.elements.namedItem("payment").value !== "GCash";
-}
-  aemiOrderForm.hidden = true;
-  aemiOrderReceipt.hidden = false;
-
-  aemiSubmitting = false;
-  aemiSubmitButton.disabled = false;
-  aemiSubmitButton.textContent = "SUBMIT ORDER";
-
-  aemiOrderReceipt.scrollIntoView({
-    behavior: "smooth",
-    block: "start"
-  });
-}
-
-/* =========================================================
-   SUBMIT ORDER AND VERIFY IT
-   ========================================================= */
-
-if (aemiOrderForm) {
-  aemiOrderForm.addEventListener("submit", async function(event) {
-    event.preventDefault();
-
-    const selectedOrderType =
-      document.getElementById("orderTypeSelect");
-
-    if (selectedOrderType &&
-        selectedOrderType.value === "Wholesale") {
-      const inquiryNotice =
-        document.getElementById("wholesaleInquiryNotice");
-
-      if (inquiryNotice) {
-        inquiryNotice.scrollIntoView({
-          behavior: "smooth",
-          block: "center"
-        });
-      }
-      return;
-    }
-
-    if (aemiSubmitting) return;
-
-    aemiSubmitting = true;
-    aemiSubmitButton.disabled = true;
-    aemiSubmitButton.textContent = "SUBMITTING...";
-
-    let orderNumber = "";
-
-    try {
-      orderNumber = await getAemiOrderNumber();
-
-      let hiddenOrderNumber =
-        document.getElementById("hiddenOrderNumber");
-
-      if (!hiddenOrderNumber) {
-        hiddenOrderNumber = document.createElement("input");
-        hiddenOrderNumber.type = "hidden";
-        hiddenOrderNumber.name = "orderNumber";
-        hiddenOrderNumber.id = "hiddenOrderNumber";
-        aemiOrderForm.appendChild(hiddenOrderNumber);
-      }
-
-      hiddenOrderNumber.value = orderNumber;
-
-      const contact =
-        aemiOrderForm.elements.namedItem("contact").value.trim();
-
-      // Submit the order to the existing Apps Script endpoint.
-      aemiOrderForm.action = AEMI_WEB_APP_URL;
-      aemiOrderForm.target = "aemiSubmitFrame";
-      aemiOrderForm.submit();
-
-      aemiSubmitButton.textContent = "CONFIRMING ORDER...";
-
-      // Check the sheet through doGet instead of relying on
-      // the blocked iframe response.
-      const deadline = Date.now() + 30000;
-
-      while (Date.now() < deadline) {
-        try {
-          const result = await checkAemiOrder(orderNumber, contact);
-
-          if (result && result.success) {
-            showAemiReceipt(
-              result.orderNumber || orderNumber,
-              result.status || "Pending"
-            );
-            return;
-          }
-        } catch (checkError) {
-          console.warn("AEMI order verification attempt failed.");
-        }
-
-        await new Promise(function(resolve) {
-          setTimeout(resolve, 1500);
-        });
-      }
-
-      // Keep submission disabled so the customer does not
-      // accidentally create a duplicate order.
-      aemiSubmitButton.textContent = "ORDER CHECK PENDING";
-
-      alert(
-        "We couldn't verify your order yet. It may already be " +
-        "recorded. Please do not submit again. Contact AEMI and " +
-        "provide your order number: " + orderNumber
-      );
-
-    } catch (error) {
-      console.error("AEMI order submission error:", error);
-
-      aemiSubmitting = false;
-      aemiSubmitButton.disabled = false;
-      aemiSubmitButton.textContent = "SUBMIT ORDER";
-
-      alert(
-        "We couldn't prepare your order number, so the order " +
-        "was not submitted. Please check your connection and try again."
-      );
-    }
-  });
-}
-
-    /* =========================================================
-       TRACK MY ORDER
-       ========================================================= */
-
-    if (aemiTrackReceiptButton) {
-
-      aemiTrackReceiptButton.addEventListener(
-        "click",
-        function() {
-
-          const orderNumber =
-            aemiReceiptOrderNumber
-              .textContent
-              .trim();
-
-
-          if (
-            aemiTrackingInput &&
-            orderNumber &&
-            orderNumber !== "—"
-          ) {
-
-            aemiTrackingInput.value =
-              orderNumber;
-
-          }
-const checkoutContact =
-  document.querySelector('#orderForm [name="contact"]');
-
-const trackingContactField =
-  document.getElementById("trackingContact");
-
-if (checkoutContact && trackingContactField) {
-  trackingContactField.value = checkoutContact.value;
-}
-
-          const trackSection =
-            document.getElementById("track");
-
-
-          if (trackSection) {
-
-            trackSection.scrollIntoView({
-              behavior: "smooth",
-              block: "start"
-            });
-
-          }
-
-
-          setTimeout(function() {
-
-            const trackingForm =
-              document.getElementById(
-                "trackingForm"
-              );
-
-            if (trackingForm) {
-
-              trackingForm.requestSubmit();
-
-            }
-
-          }, 700);
-
-        }
-      );
-
-    }
-
-
-    /* =========================================================
-       BACK TO ORDER
-       ========================================================= */
-
-    if (aemiBackToOrderButton) {
-
-      aemiBackToOrderButton.addEventListener(
-        "click",
-        function() {
-
-          aemiOrderReceipt.hidden =
-            true;
-
-          aemiOrderForm.hidden =
-            false;
-
-          aemiOrderForm.reset();
-
-
-          const hiddenOrderNumber =
-            document.getElementById(
-              "hiddenOrderNumber"
-            );
-
-          if (hiddenOrderNumber) {
-            hiddenOrderNumber.remove();
-          }
-
-
-          aemiReceiptOrderNumber.textContent =
-            "—";
-
-          aemiReceiptStatus.textContent =
-            "Pending";
-
-
-          aemiSubmitting =
-            false;
-
-          aemiSubmitButton.disabled =
-            false;
-
-          aemiSubmitButton.textContent =
-            "SUBMIT ORDER";
-
-
-          aemiOrderForm.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-          });
-
-        }
-      );
-
-    }
-
-  </script>
-
-<!-- Free interactive map library -->
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  const mapElement = document.getElementById("aemiMap");
-  const status = document.getElementById("mapLocationStatus");
-
-  if (!mapElement || !status || typeof L === "undefined") {
-    return;
-  }
-
-  // Start the map around Silang, Cavite.
-  const map = L.map("aemiMap").setView([14.2300, 120.9750], 12);
-
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    maxZoom: 19
-  }).addTo(map);
-
-  let marker = null;
-  let addressLookupId = 0;
-
-async function updatePin(latlng) {
-  const lookupId = ++addressLookupId;
-  const lat = latlng.lat.toFixed(6);
-  const lng = latlng.lng.toFixed(6);
-
-  status.textContent = "Pinned location: " + lat + ", " + lng +
-    ". Looking up address...";
-
-  let latitude = document.getElementById("mapLatitude");
-  let longitude = document.getElementById("mapLongitude");
-
-  if (!latitude) {
-    latitude = document.createElement("input");
-    latitude.type = "hidden";
-    latitude.name = "mapLatitude";
-    latitude.id = "mapLatitude";
-    document.getElementById("orderForm").appendChild(latitude);
-  }
-
-  if (!longitude) {
-    longitude = document.createElement("input");
-    longitude.type = "hidden";
-    longitude.name = "mapLongitude";
-    longitude.id = "mapLongitude";
-    document.getElementById("orderForm").appendChild(longitude);
-  }
-
-  latitude.value = lat;
-  longitude.value = lng;
-
-  try {
-    const params = new URLSearchParams({
-      format: "jsonv2",
-      lat: lat,
-      lon: lng
-    });
-
-    const response = await fetch(
-      "https://nominatim.openstreetmap.org/reverse?" + params
-    );
-
-    if (!response.ok) {
-      throw new Error("Address lookup failed");
-    }
-
-    const data = await response.json();
-
-if (lookupId !== addressLookupId) return;
-
-    const addressField = document.getElementById("addressField");
-
-
-if (data.display_name && addressField) {
-  const currentAddress = addressField.value.trim();
-
-  if (currentAddress) {
-    status.textContent =
-      "Map address found. Please check your address below and add your house/building number if needed.";
-  } else {
-    addressField.value = data.display_name;
-
-    status.textContent =
-      "Map address filled in below. Please add your house/building number and check the details.";
-  }
-  
-} else {
-      status.textContent =
-        "Location pinned! Please enter your full address below.";
-    }
-
-  } catch (error) {
-    if (lookupId !== addressLookupId) return;
-
-    console.error("Address lookup error:", error);
-    status.textContent =
-      "Address lookup unavailable. Please enter your full address below.";
-  }
-
-}
-
-function placeMarker(latlng) {
-  if (marker) {
-    marker.setLatLng(latlng);
-  } else {
-    marker = L.marker(latlng, { draggable: true }).addTo(map);
-
-    marker.on("dragend", function () {
-      updatePin(marker.getLatLng());
-    });
-  }
-
-  updatePin(latlng);
-}
-
-  map.on("click", function (event) {
-    placeMarker(event.latlng);
-  });
-
-  setTimeout(function () {
-    map.invalidateSize();
-  }, 200);
-});
-</script>
-
 </body>
 </html>
