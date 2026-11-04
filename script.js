@@ -398,7 +398,10 @@ document.addEventListener("DOMContentLoaded", () => {
       const messengerURL = "https://m.me/aemii.co";
 
       let copied = false;
-
+const messengerWindow = window.open(
+  "https://m.me/aemii.co",
+  "_blank"
+);
       try {
 
         if (navigator.clipboard?.writeText) {
@@ -440,11 +443,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       }
 
-      window.open(
-        messengerURL,
-        "_blank",
-        "noopener,noreferrer"
-      );
+     if (!messengerWindow) {
+  formHint.textContent =
+    "Your inquiry is ready. Please allow pop-ups to open Messenger.";
+}
 
     });
 
