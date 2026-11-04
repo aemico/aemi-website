@@ -1961,3 +1961,535 @@ h3 {
 .art-preview-six {
   background-color: var(--yellow-light);
 }
+
+/* ============================================
+   AEMI ART GALLERY — SHARED PASTEL THEME
+   CJ's powder blue + Yua's pastel yellow
+   ============================================ */
+
+:root {
+  --blue: #DCECF2;
+  --blue-light: #EDF5F7;
+  --blue-mid: #B9D8E3;
+  --blue-deep: #739AA8;
+
+  --yellow: #F4E58F;
+  --yellow-light: #FBF2C9;
+  --yellow-deep: #D5BF56;
+
+  --ivory: #FBF8EF;
+  --cream: #FFFDF7;
+  --ivory-dark: #F0EADC;
+
+  --red: var(--blue-deep);
+  --deep-red: #4D6D78;
+
+  --ink: #26383E;
+  --muted: #6E7D80;
+  --line: #D6E2E4;
+
+  --shadow-soft: 0 12px 35px rgba(63, 91, 101, 0.08);
+}
+
+/* Main page */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+}
+
+body {
+  background: var(--ivory);
+  color: var(--ink);
+}
+
+::selection {
+  background: var(--yellow);
+  color: var(--ink);
+}
+
+/* Headings and small labels */
+.eyebrow {
+  color: var(--blue-deep);
+}
+
+h1,
+h2,
+h3 {
+  color: var(--ink);
+}
+
+a {
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--deep-red);
+}
+
+/* Sticky header */
+.site-header {
+  background: rgba(251, 248, 239, 0.94);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(14px);
+}
+
+.brand {
+  color: var(--deep-red);
+}
+
+.site-header nav a:hover,
+.site-header nav a:focus-visible {
+  color: var(--blue-deep);
+}
+
+.menu-toggle {
+  color: var(--deep-red);
+  cursor: pointer;
+}
+
+/* Hero section */
+.hero {
+  background:
+    radial-gradient(
+      ellipse at 15% 20%,
+      rgba(220, 236, 242, 0.9),
+      transparent 42%
+    ),
+    radial-gradient(
+      ellipse at 85% 80%,
+      rgba(244, 229, 143, 0.42),
+      transparent 38%
+    ),
+    var(--ivory);
+}
+
+.hero .eyebrow {
+  color: var(--deep-red);
+}
+
+.hero h1 em,
+.hero h2 em {
+  color: var(--deep-red);
+}
+
+.hero p:not(.eyebrow) {
+  color: var(--muted);
+}
+
+/* Buttons */
+.button,
+button.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 46px;
+  padding: 12px 22px;
+  background: var(--blue);
+  border: 1px solid var(--blue-mid);
+  color: var(--ink);
+  border-radius: 3px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-align: center;
+  cursor: pointer;
+  transition:
+    background 0.22s ease,
+    border-color 0.22s ease,
+    transform 0.22s ease;
+}
+
+.button:hover,
+button.button:hover {
+  background: var(--yellow);
+  border-color: var(--yellow-deep);
+  color: var(--ink);
+  transform: translateY(-2px);
+}
+
+.button:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--blue-deep);
+  outline-offset: 4px;
+}
+
+/* General section spacing and separators */
+.section-wrap,
+.section,
+.section-heading {
+  position: relative;
+}
+
+.section-heading {
+  color: var(--ink);
+}
+
+.section-heading .eyebrow {
+  color: var(--deep-red);
+}
+
+/* Gallery */
+.gallery-section,
+#gallery {
+  background: var(--ivory);
+}
+
+.gallery-grid {
+  gap: clamp(16px, 2.5vw, 30px);
+}
+
+.art-card {
+  min-width: 0;
+}
+
+.art-preview {
+  overflow: hidden;
+  border: 1px solid rgba(77, 109, 120, 0.12);
+}
+
+.art-preview-one,
+.art-preview-three,
+.art-preview-five {
+  background-color: var(--blue);
+}
+
+.art-preview-two,
+.art-preview-four,
+.art-preview-six {
+  background-color: var(--yellow-light);
+}
+
+.preview-tag {
+  color: var(--ink);
+}
+
+.preview-placeholder {
+  color: rgba(38, 56, 62, 0.62);
+}
+
+.art-card-info {
+  color: var(--ink);
+}
+
+.art-card-info p {
+  color: var(--muted);
+}
+
+.art-status {
+  color: var(--deep-red);
+}
+
+/* Artwork filters */
+.filter-button,
+.gallery-filter button,
+[data-filter] {
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.filter-button[aria-pressed="true"],
+.gallery-filter button[aria-pressed="true"],
+[data-filter][aria-pressed="true"] {
+  background: var(--blue);
+  border-color: var(--blue-deep);
+  color: var(--ink);
+}
+
+.filter-button:hover,
+.gallery-filter button:hover,
+[data-filter]:hover {
+  background: var(--yellow-light);
+  border-color: var(--yellow-deep);
+  color: var(--ink);
+}
+
+/* See more art */
+.gallery-more {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 30px 16px 20px;
+  text-align: center;
+}
+
+.gallery-more-note {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.gallery-more-button {
+  background: var(--yellow) !important;
+  border-color: var(--yellow-deep) !important;
+  color: var(--ink) !important;
+}
+
+.gallery-more-button:hover {
+  background: var(--blue) !important;
+  border-color: var(--blue-deep) !important;
+}
+
+.gallery-more-button span {
+  transition: transform 0.25s ease;
+}
+
+.gallery-more-button:hover span {
+  transform: translateY(3px);
+}
+
+.gallery-more[hidden],
+.gallery-more-button[hidden],
+.art-card[hidden] {
+  display: none !important;
+}
+
+.gallery-footnote {
+  color: var(--muted);
+}
+
+/* Bidding section */
+#bids,
+.bids-section {
+  background: var(--blue-light);
+}
+
+.bid-card {
+  background: var(--cream);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-soft);
+}
+
+.bid-card-yua {
+  border-top: 4px solid var(--yellow-deep);
+}
+
+.bid-card-cj {
+  border-top: 4px solid var(--blue-deep);
+}
+
+.bid-avatar {
+  background: var(--blue);
+  color: var(--ink);
+}
+
+.bid-card-yua .bid-avatar {
+  background: var(--yellow-light);
+}
+
+.bid-open-label {
+  color: var(--muted);
+}
+
+.bid-card h3 {
+  color: var(--deep-red);
+}
+
+.bid-small {
+  color: var(--muted);
+}
+
+.text-link {
+  color: var(--deep-red);
+  text-decoration-color: var(--blue-mid);
+  text-underline-offset: 4px;
+}
+
+/* Commission section */
+#commissions,
+.commission-section {
+  background:
+    linear-gradient(
+      120deg,
+      var(--ivory) 0%,
+      var(--ivory) 54%,
+      var(--yellow-light) 54%,
+      var(--yellow-light) 100%
+    );
+}
+
+.commission-form {
+  background: var(--cream);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-soft);
+}
+
+.form-heading {
+  border-bottom: 1px solid var(--line);
+}
+
+.form-spark {
+  color: var(--blue-deep);
+}
+
+.form-row label,
+.commission-form label {
+  color: var(--ink);
+}
+
+input,
+select,
+textarea {
+  max-width: 100%;
+  background: #FFFFFF;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid var(--blue-mid);
+  outline-offset: 1px;
+  border-color: var(--blue-deep);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #879395;
+}
+
+.form-note,
+.form-hint {
+  color: var(--muted);
+}
+
+.commission-points b {
+  color: var(--deep-red);
+}
+
+/* Our story */
+#about,
+.about,
+.story-section {
+  background: var(--ivory);
+}
+
+#about .eyebrow,
+.about .eyebrow,
+.story-section .eyebrow {
+  color: var(--deep-red);
+}
+
+/* Contact and social links */
+#contact,
+.contact {
+  background: var(--blue-light);
+}
+
+.socials a {
+  border: 1px solid var(--blue-mid);
+  background: var(--cream);
+  color: var(--ink);
+}
+
+.socials a:hover {
+  border-color: var(--yellow-deep);
+  background: var(--yellow-light);
+  color: var(--ink);
+}
+
+.pickup,
+.pickup p {
+  color: var(--muted);
+}
+
+.pickup strong {
+  color: var(--deep-red);
+}
+
+/* Footer */
+footer {
+  background:
+    linear-gradient(
+      115deg,
+      var(--blue) 0%,
+      var(--blue) 50%,
+      var(--yellow-light) 50%,
+      var(--yellow-light) 100%
+    );
+  color: var(--ink);
+  border-top: 1px solid var(--line);
+}
+
+footer strong,
+footer span,
+footer small {
+  color: var(--ink);
+}
+
+/* Links and keyboard accessibility */
+a:focus-visible {
+  outline: 2px solid var(--blue-deep);
+  outline-offset: 4px;
+}
+
+/* Mobile and tablet */
+@media (max-width: 1000px) {
+  .site-header nav.open {
+    background: var(--ivory);
+    border-bottom: 1px solid var(--line);
+    box-shadow: var(--shadow-soft);
+  }
+}
+
+@media (max-width: 600px) {
+  .hero {
+    min-height: auto;
+    padding: 70px 22px;
+  }
+
+  .gallery-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .gallery-more {
+    padding: 24px 12px 16px;
+    gap: 12px;
+  }
+
+  .gallery-more-note {
+    max-width: 270px;
+    font-size: 12px;
+  }
+
+  .gallery-more-button {
+    width: 100%;
+    max-width: 280px;
+    min-height: 48px;
+  }
+
+  .commission-form {
+    padding: 22px;
+  }
+
+  .socials {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  footer {
+    padding: 35px 20px;
+  }
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
