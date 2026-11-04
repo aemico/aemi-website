@@ -173,172 +173,62 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
+
   /* ----------------------------------------------------------
-     4. ARTWORK LIGHTBOX
+     4. INDIVIDUAL ARTWORK PAGES
      ---------------------------------------------------------- */
 
   if (gallery) {
 
-    const lightbox = document.createElement("div");
-
-    lightbox.className = "art-lightbox";
-    lightbox.id = "art-lightbox";
-    lightbox.hidden = true;
-
-    lightbox.innerHTML = `
-      <div
-        class="lightbox-panel"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="lightbox-title"
-      >
-        <button
-          class="lightbox-close"
-          type="button"
-          aria-label="Close artwork preview"
-        >
-          ×
-        </button>
-
-        <div class="lightbox-artwork"></div>
-
-        <div class="lightbox-information">
-          <p class="eyebrow lightbox-artist"></p>
-          <h2 id="lightbox-title"></h2>
-          <p class="lightbox-description"></p>
-        </div>
-      </div>
-    `;
-
-    document.body.appendChild(lightbox);
-
-    const lightboxPanel =
-      lightbox.querySelector(".lightbox-panel");
-
-    const lightboxArtwork =
-      lightbox.querySelector(".lightbox-artwork");
-
-    const lightboxTitle =
-      lightbox.querySelector("#lightbox-title");
-
-    const lightboxArtist =
-      lightbox.querySelector(".lightbox-artist");
-
-    const lightboxDescription =
-      lightbox.querySelector(".lightbox-description");
-
-    const closeButton =
-      lightbox.querySelector(".lightbox-close");
-
-    let previouslyFocused = null;
-
-    function closeLightbox() {
-
-      lightbox.hidden = true;
-      document.body.classList.remove("lightbox-open");
-
-      if (previouslyFocused) {
-        previouslyFocused.focus();
-      }
-    }
-
-    function openLightbox(card) {
-
-      const title =
-        card.querySelector("h3")?.textContent.trim()
-        || "Untitled artwork";
-
-      const description =
-        card.querySelector(".art-card-info p")
-          ?.textContent.trim()
-        || "An original piece from AEMI.";
-
-      const artist =
-        card.dataset.artist === "yua"
-          ? "YUA / PAINTING"
-          : "CJ / PENCIL DRAWING";
-
-      const preview =
-        card.querySelector(".art-preview");
-
-      previouslyFocused = card;
-
-      lightboxArtwork.replaceChildren();
-
-      if (preview) {
-        const previewCopy = preview.cloneNode(true);
-        previewCopy.removeAttribute("id");
-        lightboxArtwork.appendChild(previewCopy);
-      }
-
-      lightboxTitle.textContent = title;
-      lightboxArtist.textContent = artist;
-      lightboxDescription.textContent = description;
-
-      lightbox.hidden = false;
-      document.body.classList.add("lightbox-open");
-
-      closeButton.focus();
-    }
+    const artworkIds = {
+      "Blue Hour Study": "blue-hour-study",
+      "Soft Focus": "soft-focus",
+      "Sun on the Windowsill": "sun-on-the-windowsill",
+      "Something in Bloom": "something-in-bloom",
+      "After the Rain": "after-the-rain",
+      "In the Margins": "in-the-margins"
+    };
 
     gallery.querySelectorAll(".art-card").forEach(card => {
 
+      const title =
+        card.querySelector("h3")?.textContent.trim();
+
+      const artworkId =
+        card.dataset.artworkId || artworkIds[title];
+
+      if (!artworkId) return;
+
       card.setAttribute("tabindex", "0");
-      card.setAttribute("role", "button");
+      card.setAttribute("role", "link");
 
       card.setAttribute(
         "aria-label",
-        `View ${card.querySelector("h3")?.textContent || "artwork"}`
+        `Open ${title || "artwork"} artwork page`
       );
 
-      card.addEventListener("click", () => {
-        openLightbox(card);
+      function openArtwork() {
+        window.location.href =
+          `artwork.html?id=${encodeURIComponent(artworkId)}`;
+      }
+
+      card.addEventListener("click", event => {
+
+        if (event.target.closest("a, button")) return;
+
+        openArtwork();
+
       });
 
       card.addEventListener("keydown", event => {
 
-        if (
-          event.key === "Enter" ||
-          event.key === " "
-        ) {
+        if (event.key === "Enter") {
           event.preventDefault();
-          openLightbox(card);
+          openArtwork();
         }
+
       });
-    });
 
-    closeButton.addEventListener("click", closeLightbox);
-
-    lightbox.addEventListener("click", event => {
-      if (event.target === lightbox) {
-        closeLightbox();
-      }
-    });
-
-    document.addEventListener("keydown", event => {
-
-      if (lightbox.hidden) return;
-
-      if (event.key === "Escape") {
-        closeLightbox();
-      }
-
-      if (event.key === "Tab") {
-
-        const focusable = [
-          closeButton
-        ];
-
-        const first = focusable[0];
-
-        if (
-          event.shiftKey &&
-          document.activeElement === first
-        ) {
-          event.preventDefault();
-          first.focus();
-        }
-      }
     });
 
   }
