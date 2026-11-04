@@ -3170,7 +3170,7 @@ body.lightbox-open {
 
 .artist-image {
   aspect-ratio: 1.35 / 1;
-  margin: 13px 13px 0;
+  margin: 13px 20px 0;
   display: grid;
   place-items: center;
   position: relative;
