@@ -2253,10 +2253,13 @@ button:focus-visible {
   color: var(--muted);
 }
 
-/* Bidding section */
+/* Bidding section background image */
 #bids,
 .bids-section {
-  background: var(--blue-light);
+  background-image: url("bidding-background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .bid-card {
