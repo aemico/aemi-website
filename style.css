@@ -2630,3 +2630,460 @@ body.lightbox-open {
     transition: none !important;
   }
 }
+
+/* ============================================================
+   AEMI ART SPACE — INDIVIDUAL ARTWORK PAGE
+   Artist-based yellow and blue exhibition theme
+   ============================================================ */
+
+/* Artist themes */
+
+.artwork-page {
+  --art-bg: #F4E58F;
+  --art-soft: #FBF2C9;
+  --art-accent: #B9D8E3;
+  --art-deep: #385D70;
+  --art-text: #365568;
+  --art-border: rgba(56, 93, 112, 0.18);
+
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at 8% 15%, rgba(255,255,255,0.2), transparent 32%),
+    radial-gradient(ellipse at 90% 75%, rgba(185,216,227,0.48), transparent 38%),
+    var(--art-bg);
+  color: var(--art-text);
+  transition: background 250ms ease;
+}
+
+/* Yua: yellow-dominant */
+
+.artwork-page.artist-yua {
+  --art-bg: #F4E58F;
+  --art-soft: #FBF2C9;
+  --art-accent: #B9D8E3;
+  --art-deep: #385D70;
+  --art-text: #365568;
+}
+
+/* CJ: blue-dominant */
+
+.artwork-page.artist-cj {
+  --art-bg: #B9D8E3;
+  --art-soft: #DCECF2;
+  --art-accent: #F4E58F;
+  --art-deep: #365568;
+  --art-text: #365568;
+}
+
+/* Header */
+
+.artwork-page .site-header {
+  position: relative;
+  background: var(--art-bg);
+  border-bottom: 1px solid var(--art-border);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.artwork-page .wordmark-name,
+.artwork-page .wordmark-note {
+  color: var(--art-deep);
+}
+
+.artwork-page .artwork-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 15px;
+  border: 1px solid var(--art-border);
+  color: var(--art-deep);
+  font-size: 11px;
+  font-weight: 600;
+  transition: background 180ms ease, transform 180ms ease;
+}
+
+.artwork-page .artwork-back:hover {
+  background: var(--art-accent);
+  transform: translateX(-3px);
+}
+
+/* Main artwork area */
+
+.artwork-page .artwork-detail {
+  width: min(1050px, calc(100% - 48px));
+  margin-inline: auto;
+  padding-top: 75px;
+  padding-bottom: 100px;
+}
+
+.artwork-page .artwork-detail-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 35px;
+  text-align: center;
+}
+
+/* Artwork display */
+
+.artwork-page .artwork-visual {
+  position: relative;
+  display: grid;
+  width: min(100%, 760px);
+  min-height: 380px;
+  place-items: center;
+  padding: 35px;
+  overflow: hidden;
+  background: var(--art-accent);
+  border: 1px solid var(--art-border);
+  box-shadow: 0 20px 55px rgba(56, 93, 112, 0.12);
+}
+
+.artwork-page .artwork-visual::before {
+  position: absolute;
+  inset: 16px;
+  border: 1px solid rgba(56, 93, 112, 0.18);
+  content: "";
+  pointer-events: none;
+}
+
+.artwork-page .artwork-visual img {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  max-height: 650px;
+  object-fit: contain;
+  object-position: center;
+}
+
+/* Placeholder before an artwork photo is uploaded */
+
+.artwork-page .artwork-image-placeholder {
+  display: grid;
+  width: 100%;
+  min-height: 340px;
+  place-items: center;
+  padding: 30px;
+  background: var(--art-soft);
+  color: var(--art-deep);
+  font-family: var(--serif);
+  font-size: clamp(22px, 4vw, 38px);
+}
+
+/* Artwork information */
+
+.artwork-page .artwork-information {
+  width: min(100%, 700px);
+  margin-inline: auto;
+  padding: 12px 10px;
+}
+
+.artwork-page .artwork-information .eyebrow {
+  margin-bottom: 14px;
+  color: var(--art-deep);
+}
+
+.artwork-page .artwork-information h1 {
+  margin: 0 0 15px;
+  color: var(--art-deep);
+  font-size: clamp(42px, 7vw, 76px);
+  line-height: 1.08;
+}
+
+.artwork-page .artwork-information > p {
+  color: var(--art-text);
+}
+
+.artwork-page .artwork-information .artwork-description {
+  max-width: 570px;
+  margin: 22px auto;
+  font-size: 14px;
+  line-height: 2;
+}
+
+/* Artwork labels */
+
+.artwork-page .artwork-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 22px 0;
+}
+
+.artwork-page .artwork-meta span,
+.artwork-page .artwork-category,
+.artwork-page .artwork-availability {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 13px;
+  background: var(--art-soft);
+  border: 1px solid var(--art-border);
+  color: var(--art-deep);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Story and detail sections */
+
+.artwork-page .artwork-extra {
+  width: min(100%, 850px);
+  margin: 65px auto 0;
+  text-align: left;
+}
+
+.artwork-page .artwork-extra-section {
+  margin-top: 18px;
+  padding: clamp(23px, 5vw, 38px);
+  background: var(--art-soft);
+  border: 1px solid var(--art-border);
+}
+
+.artwork-page .artwork-extra-section:nth-child(even) {
+  background: var(--art-accent);
+}
+
+.artwork-page .artwork-extra-section h2 {
+  margin-bottom: 16px;
+  color: var(--art-deep);
+  font-size: clamp(27px, 4vw, 38px);
+}
+
+.artwork-page .artwork-extra-section p {
+  margin: 0;
+  color: var(--art-text);
+  font-size: 13px;
+  line-height: 2;
+}
+
+/* Artwork facts */
+
+.artwork-page .artwork-facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.artwork-page .artwork-fact {
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid var(--art-border);
+}
+
+.artwork-page .artwork-fact span {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--art-deep);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.artwork-page .artwork-fact strong {
+  color: var(--art-text);
+  font-size: 12px;
+}
+
+/* More artworks */
+
+.artwork-page .artwork-more {
+  margin-top: 70px;
+  text-align: left;
+}
+
+.artwork-page .artwork-more h2 {
+  margin-bottom: 25px;
+  color: var(--art-deep);
+}
+
+.artwork-page .artwork-more-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.artwork-page .artwork-more-card {
+  display: block;
+  padding: 12px;
+  background: var(--art-soft);
+  border: 1px solid var(--art-border);
+  transition: transform 180ms ease, background 180ms ease;
+}
+
+.artwork-page .artwork-more-card:hover {
+  background: var(--art-accent);
+  transform: translateY(-4px);
+}
+
+.artwork-page .artwork-more-card img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: contain;
+}
+
+.artwork-page .artwork-more-card h3 {
+  margin: 12px 0 3px;
+  color: var(--art-deep);
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 400;
+}
+
+.artwork-page .artwork-more-card p {
+  margin: 0;
+  color: var(--art-text);
+  font-size: 10px;
+}
+
+/* Inquiry and sharing actions */
+
+.artwork-page .artwork-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.artwork-page .artwork-actions .button {
+  min-width: 170px;
+  background: var(--art-deep);
+  border-color: var(--art-deep);
+  color: var(--art-soft);
+}
+
+.artwork-page .artwork-actions .button:hover {
+  background: var(--art-accent);
+  border-color: var(--art-deep);
+  color: var(--art-deep);
+}
+
+/* Back to gallery */
+
+.artwork-page .artwork-bottom-link {
+  display: flex;
+  justify-content: center;
+  margin-top: 65px;
+}
+
+.artwork-page .artwork-bottom-link a {
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--art-deep);
+  color: var(--art-deep);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* Footer */
+
+.artwork-page .site-footer {
+  background: var(--art-accent);
+  border-top: 1px solid var(--art-border);
+}
+
+.artwork-page .site-footer,
+.artwork-page .site-footer p,
+.artwork-page .footer-wordmark {
+  color: var(--art-deep);
+}
+
+/* Missing artwork message */
+
+.artwork-page .artwork-not-found {
+  padding: 80px 20px;
+  color: var(--art-deep);
+  text-align: center;
+}
+
+.artwork-page .artwork-not-found h1 {
+  font-size: clamp(35px, 6vw, 55px);
+}
+
+/* Responsive layout */
+
+@media (max-width: 680px) {
+  .artwork-page .site-header {
+    min-height: 72px;
+    padding-inline: 20px;
+  }
+
+  .artwork-page .artwork-detail {
+    width: calc(100% - 32px);
+    padding-top: 40px;
+    padding-bottom: 65px;
+  }
+
+  .artwork-page .artwork-detail-grid {
+    gap: 23px;
+  }
+
+  .artwork-page .artwork-visual {
+    min-height: 260px;
+    padding: 20px;
+  }
+
+  .artwork-page .artwork-visual img {
+    max-height: 470px;
+  }
+
+  .artwork-page .artwork-image-placeholder {
+    min-height: 230px;
+  }
+
+  .artwork-page .artwork-information {
+    padding-inline: 3px;
+  }
+
+  .artwork-page .artwork-information h1 {
+    font-size: clamp(38px, 10vw, 55px);
+  }
+
+  .artwork-page .artwork-information .artwork-description {
+    font-size: 12px;
+  }
+
+  .artwork-page .artwork-extra {
+    margin-top: 42px;
+  }
+
+  .artwork-page .artwork-facts {
+    grid-template-columns: 1fr 1fr;
+    gap: 9px;
+  }
+
+  .artwork-page .artwork-fact {
+    padding: 12px;
+  }
+
+  .artwork-page .artwork-more {
+    margin-top: 45px;
+  }
+
+  .artwork-page .artwork-more-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 11px;
+  }
+
+  .artwork-page .artwork-actions {
+    flex-direction: column;
+  }
+
+  .artwork-page .artwork-actions .button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 380px) {
+  .artwork-page .artwork-facts {
+    grid-template-columns: 1fr;
+  }
+
+  .artwork-page .artwork-more-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
