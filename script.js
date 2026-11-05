@@ -332,16 +332,18 @@ document.addEventListener("DOMContentLoaded", () => {
         temporaryField.remove();
       }
 
-      if (formHint) {
-        formHint.textContent = copied
-          ? `Your inquiry has been copied. Paste it into ${artistName}'s Instagram chat and send it.`
-          : `Your inquiry is ready. Please copy the message below and paste it into ${artistName}'s Instagram chat.`;
-
-        if (!instagramWindow) {
-          formHint.textContent +=
-            " If Instagram did not open, allow pop-ups or open the artist's profile manually.";
-        }
-      }
+     if (formHint) {
+  if (copied && instagramWindow) {
+    formHint.textContent =
+      `Your inquiry is ready! We've copied your message and opened ${artistName}'s Instagram. Just paste it into the chat and send.`;
+  } else if (copied) {
+    formHint.textContent =
+      `Your inquiry is copied! Open ${artistName}'s Instagram, paste your message into the chat, and send.`;
+  } else {
+    formHint.textContent =
+      `Your inquiry is prepared! Please copy the message below, open ${artistName}'s Instagram, and paste it into the chat.`;
+  }
+}
 
       // Display the prepared message as a backup.
       let preview = document.getElementById("inquiry-preview");
