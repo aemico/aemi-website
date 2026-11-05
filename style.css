@@ -3329,3 +3329,12 @@ body.lightbox-open {
     font-size: 16px;
   }
 }
+/* ART BIDS — MOBILE BACKGROUND FIX */
+@media (max-width: 680px) {
+  #bids,
+  .bids-section {
+    background-size: auto 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+}
