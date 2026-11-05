@@ -232,9 +232,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
   }
-
-
   
+
   /* ----------------------------------------------------------
      5. COMMISSION INQUIRY
      ---------------------------------------------------------- */
@@ -263,12 +262,13 @@ document.addEventListener("DOMContentLoaded", () => {
       const name = String(formData.get("name") || "").trim();
       const contact = String(formData.get("contact") || "").trim();
       const artist = String(formData.get("artist") || "").trim();
+      const budget = String(formData.get("budget") || "").trim();
       const details = String(formData.get("details") || "").trim();
 
       if (!name || !contact || !artist || !details) {
         if (formHint) {
           formHint.textContent =
-            "Please complete all fields before preparing your inquiry.";
+            "Please complete all required fields before continuing.";
         }
         return;
       }
@@ -290,27 +290,13 @@ document.addEventListener("DOMContentLoaded", () => {
         `Name: ${name}`,
         `Contact: ${contact}`,
         `Preferred artist: ${artist}`,
+        budget ? `Preferred budget: ${budget}` : "",
         "",
         "My idea:",
         details
-      ].join("\n");
+      ].filter(line => line !== "").join("\n");
 
-      // Open Instagram immediately while the submit click is active.
-      const instagramWindow = window.open(
-        instagramURL,
-        "_blank"
-      );
-
-      // Try copying while still in the original page.
-      let copyTask = Promise.resolve(false);
-
-      if (navigator.clipboard?.writeText) {
-        copyTask = navigator.clipboard.writeText(message)
-          .then(() => true)
-          .catch(() => false);
-      }
-
-      // Prepare the backup message field.
+      // Create the message preview.
       let preview = document.getElementById("inquiry-preview");
 
       if (!preview) {
@@ -323,7 +309,7 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
         preview.style.cssText =
-          'width:100%;min-height:145px;margin-top:12px;padding:12px;border:1px solid #d8e3e2;background:#fffdf7;color:#26383e;font:11px/1.7 "DM Sans",Arial,sans-serif;resize:vertical;';
+          'width:100%;min-height:145px;margin-top:12px;padding:12px;border:1px solid #d8e3e2;background:#fffdf7;color:#26383e;font:12px/1.7 "DM Sans",Arial,sans-serif;resize:vertical;';
 
         if (formHint) {
           formHint.insertAdjacentElement("afterend", preview);
@@ -334,50 +320,99 @@ document.addEventListener("DOMContentLoaded", () => {
 
       preview.value = message;
 
-      // Add a manual copy button as a reliable backup.
+      // Create a manual copy button.
       let copyButton = document.getElementById("copy-inquiry");
 
       if (!copyButton) {
         copyButton = document.createElement("button");
         copyButton.id = "copy-inquiry";
         copyButton.type = "button";
-        copyButton.textContent = "Copy inquiry";
-
-        copyButton.style.cssText =
-          'display:block;margin-top:10px;padding:12px 18px;border:0;background:#26383e;color:#fffdf7;font:inherit;cursor:pointer;';
+        copyButton.className = "button button-dark";
+        copyButton.style.marginTop = "12px";
 
         preview.insertAdjacentElement("afterend", copyButton);
-
-        copyButton.addEventListener("click", async () => {
-          try {
-            await navigator.clipboard.writeText(preview.value);
-            copyButton.textContent = "Copied! ✓";
-          } catch (error) {
-            preview.focus();
-            preview.select();
-
-            const successful = document.execCommand("copy");
-
-            copyButton.textContent = successful
-              ? "Copied! ✓"
-              : "Please copy the selected message";
-          }
-        });
       }
 
-      // Update the confirmation after the clipboard attempt.
-      const copied = await copyTask;
+      copyButton.textContent = "Copy inquiry";
+
+      // Manual copy fallback for mobile browsers.
+      copyButton.onclick = async () => {
+        try {
+          if (!navigator.clipboard?.writeText) {
+            throw new Error("Clipboard unavailable");
+          }
+
+          await navigator.clipboard.writeText(preview.value);
+          copyButton.textContent = "Copied! ✓";
+
+        } catch (error) {
+          preview.focus();
+          preview.select();
+          preview.setSelectionRange(0, preview.value.length);
+
+          copyButton.textContent =
+            "Message selected — tap Copy";
+
+          if (formHint) {
+            formHint.textContent =
+              "Your message is selected. Use your phone's Copy option, then paste it into Instagram.";
+          }
+        }
+      };
+
+      // Start copying while the original submit interaction is active.
+      let copyPromise = null;
+      let copied = false;
+
+      try {
+        if (navigator.clipboard?.writeText) {
+          copyPromise = navigator.clipboard.writeText(message);
+        } else {
+          preview.focus();
+          preview.select();
+          copied = document.execCommand("copy");
+        }
+      } catch (error) {
+        copied = false;
+      }
+
+      // Open Instagram immediately, without waiting for copying.
+      const instagramWindow = window.open(
+        instagramURL,
+        "_blank"
+      );
+
+      // Finish checking the clipboard result.
+      if (copyPromise) {
+        try {
+          await copyPromise;
+          copied = true;
+        } catch (error) {
+          copied = false;
+        }
+      }
 
       if (formHint) {
-        if (copied && instagramWindow) {
+        if (copied) {
           formHint.textContent =
             `Your inquiry is copied! Instagram is opening ${artistName}'s chat. Paste your message and send it.`;
-        } else if (copied) {
-          formHint.textContent =
-            `Your inquiry is copied! Open ${artistName}'s Instagram and paste your message into the chat.`;
+          copyButton.textContent = "Copy again";
         } else {
           formHint.textContent =
-            `Your inquiry is ready! Use the Copy inquiry button below, then paste it into ${artistName}'s Instagram chat.`;
+            `Your inquiry is ready! If it wasn't copied automatically, use the Copy inquiry button below.`;
+        }
+
+        if (!instagramWindow) {
+          formHint.textContent +=
+            ` If Instagram did not open, tap here to open ${artistName}'s chat: `;
+
+          const link = document.createElement("a");
+          link.href = instagramURL;
+          link.target = "_blank";
+          link.rel = "noopener noreferrer";
+          link.textContent = "Open Instagram";
+
+          formHint.appendChild(link);
         }
       }
 
