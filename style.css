@@ -950,8 +950,28 @@ h3 {
 /* BIDDING SECTION */
 
 .bids-section {
-  padding: 105px 0;
-  background: var(--blue);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: 110px 0;
+  background-color: var(--ivory);
+  background-image:
+    radial-gradient(
+      circle at 8% 12%,
+      rgba(244, 229, 143, 0.48),
+      transparent 24%
+    ),
+    radial-gradient(
+      circle at 92% 85%,
+      rgba(185, 216, 227, 0.58),
+      transparent 28%
+    ),
+    linear-gradient(
+      135deg,
+      #fbf8ef 0%,
+      #f7f5ed 48%,
+      #edf5f7 100%
+    );
 }
 
 .bids-inner {
@@ -991,8 +1011,18 @@ h3 {
   padding: 23px 20px;
   border: 1px solid rgba(38, 56, 62, 0.1);
   background: rgba(251, 248, 239, 0.88);
+  box-shadow:
+    0 8px 22px rgba(38, 56, 62, 0.07),
+    0 2px 6px rgba(38, 56, 62, 0.035);
+  transition: transform 250ms ease, box-shadow 250ms ease;
 }
 
+.bid-card:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 13px 28px rgba(38, 56, 62, 0.09),
+    0 3px 8px rgba(38, 56, 62, 0.045);
+}
 .bid-card-cj {
   background: var(--ivory);
 }
@@ -2253,15 +2283,6 @@ button:focus-visible {
   color: var(--muted);
 }
 
-/* Bidding section background image */
-#bids,
-.bids-section {
-  background-image: url("bidding-background.jpg");
-  background-size: 100% auto;
-  background-position: center top;
-  background-repeat: no-repeat;
-}
-
 .bid-card {
   background: var(--cream);
   border: 1px solid var(--line);
@@ -3335,15 +3356,6 @@ body.lightbox-open {
 
   .artists-closing p {
     font-size: 16px;
-  }
-}
-/* ART BIDS — MOBILE BACKGROUND FIX */
-@media (max-width: 680px) {
-  #bids,
-  .bids-section {
-    background-size: auto 100%;
-    background-position: center center;
-    background-repeat: no-repeat;
   }
 }
 
