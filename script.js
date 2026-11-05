@@ -234,6 +234,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
+ 
   /* ----------------------------------------------------------
      5. COMMISSION INQUIRY
      ---------------------------------------------------------- */
@@ -243,6 +244,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const formHint =
     document.getElementById("form-hint");
+
+  const artistInstagram = {
+    "Yua — painting": "https://ig.me/m/yxuas_",
+    "CJ — pencil drawing": "https://ig.me/m/artby_cjj"
+  };
 
   if (commissionForm) {
 
@@ -254,17 +260,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const formData = new FormData(commissionForm);
 
-      const name =
-        String(formData.get("name") || "").trim();
-
-      const contact =
-        String(formData.get("contact") || "").trim();
-
-      const artist =
-        String(formData.get("artist") || "").trim();
-
-      const details =
-        String(formData.get("details") || "").trim();
+      const name = String(formData.get("name") || "").trim();
+      const contact = String(formData.get("contact") || "").trim();
+      const artist = String(formData.get("artist") || "").trim();
+      const details = String(formData.get("details") || "").trim();
 
       if (!name || !contact || !artist || !details) {
         if (formHint) {
@@ -274,8 +273,19 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
+      const instagramURL = artistInstagram[artist];
+
+      if (!instagramURL) {
+        if (formHint) {
+          formHint.textContent = "Please choose a valid artist.";
+        }
+        return;
+      }
+
+      const artistName = artist.startsWith("Yua") ? "Yua" : "CJ";
+
       const message = [
-        "Hello, AEMI! I'd like to ask about a commission.",
+        `Hello ${artistName}! I'd like to ask about a commission.`,
         "",
         `Name: ${name}`,
         `Contact: ${contact}`,
@@ -285,35 +295,32 @@ document.addEventListener("DOMContentLoaded", () => {
         details
       ].join("\n");
 
-      const messengerURL = "https://m.me/aemii.co";
+      // Open the selected artist's Instagram DM.
+      const instagramWindow = window.open(
+        instagramURL,
+        "_blank"
+      );
 
       let copied = false;
-const messengerWindow = window.open(
-  "https://m.me/aemii.co",
-  "_blank"
-);
-      try {
 
+      try {
         if (navigator.clipboard?.writeText) {
           await navigator.clipboard.writeText(message);
           copied = true;
         }
-
       } catch (error) {
         copied = false;
       }
 
+      // Fallback if clipboard access is unavailable.
       if (!copied) {
-
-        const temporaryField =
-          document.createElement("textarea");
+        const temporaryField = document.createElement("textarea");
 
         temporaryField.value = message;
         temporaryField.style.position = "fixed";
         temporaryField.style.opacity = "0";
 
         document.body.appendChild(temporaryField);
-
         temporaryField.select();
 
         try {
@@ -326,17 +333,39 @@ const messengerWindow = window.open(
       }
 
       if (formHint) {
-
         formHint.textContent = copied
-          ? "Your inquiry has been copied. Messenger will open next — paste your message into the chat and send it."
-          : "Messenger will open. Please copy your inquiry details before sending your message.";
+          ? `Your inquiry has been copied. Paste it into ${artistName}'s Instagram chat and send it.`
+          : `Your inquiry is ready. Please copy the message below and paste it into ${artistName}'s Instagram chat.`;
 
+        if (!instagramWindow) {
+          formHint.textContent +=
+            " If Instagram did not open, allow pop-ups or open the artist's profile manually.";
+        }
       }
 
-     if (!messengerWindow) {
-  formHint.textContent =
-    "Your inquiry is ready. Please allow pop-ups to open Messenger.";
-}
+      // Display the prepared message as a backup.
+      let preview = document.getElementById("inquiry-preview");
+
+      if (!preview) {
+        preview = document.createElement("textarea");
+        preview.id = "inquiry-preview";
+        preview.readOnly = true;
+        preview.setAttribute(
+          "aria-label",
+          "Your prepared commission inquiry"
+        );
+
+        preview.style.cssText =
+          'width:100%;min-height:145px;margin-top:12px;padding:12px;border:1px solid #d8e3e2;background:#fffdf7;color:#26383e;font:11px/1.7 "DM Sans",Arial,sans-serif;resize:vertical;';
+
+        formHint.insertAdjacentElement("afterend", preview);
+      }
+
+      preview.value = message;
+
+    });
+
+  }
 
     });
 
