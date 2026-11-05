@@ -296,10 +296,23 @@ document.addEventListener("DOMContentLoaded", () => {
       ].join("\n");
 
       // Open the selected artist's Instagram DM.
-      const instagramWindow = window.open(
-        instagramURL,
-        "_blank"
-      );
+      let instagramWindow;
+
+const isAndroid = /Android/i.test(navigator.userAgent);
+
+if (isAndroid) {
+  const username = artist.startsWith("Yua") ? "yxuas_" : "artby_cjj";
+
+  instagramWindow = window.open(
+    `intent://instagram.com/${username}/#Intent;scheme=https;package=com.instagram.android;end`,
+    "_blank"
+  );
+} else {
+  instagramWindow = window.open(
+    `https://www.instagram.com/${artist.startsWith("Yua") ? "yxuas_" : "artby_cjj"}/`,
+    "_blank"
+  );
+}
 
       let copied = false;
 
