@@ -234,7 +234,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
- 
+  
   /* ----------------------------------------------------------
      5. COMMISSION INQUIRY
      ---------------------------------------------------------- */
@@ -295,64 +295,22 @@ document.addEventListener("DOMContentLoaded", () => {
         details
       ].join("\n");
 
-            // Copy the inquiry BEFORE opening Instagram.
-      let copied = false;
-
-      try {
-        if (navigator.clipboard?.writeText) {
-          await navigator.clipboard.writeText(message);
-          copied = true;
-        }
-      } catch (error) {
-        copied = false;
-      }
-
-      // Fallback clipboard method.
-      if (!copied) {
-        const temporaryField = document.createElement("textarea");
-
-        temporaryField.value = message;
-        temporaryField.style.position = "fixed";
-        temporaryField.style.left = "-9999px";
-
-        document.body.appendChild(temporaryField);
-        temporaryField.focus();
-        temporaryField.select();
-
-        try {
-          copied = document.execCommand("copy");
-        } catch (error) {
-          copied = false;
-        }
-
-        temporaryField.remove();
-      }
-
-      // Open the selected artist's Instagram conversation.
-      const username = artist.startsWith("Yua")
-        ? "yxuas_"
-        : "artby_cjj";
-
-      const instagramURL = `https://ig.me/m/${username}`;
-
+      // Open Instagram immediately while the submit click is active.
       const instagramWindow = window.open(
         instagramURL,
         "_blank"
       );
 
-      // Show confirmation.
-      if (formHint) {
-        formHint.textContent = copied
-          ? `Your inquiry has been copied! Instagram is opening ${artistName}'s chat. Just paste your message and send.`
-          : `Instagram is opening ${artistName}'s chat. Your message is shown below so you can copy it manually.`;
+      // Try copying while still in the original page.
+      let copyTask = Promise.resolve(false);
 
-        if (!instagramWindow) {
-          formHint.textContent +=
-            " If Instagram did not open, tap the Instagram link again.";
-        }
+      if (navigator.clipboard?.writeText) {
+        copyTask = navigator.clipboard.writeText(message)
+          .then(() => true)
+          .catch(() => false);
       }
 
-      // Display a backup copy of the inquiry.
+      // Prepare the backup message field.
       let preview = document.getElementById("inquiry-preview");
 
       if (!preview) {
@@ -367,13 +325,62 @@ document.addEventListener("DOMContentLoaded", () => {
         preview.style.cssText =
           'width:100%;min-height:145px;margin-top:12px;padding:12px;border:1px solid #d8e3e2;background:#fffdf7;color:#26383e;font:11px/1.7 "DM Sans",Arial,sans-serif;resize:vertical;';
 
-        formHint.insertAdjacentElement("afterend", preview);
+        if (formHint) {
+          formHint.insertAdjacentElement("afterend", preview);
+        } else {
+          commissionForm.appendChild(preview);
+        }
       }
 
       preview.value = message;
 
+      // Add a manual copy button as a reliable backup.
+      let copyButton = document.getElementById("copy-inquiry");
+
+      if (!copyButton) {
+        copyButton = document.createElement("button");
+        copyButton.id = "copy-inquiry";
+        copyButton.type = "button";
+        copyButton.textContent = "Copy inquiry";
+
+        copyButton.style.cssText =
+          'display:block;margin-top:10px;padding:12px 18px;border:0;background:#26383e;color:#fffdf7;font:inherit;cursor:pointer;';
+
+        preview.insertAdjacentElement("afterend", copyButton);
+
+        copyButton.addEventListener("click", async () => {
+          try {
+            await navigator.clipboard.writeText(preview.value);
+            copyButton.textContent = "Copied! ✓";
+          } catch (error) {
+            preview.focus();
+            preview.select();
+
+            const successful = document.execCommand("copy");
+
+            copyButton.textContent = successful
+              ? "Copied! ✓"
+              : "Please copy the selected message";
+          }
+        });
+      }
+
+      // Update the confirmation after the clipboard attempt.
+      const copied = await copyTask;
+
+      if (formHint) {
+        if (copied && instagramWindow) {
+          formHint.textContent =
+            `Your inquiry is copied! Instagram is opening ${artistName}'s chat. Paste your message and send it.`;
+        } else if (copied) {
+          formHint.textContent =
+            `Your inquiry is copied! Open ${artistName}'s Instagram and paste your message into the chat.`;
+        } else {
+          formHint.textContent =
+            `Your inquiry is ready! Use the Copy inquiry button below, then paste it into ${artistName}'s Instagram chat.`;
+        }
+      }
+
     });
 
   }
-
-});
