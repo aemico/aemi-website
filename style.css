@@ -5611,3 +5611,284 @@ body.lightbox-open {
   }
 
 }
+/* ==========================================================
+   AEMI ART BIDS — INDIVIDUAL SCRAPBOOK CONFETTI
+   ========================================================== */
+
+.bids-confetti {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Curly ribbon base */
+
+.confetti-ribbon {
+  position: absolute;
+  display: block;
+  width: 45px;
+  height: 75px;
+
+  border: 5px solid currentColor;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+
+  opacity: .82;
+  filter: drop-shadow(1px 2px 1px rgba(70,60,45,.08));
+}
+
+/* The ribbon curl shape */
+
+.confetti-ribbon::before {
+  content: "";
+  position: absolute;
+
+  width: 23px;
+  height: 30px;
+
+  border: 4px solid currentColor;
+  border-left-color: transparent;
+  border-radius: 50%;
+
+  top: 17px;
+  left: 18px;
+
+  transform: rotate(35deg);
+}
+
+.confetti-ribbon::after {
+  content: "";
+  position: absolute;
+
+  width: 16px;
+  height: 22px;
+
+  border: 3px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+
+  bottom: 5px;
+  left: -10px;
+
+  transform: rotate(-35deg);
+}
+
+/* Ribbon colors */
+
+.ribbon-blue {
+  color: #739fb2;
+}
+
+.ribbon-yellow {
+  color: #d8b64c;
+}
+
+.ribbon-red {
+  color: #d99582;
+}
+
+/* Individual positions */
+
+.ribbon-one {
+  top: 17%;
+  left: 4%;
+  transform: rotate(-30deg) scale(.85);
+}
+
+.ribbon-two {
+  top: 28%;
+  right: 5%;
+  transform: rotate(28deg) scale(.9);
+}
+
+.ribbon-three {
+  top: 49%;
+  left: 2%;
+  transform: rotate(35deg) scale(.7);
+}
+
+.ribbon-four {
+  top: 62%;
+  right: 3%;
+  transform: rotate(-25deg) scale(.85);
+}
+
+.ribbon-five {
+  bottom: 8%;
+  left: 13%;
+  transform: rotate(25deg) scale(.7);
+}
+
+.ribbon-six {
+  bottom: 12%;
+  right: 14%;
+  transform: rotate(-35deg) scale(.75);
+}
+
+/* Hand-drawn stars */
+
+.confetti-star,
+.confetti-heart,
+.confetti-spark {
+  position: absolute;
+  display: block;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.confetti-star {
+  font-family: Georgia, serif;
+  color: #739aa8;
+  font-size: 31px;
+  text-shadow: 1px 2px 1px rgba(70,60,45,.08);
+}
+
+.star-one {
+  top: 13%;
+  left: 17%;
+  transform: rotate(-12deg);
+}
+
+.star-two {
+  top: 28%;
+  right: 17%;
+  color: #d5b34c;
+  font-size: 38px;
+  transform: rotate(14deg);
+}
+
+.star-three {
+  top: 54%;
+  left: 6%;
+  color: #d99582;
+  font-size: 27px;
+  transform: rotate(18deg);
+}
+
+.star-four {
+  bottom: 16%;
+  right: 9%;
+  font-size: 35px;
+  transform: rotate(-15deg);
+}
+
+.star-five {
+  bottom: 22%;
+  left: 19%;
+  color: #d5b34c;
+  font-size: 26px;
+}
+
+.star-six {
+  top: 65%;
+  right: 20%;
+  color: #d99582;
+  font-size: 30px;
+}
+
+/* Little hand-drawn hearts */
+
+.confetti-heart {
+  color: #739aa8;
+  font-family: Georgia, serif;
+  font-size: 39px;
+}
+
+.heart-one {
+  top: 18%;
+  right: 30%;
+  transform: rotate(15deg);
+}
+
+.heart-two {
+  bottom: 19%;
+  left: 6%;
+  color: #d99582;
+  transform: rotate(-12deg);
+}
+
+/* Tiny extra sparkles */
+
+.confetti-spark {
+  color: #d5b34c;
+  font-size: 19px;
+}
+
+.spark-one {
+  top: 42%;
+  right: 8%;
+}
+
+.spark-two {
+  bottom: 35%;
+  left: 12%;
+  color: #739aa8;
+}
+
+/* Keep confetti behind the actual content */
+
+.bids-playful .bids-inner {
+  position: relative;
+  z-index: 1;
+}
+
+/* Smaller decorative pieces on mobile */
+
+@media (max-width: 760px) {
+
+  .confetti-ribbon {
+    transform-origin: center;
+    opacity: .48;
+  }
+
+  .ribbon-one {
+    top: 8%;
+    left: -12px;
+    transform: rotate(-30deg) scale(.55);
+  }
+
+  .ribbon-two {
+    top: 22%;
+    right: -15px;
+    transform: rotate(28deg) scale(.55);
+  }
+
+  .ribbon-three {
+    top: 55%;
+    left: -15px;
+    transform: rotate(35deg) scale(.5);
+  }
+
+  .ribbon-four {
+    top: 73%;
+    right: -15px;
+    transform: rotate(-25deg) scale(.5);
+  }
+
+  .ribbon-five,
+  .ribbon-six {
+    display: none;
+  }
+
+  .confetti-star {
+    font-size: 22px;
+    opacity: .65;
+  }
+
+  .confetti-heart {
+    font-size: 28px;
+    opacity: .65;
+  }
+
+  .star-two {
+    font-size: 28px;
+  }
+
+  .heart-one {
+    right: 5%;
+  }
+
+}
