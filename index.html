@@ -286,8 +286,12 @@
     <section class="section-wrap commission-section" id="commissions">
       <div class="commission-copy">
         <p class="eyebrow">03 / made for you</p>
-        <h2>Have a feeling<br>you want <em>drawn?</em></h2>
-        <p>Tell us a little about the piece you’re imagining. We’ll read your inquiry and get back to you through the contact method you choose.</p>
+       <h2>A little idea.<br>Made <em>just for you.</em></h2>
+    <p>
+  Every artwork is unique, so commission rates depend on
+  the details of your request. We'll discuss the pricing
+  with you before confirming your commission.
+</p>
         <div class="commission-points">
           <span><b>01</b> Share your idea</span>
           <span><b>02</b> We discuss details</span>
@@ -313,21 +317,30 @@
 
         <div class="form-row">
           <label for="artist-choice">Who would you like to work with?</label>
-          <select id="artist-choice" name="artist" required>
-            <option value="" disabled selected>Choose an artist</option>
-            <option value="Yua — painting">Yua · painting</option>
-            <option value="CJ — pencil drawing">CJ · pencil drawing</option>
-            <option value="Either / not sure yet">Either / not sure yet</option>
-          </select>
+        <select id="artist-choice" name="artist" required>
+  <option value="" disabled selected>Choose an artist</option>
+  <option value="Yua — painting">Yua · Painting</option>
+  <option value="CJ — pencil drawing">CJ · Pencil Drawing</option>
+</select>
         </div>
-
+<div class="form-row">
+  <label for="client-budget">Preferred budget (optional)</label>
+  <input
+    id="client-budget"
+    name="budget"
+    type="text"
+    placeholder="Your estimated budget"
+  >
+</div>
         <div class="form-row">
           <label for="project-details">Tell us about your idea</label>
           <textarea id="project-details" name="details" rows="4" placeholder="Subject, size, mood, deadline, budget — anything you know so far…" required></textarea>
         </div>
 
         <button class="button button-dark form-submit" type="submit">Prepare inquiry <span aria-hidden="true">↗</span></button>
-        <p class="form-hint" id="form-hint">This form prepares your message and opens Messenger; no details are sent automatically.</p>
+      <p class="form-hint" id="form-hint">
+  Your inquiry will be prepared and opened in the Instagram account of your chosen artist. You’ll need to paste the copied message into the chat.
+</p>
       </form>
     </section>
 
