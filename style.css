@@ -4130,3 +4130,197 @@ body.lightbox-open {
       0 2px 7px rgba(38,56,62,.06);
   }
 }
+
+/* ==========================================================
+   AEMI ART BIDS — FINAL LAYOUT CORRECTIONS
+   Correct the old two-column layout without affecting
+   the rest of the website.
+   ========================================================== */
+
+
+/* ----------------------------------------------------------
+   1. MAIN SECTION CONTAINER
+   ---------------------------------------------------------- */
+
+.bids-playful .bids-inner {
+  display: block;
+  width: min(100% - 48px, 1120px);
+  margin-inline: auto;
+}
+
+
+/* ----------------------------------------------------------
+   2. MAIN HEADING
+   ---------------------------------------------------------- */
+
+.bids-playful .bids-heading {
+  width: 100%;
+  max-width: 650px;
+  margin: 0 auto 65px;
+  text-align: center;
+}
+
+.bids-playful .bids-heading h2 {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.bids-playful .bids-heading > p:not(.eyebrow) {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/* ----------------------------------------------------------
+   3. ARTIST CARDS — DESKTOP
+   ---------------------------------------------------------- */
+
+.bids-playful .bid-cards {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 35px;
+}
+
+.bids-playful .bid-play-card {
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+  box-sizing: border-box;
+}
+
+
+/* ----------------------------------------------------------
+   4. BOTTOM SPECIAL-SERIES NOTE
+   ---------------------------------------------------------- */
+
+.bids-playful .bids-bottom-note {
+  display: flex;
+  width: min(100%, 850px);
+  max-width: 850px;
+  margin: 70px auto 0;
+  box-sizing: border-box;
+}
+
+
+/* ----------------------------------------------------------
+   5. FOOTER CAPTION
+   ---------------------------------------------------------- */
+
+.bids-playful .bids-footer-caption {
+  display: block;
+  width: 100%;
+  margin: 28px auto 0;
+  text-align: center;
+}
+
+/* ==========================================================
+   AEMI ART BIDS — FINAL RESPONSIVE LAYOUT
+   ========================================================== */
+
+
+/* TABLET */
+
+@media (max-width: 900px) {
+
+  .bids-playful .bids-inner {
+    width: min(100% - 40px, 760px);
+  }
+
+  .bids-playful .bid-cards {
+    gap: 25px;
+  }
+
+  .bids-playful .bid-play-card {
+    padding: 27px 23px;
+  }
+
+}
+
+
+/* MOBILE */
+
+@media (max-width: 760px) {
+
+  .bids-playful {
+    padding: 85px 0 75px;
+  }
+
+  .bids-playful .bids-inner {
+    width: calc(100% - 36px);
+  }
+
+  .bids-playful .bids-heading {
+    margin-bottom: 42px;
+  }
+
+  .bids-playful .bids-heading h2 {
+    font-size: clamp(39px, 10vw, 54px);
+  }
+
+  .bids-playful .bids-heading > p:not(.eyebrow) {
+    max-width: 440px;
+    font-size: 13px;
+  }
+
+  .bids-playful .bid-cards {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 30px;
+  }
+
+  .bids-playful .bid-play-card {
+    width: 100%;
+    padding: 27px 23px;
+  }
+
+  .bids-playful .bids-bottom-note {
+    margin-top: 55px;
+    padding: 20px 18px;
+    gap: 12px;
+  }
+
+  .bids-playful .bids-footer-caption {
+    margin-top: 24px;
+    font-size: 11px;
+  }
+
+}
+
+
+/* SMALL MOBILE */
+
+@media (max-width: 380px) {
+
+  .bids-playful .bids-inner {
+    width: calc(100% - 28px);
+  }
+
+  .bids-playful .bid-play-card {
+    padding: 23px 17px;
+  }
+
+  .bids-playful .bid-card-top {
+    gap: 8px;
+  }
+
+  .bids-playful .bid-open-label {
+    padding: 7px 9px;
+    font-size: 8px;
+    letter-spacing: .5px;
+  }
+
+  .bids-playful .bid-social-links {
+    gap: 7px;
+  }
+
+  .bids-playful .bid-social-links a {
+    padding: 10px 8px;
+    font-size: 10px;
+  }
+
+  .bids-playful .bids-bottom-note {
+    padding: 18px 14px;
+  }
+
+}
