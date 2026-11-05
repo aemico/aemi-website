@@ -4324,3 +4324,1290 @@ body.lightbox-open {
   }
 
 }
+/* ==========================================================
+   AEMI ART BIDS — PAPER & SCRAPBOOK BACKGROUND
+   Handmade paper, scattered confetti, tiny stars and
+   soft pastel cutouts.
+   ========================================================== */
+
+
+/* ----------------------------------------------------------
+   1. PAPER BASE
+   ---------------------------------------------------------- */
+
+.bids-playful {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+
+  background-color: #fbf8ef;
+
+  background-image:
+    /* Soft warm paper lighting */
+    radial-gradient(
+      ellipse at 50% 45%,
+      rgba(255, 255, 255, 0.85) 0%,
+      rgba(255, 255, 255, 0.35) 45%,
+      transparent 78%
+    ),
+
+    /* Butter-yellow paper wash */
+    radial-gradient(
+      ellipse at 4% 18%,
+      rgba(244, 229, 143, 0.42) 0%,
+      transparent 30%
+    ),
+
+    /* Powder-blue paper wash */
+    radial-gradient(
+      ellipse at 96% 68%,
+      rgba(185, 216, 227, 0.48) 0%,
+      transparent 32%
+    ),
+
+    /* Subtle ivory paper shading */
+    linear-gradient(
+      135deg,
+      #fbf8ef 0%,
+      #f8f4e9 48%,
+      #f4f2e8 100%
+    );
+}
+
+
+/* ----------------------------------------------------------
+   2. PAPER GRAIN + SCATTERED CONFETTI
+   ---------------------------------------------------------- */
+
+.bids-playful::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+
+  pointer-events: none;
+
+  opacity: 0.78;
+
+  background-image:
+
+    /* Tiny powder-blue confetti dots */
+    radial-gradient(
+      circle,
+      rgba(115, 154, 168, 0.65) 1.5px,
+      transparent 2px
+    ),
+
+    /* Butter-yellow confetti dots */
+    radial-gradient(
+      circle,
+      rgba(215, 185, 76, 0.75) 2px,
+      transparent 2.6px
+    ),
+
+    /* Muted red confetti dots */
+    radial-gradient(
+      circle,
+      rgba(164, 105, 100, 0.48) 1.5px,
+      transparent 2px
+    ),
+
+    /* Small paper-like diamonds */
+    conic-gradient(
+      from 45deg,
+      transparent 0deg 75deg,
+      rgba(115, 154, 168, 0.45) 75deg 105deg,
+      transparent 105deg 360deg
+    ),
+
+    /* Fine paper fibers */
+    repeating-linear-gradient(
+      0deg,
+      rgba(94, 83, 61, 0.018) 0px,
+      rgba(94, 83, 61, 0.018) 1px,
+      transparent 1px,
+      transparent 5px
+    ),
+
+    repeating-linear-gradient(
+      90deg,
+      rgba(94, 83, 61, 0.014) 0px,
+      rgba(94, 83, 61, 0.014) 1px,
+      transparent 1px,
+      transparent 6px
+    );
+
+  background-size:
+    83px 97px,
+    121px 113px,
+    157px 139px,
+    103px 103px,
+    100% 100%,
+    100% 100%;
+
+  background-position:
+    12px 18px,
+    54px 63px,
+    91px 29px,
+    35px 45px,
+    center,
+    center;
+}
+
+
+/* ----------------------------------------------------------
+   3. SCATTERED SCRAPBOOK STARS
+   ---------------------------------------------------------- */
+
+.bids-playful::after {
+  content: "✦";
+
+  position: absolute;
+  z-index: 0;
+
+  top: 75px;
+  left: 5%;
+
+  color: #739aa8;
+
+  font-family: Georgia, serif;
+  font-size: 25px;
+  line-height: 1;
+
+  pointer-events: none;
+
+  opacity: 0.75;
+
+  text-shadow:
+
+    /* Upper-right stars */
+    170px 85px 0 rgba(215, 185, 76, 0.85),
+    340px 15px 0 rgba(115, 154, 168, 0.65),
+    530px 115px 0 rgba(164, 105, 100, 0.60),
+
+    /* Middle stars */
+    690px 45px 0 rgba(215, 185, 76, 0.75),
+    850px 160px 0 rgba(115, 154, 168, 0.70),
+    1020px 70px 0 rgba(164, 105, 100, 0.55),
+
+    /* Lower stars */
+    140px 650px 0 rgba(115, 154, 168, 0.70),
+    380px 730px 0 rgba(215, 185, 76, 0.85),
+    620px 680px 0 rgba(164, 105, 100, 0.60),
+    870px 760px 0 rgba(115, 154, 168, 0.65),
+    1080px 650px 0 rgba(215, 185, 76, 0.75);
+
+}
+
+
+/* ----------------------------------------------------------
+   4. KEEP ALL CONTENT ABOVE THE DECORATIONS
+   ---------------------------------------------------------- */
+
+.bids-playful .bids-inner {
+  position: relative;
+  z-index: 1;
+}
+
+
+/* ----------------------------------------------------------
+   5. KEEP THE CHECKERED SCRAPBOOK EDGES
+   ---------------------------------------------------------- */
+
+.bids-playful .bids-inner::before,
+.bids-playful .bids-inner::after {
+  z-index: -1;
+}
+
+
+/* ----------------------------------------------------------
+   6. PREVENT DECORATIONS FROM BLOCKING INTERACTIONS
+   ---------------------------------------------------------- */
+
+.bids-playful .bid-play-card,
+.bids-playful .bids-heading,
+.bids-playful .bids-bottom-note {
+  position: relative;
+}
+
+
+/* ----------------------------------------------------------
+   7. TABLET BACKGROUND ADJUSTMENTS
+   ---------------------------------------------------------- */
+
+@media (max-width: 900px) {
+
+  .bids-playful::after {
+    left: 3%;
+    opacity: 0.55;
+
+    text-shadow:
+      130px 100px 0 rgba(215, 185, 76, 0.8),
+      350px 35px 0 rgba(115, 154, 168, 0.7),
+      550px 160px 0 rgba(164, 105, 100, 0.5),
+      100px 700px 0 rgba(115, 154, 168, 0.65),
+      430px 760px 0 rgba(215, 185, 76, 0.8);
+  }
+
+}
+
+
+/* ----------------------------------------------------------
+   8. MOBILE BACKGROUND ADJUSTMENTS
+   ---------------------------------------------------------- */
+
+@media (max-width: 760px) {
+
+  .bids-playful::before {
+    opacity: 0.55;
+
+    background-size:
+      67px 83px,
+      103px 97px,
+      131px 117px,
+      90px 90px,
+      100% 100%,
+      100% 100%;
+  }
+
+  .bids-playful::after {
+    top: 45px;
+    left: 4%;
+    font-size: 20px;
+    opacity: 0.55;
+
+    text-shadow:
+      130px 110px 0 rgba(215, 185, 76, 0.8),
+      280px 45px 0 rgba(115, 154, 168, 0.7),
+      50px 620px 0 rgba(164, 105, 100, 0.55),
+      280px 850px 0 rgba(215, 185, 76, 0.8),
+      110px 1200px 0 rgba(115, 154, 168, 0.7),
+      300px 1500px 0 rgba(164, 105, 100, 0.5);
+  }
+
+}
+
+/* ==========================================================
+   AEMI ART BIDS — HANDMADE SCRAPBOOK COLLAGE
+   Complete Art Bids styling
+   ========================================================== */
+
+.bids-playful {
+  --paper: #fbf7eb;
+  --paper-shadow: rgba(76, 63, 43, .15);
+  --tape-blue: rgba(151, 190, 207, .78);
+  --tape-yellow: rgba(238, 211, 119, .78);
+  --scrap-blue: #c8e0e9;
+  --scrap-yellow: #f7e6a1;
+  --scrap-red: #d99a86;
+
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: 100px 0 85px;
+  color: var(--ink);
+  background-color: var(--paper);
+
+  background-image:
+    radial-gradient(
+      ellipse at 48% 45%,
+      rgba(255,255,255,.82),
+      transparent 72%
+    ),
+    radial-gradient(
+      ellipse at 0% 35%,
+      rgba(185,216,227,.24),
+      transparent 32%
+    ),
+    radial-gradient(
+      ellipse at 100% 72%,
+      rgba(244,229,143,.28),
+      transparent 34%
+    ),
+    repeating-linear-gradient(
+      0deg,
+      rgba(104,88,63,.018) 0px,
+      rgba(104,88,63,.018) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+}
+
+/* ----------------------------------------------------------
+   BACKGROUND COLLAGE — TORN PAPER CORNERS
+   ---------------------------------------------------------- */
+
+.bids-playful::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  pointer-events: none;
+
+  background:
+    /* Upper-left blue torn paper */
+    linear-gradient(
+      145deg,
+      transparent 0 4%,
+      rgba(185,216,227,.78) 4.2% 10%,
+      transparent 10.3% 100%
+    ),
+
+    /* Upper-right yellow paper */
+    linear-gradient(
+      225deg,
+      transparent 0 5%,
+      rgba(244,229,143,.65) 5.2% 11%,
+      transparent 11.3% 100%
+    ),
+
+    /* Lower-left blue paper */
+    linear-gradient(
+      35deg,
+      transparent 0 3%,
+      rgba(185,216,227,.72) 3.2% 10%,
+      transparent 10.3% 100%
+    ),
+
+    /* Lower-right yellow paper */
+    linear-gradient(
+      325deg,
+      transparent 0 4%,
+      rgba(244,229,143,.62) 4.2% 11%,
+      transparent 11.3% 100%
+    );
+}
+
+/* ----------------------------------------------------------
+   BACKGROUND COLLAGE — CURLY CONFETTI AND HAND-DRAWN STARS
+   ---------------------------------------------------------- */
+
+.bids-playful::after {
+  content:
+    "〰     ✦        ♡       〰       ✳";
+  white-space: pre;
+
+  position: absolute;
+  z-index: 0;
+  top: 45px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  padding: 0 4%;
+  box-sizing: border-box;
+
+  color: #739aa8;
+  font-family: Georgia, serif;
+  font-size: 27px;
+  line-height: 1;
+
+  pointer-events: none;
+  opacity: .68;
+
+  background-image:
+    radial-gradient(circle, #d99a86 2px, transparent 3px),
+    radial-gradient(circle, #d5b64f 2px, transparent 3px),
+    radial-gradient(circle, #739aa8 2px, transparent 3px);
+
+  background-size:
+    117px 139px,
+    163px 151px,
+    193px 177px;
+
+  background-position:
+    25px 40px,
+    78px 100px,
+    130px 20px;
+
+  background-repeat: repeat;
+}
+
+/* ----------------------------------------------------------
+   CHECKERBOARD TOP AND BOTTOM EDGES
+   ---------------------------------------------------------- */
+
+.bids-playful .bids-inner {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: min(100% - 48px, 1120px);
+  margin-inline: auto;
+  isolation: isolate;
+}
+
+.bids-playful .bids-inner::before,
+.bids-playful .bids-inner::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  width: 100vw;
+  height: 25px;
+  transform: translateX(-50%);
+  opacity: .78;
+  pointer-events: none;
+
+  background-image:
+    repeating-conic-gradient(
+      #b9d8e3 0% 25%,
+      #fbf8ef 0% 50%
+    );
+
+  background-size: 30px 30px;
+}
+
+.bids-playful .bids-inner::before {
+  top: -100px;
+}
+
+.bids-playful .bids-inner::after {
+  bottom: -80px;
+}
+
+/* ----------------------------------------------------------
+   MAIN HEADING
+   ---------------------------------------------------------- */
+
+.bids-playful .bids-heading {
+  position: relative;
+  width: 100%;
+  max-width: 650px;
+  margin: 0 auto 65px;
+  text-align: center;
+}
+
+.bids-sticker {
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  margin-bottom: 22px;
+
+  background: #f4df91;
+  color: var(--ink);
+
+  border: 1px solid rgba(87,74,48,.22);
+  border-radius: 2px;
+
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+
+  transform: rotate(-5deg);
+
+  box-shadow:
+    2px 4px 7px rgba(55,47,34,.13),
+    inset 0 0 10px rgba(255,255,255,.25);
+}
+
+.bids-sticker::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0 3px,
+    rgba(130,100,45,.035) 3px 4px
+  );
+  pointer-events: none;
+}
+
+.bids-playful .bids-heading .eyebrow {
+  margin-bottom: 15px;
+  letter-spacing: 3px;
+}
+
+.bids-playful .bids-heading h2 {
+  margin: 0 0 18px;
+  font-family: "Playfair Display", serif;
+  font-size: clamp(43px, 6vw, 72px);
+  line-height: .99;
+  font-weight: 500;
+  letter-spacing: -2px;
+}
+
+.bids-playful .bids-heading h2 em {
+  color: var(--blue-deep);
+}
+
+.bids-playful .bids-heading > p:not(.eyebrow) {
+  max-width: 490px;
+  margin: 0 auto;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.85;
+}
+
+.bids-heading-doodle {
+  display: block;
+  margin-top: 10px;
+  color: var(--blue-deep);
+  font-size: 38px;
+  transform: rotate(25deg);
+}
+
+/* ----------------------------------------------------------
+   ARTIST CARDS — PAPER SHEETS
+   ---------------------------------------------------------- */
+
+.bids-playful .bid-cards {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 32px;
+}
+
+.bids-playful .bid-play-card {
+  position: relative;
+  isolation: isolate;
+  overflow: visible;
+
+  display: flex;
+  flex-direction: column;
+
+  min-width: 0;
+  min-height: 0;
+  padding: 32px;
+
+  border: 1px solid rgba(65,83,85,.16);
+  border-radius: 5px 13px 7px 11px;
+
+  box-shadow:
+    0 9px 18px rgba(58,54,43,.12),
+    0 2px 5px rgba(58,54,43,.06);
+
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease;
+}
+
+/* Slightly irregular paper edges */
+
+.bids-playful .bid-card-yua {
+  background-color: #cfe5ec;
+  background-image:
+    radial-gradient(ellipse at 20% 20%, rgba(255,255,255,.3), transparent 65%),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 5px,
+      rgba(65,105,119,.025) 5px 6px
+    );
+
+  clip-path: polygon(
+    1% 0%, 98% 1%, 100% 3%,
+    99.5% 97%, 97% 100%,
+    2% 99%, 0% 96%, .5% 3%
+  );
+}
+
+.bids-playful .bid-card-cj {
+  background-color: #f8e9b3;
+  background-image:
+    radial-gradient(ellipse at 80% 15%, rgba(255,255,255,.34), transparent 65%),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 5px,
+      rgba(130,103,48,.025) 5px 6px
+    );
+
+  clip-path: polygon(
+    1% 1%, 97% 0%, 100% 4%,
+    99% 97%, 96% 100%,
+    2% 99%, 0% 96%, .5% 3%
+  );
+}
+
+.bids-playful .bid-play-card:hover {
+  transform: translateY(-4px) rotate(-.2deg);
+  box-shadow:
+    0 15px 25px rgba(58,54,43,.15),
+    0 3px 8px rgba(58,54,43,.07);
+}
+
+/* ----------------------------------------------------------
+   WASHI TAPE — CARD CORNERS
+   ---------------------------------------------------------- */
+
+.bids-playful .bid-play-card::before {
+  content: "";
+  position: absolute;
+  z-index: 5;
+
+  top: -10px;
+  left: 24px;
+
+  width: 90px;
+  height: 27px;
+
+  background-color: var(--tape-blue);
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      rgba(255,255,255,.23) 0 4px,
+      transparent 4px 8px
+    );
+
+  opacity: .9;
+  transform: rotate(-9deg);
+
+  box-shadow: 0 2px 4px rgba(50,50,40,.08);
+
+  pointer-events: none;
+}
+
+.bids-playful .bid-card-cj::before {
+  left: auto;
+  right: 25px;
+
+  background-color: var(--tape-yellow);
+  transform: rotate(8deg);
+}
+
+/* Tape on opposite lower corners */
+
+.bids-playful .bid-play-card::after {
+  content: "";
+  position: absolute;
+  z-index: 4;
+
+  bottom: 10px;
+  left: 20px;
+
+  width: 65px;
+  height: 20px;
+
+  background: rgba(255,255,255,.35);
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      rgba(115,154,168,.20) 0 3px,
+      transparent 3px 7px
+    );
+
+  transform: rotate(-25deg);
+  pointer-events: none;
+}
+
+.bids-playful .bid-card-cj::after {
+  left: auto;
+  right: 20px;
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      rgba(215,185,76,.28) 0 3px,
+      transparent 3px 7px
+    );
+  transform: rotate(22deg);
+}
+
+/* Keep the actual card content above decorative elements */
+
+.bids-play-card > *:not(.bid-decor) {
+  position: relative;
+  z-index: 6;
+}
+
+.bid-decor {
+  position: absolute;
+  z-index: 1;
+  top: 95px;
+  right: 22px;
+  width: 125px;
+  height: 125px;
+  pointer-events: none;
+}
+
+.bid-decor-star {
+  position: absolute;
+  top: 0;
+  right: 8px;
+  color: #739aa8;
+  font-size: 55px;
+  transform: rotate(15deg);
+}
+
+.bid-decor-circle {
+  position: absolute;
+  right: 10px;
+  bottom: 0;
+  width: 75px;
+  height: 75px;
+  border: 2px dashed currentColor;
+  border-radius: 50%;
+  opacity: .4;
+}
+
+.bid-decor-spark {
+  position: absolute;
+  left: 0;
+  bottom: 10px;
+  font-size: 35px;
+  color: #b79a36;
+}
+
+.bid-decor-cj .bid-decor-star {
+  color: #d1ae43;
+  transform: rotate(-12deg);
+}
+
+.bid-decor-cj .bid-decor-circle {
+  border-radius: 42% 58% 61% 39%;
+}
+
+/* ----------------------------------------------------------
+   ARTIST CARD TOP
+   ---------------------------------------------------------- */
+
+.bids-playful .bid-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.bids-playful .bid-avatar {
+  display: grid;
+  place-items: center;
+
+  width: 55px;
+  height: 55px;
+
+  border: 1px solid rgba(38,56,62,.15);
+  border-radius: 50%;
+
+  background: rgba(255,255,255,.65);
+  color: var(--ink);
+
+  font-family: "Playfair Display", serif;
+  font-size: 25px;
+  font-weight: 500;
+
+  transform: rotate(-7deg);
+
+  box-shadow: 0 3px 8px rgba(38,56,62,.08);
+}
+
+.bid-card-cj .bid-avatar {
+  background: rgba(255,255,255,.62);
+  transform: rotate(7deg);
+}
+
+.bids-playful .bid-open-label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  padding: 9px 14px;
+
+  border: 1px solid rgba(38,56,62,.35);
+  border-radius: 3px;
+
+  background: rgba(255,255,255,.48);
+  color: var(--ink);
+
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.bids-playful .bid-open-label i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #739b78;
+}
+
+/* ----------------------------------------------------------
+   CARD TYPOGRAPHY
+   ---------------------------------------------------------- */
+
+.bids-playful .bid-card .eyebrow {
+  margin-bottom: 10px;
+  font-size: 9px;
+  letter-spacing: 2px;
+}
+
+.bids-playful .bid-card h3 {
+  max-width: 330px;
+  margin: 0 0 12px;
+
+  font-family: "Playfair Display", serif;
+  font-size: clamp(28px, 3vw, 38px);
+  font-weight: 500;
+  line-height: 1.12;
+}
+
+.bid-description {
+  max-width: 340px;
+  min-height: 58px;
+  margin: 0 0 23px;
+
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+/* ----------------------------------------------------------
+   AUCTION TICKET — CREAM PAPER
+   ---------------------------------------------------------- */
+
+.bid-ticket {
+  position: relative;
+  padding: 19px 20px 17px;
+  margin: 0 0 19px;
+
+  border: 1px dashed rgba(38,56,62,.55);
+  border-radius: 3px;
+
+  background-color: #fffaf0;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 5px,
+      rgba(130,105,70,.025) 5px 6px
+    );
+
+  box-shadow:
+    0 4px 9px rgba(58,54,43,.08),
+    0 1px 3px rgba(58,54,43,.04);
+
+  text-align: center;
+}
+
+.ticket-label {
+  display: inline-block;
+  padding: 5px 10px;
+
+  border-radius: 2px;
+  background: var(--ink);
+  color: white;
+
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.ticket-price {
+  margin-top: 8px;
+
+  font-family: "Playfair Display", serif;
+  font-size: 65px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.ticket-price span {
+  font-size: 34px;
+  vertical-align: 12px;
+}
+
+.ticket-caption {
+  display: block;
+  margin-top: 3px;
+
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.ticket-divider {
+  width: 100%;
+  height: 1px;
+  margin: 15px 0;
+
+  background: rgba(38,56,62,.2);
+}
+
+.ticket-increment {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.ticket-increment span {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.ticket-increment strong {
+  font-family: "Playfair Display", serif;
+  font-size: 25px;
+}
+
+.ticket-perforation {
+  position: absolute;
+  top: 50%;
+  left: -9px;
+
+  width: 17px;
+  height: 17px;
+
+  border: 1px dashed rgba(38,56,62,.5);
+  border-radius: 50%;
+
+  background: #cfe5ec;
+  transform: translateY(-50%);
+}
+
+.bid-card-cj .ticket-perforation {
+  background: #f8e9b3;
+}
+
+/* ----------------------------------------------------------
+   SPECIAL SERIES NOTE INSIDE EACH CARD
+   ---------------------------------------------------------- */
+
+.bid-card-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+
+  padding: 11px 12px;
+  margin-bottom: 23px;
+
+  border: 1px solid rgba(38,56,62,.08);
+  border-radius: 3px;
+
+  background: rgba(255,255,255,.38);
+}
+
+.bid-card-note > span {
+  color: var(--blue-deep);
+  font-size: 18px;
+}
+
+.bid-card-note p {
+  margin: 0;
+  color: var(--ink);
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+/* ----------------------------------------------------------
+   SOCIAL LINKS
+   ---------------------------------------------------------- */
+
+.bid-social-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-top: auto;
+  margin-bottom: 12px;
+
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.bid-social-heading > span:last-child {
+  font-size: 20px;
+}
+
+.bid-social-links {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.bid-social-links a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  min-width: 0;
+  padding: 11px;
+
+  border: 1px solid rgba(38,56,62,.35);
+  border-radius: 4px;
+
+  background: rgba(255,250,240,.83);
+  color: var(--ink);
+
+  font-size: 11px;
+  font-weight: 700;
+  text-decoration: none;
+
+  transition:
+    transform .2s ease,
+    background .2s ease,
+    box-shadow .2s ease;
+}
+
+.bid-social-links a:hover {
+  background: white;
+  transform: translateY(-2px);
+  box-shadow: 0 3px 7px rgba(38,56,62,.08);
+}
+
+.bid-social-icon {
+  display: grid;
+  place-items: center;
+
+  width: 23px;
+  height: 23px;
+  flex-shrink: 0;
+
+  border-radius: 50%;
+  background: var(--yellow);
+
+  font-size: 15px;
+}
+
+.bid-social-links a:nth-child(2) .bid-social-icon {
+  background: var(--blue-mid);
+  font-family: Arial, sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.bid-social-arrow {
+  margin-left: auto;
+  font-size: 15px;
+}
+
+.bid-card-number {
+  display: block;
+  margin-top: 20px;
+
+  color: rgba(38,56,62,.55);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-align: right;
+}
+
+/* ----------------------------------------------------------
+   BOTTOM SPECIAL-SERIES PAPER NOTE
+   ---------------------------------------------------------- */
+
+.bids-playful .bids-bottom-note {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  width: min(100%, 850px);
+  max-width: 850px;
+
+  padding: 24px 30px;
+  margin: 65px auto 20px;
+
+  border: 1px solid rgba(38,56,62,.22);
+  border-radius: 4px 8px 5px 9px;
+
+  background-color: #f7e7a8;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 5px,
+      rgba(130,105,70,.025) 5px 6px
+    );
+
+  box-shadow:
+    0 8px 17px rgba(58,54,43,.11),
+    0 2px 4px rgba(58,54,43,.05);
+}
+
+/* Washi tape across the note */
+
+.bids-playful .bids-bottom-note::before {
+  content: "";
+  position: absolute;
+  top: -11px;
+  left: 50%;
+
+  width: 100px;
+  height: 25px;
+
+  background-color: rgba(219,190,112,.78);
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      rgba(255,255,255,.23) 0 4px,
+      transparent 4px 8px
+    );
+
+  transform: translateX(-50%) rotate(2deg);
+  box-shadow: 0 2px 4px rgba(50,50,40,.08);
+}
+
+.bids-bottom-star {
+  flex-shrink: 0;
+  color: var(--ink);
+  font-size: 38px;
+}
+
+.bids-bottom-title {
+  margin: 0 0 6px;
+
+  font-family: "Playfair Display", serif;
+  font-size: 21px;
+  font-weight: 600;
+}
+
+.bids-playful .bids-bottom-note div > p:last-child {
+  margin: 0;
+  color: var(--ink);
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.bids-bottom-doodle {
+  margin-left: auto;
+  color: var(--blue-deep);
+  font-size: 43px;
+  transform: rotate(12deg);
+}
+
+.bids-playful .bids-footer-caption {
+  display: block;
+  width: 100%;
+  margin: 25px auto 0;
+
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.8;
+  text-align: center;
+}
+
+/* ----------------------------------------------------------
+   RESPONSIVE — TABLET
+   ---------------------------------------------------------- */
+
+@media (max-width: 900px) {
+
+  .bids-playful .bids-inner {
+    width: min(100% - 40px, 760px);
+  }
+
+  .bids-playful .bid-cards {
+    gap: 22px;
+  }
+
+  .bids-playful .bid-play-card {
+    padding: 26px 22px;
+  }
+
+}
+
+/* ----------------------------------------------------------
+   RESPONSIVE — MOBILE
+   ---------------------------------------------------------- */
+
+@media (max-width: 760px) {
+
+  .bids-playful {
+    padding: 80px 0 75px;
+  }
+
+  .bids-playful .bids-inner {
+    width: calc(100% - 36px);
+  }
+
+  .bids-playful .bids-heading {
+    margin-bottom: 43px;
+  }
+
+  .bids-playful .bids-heading h2 {
+    font-size: clamp(39px, 10vw, 54px);
+    letter-spacing: -1px;
+  }
+
+  .bids-playful .bids-heading > p:not(.eyebrow) {
+    max-width: 440px;
+    font-size: 13px;
+  }
+
+  .bids-playful .bid-cards {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 30px;
+  }
+
+  .bids-playful .bid-play-card {
+    padding: 27px 23px;
+  }
+
+  .bids-playful .bid-card h3 {
+    font-size: 34px;
+  }
+
+  .bid-decor {
+    top: 100px;
+    right: 12px;
+    opacity: .65;
+    transform: scale(.8);
+    transform-origin: top right;
+  }
+
+  .bids-playful .bids-bottom-note {
+    gap: 12px;
+    padding: 22px 17px;
+    margin-top: 55px;
+  }
+
+  .bids-bottom-star {
+    font-size: 27px;
+  }
+
+  .bids-bottom-title {
+    font-size: 17px;
+  }
+
+  .bids-playful .bids-bottom-note div > p:last-child {
+    font-size: 11px;
+  }
+
+  .bids-bottom-doodle {
+    display: none;
+  }
+
+  .bids-playful::after {
+    font-size: 21px;
+    opacity: .45;
+  }
+
+}
+
+/* ----------------------------------------------------------
+   RESPONSIVE — SMALL PHONES
+   ---------------------------------------------------------- */
+
+@media (max-width: 380px) {
+
+  .bids-playful .bids-inner {
+    width: calc(100% - 28px);
+  }
+
+  .bids-playful .bid-play-card {
+    padding: 23px 17px;
+  }
+
+  .bids-playful .bid-open-label {
+    padding: 7px 9px;
+    font-size: 8px;
+    letter-spacing: .5px;
+  }
+
+  .bid-social-links {
+    gap: 7px;
+  }
+
+  .bid-social-links a {
+    padding: 10px 8px;
+    font-size: 10px;
+  }
+
+  .ticket-increment strong {
+    font-size: 22px;
+  }
+
+  .bids-playful .bids-bottom-note {
+    padding: 19px 14px;
+  }
+
+}
