@@ -295,25 +295,7 @@ document.addEventListener("DOMContentLoaded", () => {
         details
       ].join("\n");
 
-      // Open the selected artist's Instagram DM.
-      let instagramWindow;
-
-const isAndroid = /Android/i.test(navigator.userAgent);
-
-if (isAndroid) {
-  const username = artist.startsWith("Yua") ? "yxuas_" : "artby_cjj";
-
-  instagramWindow = window.open(
-    `intent://instagram.com/${username}/#Intent;scheme=https;package=com.instagram.android;end`,
-    "_blank"
-  );
-} else {
-  instagramWindow = window.open(
-    `https://www.instagram.com/${artist.startsWith("Yua") ? "yxuas_" : "artby_cjj"}/`,
-    "_blank"
-  );
-}
-
+            // Copy the inquiry BEFORE opening Instagram.
       let copied = false;
 
       try {
@@ -325,15 +307,16 @@ if (isAndroid) {
         copied = false;
       }
 
-      // Fallback if clipboard access is unavailable.
+      // Fallback clipboard method.
       if (!copied) {
         const temporaryField = document.createElement("textarea");
 
         temporaryField.value = message;
         temporaryField.style.position = "fixed";
-        temporaryField.style.opacity = "0";
+        temporaryField.style.left = "-9999px";
 
         document.body.appendChild(temporaryField);
+        temporaryField.focus();
         temporaryField.select();
 
         try {
@@ -345,20 +328,31 @@ if (isAndroid) {
         temporaryField.remove();
       }
 
-     if (formHint) {
-  if (copied && instagramWindow) {
-    formHint.textContent =
-      `Your inquiry is ready! We've copied your message and opened ${artistName}'s Instagram. Just paste it into the chat and send.`;
-  } else if (copied) {
-    formHint.textContent =
-      `Your inquiry is copied! Open ${artistName}'s Instagram, paste your message into the chat, and send.`;
-  } else {
-    formHint.textContent =
-      `Your inquiry is prepared! Please copy the message below, open ${artistName}'s Instagram, and paste it into the chat.`;
-  }
-}
+      // Open the selected artist's Instagram conversation.
+      const username = artist.startsWith("Yua")
+        ? "yxuas_"
+        : "artby_cjj";
 
-      // Display the prepared message as a backup.
+      const instagramURL = `https://ig.me/m/${username}`;
+
+      const instagramWindow = window.open(
+        instagramURL,
+        "_blank"
+      );
+
+      // Show confirmation.
+      if (formHint) {
+        formHint.textContent = copied
+          ? `Your inquiry has been copied! Instagram is opening ${artistName}'s chat. Just paste your message and send.`
+          : `Instagram is opening ${artistName}'s chat. Your message is shown below so you can copy it manually.`;
+
+        if (!instagramWindow) {
+          formHint.textContent +=
+            " If Instagram did not open, tap the Instagram link again.";
+        }
+      }
+
+      // Display a backup copy of the inquiry.
       let preview = document.getElementById("inquiry-preview");
 
       if (!preview) {
