@@ -3346,3 +3346,67 @@ body.lightbox-open {
     background-repeat: no-repeat;
   }
 }
+
+/* =========================================
+   AEMI — FULL-WIDTH HOMEPAGE BACKGROUNDS
+   Keep content centered; extend backgrounds
+   from edge to edge.
+   ========================================= */
+
+/* Sections with backgrounds that were
+   previously limited by .section-wrap */
+.hero,
+.commission-section,
+.contact-section {
+  position: relative;
+  isolation: isolate;
+  background: transparent !important;
+}
+
+/* Full-width background layer */
+.hero::before,
+.commission-section::before,
+.contact-section::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+/* HERO */
+.hero::before {
+  background:
+    radial-gradient(
+      ellipse at 15% 20%,
+      rgba(220, 236, 242, 0.9),
+      transparent 42%
+    ),
+    radial-gradient(
+      ellipse at 85% 80%,
+      rgba(244, 229, 143, 0.42),
+      transparent 38%
+    ),
+    var(--ivory);
+}
+
+/* COMMISSIONS */
+.commission-section::before {
+  background:
+    linear-gradient(
+      120deg,
+      var(--ivory) 0%,
+      var(--ivory) 54%,
+      var(--yellow-light) 54%,
+      var(--yellow-light) 100%
+    );
+}
+
+/* CONTACT */
+.contact-section::before {
+  background: var(--blue-light);
+}
