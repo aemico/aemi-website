@@ -3410,3 +3410,8 @@ body.lightbox-open {
 .contact-section::before {
   background: var(--blue-light);
 }
+/* AEMI — Pastel Yellow Navigation */
+
+.site-header {
+  background: #fbf2c9 !important;
+}
