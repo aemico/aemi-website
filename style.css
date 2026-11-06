@@ -6136,3 +6136,17 @@ body.lightbox-open {
   margin: 18px 0 0;
   font-size: 11px;
 }
+/* A BREATHING ARTIST — FULL-WIDTH BACKGROUND */
+.breathing-section {
+  width: 100%;
+  max-width: none !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  box-sizing: border-box;
+}
+
+/* Keep the text and support card centered */
+.breathing-content {
+  width: min(100% - 48px, 760px);
+  margin-inline: auto;
+}
