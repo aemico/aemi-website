@@ -6191,3 +6191,126 @@ body.lightbox-open {
 .artwork-gallery-button:hover span {
   color: white;
 }
+
+/* A BREATHING ARTIST — COMMUNITY DETAILS */
+
+.breathing-community {
+  max-width: 1050px;
+  margin: 85px auto 0;
+}
+
+.breathing-community-intro {
+  max-width: 650px;
+  margin: 0 auto 38px;
+  text-align: center;
+}
+
+.breathing-community-intro h3,
+.breathing-donation h3 {
+  margin: 14px 0;
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: clamp(27px, 4vw, 38px);
+  font-weight: 400;
+}
+
+.breathing-community-intro > p:last-child,
+.breathing-donation > p:not(.eyebrow) {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.9;
+}
+
+.breathing-support-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.breathing-support-item {
+  padding: 28px 24px;
+  border: 1px solid rgba(115, 154, 168, 0.22);
+  border-radius: 18px;
+  background: rgba(255, 250, 245, 0.72);
+}
+
+.breathing-support-item > span {
+  color: var(--blue-deep);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .12em;
+}
+
+.breathing-support-item h4 {
+  margin: 20px 0 10px;
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 21px;
+  font-weight: 400;
+}
+
+.breathing-support-item p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.breathing-donation {
+  max-width: 650px;
+  margin: 75px auto 0;
+  padding: 42px 32px;
+  border: 1px solid rgba(115, 154, 168, 0.25);
+  border-radius: 24px;
+  background: var(--yellow-light);
+  text-align: center;
+  box-shadow: 0 14px 40px rgba(38, 56, 62, 0.07);
+}
+
+.breathing-gcash-placeholder {
+  margin-top: 28px;
+  padding: 28px 20px;
+  border: 1px dashed var(--blue-deep);
+  border-radius: 14px;
+  background: rgba(255, 250, 245, 0.65);
+}
+
+.breathing-gcash-placeholder span {
+  color: var(--ink);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .12em;
+}
+
+.breathing-gcash-placeholder p {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.breathing-donation .breathing-transparency {
+  margin-top: 24px;
+  font-size: 11px !important;
+}
+
+.breathing-donation .breathing-thanks {
+  margin-top: 20px;
+  color: var(--ink) !important;
+  font-family: var(--serif);
+  font-size: 17px !important;
+}
+
+/* MOBILE */
+@media (max-width: 700px) {
+  .breathing-support-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .breathing-support-item {
+    padding: 24px;
+  }
+
+  .breathing-donation {
+    padding: 32px 20px;
+  }
+}
