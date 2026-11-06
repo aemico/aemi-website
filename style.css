@@ -6150,3 +6150,44 @@ body.lightbox-open {
   width: min(100% - 48px, 760px);
   margin-inline: auto;
 }
+/* ARTWORK PAGE — GALLERY BOX BUTTON */
+
+.artwork-bottom-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  text-align: center;
+}
+
+.artwork-gallery-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 15px 25px;
+  border: 1px solid var(--blue-deep);
+  border-radius: 10px;
+  background: var(--blue-light);
+  color: var(--ink);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-decoration: none;
+  transition: background 180ms ease, color 180ms ease,
+    transform 180ms ease;
+}
+
+.artwork-gallery-button span {
+  color: var(--blue-deep);
+}
+
+.artwork-gallery-button:hover {
+  background: var(--blue-deep);
+  color: white;
+  transform: translateY(-2px);
+}
+
+.artwork-gallery-button:hover span {
+  color: white;
+}
