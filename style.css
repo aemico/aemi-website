@@ -5892,3 +5892,9 @@ body.lightbox-open {
   }
 
 }
+/* REMOVE WASHI TAPE FROM THE TWO BIDDING CARDS */
+
+.bids-playful .bid-play-card::before,
+.bids-playful .bid-play-card::after {
+  display: none !important;
+}
