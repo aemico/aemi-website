@@ -5904,3 +5904,31 @@ body.lightbox-open {
   border-radius: 22px !important;
   clip-path: none !important;
 }
+
+/* ==================================================
+   AEMI ART BIDS — FULL SECTION BACKGROUND IMAGE
+   ================================================== */
+
+.bids-playful {
+  background-image: url("art-bids-background.jpg") !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-color: transparent !important;
+}
+
+/* Remove the old decorative background overlays */
+.bids-playful::before,
+.bids-playful::after {
+  display: none !important;
+}
+
+/* ART BIDS — MOBILE BACKGROUND */
+
+@media (max-width: 760px) {
+  .bids-playful {
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+  }
+}
