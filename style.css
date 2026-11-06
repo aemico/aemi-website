@@ -5932,3 +5932,11 @@ body.lightbox-open {
     background-repeat: no-repeat !important;
   }
 }
+/* REMOVE ART BIDS CONFETTI */
+
+.bids-playful .confetti,
+.bids-playful .confetti-piece,
+.bids-playful .confetti-dot,
+.bids-playful .confetti-shape {
+  display: none !important;
+}
