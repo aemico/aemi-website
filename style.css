@@ -6621,43 +6621,49 @@ body.lightbox-open {
     padding: 75px 22px;
   }
 }
-/* A BREATHING ARTIST — YELLOW NOTE BUBBLE */
-.breathing-note-bubble {
+/* A BREATHING ARTIST — SEPARATE YELLOW BUBBLES */
+.breathing-transparency-bubble,
+.breathing-thanks-bubble {
   width: min(100%, 620px);
-  margin: 32px auto 0;
-  padding: 24px 28px;
+  margin-inline: auto;
+  padding: 21px 28px;
   border: 1px solid rgba(216, 193, 91, 0.45);
-  border-radius: 22px;
+  border-radius: 20px;
   background: linear-gradient(
     145deg,
     #fbf2c9,
     #f4e58f
   );
-  box-shadow: 0 10px 28px rgba(90, 76, 32, 0.07);
+  box-shadow: 0 8px 24px rgba(90, 76, 32, 0.06);
   text-align: center;
 }
 
-.breathing-note-bubble .breathing-transparency {
+.breathing-transparency-bubble {
+  margin-top: 32px;
+}
+
+.breathing-thanks-bubble {
+  margin-top: 16px;
+}
+
+.breathing-transparency-bubble p,
+.breathing-thanks-bubble p {
   margin: 0;
   color: var(--ink);
   font-size: 13px;
   line-height: 1.8;
 }
 
-.breathing-note-bubble .breathing-thanks {
-  margin: 16px 0 0;
-  padding-top: 16px;
-  border-top: 1px solid rgba(90, 76, 32, 0.16);
-  color: var(--ink);
+.breathing-thanks-bubble p {
   font-family: var(--serif);
   font-size: 17px;
-  line-height: 1.7;
   font-style: italic;
 }
 
 @media (max-width: 600px) {
-  .breathing-note-bubble {
-    padding: 21px 19px;
-    border-radius: 18px;
+  .breathing-transparency-bubble,
+  .breathing-thanks-bubble {
+    padding: 19px 20px;
+    border-radius: 17px;
   }
 }
