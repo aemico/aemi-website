@@ -1245,9 +1245,14 @@ h3 {
 
 /* ABOUT */
 
+/* OUR STORY — BACKGROUND IMAGE */
+
 .about-section {
   overflow: hidden;
-  background: var(--blue-light);
+  background-image: url("our-story-background.jpg");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
 }
 
 .about-inner {
