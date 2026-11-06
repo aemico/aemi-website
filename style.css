@@ -1243,13 +1243,24 @@ h3 {
   text-align: center;
 }
 
-/* OUR STORY — BACKGROUND IMAGE */
+/* OUR STORY — SOFT YELLOW GLOW */
 .about-section {
+  position: relative;
   overflow: hidden;
-  background-image: url("our-story-background.jpg");
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
+  background:
+    radial-gradient(
+      ellipse at 50% 0%,
+      rgba(244, 229, 143, 0.95) 0%,
+      rgba(251, 242, 201, 0.75) 28%,
+      transparent 65%
+    ),
+    radial-gradient(
+      ellipse at 50% 100%,
+      rgba(244, 229, 143, 0.95) 0%,
+      rgba(251, 242, 201, 0.75) 28%,
+      transparent 65%
+    ),
+    var(--ivory);
 }
 
 .about-inner {
