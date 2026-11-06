@@ -173,12 +173,19 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-
+ 
   /* ----------------------------------------------------------
-     4. INDIVIDUAL ARTWORK PAGES
+     4. ARTWORK QUICK VIEW
      ---------------------------------------------------------- */
 
   if (gallery) {
+    const lightbox = document.getElementById("art-lightbox");
+    const lightboxArtwork = document.getElementById("lightbox-artwork");
+    const lightboxTitle = document.getElementById("lightbox-title");
+    const lightboxArtist = document.getElementById("lightbox-artist");
+    const lightboxDescription = document.getElementById("lightbox-description");
+    const lightboxFullPage = document.getElementById("lightbox-full-page");
+    const lightboxClose = document.getElementById("lightbox-close");
 
     const artworkIds = {
       "Blue Hour Study": "blue-hour-study",
@@ -189,50 +196,85 @@ document.addEventListener("DOMContentLoaded", () => {
       "In the Margins": "in-the-margins"
     };
 
+    function closeLightbox() {
+      if (!lightbox) return;
+
+      lightbox.hidden = true;
+      document.body.classList.remove("lightbox-open");
+    }
+
+    function openLightbox(card) {
+      if (!lightbox) return;
+
+      const title = card.querySelector("h3")?.textContent.trim() || "Untitled artwork";
+      const artist = card.dataset.artist === "yua" ? "YUA" : "CJ";
+      const artworkId = card.dataset.artworkId || artworkIds[title];
+
+      const preview = card.querySelector(".art-preview");
+
+      lightboxTitle.textContent = title;
+      lightboxArtist.textContent = artist + " · " +
+        (artist === "YUA" ? "PAINTING" : "PENCIL DRAWING");
+
+      lightboxDescription.textContent =
+        "Take a closer look at this piece from the AEMI gallery. Visit its artwork page for more details.";
+
+      lightboxArtwork.innerHTML = "";
+
+      if (preview) {
+        const previewCopy = preview.cloneNode(true);
+        previewCopy.querySelector(".preview-placeholder")?.remove();
+        lightboxArtwork.appendChild(previewCopy);
+      }
+
+      lightboxFullPage.href = artworkId
+        ? `artwork.html?id=${encodeURIComponent(artworkId)}`
+        : "#";
+
+      lightboxFullPage.hidden = !artworkId;
+
+      lightbox.hidden = false;
+      document.body.classList.add("lightbox-open");
+      lightboxClose?.focus();
+    }
+
     gallery.querySelectorAll(".art-card").forEach(card => {
-
-      const title =
-        card.querySelector("h3")?.textContent.trim();
-
-      const artworkId =
-        card.dataset.artworkId || artworkIds[title];
-
-      if (!artworkId) return;
-
       card.setAttribute("tabindex", "0");
-      card.setAttribute("role", "link");
+      card.setAttribute("role", "button");
+
+      const title = card.querySelector("h3")?.textContent.trim();
 
       card.setAttribute(
         "aria-label",
-        `Open ${title || "artwork"} artwork page`
+        `Preview ${title || "artwork"}`
       );
 
-      function openArtwork() {
-        window.location.href =
-          `artwork.html?id=${encodeURIComponent(artworkId)}`;
-      }
-
       card.addEventListener("click", event => {
-
         if (event.target.closest("a, button")) return;
-
-        openArtwork();
-
+        openLightbox(card);
       });
 
       card.addEventListener("keydown", event => {
-
-        if (event.key === "Enter") {
+        if (event.key === "Enter" || event.key === " ") {
           event.preventDefault();
-          openArtwork();
+          openLightbox(card);
         }
-
       });
-
     });
 
+    lightboxClose?.addEventListener("click", closeLightbox);
+
+    lightbox?.addEventListener("click", event => {
+      if (event.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape" && lightbox && !lightbox.hidden) {
+        closeLightbox();
+      }
+    });
   }
-  
+
 
   /* ----------------------------------------------------------
      5. COMMISSION INQUIRY
