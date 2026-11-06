@@ -5898,3 +5898,9 @@ body.lightbox-open {
 .bids-playful .bid-play-card::after {
   display: none !important;
 }
+/* SOFTER ROUNDED CORNERS FOR THE ART BID CARDS */
+
+.bids-playful .bid-play-card {
+  border-radius: 22px !important;
+  clip-path: none !important;
+}
