@@ -691,6 +691,37 @@
     </section>
   </main>
 
+  <!-- ARTWORK QUICK VIEW -->
+  <div class="art-lightbox" id="art-lightbox" hidden>
+    <div
+      class="lightbox-panel"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="lightbox-title"
+    >
+      <button
+        class="lightbox-close"
+        id="lightbox-close"
+        type="button"
+        aria-label="Close artwork preview"
+      >
+        &times;
+      </button>
+
+      <div class="lightbox-artwork" id="lightbox-artwork"></div>
+
+      <div class="lightbox-information">
+        <p class="eyebrow" id="lightbox-artist"></p>
+        <h2 id="lightbox-title"></h2>
+        <p class="lightbox-description" id="lightbox-description"></p>
+
+        <a class="text-link" id="lightbox-full-page" href="#">
+          View full artwork <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
   <footer class="site-footer">
     <a class="footer-wordmark" href="#top">AEMI<span>✳</span></a>
     <p>made with care by Yua & CJ</p>
