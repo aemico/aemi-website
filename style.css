@@ -2338,9 +2338,11 @@ button:focus-visible {
 }
 
 .commission-form {
-  background: var(--cream);
-  border: 1px solid var(--line);
-  box-shadow: var(--shadow-soft);
+  padding: 32px;
+  border: 1px solid #e8d982;
+  border-radius: 22px;
+  background: var(--yellow-light);
+  box-shadow: 0 12px 35px rgba(38, 56, 62, 0.08);
 }
 
 .form-heading {
@@ -3409,13 +3411,17 @@ body.lightbox-open {
 /* COMMISSIONS */
 .commission-section::before {
   background:
-    linear-gradient(
-      120deg,
-      var(--ivory) 0%,
-      var(--ivory) 54%,
-      var(--yellow-light) 54%,
-      var(--yellow-light) 100%
-    );
+    radial-gradient(
+      ellipse at 15% 20%,
+      rgba(185, 216, 227, 0.95),
+      transparent 48%
+    ),
+    radial-gradient(
+      ellipse at 85% 80%,
+      rgba(220, 236, 242, 0.9),
+      transparent 45%
+    ),
+    var(--blue-light);
 }
 
 /* CONTACT */
