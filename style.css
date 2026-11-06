@@ -5988,3 +5988,39 @@ body.lightbox-open {
 .bids-playful .confetti-shape {
   display: none !important;
 }
+
+/* FORCE OVERRIDE — OUR STORY BACKGROUND */
+.about-section {
+  background: var(--ivory) !important;
+  background-image:
+    radial-gradient(
+      ellipse at 50% 0%,
+      rgba(244, 229, 143, 1) 0%,
+      rgba(251, 242, 201, 0.85) 30%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse at 50% 100%,
+      rgba(244, 229, 143, 1) 0%,
+      rgba(251, 242, 201, 0.85) 30%,
+      transparent 70%
+    ) !important;
+}
+
+/* Override the section's background layer too */
+.about-section::before {
+  background:
+    radial-gradient(
+      ellipse at 50% 0%,
+      rgba(244, 229, 143, 1) 0%,
+      rgba(251, 242, 201, 0.85) 30%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse at 50% 100%,
+      rgba(244, 229, 143, 1) 0%,
+      rgba(251, 242, 201, 0.85) 30%,
+      transparent 70%
+    ),
+    var(--ivory) !important;
+}
