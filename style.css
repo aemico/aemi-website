@@ -3411,6 +3411,11 @@ body.lightbox-open {
 /* COMMISSIONS */
 .commission-section::before {
   background:
+    linear-gradient(
+      to bottom,
+      transparent 72%,
+      var(--blue-light) 100%
+    ),
     radial-gradient(
       ellipse at 15% 20%,
       rgba(185, 216, 227, 0.95),
