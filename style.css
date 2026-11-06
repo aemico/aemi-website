@@ -6667,3 +6667,57 @@ body.lightbox-open {
     border-radius: 17px;
   }
 }
+
+/* AEMI HEADER — MOBILE AND TABLET FIX */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+@media (max-width: 1000px) {
+  .site-header {
+    position: sticky;
+  }
+
+  .site-header .menu-toggle {
+    display: flex;
+  }
+
+  .site-header .site-nav {
+    display: none;
+  }
+
+  .site-header .site-nav.open {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 12px 6% 20px;
+    background: var(--ivory);
+    border-bottom: 1px solid var(--line);
+    box-shadow: 0 12px 24px rgba(38, 56, 62, 0.08);
+  }
+
+  .site-header .site-nav.open a {
+    display: block;
+    width: 100%;
+    padding: 12px 0;
+  }
+}
+
+@media (min-width: 1001px) {
+  .site-header .menu-toggle {
+    display: none;
+  }
+
+  .site-header .site-nav {
+    display: flex;
+    flex-wrap: nowrap;
+  }
+}
