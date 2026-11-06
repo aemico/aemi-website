@@ -379,15 +379,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
       <div class="artwork-bottom-link">
 
-        <p>Every piece has its own little story.</p>
+  <p>Every piece has its own little story.</p>
 
-        <a href="index.html#gallery">
-          Explore the AEMI gallery ↗
-        </a>
+  <a
+    class="artwork-gallery-button"
+    href="index.html#gallery"
+  >
+    Explore the AEMI gallery
+    <span aria-hidden="true">↗</span>
+  </a>
 
-      </div>
-
-    </div>
+</div>
 
   `;
 
