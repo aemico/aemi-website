@@ -73,32 +73,103 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   /* ----------------------------------------------------------
-     3. GALLERY FILTERS + SEE MORE
+     3. GALLERY FILTERS + FAVORITES + SEE MORE
      ---------------------------------------------------------- */
 
   const gallery = document.getElementById("art-grid");
-  const filterButtons =
-    document.querySelectorAll(".filter-button");
-
-  const moreSection =
-    document.querySelector(".gallery-more");
-
-  const moreButton =
-    document.getElementById("see-more-art");
+  const filterButtons = document.querySelectorAll(".filter-button");
+  const moreSection = document.querySelector(".gallery-more");
+  const moreButton = document.getElementById("see-more-art");
+  const savedCount = document.getElementById("saved-count");
 
   const batchSize = 6;
+  const STORAGE_KEY = "aemi-saved-artworks";
 
   let activeFilter = "all";
   let visibleCount = batchSize;
+  let savedArtworks = [];
+
+  try {
+    savedArtworks = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+    if (!Array.isArray(savedArtworks)) savedArtworks = [];
+  } catch (error) {
+    savedArtworks = [];
+  }
+
+  function saveFavorites() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(savedArtworks));
+    } catch (error) {
+      console.warn("Could not save favorites in this browser.", error);
+    }
+  }
 
   if (gallery) {
-
     const artworkCards = Array.from(
       gallery.querySelectorAll(".art-card")
     );
 
+    const emptyMessage = document.createElement("p");
+    emptyMessage.className = "favorites-empty";
+    emptyMessage.textContent = "No saved artworks yet. Tap the heart on a piece you love.";
+    emptyMessage.hidden = true;
+    gallery.insertAdjacentElement("afterend", emptyMessage);
+
+    function getArtworkTitle(card) {
+      return card.querySelector("h3")?.textContent.trim() || "";
+    }
+
+    function updateFavoriteButtons() {
+      artworkCards.forEach(card => {
+        const title = getArtworkTitle(card);
+        const isSaved = savedArtworks.includes(title);
+        const info = card.querySelector(".art-card-info");
+
+        if (!info) return;
+
+        let button = info.querySelector(".favorite-button");
+
+        if (!button) {
+          button = document.createElement("button");
+          button.type = "button";
+          button.className = "favorite-button";
+          button.addEventListener("click", event => {
+            event.stopPropagation();
+
+            const currentTitle = getArtworkTitle(card);
+            const alreadySaved = savedArtworks.includes(currentTitle);
+
+            savedArtworks = alreadySaved
+              ? savedArtworks.filter(item => item !== currentTitle)
+              : [...savedArtworks, currentTitle];
+
+            saveFavorites();
+            updateFavoriteButtons();
+            updateGallery();
+          });
+
+          info.appendChild(button);
+        }
+
+        button.textContent = isSaved ? "♥ Saved" : "♡ Save";
+        button.setAttribute("aria-pressed", String(isSaved));
+        button.setAttribute(
+          "aria-label",
+          `${isSaved ? "Remove" : "Add"} ${title} ${isSaved ? "from" : "to"} favorites`
+        );
+      });
+
+      if (savedCount) {
+        savedCount.textContent = savedArtworks.length;
+      }
+    }
+
     function getFilteredCards() {
       return artworkCards.filter(card => {
+        if (activeFilter === "saved") {
+          return savedArtworks.includes(getArtworkTitle(card));
+        }
+
         return (
           activeFilter === "all" ||
           card.dataset.artist === activeFilter
@@ -107,7 +178,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function updateGallery() {
-
       const filteredCards = getFilteredCards();
 
       artworkCards.forEach(card => {
@@ -118,8 +188,7 @@ document.addEventListener("DOMContentLoaded", () => {
         card.hidden = index >= visibleCount;
       });
 
-      const hasMore =
-        filteredCards.length > visibleCount;
+      const hasMore = filteredCards.length > visibleCount;
 
       if (moreSection) {
         moreSection.hidden = !hasMore;
@@ -128,32 +197,25 @@ document.addEventListener("DOMContentLoaded", () => {
       if (moreButton) {
         moreButton.hidden = !hasMore;
 
-        const remaining =
-          filteredCards.length - visibleCount;
+        const remaining = filteredCards.length - visibleCount;
 
-        moreButton.innerHTML =
-          remaining > 0
-            ? 'See more art <span aria-hidden="true">↓</span>'
-            : 'All caught up <span aria-hidden="true">✳</span>';
+        moreButton.innerHTML = remaining > 0
+          ? 'See more art <span aria-hidden="true">↓</span>'
+          : 'All caught up <span aria-hidden="true">✳</span>';
       }
+
+      emptyMessage.hidden = !(activeFilter === "saved" && filteredCards.length === 0);
     }
 
     filterButtons.forEach(button => {
-
       button.addEventListener("click", () => {
-
         activeFilter = button.dataset.filter || "all";
         visibleCount = batchSize;
 
         filterButtons.forEach(item => {
           const isActive = item === button;
-
           item.classList.toggle("is-active", isActive);
-
-          item.setAttribute(
-            "aria-pressed",
-            String(isActive)
-          );
+          item.setAttribute("aria-pressed", String(isActive));
         });
 
         updateGallery();
@@ -162,23 +224,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (moreButton) {
       moreButton.addEventListener("click", () => {
-
         visibleCount += batchSize;
-
         updateGallery();
       });
     }
 
+    updateFavoriteButtons();
     updateGallery();
-  }
 
 
- 
-  /* ----------------------------------------------------------
-     4. ARTWORK QUICK VIEW
-     ---------------------------------------------------------- */
+    /* ----------------------------------------------------------
+       4. ARTWORK QUICK VIEW
+       ---------------------------------------------------------- */
 
-  if (gallery) {
     const lightbox = document.getElementById("art-lightbox");
     const lightboxArtwork = document.getElementById("lightbox-artwork");
     const lightboxTitle = document.getElementById("lightbox-title");
@@ -206,10 +264,9 @@ document.addEventListener("DOMContentLoaded", () => {
     function openLightbox(card) {
       if (!lightbox) return;
 
-      const title = card.querySelector("h3")?.textContent.trim() || "Untitled artwork";
+      const title = getArtworkTitle(card) || "Untitled artwork";
       const artist = card.dataset.artist === "yua" ? "YUA" : "CJ";
       const artworkId = card.dataset.artworkId || artworkIds[title];
-
       const preview = card.querySelector(".art-preview");
 
       lightboxTitle.textContent = title;
@@ -238,16 +295,13 @@ document.addEventListener("DOMContentLoaded", () => {
       lightboxClose?.focus();
     }
 
-    gallery.querySelectorAll(".art-card").forEach(card => {
+    artworkCards.forEach(card => {
       card.setAttribute("tabindex", "0");
       card.setAttribute("role", "button");
 
-      const title = card.querySelector("h3")?.textContent.trim();
+      const title = getArtworkTitle(card);
 
-      card.setAttribute(
-        "aria-label",
-        `Preview ${title || "artwork"}`
-      );
+      card.setAttribute("aria-label", `Preview ${title || "artwork"}`);
 
       card.addEventListener("click", event => {
         if (event.target.closest("a, button")) return;
@@ -255,7 +309,10 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       card.addEventListener("keydown", event => {
-        if (event.key === "Enter" || event.key === " ") {
+        if (
+          (event.key === "Enter" || event.key === " ") &&
+          event.target === card
+        ) {
           event.preventDefault();
           openLightbox(card);
         }
