@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#dcecf2">
+  <meta name="description" content="AEMI Circle is a growing creative space for art, digital treasures, and community. Coming soon.">
+  <title>AEMI Circle — A little space for art to grow</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --blue: #dcecf2;
+      --blue-light: #edf5f7;
+      --blue-mid: #b9d8e3;
+      --blue-deep: #739aa8;
+      --ivory: #fbf8ef;
+      --ivory-dark: #f0eadc;
+      --yellow: #f4e58f;
+      --yellow-light: #fbf2c9;
+      --ink: #26383e;
+      --muted: #6e7d80;
+      --line: rgba(38, 56, 62, 0.13);
+      --white: #fffefa;
+      --serif: "Playfair Display", Georgia, serif;
+      --sans: "DM Sans", Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--ivory);
+      font-family: var(--sans);
+      line-height: 1.65;
+    }
+    a { color: inherit; }
+    .circle-page { overflow: hidden; }
+    .top-note {
+      padding: 9px 18px;
+      background: var(--yellow);
+      color: var(--ink);
+      text-align: center;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    .site-header {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 20px clamp(20px, 6vw, 88px);
+      background: rgba(251, 248, 239, 0.94);
+      border-bottom: 1px solid var(--line);
+    }
+    .brand {
+      text-decoration: none;
+      font-family: var(--serif);
+      font-size: 1.55rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+    .brand small {
+      display: block;
+      margin-top: -5px;
+      color: var(--muted);
+      font-family: var(--sans);
+      font-size: 0.58rem;
+      font-weight: 500;
+      letter-spacing: 0.19em;
+      text-align: center;
+      text-transform: uppercase;
+    }
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: clamp(14px, 2.5vw, 32px);
+    }
+    .nav-links a {
+      font-size: 0.76rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 180ms ease;
+    }
+    .nav-links a:hover { color: var(--blue-deep); }
+    .nav-links .back-link {
+      padding: 9px 15px;
+      border: 1px solid var(--blue-deep);
+      border-radius: 30px;
+    }
+
+    .hero {
+      position: relative;
+      padding: clamp(76px, 11vw, 145px) 22px clamp(78px, 10vw, 130px);
+      background:
+        radial-gradient(circle at 15% 22%, rgba(255,255,255,.78) 0 2px, transparent 3px),
+        radial-gradient(circle at 82% 30%, rgba(255,255,255,.8) 0 3px, transparent 4px),
+        linear-gradient(135deg, var(--blue-light), var(--blue));
+      text-align: center;
+    }
+    .hero::before, .hero::after {
+      position: absolute;
+      content: "";
+      width: 190px;
+      height: 190px;
+      border: 1px solid rgba(115,154,168,.25);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .hero::before { top: 12%; left: -100px; }
+    .hero::after { right: -100px; bottom: 8%; width: 250px; height: 250px; }
+    .eyebrow {
+      margin: 0 0 17px;
+      color: var(--blue-deep);
+      font-size: 0.69rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    .hero h1 {
+      max-width: 850px;
+      margin: 0 auto 20px;
+      font-family: var(--serif);
+      font-size: clamp(3rem, 8vw, 6.4rem);
+      font-weight: 500;
+      letter-spacing: -0.045em;
+      line-height: 1.04;
+    }
+    .hero h1 span { color: var(--blue-deep); font-style: italic; }
+    .hero-copy {
+      max-width: 560px;
+      margin: 0 auto 28px;
+      color: #52666c;
+      font-size: clamp(0.95rem, 2vw, 1.08rem);
+    }
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 9px 16px;
+      border: 1px solid rgba(115,154,168,.45);
+      border-radius: 40px;
+      background: rgba(255,254,250,.58);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+    .status-pill::before {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--blue-deep);
+      content: "";
+    }
+
+    .section {
+      padding: clamp(66px, 8vw, 108px) clamp(20px, 7vw, 100px);
+    }
+    .section-inner { width: min(1100px, 100%); margin: 0 auto; }
+    .section-heading {
+      max-width: 690px;
+      margin: 0 auto 42px;
+      text-align: center;
+    }
+    .section-heading h2 {
+      margin-bottom: 14px;
+      font-family: var(--serif);
+      font-size: clamp(2.2rem, 5vw, 3.7rem);
+      font-weight: 500;
+      letter-spacing: -0.035em;
+      line-height: 1.12;
+    }
+    .section-heading p:last-child {
+      max-width: 570px;
+      margin: 0 auto;
+      color: var(--muted);
+    }
+    .intro-section { background: var(--ivory); }
+    .intro-note {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 30px clamp(22px, 5vw, 54px);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: var(--white);
+      text-align: center;
+    }
+    .intro-note p { margin: 0; color: #58696d; }
+    .intro-note strong { color: var(--ink); }
+
+    .membership-section { background: var(--blue-light); }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+    .feature-card {
+      min-height: 210px;
+      padding: 27px 25px;
+      border: 1px solid rgba(115,154,168,.24);
+      border-radius: 20px;
+      background: rgba(255,254,250,.82);
+    }
+    .feature-icon {
+      display: grid;
+      width: 42px;
+      height: 42px;
+      margin-bottom: 20px;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--yellow-light);
+      font-size: 1.1rem;
+    }
+    .feature-card h3 {
+      margin-bottom: 8px;
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+    .feature-card p { margin: 0; color: var(--muted); font-size: 0.9rem; }
+    .coming-panel {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      margin-top: 26px;
+      padding: 22px 25px;
+      border: 1px dashed var(--blue-deep);
+      border-radius: 16px;
+      background: rgba(220,236,242,.5);
+    }
+    .coming-panel p { margin: 0; color: var(--muted); font-size: 0.88rem; }
+    .coming-label {
+      flex: 0 0 auto;
+      padding: 8px 13px;
+      border-radius: 30px;
+      background: var(--yellow);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .studio-section { background: var(--ivory); }
+    .studio-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+    .studio-card {
+      position: relative;
+      min-height: 185px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 26px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: var(--white);
+    }
+    .studio-card:nth-child(2), .studio-card:nth-child(3) { background: var(--yellow-light); }
+    .studio-card::after {
+      position: absolute;
+      top: -35px;
+      right: -25px;
+      width: 120px;
+      height: 120px;
+      border: 1px solid rgba(115,154,168,.3);
+      border-radius: 50%;
+      content: "";
+    }
+    .studio-card h3 {
+      position: relative;
+      z-index: 1;
+      max-width: 270px;
+      margin: 0 0 5px;
+      font-family: var(--serif);
+      font-size: 1.55rem;
+      font-weight: 500;
+    }
+    .studio-card p { position: relative; z-index: 1; margin: 0; color: var(--muted); font-size: .86rem; }
+    .studio-status { margin-top: 26px; text-align: center; }
+
+    .community-section {
+      background: var(--yellow-light);
+      text-align: center;
+    }
+    .community-card {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: clamp(30px, 5vw, 54px);
+      border: 1px solid rgba(38,56,62,.12);
+      border-radius: 24px;
+      background: rgba(255,254,250,.76);
+    }
+    .community-card h2 {
+      margin-bottom: 14px;
+      font-family: var(--serif);
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 500;
+      line-height: 1.15;
+    }
+    .community-card p { max-width: 550px; margin: 0 auto 22px; color: var(--muted); }
+    .community-tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 9px; }
+    .community-tags span {
+      padding: 7px 12px;
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      background: var(--white);
+      font-size: .76rem;
+    }
+
+    .footer {
+      padding: 36px 20px;
+      background: var(--ink);
+      color: var(--ivory);
+      text-align: center;
+    }
+    .footer-brand {
+      margin-bottom: 5px;
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      letter-spacing: .1em;
+    }
+    .footer p { margin: 0; color: rgba(251,248,239,.68); font-size: .78rem; }
+    .footer a { display: inline-block; margin-top: 15px; color: var(--yellow); font-size: .78rem; text-decoration: none; }
+
+    @media (max-width: 760px) {
+      .site-header { flex-direction: column; gap: 15px; padding: 17px 18px; }
+      .nav-links { justify-content: center; gap: 11px 18px; }
+      .nav-links a { font-size: .72rem; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .feature-card { min-height: 0; }
+      .coming-panel { align-items: flex-start; flex-direction: column; }
+    }
+    @media (max-width: 520px) {
+      .studio-grid { grid-template-columns: 1fr; }
+      .studio-card { min-height: 150px; }
+      .hero { padding-top: 76px; padding-bottom: 82px; }
+      .section { padding-left: 18px; padding-right: 18px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="circle-page">
+    <div class="top-note">A new little corner of AEMI is growing</div>
+
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="AEMI home">AEMI<small>an art space</small></a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#membership">Membership</a>
+        <a href="#digital-studio">Digital Studio</a>
+        <a href="#community">Community</a>
+        <a class="back-link" href="index.html">Back to AEMI ↗</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <p class="eyebrow">AEMI CIRCLE</p>
+        <h1>A little space for art <span>to grow.</span></h1>
+        <p class="hero-copy">A growing creative corner where you can discover more of our work, keep little art treasures, and be part of the AEMI story.</p>
+        <span class="status-pill">Opening soon</span>
+      </section>
+
+      <section class="section intro-section">
+        <div class="section-inner">
+          <div class="section-heading">
+            <p class="eyebrow">A CLOSER LOOK</p>
+            <h2>More than a gallery.</h2>
+            <p>AEMI Circle is where our creative world can stretch a little further.</p>
+          </div>
+          <div class="intro-note">
+            <p><strong>Made by Yua and CJ.</strong> This space is being prepared for exclusive art collections, digital creations, and a welcoming community around the things we make and love. We're taking our time to build it thoughtfully.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section membership-section" id="membership">
+        <div class="section-inner">
+          <div class="section-heading">
+            <p class="eyebrow">THE MEMBERSHIP</p>
+            <h2>Two artists, one little circle.</h2>
+            <p>One shared membership is planned to bring both artists' creative corners together.</p>
+          </div>
+
+          <div class="feature-grid">
+            <article class="feature-card">
+              <div class="feature-icon" aria-hidden="true">✿</div>
+              <h3>Yua's corner</h3>
+              <p>Exclusive collections, artwork notes, and little glimpses into the painting process.</p>
+            </article>
+            <article class="feature-card">
+              <div class="feature-icon" aria-hidden="true">✎</div>
+              <h3>CJ's corner</h3>
+              <p>Drawing collections, behind-the-scenes moments, and previews of works in progress.</p>
+            </article>
+            <article class="feature-card">
+              <div class="feature-icon" aria-hidden="true">♡</div>
+              <h3>Shared exclusives</h3>
+              <p>Member-only wallpapers, a growing sticker library, and special collections from AEMI.</p>
+            </article>
+          </div>
+
+          <div class="coming-panel">
+            <p>Membership access and its full details are still being prepared. No subscriptions or payments are being accepted yet.</p>
+            <span class="coming-label">Membership · Coming soon</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section studio-section" id="digital-studio">
+        <div class="section-inner">
+          <div class="section-heading">
+            <p class="eyebrow">THE DIGITAL STUDIO</p>
+            <h2>Little pieces of art to keep.</h2>
+            <p>A future collection of digital creations made by the artists of AEMI.</p>
+          </div>
+
+          <div class="studio-grid">
+            <article class="studio-card">
+              <h3>Printable posters</h3>
+              <p>Art prints for your favorite little spaces.</p>
+            </article>
+            <article class="studio-card">
+              <h3>Printable stickers</h3>
+              <p>Small details to decorate your everyday.</p>
+            </article>
+            <article class="studio-card">
+              <h3>Digital artwork copies</h3>
+              <p>Selected artworks in digital format.</p>
+            </article>
+            <article class="studio-card">
+              <h3>Digital art bundles</h3>
+              <p>Curated sets of AEMI digital creations.</p>
+            </article>
+          </div>
+
+          <div class="studio-status">
+            <span class="status-pill">Digital products · Coming soon</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section community-section" id="community">
+        <div class="section-inner">
+          <div class="community-card">
+            <p class="eyebrow">A PLACE TO CONNECT</p>
+            <h2>Art is even lovelier when shared.</h2>
+            <p>We're also imagining a community where art lovers can introduce themselves, share their work, exchange thoughtful feedback, and find creative opportunities.</p>
+            <div class="community-tags" aria-label="Planned community spaces">
+              <span>Introductions</span>
+              <span>Art sharing</span>
+              <span>Feedback corner</span>
+              <span>Discussions</span>
+              <span>Announcements</span>
+              <span>Opportunities</span>
+            </div>
+            <div style="margin-top: 25px;">
+              <span class="coming-label">Community · Coming soon</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-brand">AEMI</div>
+      <p>An art space by Yua &amp; CJ.</p>
+      <a href="index.html">Return to the main art space ↗</a>
+    </footer>
+  </div>
+</body>
+</html>
