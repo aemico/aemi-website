@@ -6314,3 +6314,310 @@ body.lightbox-open {
     padding: 32px 20px;
   }
 }
+
+
+/* ============================================================
+   A BREATHING ARTIST — DEDICATED SUPPORT PAGE
+   ============================================================ */
+
+.support-page {
+  background: var(--ivory);
+}
+
+/* HERO */
+
+.support-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 105px 24px 115px;
+  background:
+    radial-gradient(
+      ellipse at 15% 0%,
+      rgba(244, 229, 143, 0.95),
+      transparent 58%
+    ),
+    radial-gradient(
+      ellipse at 90% 100%,
+      rgba(185, 216, 227, 0.8),
+      transparent 55%
+    ),
+    var(--ivory);
+}
+
+.support-hero-content {
+  max-width: 850px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.support-hero h1 {
+  margin: 22px 0;
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: clamp(58px, 9vw, 100px);
+  font-weight: 400;
+  line-height: .98;
+}
+
+.support-hero h1 em {
+  color: var(--blue-deep);
+}
+
+.support-hero-content > p:not(.eyebrow) {
+  max-width: 580px;
+  margin: 12px auto;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+.support-hero-content .support-hero-lead {
+  color: var(--ink) !important;
+  font-family: var(--serif);
+  font-size: 23px !important;
+}
+
+/* ABOUT */
+
+.support-about {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+.support-section-heading h2,
+.support-payment h2 {
+  margin-top: 15px;
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: clamp(34px, 5vw, 48px);
+  font-weight: 400;
+  line-height: 1.15;
+}
+
+.support-about-copy p {
+  margin: 0 0 18px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 2;
+}
+
+/* PROJECTS */
+
+.support-projects {
+  padding: 95px 24px;
+  background:
+    radial-gradient(
+      ellipse at 50% 0%,
+      rgba(185, 216, 227, 0.8),
+      transparent 70%
+    ),
+    var(--blue-light);
+}
+
+.support-projects-inner {
+  max-width: var(--page-width);
+  margin: 0 auto;
+  text-align: center;
+}
+
+.support-projects-inner > h2 {
+  margin: 16px 0;
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: clamp(34px, 5vw, 48px);
+  font-weight: 400;
+}
+
+.support-projects-intro {
+  max-width: 560px;
+  margin: 0 auto;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.9;
+}
+
+.support-project-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  margin-top: 45px;
+  text-align: left;
+}
+
+.support-project-card {
+  padding: 30px 25px;
+  border: 1px solid rgba(115, 154, 168, .2);
+  border-radius: 18px;
+  background: rgba(255, 250, 245, .82);
+}
+
+.support-project-card > span {
+  color: var(--blue-deep);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .12em;
+}
+
+.support-project-card h3 {
+  margin: 22px 0 12px;
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.support-project-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+/* PAYMENT */
+
+.support-payment {
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+.support-payment-content {
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.support-payment-content > p:not(.eyebrow) {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.9;
+}
+
+.support-qr-card {
+  max-width: 390px;
+  margin: 38px auto 0;
+  padding: 30px 24px;
+  border: 1px solid rgba(115, 154, 168, .25);
+  border-radius: 22px;
+  background: var(--yellow-light);
+  box-shadow: 0 14px 40px rgba(38, 56, 62, .07);
+}
+
+.support-qr-label {
+  margin: 0 0 22px;
+  color: var(--ink);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .12em;
+}
+
+.support-qr-image {
+  display: block;
+  width: min(100%, 260px);
+  height: auto;
+  margin: 0 auto;
+  border-radius: 10px;
+  background: white;
+}
+
+.support-qr-caption {
+  margin: 20px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.support-payment-content .support-transparency {
+  max-width: 560px;
+  margin: 25px auto 0;
+  font-size: 11px;
+}
+
+/* THANK YOU */
+
+.support-thankyou {
+  padding: 100px 24px;
+  background:
+    radial-gradient(
+      ellipse at 50% 100%,
+      rgba(244, 229, 143, .9),
+      transparent 68%
+    ),
+    var(--ivory);
+}
+
+.support-thankyou-content {
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.support-thankyou h2 {
+  margin: 18px 0 25px;
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: clamp(36px, 5vw, 52px);
+  font-weight: 400;
+  line-height: 1.15;
+}
+
+.support-thankyou-content > p:not(.eyebrow) {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 2;
+}
+
+.support-thankyou-content .support-signature {
+  margin-top: 38px;
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 19px !important;
+  line-height: 1.8;
+}
+
+.support-signature strong {
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.support-signature span {
+  color: var(--muted);
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+  .support-hero {
+    padding: 80px 22px 90px;
+  }
+
+  .support-about {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    padding-top: 70px;
+    padding-bottom: 70px;
+  }
+
+  .support-projects {
+    padding: 75px 22px;
+  }
+
+  .support-project-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .support-payment {
+    padding-top: 75px;
+    padding-bottom: 75px;
+  }
+
+  .support-thankyou {
+    padding: 75px 22px;
+  }
+}
