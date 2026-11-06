@@ -1415,7 +1415,7 @@ h3 {
   gap: 20px;
   padding: 22px max(40px, calc((100% - var(--page-width)) / 2));
   border-top: 1px solid var(--line);
-  background: var(--ivory-dark);
+  background: #fbf2c9;
 }
 
 .footer-wordmark {
