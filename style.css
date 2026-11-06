@@ -6024,3 +6024,9 @@ body.lightbox-open {
     ),
     var(--ivory) !important;
 }
+/* ARTWORK PAGE — TIGHTEN GALLERY LINK SPACING */
+.artwork-page .artwork-gallery-link,
+.artwork-page a[href*="#gallery"] {
+  margin-top: 8px !important;
+  padding-top: 0 !important;
+}
