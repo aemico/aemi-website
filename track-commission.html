@@ -1,0 +1,551 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#eaf4f7">
+  <meta name="description" content="Check the progress of your AEMI Art Space commission.">
+  <title>Track Your Commission — AEMI Art Space</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    .tracker-page {
+      min-height: 75vh;
+      padding: 90px 20px;
+      background: var(--blue-light, #edf5f7);
+    }
+
+    .tracker-container {
+      width: min(100%, 680px);
+      margin: 0 auto;
+    }
+
+    .tracker-heading {
+      margin-bottom: 34px;
+      text-align: center;
+    }
+
+    .tracker-heading h1 {
+      margin: 12px 0;
+      font-family: "Playfair Display", serif;
+      font-size: clamp(38px, 7vw, 58px);
+      font-weight: 500;
+      line-height: 1.1;
+    }
+
+    .tracker-heading h1 em {
+      color: var(--blue-deep, #739aa8);
+    }
+
+    .tracker-heading > p:last-child {
+      max-width: 470px;
+      margin: 0 auto;
+      color: var(--muted, #6e7d80);
+      line-height: 1.8;
+    }
+
+    .tracker-form,
+    .tracker-result {
+      padding: clamp(22px, 5vw, 38px);
+      background: var(--ivory, #fbf8ef);
+      border: 1px solid var(--line, #d6e2e4);
+    }
+
+    .tracker-form h2,
+    .tracker-result h2 {
+      margin: 0 0 8px;
+      font-family: "Playfair Display", serif;
+      font-size: 27px;
+      font-weight: 500;
+    }
+
+    .tracker-form > p {
+      margin: 0 0 25px;
+      color: var(--muted, #6e7d80);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .tracker-field {
+      margin-bottom: 19px;
+    }
+
+    .tracker-field label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .tracker-field input {
+      width: 100%;
+      min-height: 49px;
+      padding: 12px 14px;
+      border: 1px solid var(--line, #d6e2e4);
+      border-radius: 0;
+      background: #fff;
+      color: var(--ink, #26383e);
+      font: inherit;
+      font-size: 14px;
+    }
+
+    .tracker-field input:focus {
+      outline: 2px solid var(--blue-mid, #b9d8e3);
+      outline-offset: 2px;
+    }
+
+    .tracker-submit {
+      width: 100%;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .tracker-submit:disabled {
+      opacity: 0.6;
+      cursor: wait;
+    }
+
+    .tracker-message {
+      min-height: 22px;
+      margin-top: 16px;
+      color: var(--muted, #6e7d80);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .tracker-result {
+      margin-top: 25px;
+    }
+
+    .tracker-result[hidden] {
+      display: none !important;
+    }
+
+    .tracker-status {
+      display: inline-block;
+      margin: 12px 0 20px;
+      padding: 7px 12px;
+      border: 1px solid var(--blue-mid, #b9d8e3);
+      background: var(--blue-light, #edf5f7);
+      color: var(--ink, #26383e);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .tracker-details {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 15px;
+      margin: 10px 0 25px;
+    }
+
+    .tracker-detail {
+      padding: 14px;
+      background: #fff;
+      border: 1px solid var(--line, #d6e2e4);
+      overflow-wrap: anywhere;
+    }
+
+    .tracker-detail span {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--muted, #6e7d80);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .tracker-detail strong {
+      font-size: 13px;
+    }
+
+    .tracker-updates {
+      margin-top: 25px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line, #d6e2e4);
+    }
+
+    .tracker-updates h3 {
+      margin: 0 0 17px;
+      font-family: "Playfair Display", serif;
+      font-size: 22px;
+      font-weight: 500;
+    }
+
+    .tracker-update {
+      position: relative;
+      margin: 0 0 18px 5px;
+      padding: 0 0 0 18px;
+      border-left: 2px solid var(--blue-mid, #b9d8e3);
+    }
+
+    .tracker-update strong {
+      display: block;
+      font-size: 13px;
+    }
+
+    .tracker-update time {
+      display: block;
+      margin: 5px 0;
+      color: var(--muted, #6e7d80);
+      font-size: 11px;
+    }
+
+    .tracker-update p {
+      margin: 0;
+      color: var(--muted, #6e7d80);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .tracker-back {
+      display: block;
+      margin-top: 25px;
+      text-align: center;
+      font-size: 13px;
+    }
+
+    @media (max-width: 480px) {
+      .tracker-page {
+        padding: 65px 16px;
+      }
+
+      .tracker-details {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" id="top">
+    <a class="wordmark" href="index.html#home" aria-label="AEMI home">
+      <span class="wordmark-name">AEMI</span>
+      <span class="wordmark-note">an art space</span>
+    </a>
+
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="site-nav"
+      aria-label="Open navigation"
+    >
+      <span></span><span></span>
+    </button>
+
+    <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+      <a href="index.html#gallery">Gallery</a>
+      <a href="index.html#bids">Art bids</a>
+      <a href="index.html#commissions">Commissions</a>
+      <a href="index.html#about">Our story</a>
+      <a href="circle.html">AEMI Circle</a>
+      <a href="support.html">Donate</a>
+      <a class="nav-contact" href="index.html#contact">
+        Say hello <span aria-hidden="true">↗</span>
+      </a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="tracker-page">
+      <div class="tracker-container">
+
+        <div class="tracker-heading">
+          <p class="eyebrow">AEMI / COMMISSION TRACKING</p>
+          <h1>Your artwork,<br><em>in progress.</em></h1>
+          <p>
+            Enter the tracking details you received after submitting
+            your inquiry to see the latest update on your commission.
+          </p>
+        </div>
+
+        <form class="tracker-form" id="tracker-form">
+          <h2>Track your commission</h2>
+          <p>
+            Both details are required to access your private commission record.
+          </p>
+
+          <div class="tracker-field">
+            <label for="tracking-reference">Tracking reference</label>
+            <input
+              id="tracking-reference"
+              name="reference"
+              type="text"
+              placeholder="Example: AEMI-XXXXXXXX"
+              autocomplete="off"
+              required
+            >
+          </div>
+
+          <div class="tracker-field">
+            <label for="tracking-code">Private access code</label>
+            <input
+              id="tracking-code"
+              name="accessCode"
+              type="password"
+              placeholder="Enter your access code"
+              autocomplete="off"
+              required
+            >
+          </div>
+
+          <button class="button button-dark tracker-submit" type="submit">
+            Check commission status <span aria-hidden="true">↗</span>
+          </button>
+
+          <p class="tracker-message" id="tracker-message" role="status" aria-live="polite"></p>
+        </form>
+
+        <section
+          class="tracker-result"
+          id="tracker-result"
+          aria-live="polite"
+          hidden
+        >
+          <p class="eyebrow">YOUR COMMISSION</p>
+          <h2 id="result-reference"></h2>
+
+          <span class="tracker-status" id="result-status"></span>
+
+          <div class="tracker-details">
+            <div class="tracker-detail">
+              <span>Artist</span>
+              <strong id="result-artist"></strong>
+            </div>
+
+            <div class="tracker-detail">
+              <span>Submitted</span>
+              <strong id="result-submitted"></strong>
+            </div>
+
+            <div class="tracker-detail">
+              <span>Last updated</span>
+              <strong id="result-updated"></strong>
+            </div>
+          </div>
+
+          <div class="tracker-updates">
+            <h3>Progress updates</h3>
+            <div id="result-updates"></div>
+          </div>
+        </section>
+
+        <a class="text-link tracker-back" href="index.html#commissions">
+          ← Back to commission inquiries
+        </a>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a class="footer-wordmark" href="index.html#top">AEMI<span>✳</span></a>
+    <p>made with care by Yua & CJ</p>
+    <p>© <span id="current-year"></span> AEMI Art Space</p>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Footer year
+      const year = document.getElementById("current-year");
+      if (year) year.textContent = new Date().getFullYear();
+
+      // Mobile navigation
+      const menuToggle = document.querySelector(".menu-toggle");
+      const siteNav = document.getElementById("site-nav");
+
+      function closeMenu() {
+        if (!menuToggle || !siteNav) return;
+        menuToggle.classList.remove("is-open");
+        siteNav.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Open navigation");
+      }
+
+      if (menuToggle && siteNav) {
+        menuToggle.addEventListener("click", () => {
+          const isOpen =
+            menuToggle.getAttribute("aria-expanded") === "true";
+
+          menuToggle.classList.toggle("is-open", !isOpen);
+          siteNav.classList.toggle("open", !isOpen);
+          menuToggle.setAttribute("aria-expanded", String(!isOpen));
+          menuToggle.setAttribute(
+            "aria-label",
+            isOpen ? "Open navigation" : "Close navigation"
+          );
+        });
+
+        siteNav.querySelectorAll("a").forEach(link => {
+          link.addEventListener("click", closeMenu);
+        });
+
+        document.addEventListener("keydown", event => {
+          if (event.key === "Escape") closeMenu();
+        });
+      }
+
+      // Commission tracking
+      const TRACK_COMMISSION_URL =
+        "https://sonoqrxbbowgmidzhiwi.supabase.co/functions/v1/track-commission";
+
+      const SUPABASE_PUBLISHABLE_KEY =
+        "sb_publishable_DTd8ysaf9mkHpbzJXGInPA_mkgjWKwO";
+
+      const form = document.getElementById("tracker-form");
+      const message = document.getElementById("tracker-message");
+      const resultPanel = document.getElementById("tracker-result");
+      const submitButton = form.querySelector('button[type="submit"]');
+
+      const statusLabels = {
+        inquiry_received: "Inquiry received",
+        discussion: "Discussion",
+        awaiting_payment: "Awaiting payment",
+        in_progress: "In progress",
+        for_review: "For review",
+        completed: "Completed",
+        cancelled: "Cancelled"
+      };
+
+      function formatDate(value) {
+        if (!value) return "Not available";
+
+        const date = new Date(value);
+        if (Number.isNaN(date.getTime())) return "Not available";
+
+        return date.toLocaleString("en-PH", {
+          dateStyle: "medium",
+          timeStyle: "short"
+        });
+      }
+
+      function displayUpdates(updates) {
+        const container = document.getElementById("result-updates");
+        container.replaceChildren();
+
+        if (!Array.isArray(updates) || updates.length === 0) {
+          const empty = document.createElement("p");
+          empty.textContent = "No progress updates have been posted yet.";
+          container.appendChild(empty);
+          return;
+        }
+
+        updates.forEach(update => {
+          const item = document.createElement("article");
+          item.className = "tracker-update";
+
+          const title = document.createElement("strong");
+          title.textContent =
+            statusLabels[update.status] || "Status update";
+
+          const date = document.createElement("time");
+          date.textContent = formatDate(update.created_at);
+
+          const note = document.createElement("p");
+          note.textContent =
+            update.public_note || "AEMI has updated your commission.";
+
+          item.append(title, date, note);
+          container.appendChild(item);
+        });
+      }
+
+      function displayCommission(commission) {
+        document.getElementById("result-reference").textContent =
+          commission.reference || "Your commission";
+
+        document.getElementById("result-status").textContent =
+          statusLabels[commission.status] || commission.status || "Status unavailable";
+
+        document.getElementById("result-artist").textContent =
+          commission.artist || "Not specified";
+
+        document.getElementById("result-submitted").textContent =
+          formatDate(commission.submittedAt);
+
+        document.getElementById("result-updated").textContent =
+          formatDate(commission.updatedAt);
+
+        displayUpdates(commission.updates);
+
+        resultPanel.hidden = false;
+      }
+
+      form.addEventListener("submit", async event => {
+        event.preventDefault();
+
+        if (!form.reportValidity()) return;
+
+        const formData = new FormData(form);
+        const reference = String(formData.get("reference") || "").trim();
+        const accessCode = String(formData.get("accessCode") || "").trim();
+
+        message.textContent = "Checking your commission details...";
+        resultPanel.hidden = true;
+        submitButton.disabled = true;
+        submitButton.textContent = "Checking...";
+
+        try {
+          const response = await fetch(TRACK_COMMISSION_URL, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "apikey": SUPABASE_PUBLISHABLE_KEY
+            },
+            body: JSON.stringify({
+              reference,
+              accessCode
+            })
+          });
+
+          const result = await response.json();
+
+          if (!response.ok) {
+            throw new Error(
+              result.error ||
+              result.message ||
+              "We couldn't find a matching commission. Check your details and try again."
+            );
+          }
+
+          if (!result.commission) {
+            throw new Error(
+              "We couldn't retrieve your commission details. Please try again."
+            );
+          }
+
+          displayCommission(result.commission);
+          message.textContent = "Your commission details have been found.";
+
+          resultPanel.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+          });
+
+        } catch (error) {
+          message.textContent =
+            error.message ||
+            "Something went wrong. Please try again.";
+
+        } finally {
+          submitButton.disabled = false;
+          submitButton.innerHTML =
+            'Check commission status <span aria-hidden="true">↗</span>';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
