@@ -333,8 +333,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
+ 
   /* ----------------------------------------------------------
-     5. COMMISSION INQUIRY
+     5. COMMISSION INQUIRY — SUPABASE CONNECTION
      ---------------------------------------------------------- */
 
   const commissionForm =
@@ -343,180 +344,227 @@ document.addEventListener("DOMContentLoaded", () => {
   const formHint =
     document.getElementById("form-hint");
 
-  const artistInstagram = {
-    "Yua — painting": "https://ig.me/m/yxuas_",
-    "CJ — pencil drawing": "https://ig.me/m/artby_cjj"
-  };
+  const CREATE_COMMISSION_URL =
+    "https://sonoqrxbbowgmidzhiwi.supabase.co/functions/v1/create-commission";
+
+  const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_DTd8ysaf9mkHpbzJXGInPA_mkgjWKwO";
 
   if (commissionForm) {
+    let isSubmitting = false;
+
+    let resultPanel = document.getElementById(
+      "commission-result"
+    );
+
+    if (!resultPanel) {
+      resultPanel = document.createElement("section");
+      resultPanel.id = "commission-result";
+      resultPanel.hidden = true;
+      resultPanel.setAttribute("aria-live", "polite");
+      resultPanel.style.cssText = [
+        "margin-top:24px",
+        "padding:22px",
+        "background:#edf5f7",
+        "border:1px solid #b9d8e3",
+        "color:#26383e",
+        "line-height:1.7"
+      ].join(";");
+
+      commissionForm.insertAdjacentElement(
+        "afterend",
+        resultPanel
+      );
+    }
 
     commissionForm.addEventListener("submit", async event => {
-
       event.preventDefault();
 
+      if (isSubmitting) return;
       if (!commissionForm.reportValidity()) return;
 
       const formData = new FormData(commissionForm);
 
       const name = String(formData.get("name") || "").trim();
       const contact = String(formData.get("contact") || "").trim();
-      const artist = String(formData.get("artist") || "").trim();
+      const selectedArtist = String(formData.get("artist") || "").trim();
       const budget = String(formData.get("budget") || "").trim();
       const details = String(formData.get("details") || "").trim();
 
-      if (!name || !contact || !artist || !details) {
+      const preferredArtist = selectedArtist.startsWith("Yua")
+        ? "Yua"
+        : selectedArtist.startsWith("CJ")
+          ? "CJ"
+          : "";
+
+      if (!name || !contact || !preferredArtist || !details) {
         if (formHint) {
           formHint.textContent =
-            "Please complete all required fields before continuing.";
+            "Please complete all required fields and select an artist.";
         }
         return;
       }
 
-      const instagramURL = artistInstagram[artist];
+      const commissionDetails = [
+        details,
+        budget ? `Preferred budget: ${budget}` : ""
+      ].filter(Boolean).join("\n\n");
 
-      if (!instagramURL) {
-        if (formHint) {
-          formHint.textContent = "Please choose a valid artist.";
-        }
-        return;
-      }
-
-      const artistName = artist.startsWith("Yua") ? "Yua" : "CJ";
-
-      const message = [
-        `Hello ${artistName}! I'd like to ask about a commission.`,
-        "",
-        `Name: ${name}`,
-        `Contact: ${contact}`,
-        `Preferred artist: ${artist}`,
-        budget ? `Preferred budget: ${budget}` : "",
-        "",
-        "My idea:",
-        details
-      ].filter(line => line !== "").join("\n");
-
-      // Create the message preview.
-      let preview = document.getElementById("inquiry-preview");
-
-      if (!preview) {
-        preview = document.createElement("textarea");
-        preview.id = "inquiry-preview";
-        preview.readOnly = true;
-        preview.setAttribute(
-          "aria-label",
-          "Your prepared commission inquiry"
-        );
-
-        preview.style.cssText =
-          'width:100%;min-height:145px;margin-top:12px;padding:12px;border:1px solid #d8e3e2;background:#fffdf7;color:#26383e;font:12px/1.7 "DM Sans",Arial,sans-serif;resize:vertical;';
-
-        if (formHint) {
-          formHint.insertAdjacentElement("afterend", preview);
-        } else {
-          commissionForm.appendChild(preview);
-        }
-      }
-
-      preview.value = message;
-
-      // Create a manual copy button.
-      let copyButton = document.getElementById("copy-inquiry");
-
-      if (!copyButton) {
-        copyButton = document.createElement("button");
-        copyButton.id = "copy-inquiry";
-        copyButton.type = "button";
-        copyButton.className = "button button-dark";
-        copyButton.style.marginTop = "12px";
-
-        preview.insertAdjacentElement("afterend", copyButton);
-      }
-
-      copyButton.textContent = "Copy inquiry";
-
-      // Manual copy fallback for mobile browsers.
-      copyButton.onclick = async () => {
-        try {
-          if (!navigator.clipboard?.writeText) {
-            throw new Error("Clipboard unavailable");
-          }
-
-          await navigator.clipboard.writeText(preview.value);
-          copyButton.textContent = "Copied! ✓";
-
-        } catch (error) {
-          preview.focus();
-          preview.select();
-          preview.setSelectionRange(0, preview.value.length);
-
-          copyButton.textContent =
-            "Message selected — tap Copy";
-
-          if (formHint) {
-            formHint.textContent =
-              "Your message is selected. Use your phone's Copy option, then paste it into Instagram.";
-          }
-        }
-      };
-
-      // Start copying while the original submit interaction is active.
-      let copyPromise = null;
-      let copied = false;
-
-      try {
-        if (navigator.clipboard?.writeText) {
-          copyPromise = navigator.clipboard.writeText(message);
-        } else {
-          preview.focus();
-          preview.select();
-          copied = document.execCommand("copy");
-        }
-      } catch (error) {
-        copied = false;
-      }
-
-      // Open Instagram immediately, without waiting for copying.
-      const instagramWindow = window.open(
-        instagramURL,
-        "_blank"
+      const submitButton = commissionForm.querySelector(
+        'button[type="submit"], input[type="submit"]'
       );
 
-      // Finish checking the clipboard result.
-      if (copyPromise) {
-        try {
-          await copyPromise;
-          copied = true;
-        } catch (error) {
-          copied = false;
+      const originalButtonText = submitButton
+        ? (submitButton.tagName === "INPUT"
+            ? submitButton.value
+            : submitButton.textContent)
+        : "";
+
+      isSubmitting = true;
+
+      if (submitButton) {
+        submitButton.disabled = true;
+
+        if (submitButton.tagName === "INPUT") {
+          submitButton.value = "Submitting...";
+        } else {
+          submitButton.textContent = "Submitting...";
         }
       }
 
       if (formHint) {
-        if (copied) {
-          formHint.textContent =
-            `Your inquiry is copied! Instagram is opening ${artistName}'s chat. Paste your message and send it.`;
-          copyButton.textContent = "Copy again";
-        } else {
-          formHint.textContent =
-            `Your inquiry is ready! If it wasn't copied automatically, use the Copy inquiry button below.`;
-        }
-
-        if (!instagramWindow) {
-          formHint.textContent +=
-            ` If Instagram did not open, tap here to open ${artistName}'s chat: `;
-
-          const link = document.createElement("a");
-          link.href = instagramURL;
-          link.target = "_blank";
-          link.rel = "noopener noreferrer";
-          link.textContent = "Open Instagram";
-
-          formHint.appendChild(link);
-        }
+        formHint.textContent =
+          "Please wait while we securely submit your inquiry...";
       }
 
-    });
+      resultPanel.hidden = true;
+      resultPanel.innerHTML = "";
 
+      try {
+        const response = await fetch(CREATE_COMMISSION_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "apikey": SUPABASE_PUBLISHABLE_KEY
+          },
+          body: JSON.stringify({
+            client_name: name,
+            client_contact: contact,
+            preferred_artist: preferredArtist,
+            commission_details: commissionDetails
+          })
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+          throw new Error(
+            result.error || result.message ||
+            "We couldn't submit your inquiry. Please try again."
+          );
+        }
+
+        if (!result.reference || !result.accessCode) {
+          throw new Error(
+            "The inquiry was submitted, but the tracking details were missing. Please contact AEMI before submitting again."
+          );
+        }
+
+        const heading = document.createElement("h3");
+        heading.textContent = "Your inquiry has been received.";
+
+        const explanation = document.createElement("p");
+        explanation.textContent =
+          "Keep these tracking details somewhere private. You'll need both to check your commission's progress.";
+
+        const referenceLabel = document.createElement("p");
+        referenceLabel.textContent = "Your tracking reference";
+
+        const referenceValue = document.createElement("strong");
+        referenceValue.textContent = result.reference;
+
+        const accessLabel = document.createElement("p");
+        accessLabel.textContent = "Your private access code";
+
+        const accessValue = document.createElement("strong");
+        accessValue.textContent = result.accessCode;
+
+        const warning = document.createElement("p");
+        warning.textContent =
+          "Important: Save both details now. Your access code will not be shown again after you leave this page.";
+
+        const copyButton = document.createElement("button");
+        copyButton.type = "button";
+        copyButton.className = "button button-dark";
+        copyButton.textContent = "Copy tracking details";
+
+        copyButton.addEventListener("click", async () => {
+          const credentials =
+            `AEMI ART SPACE — COMMISSION TRACKING\n` +
+            `Reference: ${result.reference}\n` +
+            `Access code: ${result.accessCode}`;
+
+          try {
+            await navigator.clipboard.writeText(credentials);
+            copyButton.textContent = "Copied! ✓";
+          } catch (error) {
+            copyButton.textContent =
+              "Please copy the details manually";
+          }
+        });
+
+        const trackerLink = document.createElement("a");
+        trackerLink.href = "track-commission.html";
+        trackerLink.textContent = "Go to commission tracking";
+
+        resultPanel.append(
+          heading,
+          explanation,
+          referenceLabel,
+          referenceValue,
+          accessLabel,
+          accessValue,
+          warning,
+          copyButton,
+          document.createElement("br"),
+          trackerLink
+        );
+
+        resultPanel.hidden = false;
+
+        if (formHint) {
+          formHint.textContent =
+            "Submission successful. Your tracking details are shown below.";
+        }
+
+        commissionForm.reset();
+
+        resultPanel.scrollIntoView({
+          behavior: "smooth",
+          block: "center"
+        });
+
+      } catch (error) {
+        if (formHint) {
+          formHint.textContent =
+            error.message ||
+            "Something went wrong. Please try again.";
+        }
+
+      } finally {
+        isSubmitting = false;
+
+        if (submitButton) {
+          submitButton.disabled = false;
+
+          if (submitButton.tagName === "INPUT") {
+            submitButton.value = originalButtonText;
+          } else {
+            submitButton.textContent = originalButtonText;
+          }
+        }
+      }
+    });
   }
 
 });
