@@ -180,7 +180,37 @@
     const form = document.getElementById("login-form");
     const button = document.getElementById("login-button");
     const message = document.getElementById("message");
+    const forgotPassword = document.getElementById("forgot-password");
 
+    forgotPassword.addEventListener("click", async (event) => {
+      event.preventDefault();
+
+      const email = document.getElementById("email").value.trim();
+
+      if (!email) {
+        message.textContent = "Please enter your admin email first.";
+        return;
+      }
+
+      forgotPassword.style.pointerEvents = "none";
+      message.style.color = "#6e7d80";
+      message.textContent = "Sending recovery email...";
+
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: "https://aemico.github.io/aemi-website/reset-password.html"
+      });
+
+      forgotPassword.style.pointerEvents = "auto";
+
+      if (error) {
+        message.style.color = "#a33b43";
+        message.textContent = error.message;
+        return;
+      }
+
+      message.style.color = "#397451";
+      message.textContent = "Recovery email sent! Check your inbox.";
+    });
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
 
