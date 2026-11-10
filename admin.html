@@ -1,0 +1,229 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AEMI Admin Portal</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background: #edf5f7;
+      color: #26383e;
+      font-family: "DM Sans", sans-serif;
+    }
+
+    .login-card {
+      width: 100%;
+      max-width: 420px;
+      padding: 42px 34px;
+      background: #fbf8ef;
+      border: 1px solid #d6e2e4;
+      border-radius: 22px;
+      box-shadow: 0 18px 55px rgba(38,56,62,.08);
+    }
+
+    .brand {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .brand small {
+      color: #739aa8;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+    }
+
+    h1 {
+      margin: 12px 0 8px;
+      font: 600 34px "Playfair Display", serif;
+    }
+
+    .subtitle {
+      color: #6e7d80;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    label {
+      display: block;
+      margin: 18px 0 7px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #d6e2e4;
+      border-radius: 10px;
+      background: white;
+      color: #26383e;
+      font: inherit;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #739aa8;
+      box-shadow: 0 0 0 3px rgba(115,154,168,.13);
+    }
+
+    button {
+      width: 100%;
+      margin-top: 24px;
+      padding: 14px;
+      border: 0;
+      border-radius: 10px;
+      background: #739aa8;
+      color: white;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      opacity: .6;
+      cursor: wait;
+    }
+
+    #message {
+      min-height: 22px;
+      margin-top: 16px;
+      color: #a33b43;
+      font-size: 12px;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .back-link {
+      display: block;
+      margin-top: 22px;
+      color: #739aa8;
+      font-size: 12px;
+      text-align: center;
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="login-card">
+    <header class="brand">
+      <small>AEMI ART SPACE</small>
+      <h1>Welcome back.</h1>
+      <p class="subtitle">
+        A private workspace for the AEMI team.
+      </p>
+    </header>
+
+    <form id="login-form">
+      <label for="email">Email address</label>
+      <input
+        id="email"
+        type="email"
+        autocomplete="username"
+        placeholder="Enter your admin email"
+        required
+      >
+
+      <label for="password">Password</label>
+      <input
+        id="password"
+        type="password"
+        autocomplete="current-password"
+        placeholder="Enter your password"
+        required
+      >
+
+      <button id="login-button" type="submit">
+        Sign in to AEMI
+      </button>
+
+      <p id="message" role="status" aria-live="polite"></p>
+    </form>
+
+    <a class="back-link" href="index.html">
+      ← Back to AEMI Art Space
+    </a>
+  </main>
+
+  <script type="module">
+    import { createClient } from
+      "https://esm.sh/@supabase/supabase-js@2";
+
+    const SUPABASE_URL =
+      "https://sonoqrxbbowgmidzhiwi.supabase.co";
+
+    const SUPABASE_KEY =
+      "sb_publishable_DTd8ysaf9mkHpbzJXGInPA_mkgjWKwO";
+
+    const supabase = createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
+
+    const form = document.getElementById("login-form");
+    const button = document.getElementById("login-button");
+    const message = document.getElementById("message");
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      button.disabled = true;
+      button.textContent = "Signing in...";
+      message.textContent = "";
+
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+
+      try {
+        const { data, error } = await supabase.auth.signInWithPassword({
+          email,
+          password
+        });
+
+        if (error) throw error;
+
+        const user = data.user;
+
+        const { data: admin, error: adminError } = await supabase
+          .from("admin_users")
+          .select("display_name, active")
+          .eq("user_id", user.id)
+          .maybeSingle();
+
+        if (adminError) throw adminError;
+
+        if (!admin || admin.active !== true) {
+          await supabase.auth.signOut();
+          throw new Error("This account is not authorized for the AEMI Admin Portal.");
+        }
+
+        window.location.replace("admin-dashboard.html");
+
+      } catch (error) {
+        message.textContent =
+          error.message || "Unable to sign in. Please try again.";
+
+        await supabase.auth.signOut();
+      } finally {
+        button.disabled = false;
+        button.textContent = "Sign in to AEMI";
+      }
+    });
+  </script>
+</body>
+</html>
