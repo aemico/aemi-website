@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AEMI Admin Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --blue: #dcecf2;
+      --blue-light: #edf5f7;
+      --blue-deep: #739aa8;
+      --ivory: #fbf8ef;
+      --ink: #26383e;
+      --muted: #6e7d80;
+      --line: #d6e2e4;
+      --yellow: #f4e58f;
+      --white: #fffefa;
+      --red: #a64b4b;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--ivory);
+      color: var(--ink);
+      font-family: "DM Sans", sans-serif;
+    }
+
+    button, input, textarea, select { font: inherit; }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 22px 5%;
+      background: var(--blue);
+      border-bottom: 1px solid var(--line);
+    }
+
+    header h1 {
+      margin: 0;
+      font: 600 25px "Playfair Display", serif;
+    }
+
+    header p {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    button {
+      cursor: pointer;
+      border: 1px solid var(--line);
+      background: var(--white);
+      color: var(--ink);
+      padding: 10px 14px;
+    }
+
+    button:hover { background: var(--yellow); }
+
+    main {
+      width: min(1200px, 90%);
+      margin: 34px auto 70px;
+    }
+
+    .welcome {
+      margin-bottom: 26px;
+    }
+
+    .welcome h2 {
+      margin: 0;
+      font: 600 30px "Playfair Display", serif;
+    }
+
+    .welcome p {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .toolbar input, .toolbar select,
+    .field input, .field textarea, .field select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid var(--line);
+      background: var(--white);
+      color: var(--ink);
+      outline-color: var(--blue-deep);
+    }
+
+    .toolbar input { flex: 1 1 220px; }
+    .toolbar select { flex: 0 1 190px; }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1.5fr);
+      gap: 20px;
+      align-items: start;
+    }
+
+    .panel {
+      background: var(--white);
+      border: 1px solid var(--line);
+      padding: 20px;
+    }
+
+    .panel h3 {
+      margin: 0 0 16px;
+      font: 600 21px "Playfair Display", serif;
+    }
+
+    #commission-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .commission-item {
+      width: 100%;
+      padding: 14px;
+      text-align: left;
+      background: var(--ivory);
+      border: 1px solid var(--line);
+    }
+
+    .commission-item.selected {
+      border-color: var(--blue-deep);
+      background: var(--blue-light);
+    }
+
+    .commission-item strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .commission-item small {
+      display: block;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .status {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 4px 8px;
+      background: var(--blue);
+      font-size: 11px;
+      text-transform: capitalize;
+    }
+
+    .detail-empty {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .detail-block {
+      padding: 13px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .detail-block:last-child { border-bottom: 0; }
+
+    .detail-label {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--muted);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .detail-value {
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .field {
+      display: grid;
+      gap: 7px;
+      margin: 15px 0;
+    }
+
+    .field label {
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .field textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .primary-button {
+      background: var(--blue);
+      border-color: var(--blue-deep);
+      font-weight: 700;
+    }
+
+    .danger-button {
+      color: var(--red);
+    }
+
+    .history-item {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .history-item:last-child { border-bottom: 0; }
+
+    .history-item strong {
+      font-size: 13px;
+      text-transform: capitalize;
+    }
+
+    .history-item p {
+      margin: 6px 0;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .history-item small {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    #message {
+      margin: 14px 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .error { color: var(--red) !important; }
+
+    @media (max-width: 760px) {
+      .layout { grid-template-columns: 1fr; }
+      header { padding: 18px 5%; }
+      header h1 { font-size: 21px; }
+      main { margin-top: 25px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div>
+      <h1>AEMI Admin Space</h1>
+      <p>Commission management</p>
+    </div>
+    <button id="logout-button" type="button">Log out</button>
+  </header>
+
+  <main>
+    <section class="welcome">
+      <h2 id="welcome-title">Welcome back.</h2>
+      <p>Manage inquiries, update commission progress, and keep your clients informed.</p>
+    </section>
+
+    <div class="toolbar">
+      <input id="search-input" type="search" placeholder="Search reference or client name">
+      <select id="status-filter">
+        <option value="">All statuses</option>
+        <option value="inquiry_received">Inquiry received</option>
+        <option value="discussion">Discussion</option>
+        <option value="awaiting_payment">Awaiting payment</option>
+        <option value="in_progress">In progress</option>
+        <option value="for_review">For review</option>
+        <option value="completed">Completed</option>
+        <option value="cancelled">Cancelled</option>
+      </select>
+      <select id="artist-filter">
+        <option value="">All artists</option>
+        <option value="Yua">Yua</option>
+        <option value="CJ">CJ</option>
+      </select>
+      <button id="refresh-button" type="button">Refresh</button>
+    </div>
+
+    <p id="message" role="status">Loading commissions...</p>
+
+    <div class="layout">
+      <section class="panel">
+        <h3>Commission inquiries</h3>
+        <div id="commission-list"></div>
+      </section>
+
+      <section class="panel">
+        <div id="commission-detail">
+          <h3>Commission details</h3>
+          <p class="detail-empty">Choose a commission from the list to view its details and manage its progress.</p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script type="module">
+    import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
+    const SUPABASE_URL = "https://sonoqrxbbowgmidzhiwi.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_DTd8ysaf9mkHpbzJXGInPA_mkgjWKwO";
+
+    const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    const list = document.getElementById("commission-list");
+    const detail = document.getElementById("commission-detail");
+    const message = document.getElementById("message");
+    const searchInput = document.getElementById("search-input");
+    const statusFilter = document.getElementById("status-filter");
+    const artistFilter = document.getElementById("artist-filter");
+
+    let commissions = [];
+    let selectedId = null;
+    let currentUser = null;
+
+    const statusLabels = {
+      inquiry_received: "Inquiry received",
+      discussion: "Discussion",
+      awaiting_payment: "Awaiting payment",
+      in_progress: "In progress",
+      for_review: "For review",
+      completed: "Completed",
+      cancelled: "Cancelled"
+    };
+
+    function setMessage(text, isError = false) {
+      message.textContent = text;
+      message.classList.toggle("error", isError);
+    }
+
+    function formatDate(value) {
+      if (!value) return "Not available";
+      return new Date(value).toLocaleString();
+    }
+
+    function makeElement(tag, className, text) {
+      const element = document.createElement(tag);
+      if (className) element.className = className;
+      if (text !== undefined) element.textContent = text;
+      return element;
+    }
+
+    async function checkAdmin() {
+      const { data: sessionData, error: sessionError } =
+        await supabase.auth.getSession();
+
+      if (sessionError || !sessionData.session) {
+        window.location.replace("admin.html");
+        return false;
+      }
+
+      currentUser = sessionData.session.user;
+
+      const { data: profile, error } = await supabase
+        .from("admin_users")
+        .select("display_name, active")
+        .eq("user_id", currentUser.id)
+        .maybeSingle();
+
+      if (error || !profile || profile.active !== true) {
+        await supabase.auth.signOut();
+        window.location.replace("admin.html");
+        return false;
+      }
+
+      document.getElementById("welcome-title").textContent =
+        `Welcome back, ${profile.display_name || "Admin"}.`;
+
+      return true;
+    }
+
+    function renderList() {
+      const search = searchInput.value.trim().toLowerCase();
+      const status = statusFilter.value;
+      const artist = artistFilter.value;
+
+      const filtered = commissions.filter(item => {
+        const matchesSearch =
+          !search ||
+          (item.tracking_reference || "").toLowerCase().includes(search) ||
+          (item.client_name || "").toLowerCase().includes(search);
+
+        const matchesStatus = !status || item.status === status;
+
+        const matchesArtist =
+          !artist || (item.preferred_artist || "").toLowerCase().includes(artist.toLowerCase());
+
+        return matchesSearch && matchesStatus && matchesArtist;
+      });
+
+      list.replaceChildren();
+
+      if (!filtered.length) {
+        list.append(makeElement("p", "detail-empty", "No matching commissions found."));
+        return;
+      }
+
+      filtered.forEach(item => {
+        const button = makeElement("button", "commission-item");
+        button.type = "button";
+
+        if (item.id === selectedId) button.classList.add("selected");
+
+        button.append(
+          makeElement("strong", "", item.tracking_reference || "No reference"),
+          makeElement("small", "", item.client_name || "Unnamed client"),
+          makeElement("small", "", item.preferred_artist || "Artist not specified"),
+          makeElement("span", "status", statusLabels[item.status] || item.status || "Unknown")
+        );
+
+        button.addEventListener("click", () => {
+          selectedId = item.id;
+          renderList();
+          showCommission(item);
+        });
+
+        list.append(button);
+      });
+    }
+
+    function addDetailBlock(container, label, value) {
+      const block = makeElement("div", "detail-block");
+      block.append(
+        makeElement("span", "detail-label", label),
+        makeElement("div", "detail-value", value || "Not provided")
+      );
+      container.append(block);
+    }
+
+    async function showCommission(item) {
+      detail.replaceChildren();
+
+      detail.append(makeElement("h3", "", "Commission details"));
+
+      addDetailBlock(detail, "Tracking reference", item.tracking_reference);
+      addDetailBlock(detail, "Client", item.client_name);
+      addDetailBlock(detail, "Contact", item.client_contact);
+      addDetailBlock(detail, "Preferred artist", item.preferred_artist);
+      addDetailBlock(detail, "Project details", item.commission_details);
+      addDetailBlock(detail, "Date submitted", formatDate(item.created_at));
+      addDetailBlock(detail, "Last updated", formatDate(item.updated_at));
+
+      const statusField = makeElement("div", "field");
+      const statusLabel = makeElement("label", "", "Commission status");
+      const statusSelect = document.createElement("select");
+      statusSelect.id = "new-status";
+
+      Object.entries(statusLabels).forEach(([value, label]) => {
+        const option = document.createElement("option");
+        option.value = value;
+        option.textContent = label;
+        if (item.status === value) option.selected = true;
+        statusSelect.append(option);
+      });
+
+      statusField.append(statusLabel, statusSelect);
+
+      const notesField = makeElement("div", "field");
+      const notesLabel = makeElement("label", "", "Private admin notes");
+      const notesInput = document.createElement("textarea");
+      notesInput.id = "admin-notes";
+      notesInput.value = item.admin_notes || "";
+      notesInput.placeholder = "Notes for AEMI admins only...";
+      notesField.append(notesLabel, notesInput);
+
+      const saveNotesButton = makeElement("button", "primary-button", "Save private notes");
+      saveNotesButton.type = "button";
+      saveNotesButton.addEventListener("click", () => saveAdminNotes(item.id));
+
+      const updateStatusButton = makeElement("button", "primary-button", "Save status");
+      updateStatusButton.type = "button";
+      updateStatusButton.addEventListener("click", () => saveStatus(item));
+
+      detail.append(statusField, updateStatusButton, notesField, saveNotesButton);
+
+      const historyHeading = makeElement("h3", "", "Public progress history");
+      historyHeading.style.marginTop = "28px";
+      detail.append(historyHeading);
+
+      const updateField = makeElement("div", "field");
+      const updateLabel = makeElement("label", "", "Message visible to the client");
+      const updateInput = document.createElement("textarea");
+      updateInput.id = "public-update";
+      updateInput.placeholder = "Write a short progress update...";
+      updateField.append(updateLabel, updateInput);
+
+      const addUpdateButton = makeElement("button", "primary-button", "Add progress update");
+      addUpdateButton.type = "button";
+      addUpdateButton.addEventListener("click", () => addPublicUpdate(item));
+
+      detail.append(updateField, addUpdateButton);
+
+      const historyContainer = makeElement("div");
+      historyContainer.id = "history-container";
+      detail.append(historyContainer);
+
+      await loadHistory(item.id, historyContainer);
+    }
+
+    async function loadHistory(commissionId, container) {
+      container.replaceChildren(makeElement("p", "detail-empty", "Loading history..."));
+
+      const { data, error } = await supabase
+        .from("commission_updates")
+        .select("status, public_note, created_at")
+        .eq("commission_id", commissionId)
+        .order("created_at", { ascending: false });
+
+      container.replaceChildren();
+
+      if (error) {
+        container.append(makeElement("p", "detail-empty", "Could not load progress history."));
+        return;
+      }
+
+      if (!data || !data.length) {
+        container.append(makeElement("p", "detail-empty", "No progress updates yet."));
+        return;
+      }
+
+      data.forEach(update => {
+        const entry = makeElement("div", "history-item");
+        entry.append(
+          makeElement("strong", "", statusLabels[update.status] || update.status || "Update"),
+          makeElement("p", "", update.public_note || ""),
+          makeElement("small", "", formatDate(update.created_at))
+        );
+        container.append(entry);
+      });
+    }
+
+    async function saveStatus(item) {
+      const newStatus = document.getElementById("new-status").value;
+
+      const { error } = await supabase
+        .from("commissions")
+        .update({ status: newStatus, updated_at: new Date().toISOString() })
+        .eq("id", item.id);
+
+      if (error) {
+        setMessage("Status could not be saved: " + error.message, true);
+        return;
+      }
+
+      setMessage("Commission status saved.");
+      await loadCommissions(item.id);
+    }
+
+    async function saveAdminNotes(id) {
+      const notes = document.getElementById("admin-notes").value;
+
+      const { error } = await supabase
+        .from("commissions")
+        .update({ admin_notes: notes, updated_at: new Date().toISOString() })
+        .eq("id", id);
+
+      if (error) {
+        setMessage("Private notes could not be saved: " + error.message, true);
+        return;
+      }
+
+      setMessage("Private admin notes saved.");
+      await loadCommissions(id);
+    }
+
+    async function addPublicUpdate(item) {
+      const note = document.getElementById("public-update").value.trim();
+      const newStatus = document.getElementById("new-status").value;
+
+      if (!note) {
+        setMessage("Please write a progress message first.", true);
+        return;
+      }
+
+      const { error: updateError } = await supabase
+        .from("commission_updates")
+        .insert({
+          commission_id: item.id,
+          status: newStatus,
+          public_note: note,
+          changed_by: currentUser.id
+        });
+
+      if (updateError) {
+        setMessage("Progress update could not be added: " + updateError.message, true);
+        return;
+      }
+
+      const { error: statusError } = await supabase
+        .from("commissions")
+        .update({
+          status: newStatus,
+          updated_at: new Date().toISOString()
+        })
+        .eq("id", item.id);
+
+      if (statusError) {
+        setMessage("The history entry was added, but the commission status could not be updated: " + statusError.message, true);
+        await loadCommissions(item.id);
+        return;
+      }
+
+      setMessage("Progress update added successfully.");
+      await loadCommissions(item.id);
+    }
+
+    async function loadCommissions(keepSelectedId = null) {
+      setMessage("Loading commissions...");
+
+      const { data, error } = await supabase
+        .from("commissions")
+        .select("id, tracking_reference, client_name, client_contact, preferred_artist, commission_details, status, admin_notes, created_at, updated_at")
+        .order("created_at", { ascending: false });
+
+      if (error) {
+        setMessage("Could not load commissions: " + error.message, true);
+        return;
+      }
+
+      commissions = data || [];
+      selectedId = keepSelectedId;
+
+      renderList();
+
+      const selected = commissions.find(item => item.id === selectedId);
+
+      if (selected) {
+        await showCommission(selected);
+      } else {
+        detail.replaceChildren(
+          makeElement("h3", "", "Commission details"),
+          makeElement("p", "detail-empty", "Choose a commission from the list to view its details and manage its progress.")
+        );
+      }
+
+      setMessage(`${commissions.length} commission(s) loaded.`);
+    }
+
+    document.getElementById("refresh-button").addEventListener("click", () => {
+      loadCommissions(selectedId);
+    });
+
+    document.getElementById("logout-button").addEventListener("click", async () => {
+      await supabase.auth.signOut();
+      window.location.replace("admin.html");
+    });
+
+    searchInput.addEventListener("input", renderList);
+    statusFilter.addEventListener("change", renderList);
+    artistFilter.addEventListener("change", renderList);
+
+    if (await checkAdmin()) {
+      await loadCommissions();
+    }
+  </script>
+</body>
+</html>
