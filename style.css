@@ -6758,3 +6758,15 @@ body.lightbox-open {
 .favorites-empty[hidden] {
   display: none !important;
 }
+    .forgot-link {
+      display: block;
+      margin-top: 16px;
+      color: #739aa8;
+      font-size: 12px;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .forgot-link:hover {
+      text-decoration: underline;
+    }
