@@ -1,125 +1,424 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AEMI Admin Dashboard</title>
+  <meta name="theme-color" content="#f8f5ea">
+  <meta name="description" content="AEMI private artist workspace.">
+  <title>AEMI Studio — Admin Space</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Nunito:wght@400;500;600;700;800;900&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --blue: #dcecf2;
-      --blue-light: #edf5f7;
-      --blue-deep: #739aa8;
-      --ivory: #fbf8ef;
-      --ink: #26383e;
-      --muted: #6e7d80;
-      --line: #d6e2e4;
-      --yellow: #f4e58f;
+      --blue: #dcecf5;
+      --blue-light: #edf5fa;
+      --blue-deep: #7299ad;
+
+      --yellow: #fff0b5;
+      --lavender: #e9ddf7;
+      --pink: #f8dde3;
+      --green: #dcebdd;
+
+      --ivory: #f8f5ea;
       --white: #fffefa;
-      --red: #a64b4b;
+      --ink: #354750;
+      --muted: #829096;
+      --line: #e9e5da;
+      --red: #b75d69;
+
+      --radius: 22px;
+      --shadow: 0 5px 20px rgba(65, 85, 95, 0.055);
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     body {
       margin: 0;
+      min-height: 100vh;
       background: var(--ivory);
       color: var(--ink);
       font-family: "DM Sans", sans-serif;
     }
 
-    button, input, textarea, select { font: inherit; }
-
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      padding: 22px 5%;
-      background: var(--blue);
-      border-bottom: 1px solid var(--line);
-    }
-
-    header h1 {
-      margin: 0;
-      font: 600 25px "Playfair Display", serif;
-    }
-
-    header p {
-      margin: 4px 0 0;
-      color: var(--muted);
-      font-size: 12px;
+    button, input, textarea, select {
+      font: inherit;
     }
 
     button {
       cursor: pointer;
-      border: 1px solid var(--line);
-      background: var(--white);
-      color: var(--ink);
-      padding: 10px 14px;
     }
 
-    button:hover { background: var(--yellow); }
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible {
+      outline: 3px solid rgba(114, 153, 173, 0.35);
+      outline-offset: 2px;
+    }
+
+    /* HEADER */
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 18px 5%;
+      background: var(--white);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 43px;
+      height: 43px;
+      border-radius: 15px;
+      background: var(--blue);
+      color: #54788c;
+      font-family: "Playfair Display", serif;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .brand-name {
+      margin: 0;
+      font-family: "Nunito", sans-serif;
+      font-size: 21px;
+      font-weight: 900;
+      letter-spacing: -0.7px;
+    }
+
+    .brand-subtitle {
+      margin: 1px 0 0;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .topbar-button {
+      padding: 10px 15px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: var(--white);
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 700;
+      transition: 0.2s ease;
+    }
+
+    .topbar-button:hover {
+      background: var(--blue);
+    }
+
+    .logout-button {
+      color: var(--red);
+    }
+
+    .logout-button:hover {
+      background: var(--pink);
+    }
+
+    /* MAIN */
 
     main {
-      width: min(1200px, 90%);
-      margin: 34px auto 70px;
+      width: min(1240px, 90%);
+      margin: 32px auto 70px;
     }
 
-    .welcome {
+    /* WELCOME */
+
+    .welcome-card {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      min-height: 190px;
       margin-bottom: 26px;
+      padding: 32px 35px;
+      border: 1px solid #d4e5ed;
+      border-radius: 27px;
+      background: var(--blue);
     }
 
-    .welcome h2 {
+    .welcome-copy {
+      position: relative;
+      z-index: 1;
+      max-width: 550px;
+    }
+
+    .welcome-label {
+      display: inline-block;
+      margin-bottom: 12px;
+      padding: 6px 11px;
+      border-radius: 20px;
+      background: rgba(255, 254, 250, 0.72);
+      color: #66889a;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .welcome-card h2 {
       margin: 0;
-      font: 600 30px "Playfair Display", serif;
+      color: #344a56;
+      font-family: "Nunito", sans-serif;
+      font-size: clamp(28px, 4vw, 39px);
+      font-weight: 900;
+      letter-spacing: -1.4px;
     }
 
-    .welcome p {
-      color: var(--muted);
+    .welcome-card p {
+      max-width: 400px;
+      margin: 9px 0 0;
+      color: #617c89;
       font-size: 13px;
+      line-height: 1.7;
     }
+
+    .welcome-art {
+      display: grid;
+      place-items: center;
+      width: 116px;
+      height: 116px;
+      flex-shrink: 0;
+      margin-right: 30px;
+      border: 2px solid rgba(255,255,255,0.7);
+      border-radius: 38px;
+      background: rgba(255,255,255,0.55);
+      transform: rotate(7deg);
+    }
+
+    .welcome-art span {
+      color: #6d91a2;
+      font-family: "Playfair Display", serif;
+      font-size: 43px;
+      font-weight: 600;
+    }
+
+    /* SECTION HEADINGS */
+
+    .section-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 28px 0 14px;
+    }
+
+    .section-heading h3 {
+      margin: 0;
+      font-family: "Nunito", sans-serif;
+      font-size: 17px;
+      font-weight: 900;
+    }
+
+    .section-heading p {
+      margin: 3px 0 0;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    /* STATISTICS */
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .stat-card {
+      position: relative;
+      overflow: hidden;
+      min-height: 135px;
+      padding: 19px;
+      border: 1px solid transparent;
+      border-radius: var(--radius);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
+    }
+
+    .stat-card.blue {
+      background: var(--blue-light);
+      border-color: #dceaf0;
+    }
+
+    .stat-card.yellow {
+      background: var(--yellow);
+      border-color: #f1e5ac;
+    }
+
+    .stat-card.lavender {
+      background: var(--lavender);
+      border-color: #e1d4f0;
+    }
+
+    .stat-card.green {
+      background: var(--green);
+      border-color: #d1e2d2;
+    }
+
+    .stat-icon {
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      margin-bottom: 11px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.65);
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .stat-card strong {
+      display: block;
+      font-family: "Nunito", sans-serif;
+      font-size: 29px;
+      font-weight: 900;
+      line-height: 1.1;
+    }
+
+    .stat-card span {
+      display: block;
+      margin-top: 5px;
+      font-size: 11px;
+      font-weight: 700;
+      opacity: 0.8;
+    }
+
+    /* TOOLBAR */
 
     .toolbar {
-      display: flex;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: minmax(180px, 1fr) 190px 150px auto;
       gap: 10px;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
     }
 
-    .toolbar input, .toolbar select,
-    .field input, .field textarea, .field select {
+    .toolbar input,
+    .toolbar select,
+    .field input,
+    .field textarea,
+    .field select {
       width: 100%;
-      padding: 12px;
+      min-width: 0;
+      padding: 12px 14px;
       border: 1px solid var(--line);
+      border-radius: 13px;
       background: var(--white);
       color: var(--ink);
-      outline-color: var(--blue-deep);
+      font-size: 12px;
     }
 
-    .toolbar input { flex: 1 1 220px; }
-    .toolbar select { flex: 0 1 190px; }
+    .toolbar input::placeholder,
+    .field textarea::placeholder {
+      color: #a0aaac;
+    }
+
+    .toolbar-button {
+      padding: 11px 16px;
+      border: 1px solid #c9dce5;
+      border-radius: 13px;
+      background: var(--blue);
+      color: #526f80;
+      font-size: 12px;
+      font-weight: 800;
+      transition: 0.2s ease;
+    }
+
+    .toolbar-button:hover {
+      background: #c8e0ec;
+    }
+
+    /* MESSAGE */
+
+    #message {
+      display: flex;
+      align-items: center;
+      min-height: 40px;
+      margin: 0 0 14px;
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: var(--white);
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.6;
+    }
+
+    #message.error {
+      border-color: #f0c9ce;
+      background: #fff0f1;
+      color: var(--red);
+    }
+
+    /* WORKSPACE */
 
     .layout {
       display: grid;
-      grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1.5fr);
-      gap: 20px;
+      grid-template-columns: minmax(260px, 0.78fr) minmax(0, 1.6fr);
+      gap: 17px;
       align-items: start;
     }
 
     .panel {
-      background: var(--white);
+      min-width: 0;
+      padding: 21px;
       border: 1px solid var(--line);
-      padding: 20px;
+      border-radius: var(--radius);
+      background: var(--white);
+      box-shadow: var(--shadow);
     }
 
-    .panel h3 {
-      margin: 0 0 16px;
-      font: 600 21px "Playfair Display", serif;
+    .panel-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 16px;
     }
+
+    .panel-heading h3 {
+      margin: 0;
+      font-family: "Nunito", sans-serif;
+      font-size: 17px;
+      font-weight: 900;
+    }
+
+    .panel-count {
+      padding: 5px 9px;
+      border-radius: 20px;
+      background: var(--blue-light);
+      color: #68899b;
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    /* COMMISSION LIST */
 
     #commission-list {
       display: grid;
@@ -127,184 +426,572 @@
     }
 
     .commission-item {
+      display: block;
       width: 100%;
       padding: 14px;
-      text-align: left;
-      background: var(--ivory);
       border: 1px solid var(--line);
+      border-radius: 15px;
+      background: #fcfaf5;
+      color: var(--ink);
+      text-align: left;
+      transition: 0.2s ease;
+    }
+
+    .commission-item:hover {
+      border-color: #c5dce6;
+      background: var(--blue-light);
+      transform: translateY(-1px);
     }
 
     .commission-item.selected {
       border-color: var(--blue-deep);
-      background: var(--blue-light);
+      background: #edf5fa;
+      box-shadow: 0 0 0 2px rgba(114,153,173,0.10);
     }
 
     .commission-item strong {
       display: block;
       margin-bottom: 5px;
+      font-size: 13px;
+      font-weight: 800;
+      overflow-wrap: anywhere;
     }
 
     .commission-item small {
       display: block;
       color: var(--muted);
-      line-height: 1.6;
+      font-size: 11px;
+      line-height: 1.7;
+      overflow-wrap: anywhere;
     }
 
     .status {
-      display: inline-block;
-      margin-top: 8px;
-      padding: 4px 8px;
+      display: inline-flex;
+      align-items: center;
+      margin-top: 9px;
+      padding: 5px 9px;
+      border-radius: 20px;
       background: var(--blue);
-      font-size: 11px;
-      text-transform: capitalize;
+      color: #577c8d;
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .status[data-status="inquiry_received"] {
+      background: var(--yellow);
+      color: #826c36;
+    }
+
+    .status[data-status="discussion"] {
+      background: var(--lavender);
+      color: #786394;
+    }
+
+    .status[data-status="awaiting_payment"] {
+      background: var(--pink);
+      color: #965d6a;
+    }
+
+    .status[data-status="in_progress"] {
+      background: var(--blue);
+      color: #557d92;
+    }
+
+    .status[data-status="for_review"] {
+      background: #f3e4c9;
+      color: #8d7044;
+    }
+
+    .status[data-status="completed"] {
+      background: var(--green);
+      color: #55785c;
+    }
+
+    .status[data-status="cancelled"] {
+      background: #f2e3e3;
+      color: #9b5c5c;
     }
 
     .detail-empty {
       color: var(--muted);
-      font-size: 13px;
-      line-height: 1.7;
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    /* DETAIL AREA */
+
+    #commission-detail h3 {
+      margin: 0 0 15px;
+      font-family: "Nunito", sans-serif;
+      font-size: 19px;
+      font-weight: 900;
     }
 
     .detail-block {
       padding: 13px 0;
-      border-bottom: 1px solid var(--line);
+      border-bottom: 1px dashed var(--line);
     }
 
-    .detail-block:last-child { border-bottom: 0; }
+    .detail-block:last-child {
+      border-bottom: 0;
+    }
 
     .detail-label {
       display: block;
-      margin-bottom: 5px;
+      margin-bottom: 6px;
       color: var(--muted);
-      font-size: 11px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.07em;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
     }
 
     .detail-value {
       white-space: pre-wrap;
       overflow-wrap: anywhere;
-      font-size: 14px;
-      line-height: 1.7;
+      font-size: 13px;
+      line-height: 1.8;
     }
+
+    /* FORMS */
 
     .field {
       display: grid;
-      gap: 7px;
-      margin: 15px 0;
+      gap: 8px;
+      margin: 16px 0;
     }
 
     .field label {
-      font-size: 12px;
-      font-weight: 700;
+      color: var(--ink);
+      font-size: 11px;
+      font-weight: 800;
     }
 
     .field textarea {
-      min-height: 90px;
+      min-height: 95px;
       resize: vertical;
+      line-height: 1.7;
     }
 
-    .primary-button {
+    .field select {
+      cursor: pointer;
+    }
+
+    .action-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 12px;
+    }
+
+    .primary-button,
+    .secondary-button {
+      min-height: 40px;
+      padding: 10px 15px;
+      border: 1px solid #c9dce5;
+      border-radius: 12px;
       background: var(--blue);
-      border-color: var(--blue-deep);
-      font-weight: 700;
+      color: #526f80;
+      font-size: 11px;
+      font-weight: 800;
+      transition: 0.2s ease;
     }
 
-    .danger-button {
-      color: var(--red);
+    .primary-button:hover {
+      background: #c8e0ec;
+    }
+
+    .secondary-button {
+      border-color: var(--line);
+      background: #fff8e7;
+      color: #817044;
+    }
+
+    .secondary-button:hover {
+      background: var(--yellow);
+    }
+
+    button:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+
+    /* DETAIL SECTIONS */
+
+    .detail-section {
+      margin-top: 25px;
+      padding-top: 20px;
+      border-top: 1px dashed var(--line);
+    }
+
+    .detail-section-heading {
+      margin-bottom: 13px;
+    }
+
+    .detail-section-heading h4 {
+      margin: 0;
+      font-family: "Nunito", sans-serif;
+      font-size: 15px;
+      font-weight: 900;
+    }
+
+    .detail-section-heading p {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.6;
+    }
+
+    /* HISTORY */
+
+    #history-container {
+      margin-top: 17px;
     }
 
     .history-item {
-      padding: 12px 0;
-      border-bottom: 1px solid var(--line);
+      padding: 13px 0;
+      border-bottom: 1px dashed var(--line);
     }
 
-    .history-item:last-child { border-bottom: 0; }
+    .history-item:last-child {
+      border-bottom: 0;
+    }
 
     .history-item strong {
-      font-size: 13px;
-      text-transform: capitalize;
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 800;
     }
 
     .history-item p {
-      margin: 6px 0;
-      font-size: 13px;
-      line-height: 1.6;
+      margin: 7px 0;
+      color: #61727a;
+      font-size: 12px;
+      line-height: 1.7;
+      overflow-wrap: anywhere;
     }
 
     .history-item small {
       color: var(--muted);
-      font-size: 11px;
+      font-size: 10px;
     }
 
-    #message {
-      margin: 14px 0;
+    /* EMPTY STATE */
+
+    .empty-state {
+      padding: 24px 12px;
+      border: 1px dashed var(--line);
+      border-radius: 15px;
+      background: #fcfaf5;
       color: var(--muted);
-      font-size: 13px;
-      line-height: 1.6;
+      font-size: 12px;
+      line-height: 1.8;
+      text-align: center;
     }
 
-    .error { color: var(--red) !important; }
+    /* FOOTER */
 
-    @media (max-width: 760px) {
-      .layout { grid-template-columns: 1fr; }
-      header { padding: 18px 5%; }
-      header h1 { font-size: 21px; }
-      main { margin-top: 25px; }
+    footer {
+      padding: 25px 10px;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.7;
+      text-align: center;
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 900px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .toolbar {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .toolbar input {
+        grid-column: 1 / -1;
+      }
+
+      .layout {
+        grid-template-columns: minmax(230px, 0.8fr) minmax(0, 1.3fr);
+      }
+    }
+
+    @media (max-width: 650px) {
+      .topbar {
+        padding: 15px 5%;
+      }
+
+      .brand-mark {
+        width: 39px;
+        height: 39px;
+      }
+
+      .brand-name {
+        font-size: 18px;
+      }
+
+      .topbar-button {
+        padding: 9px 11px;
+        font-size: 11px;
+      }
+
+      main {
+        width: 92%;
+        margin-top: 22px;
+      }
+
+      .welcome-card {
+        min-height: 165px;
+        padding: 23px;
+        border-radius: 22px;
+      }
+
+      .welcome-card h2 {
+        font-size: 28px;
+      }
+
+      .welcome-card p {
+        font-size: 11px;
+      }
+
+      .welcome-art {
+        width: 75px;
+        height: 75px;
+        margin-right: 3px;
+        border-radius: 25px;
+      }
+
+      .welcome-art span {
+        font-size: 30px;
+      }
+
+      .stats-grid {
+        gap: 10px;
+      }
+
+      .stat-card {
+        min-height: 120px;
+        padding: 15px;
+        border-radius: 18px;
+      }
+
+      .stat-card strong {
+        font-size: 25px;
+      }
+
+      .toolbar {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .toolbar select,
+      .toolbar button {
+        width: 100%;
+      }
+
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .panel {
+        padding: 17px;
+      }
+
+      .commission-item {
+        padding: 13px;
+      }
+    }
+
+    @media (max-width: 390px) {
+      .welcome-art {
+        display: none;
+      }
+
+      .toolbar {
+        grid-template-columns: 1fr;
+      }
+
+      .toolbar input {
+        grid-column: auto;
+      }
+
+      .topbar-actions {
+        gap: 6px;
+      }
+
+      .topbar-button {
+        padding: 8px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+      }
     }
   </style>
 </head>
 
 <body>
-  <header>
-    <div>
-      <h1>AEMI Admin Space</h1>
-      <p>Commission management</p>
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark">A</div>
+      <div>
+        <h1 class="brand-name">aemi studio</h1>
+        <p class="brand-subtitle">your little creative workspace</p>
+      </div>
     </div>
-    <button id="logout-button" type="button">Log out</button>
+
+    <div class="topbar-actions">
+      <button class="topbar-button" id="refresh-button" type="button">
+        Refresh
+      </button>
+      <button class="topbar-button logout-button" id="logout-button" type="button">
+        Log out
+      </button>
+    </div>
   </header>
 
   <main>
-    <section class="welcome">
-      <h2 id="welcome-title">Welcome back.</h2>
-      <p>Manage inquiries, update commission progress, and keep your clients informed.</p>
+
+    <!-- WELCOME -->
+
+    <section class="welcome-card">
+      <div class="welcome-copy">
+        <span class="welcome-label">A little hello!</span>
+        <h2 id="welcome-title">hello, artists!</h2>
+        <p>
+          Ready to make something wonderful today?
+          Manage your commissions and keep your little art space organized.
+        </p>
+      </div>
+
+      <div class="welcome-art" aria-hidden="true">
+        <span>A</span>
+      </div>
     </section>
 
-    <div class="toolbar">
-      <input id="search-input" type="search" placeholder="Search reference or client name">
-      <select id="status-filter">
-        <option value="">All statuses</option>
-        <option value="inquiry_received">Inquiry received</option>
-        <option value="discussion">Discussion</option>
-        <option value="awaiting_payment">Awaiting payment</option>
-        <option value="in_progress">In progress</option>
-        <option value="for_review">For review</option>
-        <option value="completed">Completed</option>
-        <option value="cancelled">Cancelled</option>
-      </select>
-      <select id="artist-filter">
-        <option value="">All artists</option>
-        <option value="Yua">Yua</option>
-        <option value="CJ">CJ</option>
-      </select>
-      <button id="refresh-button" type="button">Refresh</button>
-    </div>
+    <!-- STATISTICS -->
 
-    <p id="message" role="status">Loading commissions...</p>
-
-    <div class="layout">
-      <section class="panel">
-        <h3>Commission inquiries</h3>
-        <div id="commission-list"></div>
-      </section>
-
-      <section class="panel">
-        <div id="commission-detail">
-          <h3>Commission details</h3>
-          <p class="detail-empty">Choose a commission from the list to view its details and manage its progress.</p>
+    <section aria-labelledby="overview-heading">
+      <div class="section-heading">
+        <div>
+          <h3 id="overview-heading">your studio overview</h3>
+          <p>A little look at what's happening in your studio.</p>
         </div>
-      </section>
-    </div>
+      </div>
+
+      <div class="stats-grid">
+        <article class="stat-card yellow">
+          <div class="stat-icon">NEW</div>
+          <strong id="stat-inquiries">—</strong>
+          <span>New inquiries</span>
+        </article>
+
+        <article class="stat-card blue">
+          <div class="stat-icon">ART</div>
+          <strong id="stat-progress">—</strong>
+          <span>In progress</span>
+        </article>
+
+        <article class="stat-card lavender">
+          <div class="stat-icon">REV</div>
+          <strong id="stat-review">—</strong>
+          <span>For review</span>
+        </article>
+
+        <article class="stat-card green">
+          <div class="stat-icon">DONE</div>
+          <strong id="stat-completed">—</strong>
+          <span>Completed</span>
+        </article>
+      </div>
+    </section>
+
+    <!-- COMMISSION MANAGEMENT -->
+
+    <section aria-labelledby="commission-heading">
+      <div class="section-heading">
+        <div>
+          <h3 id="commission-heading">commission corner</h3>
+          <p>Your inquiries, projects, and client requests in one place.</p>
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <input
+          id="search-input"
+          type="search"
+          placeholder="Search reference or client name"
+          aria-label="Search commissions"
+        >
+
+        <select id="status-filter" aria-label="Filter by status">
+          <option value="">All statuses</option>
+          <option value="inquiry_received">Inquiry received</option>
+          <option value="discussion">Discussion</option>
+          <option value="awaiting_payment">Awaiting payment</option>
+          <option value="in_progress">In progress</option>
+          <option value="for_review">For review</option>
+          <option value="completed">Completed</option>
+          <option value="cancelled">Cancelled</option>
+        </select>
+
+        <select id="artist-filter" aria-label="Filter by artist">
+          <option value="">All artists</option>
+          <option value="Yua">Yua</option>
+          <option value="CJ">CJ</option>
+        </select>
+
+        <button class="toolbar-button" id="clear-filters" type="button">
+          Clear filters
+        </button>
+      </div>
+
+      <p id="message" role="status" aria-live="polite">
+        Loading commissions...
+      </p>
+
+      <div class="layout">
+
+        <!-- COMMISSION LIST -->
+
+        <section class="panel">
+          <div class="panel-heading">
+            <h3>inquiries</h3>
+            <span class="panel-count" id="list-count">0 items</span>
+          </div>
+
+          <div id="commission-list">
+            <div class="empty-state">Loading your commissions...</div>
+          </div>
+        </section>
+
+        <!-- COMMISSION DETAILS -->
+
+        <section class="panel">
+          <div id="commission-detail">
+            <h3>your commission desk</h3>
+            <div class="empty-state">
+              Choose a commission from your inquiry list to view
+              client information and manage its progress.
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </section>
+
+    <footer>
+      AEMI Studio · Private artist workspace
+    </footer>
+
   </main>
 
   <script type="module">
@@ -343,15 +1030,23 @@
 
     function formatDate(value) {
       if (!value) return "Not available";
+
       return new Date(value).toLocaleString();
     }
 
     function makeElement(tag, className, text) {
       const element = document.createElement(tag);
+
       if (className) element.className = className;
-      if (text !== undefined) element.textContent = text;
+
+      if (text !== undefined) {
+        element.textContent = text;
+      }
+
       return element;
     }
+
+    /* AUTHENTICATION */
 
     async function checkAdmin() {
       const { data: sessionData, error: sessionError } =
@@ -377,48 +1072,116 @@
       }
 
       document.getElementById("welcome-title").textContent =
-        `Welcome back, ${profile.display_name || "Admin"}.`;
+        `hello, ${profile.display_name || "artists"}!`;
 
       return true;
     }
 
-    function renderList() {
+    /* STATISTICS */
+
+    function updateStatistics() {
+      const count = status =>
+        commissions.filter(item => item.status === status).length;
+
+      document.getElementById("stat-inquiries").textContent =
+        count("inquiry_received");
+
+      document.getElementById("stat-progress").textContent =
+        count("in_progress");
+
+      document.getElementById("stat-review").textContent =
+        count("for_review");
+
+      document.getElementById("stat-completed").textContent =
+        count("completed");
+    }
+
+    /* FILTERING AND LIST */
+
+    function getFilteredCommissions() {
       const search = searchInput.value.trim().toLowerCase();
       const status = statusFilter.value;
       const artist = artistFilter.value;
 
-      const filtered = commissions.filter(item => {
+      return commissions.filter(item => {
         const matchesSearch =
           !search ||
           (item.tracking_reference || "").toLowerCase().includes(search) ||
           (item.client_name || "").toLowerCase().includes(search);
 
-        const matchesStatus = !status || item.status === status;
+        const matchesStatus =
+          !status || item.status === status;
 
         const matchesArtist =
-          !artist || (item.preferred_artist || "").toLowerCase().includes(artist.toLowerCase());
+          !artist ||
+          (item.preferred_artist || "")
+            .toLowerCase()
+            .includes(artist.toLowerCase());
 
         return matchesSearch && matchesStatus && matchesArtist;
       });
+    }
+
+    function renderList() {
+      const filtered = getFilteredCommissions();
 
       list.replaceChildren();
 
+      document.getElementById("list-count").textContent =
+        `${filtered.length} ${filtered.length === 1 ? "item" : "items"}`;
+
       if (!filtered.length) {
-        list.append(makeElement("p", "detail-empty", "No matching commissions found."));
+        list.append(
+          makeElement(
+            "div",
+            "empty-state",
+            commissions.length
+              ? "No matching commissions found. Try adjusting your filters."
+              : "No commissions have been submitted yet."
+          )
+        );
+
         return;
       }
 
       filtered.forEach(item => {
         const button = makeElement("button", "commission-item");
-        button.type = "button";
 
-        if (item.id === selectedId) button.classList.add("selected");
+        button.type = "button";
+        button.setAttribute(
+          "aria-pressed",
+          String(item.id === selectedId)
+        );
+
+        if (item.id === selectedId) {
+          button.classList.add("selected");
+        }
+
+        const status = makeElement(
+          "span",
+          "status",
+          statusLabels[item.status] || item.status || "Unknown"
+        );
+
+        status.dataset.status = item.status || "";
 
         button.append(
-          makeElement("strong", "", item.tracking_reference || "No reference"),
-          makeElement("small", "", item.client_name || "Unnamed client"),
-          makeElement("small", "", item.preferred_artist || "Artist not specified"),
-          makeElement("span", "status", statusLabels[item.status] || item.status || "Unknown")
+          makeElement(
+            "strong",
+            "",
+            item.tracking_reference || "No reference"
+          ),
+          makeElement(
+            "small",
+            "",
+            item.client_name || "Unnamed client"
+          ),
+          makeElement(
+            "small",
+            "",
+            item.preferred_artist || "Artist not specified"
+          ),
+          status
         );
 
         button.addEventListener("click", () => {
@@ -431,87 +1194,287 @@
       });
     }
 
+    /* COMMISSION DETAILS */
+
     function addDetailBlock(container, label, value) {
       const block = makeElement("div", "detail-block");
+
       block.append(
         makeElement("span", "detail-label", label),
-        makeElement("div", "detail-value", value || "Not provided")
+        makeElement(
+          "div",
+          "detail-value",
+          value || "Not provided"
+        )
       );
+
       container.append(block);
     }
 
     async function showCommission(item) {
       detail.replaceChildren();
 
-      detail.append(makeElement("h3", "", "Commission details"));
+      detail.append(
+        makeElement("h3", "", "commission details")
+      );
 
-      addDetailBlock(detail, "Tracking reference", item.tracking_reference);
-      addDetailBlock(detail, "Client", item.client_name);
-      addDetailBlock(detail, "Contact", item.client_contact);
-      addDetailBlock(detail, "Preferred artist", item.preferred_artist);
-      addDetailBlock(detail, "Project details", item.commission_details);
-      addDetailBlock(detail, "Date submitted", formatDate(item.created_at));
-      addDetailBlock(detail, "Last updated", formatDate(item.updated_at));
+      addDetailBlock(
+        detail,
+        "Tracking reference",
+        item.tracking_reference
+      );
+
+      addDetailBlock(
+        detail,
+        "Client",
+        item.client_name
+      );
+
+      addDetailBlock(
+        detail,
+        "Contact",
+        item.client_contact
+      );
+
+      addDetailBlock(
+        detail,
+        "Preferred artist",
+        item.preferred_artist
+      );
+
+      addDetailBlock(
+        detail,
+        "Project details",
+        item.commission_details
+      );
+
+      addDetailBlock(
+        detail,
+        "Date submitted",
+        formatDate(item.created_at)
+      );
+
+      addDetailBlock(
+        detail,
+        "Last updated",
+        formatDate(item.updated_at)
+      );
+
+      /* STATUS */
 
       const statusField = makeElement("div", "field");
-      const statusLabel = makeElement("label", "", "Commission status");
+      const statusLabel = makeElement(
+        "label",
+        "",
+        "Commission status"
+      );
+
+      statusLabel.htmlFor = "new-status";
+
       const statusSelect = document.createElement("select");
       statusSelect.id = "new-status";
 
       Object.entries(statusLabels).forEach(([value, label]) => {
         const option = document.createElement("option");
+
         option.value = value;
         option.textContent = label;
-        if (item.status === value) option.selected = true;
+
+        if (item.status === value) {
+          option.selected = true;
+        }
+
         statusSelect.append(option);
       });
 
       statusField.append(statusLabel, statusSelect);
 
+      const updateStatusButton = makeElement(
+        "button",
+        "primary-button",
+        "Save status"
+      );
+
+      updateStatusButton.type = "button";
+
+      updateStatusButton.addEventListener(
+        "click",
+        () => saveStatus(item)
+      );
+
+      const statusActions = makeElement("div", "action-row");
+      statusActions.append(updateStatusButton);
+
+      detail.append(statusField, statusActions);
+
+      /* PRIVATE NOTES */
+
+      const notesSection = makeElement("div", "detail-section");
+
+      const notesHeading = makeElement(
+        "div",
+        "detail-section-heading"
+      );
+
+      notesHeading.append(
+        makeElement("h4", "", "private admin notes"),
+        makeElement(
+          "p",
+          "",
+          "Only AEMI admins should see these notes."
+        )
+      );
+
       const notesField = makeElement("div", "field");
-      const notesLabel = makeElement("label", "", "Private admin notes");
+
+      const notesLabel = makeElement(
+        "label",
+        "",
+        "Internal notes"
+      );
+
+      notesLabel.htmlFor = "admin-notes";
+
       const notesInput = document.createElement("textarea");
+
       notesInput.id = "admin-notes";
       notesInput.value = item.admin_notes || "";
-      notesInput.placeholder = "Notes for AEMI admins only...";
+      notesInput.placeholder =
+        "Write reminders or important information for the team...";
+
       notesField.append(notesLabel, notesInput);
 
-      const saveNotesButton = makeElement("button", "primary-button", "Save private notes");
+      const saveNotesButton = makeElement(
+        "button",
+        "secondary-button",
+        "Save private notes"
+      );
+
       saveNotesButton.type = "button";
-      saveNotesButton.addEventListener("click", () => saveAdminNotes(item.id));
 
-      const updateStatusButton = makeElement("button", "primary-button", "Save status");
-      updateStatusButton.type = "button";
-      updateStatusButton.addEventListener("click", () => saveStatus(item));
+      saveNotesButton.addEventListener(
+        "click",
+        () => saveAdminNotes(item.id)
+      );
 
-      detail.append(statusField, updateStatusButton, notesField, saveNotesButton);
+      const notesActions = makeElement("div", "action-row");
+      notesActions.append(saveNotesButton);
 
-      const historyHeading = makeElement("h3", "", "Public progress history");
-      historyHeading.style.marginTop = "28px";
-      detail.append(historyHeading);
+      notesSection.append(
+        notesHeading,
+        notesField,
+        notesActions
+      );
+
+      detail.append(notesSection);
+
+      /* PUBLIC PROGRESS UPDATES */
+
+      const updateSection = makeElement(
+        "div",
+        "detail-section"
+      );
+
+      const updateHeading = makeElement(
+        "div",
+        "detail-section-heading"
+      );
+
+      updateHeading.append(
+        makeElement("h4", "", "client progress update"),
+        makeElement(
+          "p",
+          "",
+          "This message will be visible to the client."
+        )
+      );
 
       const updateField = makeElement("div", "field");
-      const updateLabel = makeElement("label", "", "Message visible to the client");
+
+      const updateLabel = makeElement(
+        "label",
+        "",
+        "Message for the client"
+      );
+
+      updateLabel.htmlFor = "public-update";
+
       const updateInput = document.createElement("textarea");
+
       updateInput.id = "public-update";
-      updateInput.placeholder = "Write a short progress update...";
+      updateInput.placeholder =
+        "Write a short update about the commission...";
+
       updateField.append(updateLabel, updateInput);
 
-      const addUpdateButton = makeElement("button", "primary-button", "Add progress update");
-      addUpdateButton.type = "button";
-      addUpdateButton.addEventListener("click", () => addPublicUpdate(item));
+      const addUpdateButton = makeElement(
+        "button",
+        "primary-button",
+        "Publish progress update"
+      );
 
-      detail.append(updateField, addUpdateButton);
+      addUpdateButton.type = "button";
+
+      addUpdateButton.addEventListener(
+        "click",
+        () => addPublicUpdate(item)
+      );
+
+      const updateActions = makeElement("div", "action-row");
+      updateActions.append(addUpdateButton);
+
+      updateSection.append(
+        updateHeading,
+        updateField,
+        updateActions
+      );
+
+      detail.append(updateSection);
+
+      /* HISTORY */
+
+      const historySection = makeElement(
+        "div",
+        "detail-section"
+      );
+
+      const historyHeading = makeElement(
+        "div",
+        "detail-section-heading"
+      );
+
+      historyHeading.append(
+        makeElement("h4", "", "progress history"),
+        makeElement(
+          "p",
+          "",
+          "A record of updates shared with this client."
+        )
+      );
 
       const historyContainer = makeElement("div");
       historyContainer.id = "history-container";
-      detail.append(historyContainer);
+
+      historySection.append(
+        historyHeading,
+        historyContainer
+      );
+
+      detail.append(historySection);
 
       await loadHistory(item.id, historyContainer);
     }
 
+    /* HISTORY */
+
     async function loadHistory(commissionId, container) {
-      container.replaceChildren(makeElement("p", "detail-empty", "Loading history..."));
+      container.replaceChildren(
+        makeElement(
+          "p",
+          "detail-empty",
+          "Loading history..."
+        )
+      );
 
       const { data, error } = await supabase
         .from("commission_updates")
@@ -519,69 +1482,144 @@
         .eq("commission_id", commissionId)
         .order("created_at", { ascending: false });
 
-      container.replaceChildren();
-
       if (error) {
-        container.append(makeElement("p", "detail-empty", "Could not load progress history."));
+        container.replaceChildren(
+          makeElement(
+            "p",
+            "detail-empty",
+            "Could not load progress history."
+          )
+        );
+
         return;
       }
 
+      container.replaceChildren();
+
       if (!data || !data.length) {
-        container.append(makeElement("p", "detail-empty", "No progress updates yet."));
+        container.append(
+          makeElement(
+            "div",
+            "empty-state",
+            "No progress updates yet."
+          )
+        );
+
         return;
       }
 
       data.forEach(update => {
         const entry = makeElement("div", "history-item");
-        entry.append(
-          makeElement("strong", "", statusLabels[update.status] || update.status || "Update"),
-          makeElement("p", "", update.public_note || ""),
-          makeElement("small", "", formatDate(update.created_at))
+
+        const status = makeElement(
+          "span",
+          "status",
+          statusLabels[update.status] || update.status || "Update"
         );
+
+        status.dataset.status = update.status || "";
+
+        entry.append(
+          status,
+          makeElement(
+            "p",
+            "",
+            update.public_note || ""
+          ),
+          makeElement(
+            "small",
+            "",
+            formatDate(update.created_at)
+          )
+        );
+
         container.append(entry);
       });
     }
 
+    /* SAVE STATUS */
+
     async function saveStatus(item) {
-      const newStatus = document.getElementById("new-status").value;
+      const statusSelect = document.getElementById("new-status");
+
+      if (!statusSelect) return;
+
+      const newStatus = statusSelect.value;
 
       const { error } = await supabase
         .from("commissions")
-        .update({ status: newStatus, updated_at: new Date().toISOString() })
+        .update({
+          status: newStatus,
+          updated_at: new Date().toISOString()
+        })
         .eq("id", item.id);
 
       if (error) {
-        setMessage("Status could not be saved: " + error.message, true);
+        setMessage(
+          "Status could not be saved: " + error.message,
+          true
+        );
+
         return;
       }
 
-      setMessage("Commission status saved.");
+      setMessage("Commission status saved successfully.");
+
       await loadCommissions(item.id);
     }
 
+    /* SAVE PRIVATE NOTES */
+
     async function saveAdminNotes(id) {
-      const notes = document.getElementById("admin-notes").value;
+      const notesInput = document.getElementById("admin-notes");
+
+      if (!notesInput) return;
+
+      const notes = notesInput.value;
 
       const { error } = await supabase
         .from("commissions")
-        .update({ admin_notes: notes, updated_at: new Date().toISOString() })
+        .update({
+          admin_notes: notes,
+          updated_at: new Date().toISOString()
+        })
         .eq("id", id);
 
       if (error) {
-        setMessage("Private notes could not be saved: " + error.message, true);
+        setMessage(
+          "Private notes could not be saved: " + error.message,
+          true
+        );
+
         return;
       }
 
-      setMessage("Private admin notes saved.");
+      setMessage("Private admin notes saved successfully.");
+
       await loadCommissions(id);
     }
 
+    /* ADD PUBLIC UPDATE */
+
     async function addPublicUpdate(item) {
-      const note = document.getElementById("public-update").value.trim();
-      const newStatus = document.getElementById("new-status").value;
+      const updateInput =
+        document.getElementById("public-update");
+
+      const statusSelect =
+        document.getElementById("new-status");
+
+      if (!updateInput || !statusSelect) return;
+
+      const note = updateInput.value.trim();
+      const newStatus = statusSelect.value;
 
       if (!note) {
-        setMessage("Please write a progress message first.", true);
+        setMessage(
+          "Please write a progress message first.",
+          true
+        );
+
+        updateInput.focus();
         return;
       }
 
@@ -595,7 +1633,12 @@
         });
 
       if (updateError) {
-        setMessage("Progress update could not be added: " + updateError.message, true);
+        setMessage(
+          "Progress update could not be added: " +
+          updateError.message,
+          true
+        );
+
         return;
       }
 
@@ -608,63 +1651,120 @@
         .eq("id", item.id);
 
       if (statusError) {
-        setMessage("The history entry was added, but the commission status could not be updated: " + statusError.message, true);
+        setMessage(
+          "The history entry was added, but the commission status could not be updated: " +
+          statusError.message,
+          true
+        );
+
         await loadCommissions(item.id);
         return;
       }
 
-      setMessage("Progress update added successfully.");
+      setMessage("Progress update published successfully.");
+
       await loadCommissions(item.id);
     }
+
+    /* LOAD COMMISSIONS */
 
     async function loadCommissions(keepSelectedId = null) {
       setMessage("Loading commissions...");
 
       const { data, error } = await supabase
         .from("commissions")
-        .select("id, tracking_reference, client_name, client_contact, preferred_artist, commission_details, status, admin_notes, created_at, updated_at")
+        .select(
+          "id, tracking_reference, client_name, client_contact, preferred_artist, commission_details, status, admin_notes, created_at, updated_at"
+        )
         .order("created_at", { ascending: false });
 
       if (error) {
-        setMessage("Could not load commissions: " + error.message, true);
+        setMessage(
+          "Could not load commissions: " + error.message,
+          true
+        );
+
         return;
       }
 
       commissions = data || [];
+
       selectedId = keepSelectedId;
 
+      updateStatistics();
       renderList();
 
-      const selected = commissions.find(item => item.id === selectedId);
+      const selected = commissions.find(
+        item => item.id === selectedId
+      );
 
       if (selected) {
         await showCommission(selected);
       } else {
         detail.replaceChildren(
-          makeElement("h3", "", "Commission details"),
-          makeElement("p", "detail-empty", "Choose a commission from the list to view its details and manage its progress.")
+          makeElement(
+            "h3",
+            "",
+            "your commission desk"
+          ),
+          makeElement(
+            "div",
+            "empty-state",
+            "Choose a commission from your inquiry list to view client information and manage its progress."
+          )
         );
       }
 
-      setMessage(`${commissions.length} commission(s) loaded.`);
+      setMessage(
+        `${commissions.length} commission(s) loaded successfully.`
+      );
     }
 
-    document.getElementById("refresh-button").addEventListener("click", () => {
-      loadCommissions(selectedId);
-    });
+    /* BUTTONS AND FILTERS */
 
-    document.getElementById("logout-button").addEventListener("click", async () => {
-      await supabase.auth.signOut();
-      window.location.replace("admin.html");
-    });
+    document
+      .getElementById("refresh-button")
+      .addEventListener("click", () => {
+        loadCommissions(selectedId);
+      });
+
+    document
+      .getElementById("clear-filters")
+      .addEventListener("click", () => {
+        searchInput.value = "";
+        statusFilter.value = "";
+        artistFilter.value = "";
+
+        renderList();
+      });
+
+    document
+      .getElementById("logout-button")
+      .addEventListener("click", async () => {
+        const { error } = await supabase.auth.signOut();
+
+        if (error) {
+          setMessage(
+            "Could not log out: " + error.message,
+            true
+          );
+
+          return;
+        }
+
+        window.location.replace("admin.html");
+      });
 
     searchInput.addEventListener("input", renderList);
     statusFilter.addEventListener("change", renderList);
     artistFilter.addEventListener("change", renderList);
 
+    /* INITIALIZE */
+
     if (await checkAdmin()) {
       await loadCommissions();
     }
+
   </script>
 </body>
 </html>
