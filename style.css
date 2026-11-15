@@ -6794,3 +6794,23 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
+
+/* TRACKER FORM & RESULT BACKGROUND */
+.tracker-form,
+.tracker-result {
+  padding: clamp(22px, 5vw, 38px);
+
+  background-color: var(--ivory, #fbf8ef);
+  background-image:
+    linear-gradient(
+      rgba(251, 248, 239, 0.78),
+      rgba(251, 248, 239, 0.78)
+    ),
+    url("images/tracker-bg.jpg");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  border: 1px solid var(--line, #d6e2e4);
+}
