@@ -6770,3 +6770,7 @@ body.lightbox-open {
     .forgot-link:hover {
       text-decoration: underline;
     }
+/* Dashboard greeting */
+.dashboard-greeting h1 {
+  color: #E6B94F;
+}
