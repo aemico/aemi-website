@@ -6774,3 +6774,23 @@ body.lightbox-open {
 .dashboard-greeting h1 {
   color: #E6B94F;
 }
+
+/* TRACKER PAGE BACKGROUND */
+body {
+  background-image: url("tracker-background-image.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+body {
+  background-color: #f7f4ef;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.35), rgba(255,255,255,0.35)),
+    url("images/tracker-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
